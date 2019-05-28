@@ -1,0 +1,74 @@
+@import './variables.scss';
+#app{
+  .collapse-sidebar{
+    width: $collapseSidebarWidth !important;
+
+    .sidebar-tool{
+      padding: 12px 0 !important;
+
+      &>i{
+        padding: 0 15px !important;
+      }
+    }
+  }
+
+  // 侧边栏 Sidebar container
+  .sidebar-container {
+    transition: width 0.28s;
+    width: $sidebarWidth;
+    background-color: $menuBg;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
+
+    /* 目录工具栏 */
+    .sidebar-tool{
+      display: table;
+      height: 32px;
+      padding: 6px;
+
+      .sidebar-search {
+        display: table-cell;
+
+        .el-icon-circle-close:hover{
+          color: $blue;
+        }
+      }
+
+      &>i{
+        display: table-cell;
+        color: $tiffany;
+        font-size: 1.5em;
+        vertical-align: middle;
+        padding-left: 6px;
+        cursor: pointer;
+
+      }
+    }
+
+    /* 滚动条 */
+    .el-scrollbar{
+      height: calc(100% - 56px);
+
+      .scrollbar-wrapper {
+        overflow-x: hidden !important;
+      }
+    }
+
+    /* 目录 */
+    .el-menu {
+      border: none;
+      width: 100%;
+    }
+
+    .el-menu--collapse{
+      .el-menu-item>div, .el-submenu>div{
+        padding: 0 15px !important;
+      }
+    }
+  }
+}
