@@ -1,0 +1,29 @@
+<template>
+    <section class="app-main">
+        <transition name="fade-transform" mode="out-in">
+            <keep-alive>
+                <router-view :key="key" />
+            </keep-alive>
+        </transition>
+    </section>
+</template>
+
+<script>
+    export default {
+        name: 'AppMain',
+        computed: {
+//            cachedViews() {
+//                return this.$store.state.tagsView.cachedViews //:include="cachedViews"
+//            },
+            key() {
+                return this.$route.fullPath
+            }
+        }
+    }
+</script>
+
+<style>
+    .app-main{
+        min-height: 100%;
+    }
+</style>

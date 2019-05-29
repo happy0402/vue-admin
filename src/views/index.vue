@@ -1,11 +1,11 @@
-<!--<template>-->
+<template>
+    <div class="index-container">
 
-<!--</template>-->
+    </div>
+</template>
 
-<!--<script>-->
-
-<!--</script>-->
-
-<!--<style scoped>-->
-
-<!--<style>-->
+<script>
+    export default {
+        name: 'Index'
+    }
+</script>
