@@ -9,6 +9,7 @@ const state = {
     sidebar: {
         opened: Cookies.get('sidebarStatus') ? !!+Cookies.get('sidebarStatus') : true
     },
+    fixedPage: false, //是否固定页面高度
     routes: [],
     searchRoutes: [],
 }
@@ -23,7 +24,10 @@ const mutations = {
             Cookies.set('sidebarStatus', 0)
         }
     },
-    SET_APPMSG: appMsg => {
+    SET_FIXEDPAGE: (state, fixedPage) => {
+        state.fixedPage = fixedPage;
+    },
+    SET_APPMSG: (state, appMsg) => {
         state.appMsg = appMsg;
     },
     SET_LANGUAGE: (state, language) => {
@@ -50,6 +54,9 @@ const actions = {
     },
     addSearchRoute({ commit }, route){
         commit('ADD_SEARCH_ROUTE', route)
+    },
+    setFixedPage({ commit }, fixedPage){
+        commit('SET_FIXEDPAGE', fixedPage)
     },
     toggleSidebar({ commit }) {
         commit('TOGGLE_SIDEBAR')

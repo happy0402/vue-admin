@@ -50,7 +50,7 @@
                 var that = this
 
                 if (!this.visitedViews.some((view, index, array) => {
-                    if(view.path === route.path){
+                    if(view.name === route.name){
                         //选中项定位
                         let tagPosition = index > (array.length / 2) ? that.$refs.tag[index].$el.offsetLeft + that.$refs.tag[index].$el.clientWidth : that.$refs.tag[index].$el.offsetLeft;
                         that.$refs.scrollbar.wrap.scrollLeft = tagPosition / that.$refs.scrollbar.$refs.resize.clientWidth * that.$refs.scrollbar.wrap.clientWidth

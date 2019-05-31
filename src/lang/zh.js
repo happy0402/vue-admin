@@ -28,6 +28,13 @@ export default {
         codeCreate: '代码生成',
         personalCenter: '个人中心'
     },
+    componentBasic:{
+        layout: '布局',
+        container: '布局容器',
+        color: '色彩',
+        icon: '图标',
+        button: '按钮'
+    },
     login:{
         title: '系统登录',
         userName: '用户名',

@@ -22,8 +22,8 @@
     }
 </script>
 
-<style>
+<style scoped="">
     .app-main{
-        min-height: 100%;
+        height: 100%;
     }
 </style>

@@ -12,7 +12,7 @@
               :collapse-transition="false"
               router>
 
-        <sidebar-item v-for="route in validMenu" :key="route.path" :item="route"></sidebar-item>
+        <sidebar-item v-for="route in validMenu" :key="route.name" :item="route"></sidebar-item>
 
       </el-menu>
     </el-scrollbar>

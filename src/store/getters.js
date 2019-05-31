@@ -4,6 +4,7 @@ const getters = {
     routes: state => state.app.routes,
     searchRoutes: state => state.app.searchRoutes,
     sidebar: state => state.app.sidebar,
+    fixedPage: state => state.app.fixedPage,
     userName: state => state.user.name,
     roles: state => state.user.roles,
     power: state => state.user.power,

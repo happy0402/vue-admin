@@ -6,7 +6,7 @@
         </template>
         <sidebar-item
                 v-for="route in validMenu(item.children)"
-                :key="route.path"
+                :key="route.name"
                 :item="route"
                 :parentNode ="node"></sidebar-item>
     </el-submenu>

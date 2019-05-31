@@ -1,5 +1,6 @@
 import Frame from '@/frame'
 
+//The name has to be unique
 export default [
     {
         path: '/frame-introduce',
@@ -13,8 +14,9 @@ export default [
         },
         children: [
             {
-                path: 'thirdComponent',
-                name: 'thirdComponent',
+                path: 'third-component',
+                name: 'ThirdComponent',
+                component: () => import('@/views/frame-introduce'),
                 meta: {
                     title: 'thirdComponent',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -22,24 +24,24 @@ export default [
                 children: [
                     {
                         path: 'basic',
-                        name: 'basic',
-                        component: () => import('@/views/frame-introduce/third-component/basic'),
+                        name: 'Basic',
                         meta: {
                             title: 'basic',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
+                            modules: ['container', 'layout', 'color', 'icon', 'button']
                         }
                     },
                     {
                         path: 'form',
-                        name: 'form',
+                        name: 'Form',
                         meta: {
                             title: 'form',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
                         }
                     },
                     {
-                        path: 'showData',
-                        name: 'showData',
+                        path: 'show-data',
+                        name: 'ShowData',
                         meta: {
                             title: 'showData',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -47,7 +49,7 @@ export default [
                     },
                     {
                         path: 'notice',
-                        name: 'notice',
+                        name: 'Notice',
                         meta: {
                             title: 'notice',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -55,7 +57,7 @@ export default [
                     },
                     {
                         path: 'navigation',
-                        name: 'navigation',
+                        name: 'Navigation',
                         meta: {
                             title: 'navigation',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -63,7 +65,7 @@ export default [
                     },
                     {
                         path: 'others',
-                        name: 'others',
+                        name: 'Others',
                         meta: {
                             title: 'others',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -72,16 +74,16 @@ export default [
                 ]
             },
             {
-                path: 'secondComponent',
-                name: 'secondComponent',
+                path: 'second-component',
+                name: 'SecondComponent',
                 meta: {
                     title: 'secondComponent',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav
                 },
                 children: [
                     {
-                        path: 'dealData',
-                        name: 'dealData',
+                        path: 'deal-data',
+                        name: 'DealData',
                         meta: {
                             title: 'dealData',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -89,7 +91,7 @@ export default [
                     },
                     {
                         path: 'animate',
-                        name: 'animate',
+                        name: 'Animate',
                         meta: {
                             title: 'animate',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -97,7 +99,7 @@ export default [
                     },
                     {
                         path: 'tinymce',
-                        name: 'tinymce',
+                        name: 'Tinymce',
                         meta: {
                             title: 'tinymce',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -107,7 +109,7 @@ export default [
             },
             {
                 path: 'directive',
-                name: 'directive',
+                name: 'Directive',
                 meta: {
                     title: 'directive',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -115,7 +117,7 @@ export default [
                 children: [
                     {
                         path: 'drag',
-                        name: 'drag',
+                        name: 'Drag',
                         meta: {
                             title: 'drag',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav

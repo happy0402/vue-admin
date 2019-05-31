@@ -28,6 +28,13 @@ export default {
         codeCreate: 'Code Create',
         personalCenter: 'Personal Center'
     },
+    componentBasic:{
+        layout: 'Layout',
+        container: 'Container',
+        color: 'Color',
+        icon: 'Icon',
+        button: 'Button'
+    },
     login:{
         title: 'Login From',
         userName: 'Username',

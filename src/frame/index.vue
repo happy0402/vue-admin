@@ -15,7 +15,9 @@
                     <settings></settings>
                 </div>
             </el-header>
-            <el-main :style="'min-height: calc(100vh - ' + headerHeight + ')'">
+            <el-main :style="fixedPage ?
+                'height: calc(100vh - ' + headerHeight + ')' :
+                'min-height: calc(100vh - ' + headerHeight + ')'">
                 <app-main></app-main>
             </el-main>
         </el-container>
@@ -44,6 +46,7 @@ export default {
     computed: {
         ...mapGetters([
             'sidebar',
+            'fixedPage',
             'headerView',
             'tagsView'
         ]),
@@ -61,27 +64,23 @@ export default {
 <style lang="scss" scoped>
     @import "~@/styles/variables.scss";
 
-    .el-header{
-        padding: 0;
+    .fram-header{
+        box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+        background-color: $white;
+        transition: width 0.28s ease 0s;
+    }
 
-        .fram-header{
-            box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-            background-color: $white;
-            transition: width 0.28s ease 0s;
-        }
+    .fixed-header{
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        z-index: 9;
 
-        .fixed-header{
-            position: fixed;
-            top: 0px;
-            right: 0px;
-            left: 0px;
-            z-index: 9;
-
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
-        }
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
     }
 
     .el-main{
-        padding: 0;
+        padding: 10px;
     }
 </style>
