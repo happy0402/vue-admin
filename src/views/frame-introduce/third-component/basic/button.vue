@@ -136,8 +136,6 @@
                     icon="${this.paramForm.icon}"
             >${this.paramForm.text}</el-button>`
 
-                console.log('<el-button-group>' + buttonCode + buttonCode + '</el-button-group>')
-
                 return this.paramForm.buttonGroup ? '<el-button-group>\n\n\t' + buttonCode + '\n\n\t' + buttonCode + '\n\n</el-button-group>' : buttonCode
             }
         }
