@@ -28,12 +28,40 @@ export default {
         codeCreate: '代码生成',
         personalCenter: '个人中心'
     },
-    componentBasic:{
+    tabsTitle:{
         layout: '布局',
         container: '布局容器',
         color: '色彩',
         icon: '图标',
-        button: '按钮'
+        button: '按钮',
+        link: '文字链接',
+
+        radio: '单选框',
+        checkbox: '多选框',
+        input: '输入框',
+        inputNumber: '计数器',
+        select: '选择器',
+        switch: '开关',
+        dateTimePicker: '日期时间选择器',
+        transfer: '穿梭框',
+        form: '表单',
+
+        table: '表格',
+        tree: '树',
+        badge: '标记',
+
+        loading: '加载',
+        message: '消息提示',
+        messageBox: '弹框',
+        notification: '通知',
+
+        tabs: '标签页',
+        steps: '步骤条',
+
+        dialog: '对话框',
+        tooltip: '文字提示',
+        popover: '弹出框',
+        divider: '分割线'
     },
     login:{
         title: '系统登录',

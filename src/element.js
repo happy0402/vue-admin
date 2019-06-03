@@ -3,6 +3,8 @@
  */
 import Vue from 'vue';
 import {
+    Link,
+
     Scrollbar,
     Autocomplete,
     Dropdown,
@@ -21,6 +23,7 @@ import {
     Select,
     Option,
     Button,
+    ButtonGroup,
     Tooltip,
     Breadcrumb,
     BreadcrumbItem,
@@ -38,6 +41,7 @@ import {
     Divider,
     Message
 } from 'element-ui';
+// import './styles/element-variables.scss'
 
 import i18n from './lang' // Internationalization
 import ElementLocale from 'element-ui/lib/locale';
@@ -84,6 +88,8 @@ Vue.use(Autocomplete);
 Vue.use(Select);
 Vue.use(Option);
 Vue.use(Button);
+Vue.use(ButtonGroup);
+Vue.use(Link);
 
 Vue.use(Dropdown);
 Vue.use(DropdownMenu);

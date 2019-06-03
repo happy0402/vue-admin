@@ -1,16 +1,6 @@
 <!-- 布局 -->
 <template>
     <show-config-code :code="codeCreate" analyseCode>
-        <p>此处配置为常用配置,所有配置请查看
-            <el-link
-                    href="https://element.eleme.cn/#/zh-CN/component/button"
-                    target="_blank"
-                    type="primary"
-                    :underline="false">
-                element-ui官方网站<i class="el-icon-view el-icon--right"></i>
-            </el-link>
-        </p>
-
         <template v-slot:config>
             <el-form
                     label-position="left"

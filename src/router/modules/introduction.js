@@ -28,7 +28,7 @@ export default [
                         meta: {
                             title: 'basic',
                             roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['container', 'layout', 'color', 'icon', 'button']
+                            modules: ['container', 'layout', 'color', 'icon', 'button', 'link']
                         }
                     },
                     {
@@ -36,7 +36,8 @@ export default [
                         name: 'Form',
                         meta: {
                             title: 'form',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
+                            modules: ['radio', 'checkbox', 'input', 'inputNumber', 'select', 'switch', 'dateTimePicker', 'form', 'transfer']
                         }
                     },
                     {
@@ -44,7 +45,8 @@ export default [
                         name: 'ShowData',
                         meta: {
                             title: 'showData',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
+                            modules: ['table', 'tree', 'badge']
                         }
                     },
                     {
@@ -52,7 +54,8 @@ export default [
                         name: 'Notice',
                         meta: {
                             title: 'notice',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
+                            modules: ['loading', 'message', 'messageBox', 'notification']
                         }
                     },
                     {
@@ -60,7 +63,8 @@ export default [
                         name: 'Navigation',
                         meta: {
                             title: 'navigation',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
+                            modules: ['tabs', 'steps']
                         }
                     },
                     {
@@ -68,7 +72,8 @@ export default [
                         name: 'Others',
                         meta: {
                             title: 'others',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
+                            modules: ['dialog', 'tooltip', 'popover', 'divider']
                         }
                     }
                 ]

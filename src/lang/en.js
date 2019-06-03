@@ -28,12 +28,40 @@ export default {
         codeCreate: 'Code Create',
         personalCenter: 'Personal Center'
     },
-    componentBasic:{
+    tabsTitle:{
         layout: 'Layout',
         container: 'Container',
         color: 'Color',
         icon: 'Icon',
-        button: 'Button'
+        button: 'Button',
+        link: 'Link',
+
+        radio: 'Radio',
+        checkbox: 'Checkbox',
+        input: 'Input',
+        inputNumber: 'InputNumber',
+        select: 'Select',
+        switch: 'Switch',
+        dateTimePicker: 'DateTimePicker',
+        transfer: 'Transfer',
+        form: 'Form',
+
+        table: 'Table',
+        tree: 'Tree',
+        badge: 'Badge',
+
+        loading: 'Loading',
+        message: 'Message',
+        messageBox: 'MessageBox',
+        notification: 'Notification',
+
+        tabs: 'Tabs',
+        steps: 'Steps',
+
+        dialog: 'Dialog',
+        tooltip: 'Tooltip',
+        popover: 'Popover',
+        divider: 'Divider'
     },
     login:{
         title: 'Login From',
