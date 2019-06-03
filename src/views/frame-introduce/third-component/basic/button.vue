@@ -1,43 +1,81 @@
 <!-- 布局 -->
 <template>
-    <show-config-code :code="codeCreate">
-        <template v-slot:show>
-            <el-row :gutter="Number(paramForm.gutter)">
-                <el-col
-                        v-for="(col,index) in paramForm.cols"
-                        :key="index"
-                        :span="Number(col.span || 24)"><div class="grid-content bg-purple-dark"></div></el-col>
-            </el-row>
-        </template>
+    <show-config-code :code="codeCreate" analyseCode>
+        <p>此处配置为常用配置,所有配置请查看
+            <el-link
+                    href="https://element.eleme.cn/#/zh-CN/component/button"
+                    target="_blank"
+                    type="primary"
+                    :underline="false">
+                element-ui官方网站<i class="el-icon-view el-icon--right"></i>
+            </el-link>
+        </p>
 
         <template v-slot:config>
             <el-form
                     label-position="left"
                     :model="paramForm"
                     label-width="80px">
-                <el-divider>Row Attribute</el-divider>
-                <el-form-item label="栅格间隔">
-                    <el-input v-model="paramForm.gutter"></el-input>
+                <el-form-item label="按钮组">
+                    <el-switch
+                            v-model="paramForm.buttonGroup"
+                            :active-value="true"
+                            :inactive-value="false">
+                    </el-switch>
                 </el-form-item>
-                <el-divider>Col Attribute</el-divider>
-                <el-form-item
-                        v-for="(col, index) in paramForm.cols"
-                        :key="index"
-                        label="列">
-                    <el-col :span="20">
-                        <el-input v-model="col.span" placeholder="栅格占据的列数"></el-input>
-                    </el-col>
-                    <el-col :span="4" class="alignRight">
-                        <el-button @click.prevent="removeCol(col)" type="danger" icon="el-icon-minus" circle></el-button>
-                    </el-col>
+                <el-form-item label="文字">
+                    <el-input v-model="paramForm.text"></el-input>
                 </el-form-item>
-                <el-form-item class="alignRight">
-                    <el-col :span="24" class="alignRight">
-                        <el-button @click.prevent="addCol()" type="primary" icon="el-icon-plus" circle></el-button>
-                    </el-col>
+                <el-form-item label="尺寸">
+                    <el-radio v-for="(size,index) in sizeArray"
+                              :key="index"
+                              v-model="paramForm.size"
+                              :label="size">{{ size }}</el-radio>
                 </el-form-item>
-                <el-form-item class="alignRight">
-                    <el-button type="primary" @click="onSubmit">提交</el-button>
+                <el-form-item label="类型">
+                    <el-select v-model="paramForm.type" placeholder="请选择类型">
+                        <el-option
+                                v-for="type in typeArray"
+                                :key="type"
+                                :label="type"
+                                :value="type">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="形状">
+                    <el-checkbox v-model="paramForm.plain">朴素</el-checkbox>
+                    <el-checkbox v-model="paramForm.round">圆角</el-checkbox>
+                    <el-checkbox v-model="paramForm.circle">圆形</el-checkbox>
+                </el-form-item>
+                <el-form-item label="加载中">
+                    <el-switch
+                            v-model="paramForm.loading"
+                            :active-value="true"
+                            :inactive-value="false">
+                    </el-switch>
+                </el-form-item>
+                <el-form-item label="禁用">
+                    <el-switch
+                            v-model="paramForm.disabled"
+                            :active-value="true"
+                            :inactive-value="false">
+                    </el-switch>
+                </el-form-item>
+                <el-form-item label="图标">
+                    <el-input v-model="paramForm.icon"></el-input>
+                </el-form-item>
+                <el-form-item label="默认聚焦">
+                    <el-switch
+                            v-model="paramForm.autofocus"
+                            :active-value="true"
+                            :inactive-value="false">
+                    </el-switch>
+                </el-form-item>
+                <el-form-item label="原生type">
+                    <el-radio v-for="(nativeType,index) in nativeTypeArray"
+                              :key="index"
+                              v-model="paramForm.nativeType"
+                              :label="nativeType">{{ nativeType }}</el-radio>
                 </el-form-item>
             </el-form>
         </template>
@@ -54,39 +92,53 @@
         },
         data(){
             return {
+                sizeArray: ['medium', 'small', 'mini'],
+                typeArray: ['default', 'primary', 'success', 'warning', 'danger', 'info', 'text'],
+                nativeTypeArray: ['button', 'submit', 'reset'],
                 paramForm:{
-                    gutter: undefined,
-                    cols: [
-                        {
-                            span: undefined
-                        }
-                    ]
-                },
-                codeCreate: ''
+                    buttonGroup: false,
+                    text: '按钮',
+                    size: 'medium',
+                    type: 'default',
+                    plain: false,
+                    round: false,
+                    circle: false,
+                    loading: false,
+                    disabled: false,
+                    icon: 'el-icon-edit',
+                    autofocus: false,
+                    nativeType: 'button'
+                }
             }
         },
-        methods:{
-            addCol(){
-                this.paramForm.cols.push({
-                    span: undefined
-                });
-            },
-            removeCol(col){
-                var index = this.paramForm.cols.indexOf(col)
-                if (index !== -1) {
-                    this.paramForm.cols.splice(index, 1)
-                }
-            },
-            onSubmit(){
-                this.codeCreate = `<el-row${this.paramForm.gutter ? ' :gutter="' + this.paramForm.gutter + '"' : ''}>`
+        computed: {
+            codeCreate(){
+                let buttonCode = `<el-button${
+                    this.paramForm.size === 'medium' ? '' :
+                        '\n\t\tsize="' + this.paramForm.size + '"'
+                    }${this.paramForm.type === 'default' ? '' :
+                    '\n\t\ttype="' + this.paramForm.type + '"'
+                    }${
+                    this.paramForm.plain ? '\n\t\tplain' : ''
+                    }${
+                    this.paramForm.round ? '\n\t\tround' : ''
+                    }${
+                    this.paramForm.circle ? '\n\t\tcircle' : ''
+                    }${
+                    this.paramForm.loading ? '\n\t\tloading' : ''
+                    }${
+                    this.paramForm.autofocus ? '\n\t\tautofocus' : ''
+                    }${
+                    this.paramForm.disabled ? '\n\t\tdisabled' : ''
+                    }${this.paramForm.nativeType === 'button' ? '' :
+                    '\n\t\tnative-type="' + this.paramForm.nativeType + '"'
+                    }
+                    icon="${this.paramForm.icon}"
+            >${this.paramForm.text}</el-button>`
 
-                var cols = this.paramForm.cols
-                for(let i = 0; i < cols.length; i++){
-                    this.codeCreate += '\n\t<el-col' + (cols[i].span ? ' :span="' + cols[i].span + '"' : '') + '></el-col>'
-                }
+                console.log('<el-button-group>' + buttonCode + buttonCode + '</el-button-group>')
 
-                this.codeCreate += `
-</el-row>`
+                return this.paramForm.buttonGroup ? '<el-button-group>\n\n\t' + buttonCode + '\n\n\t' + buttonCode + '\n\n</el-button-group>' : buttonCode
             }
         }
     }
@@ -95,25 +147,5 @@
 <style lang="scss" scoped="">
     .alignRight{
         text-align: right;
-    }
-
-    .showContainer{
-        max-height: 50%;
-        overflow-y: auto;
-
-        .el-col {
-            border-radius: 4px;
-        }
-        .bg-purple-dark {
-            background: #99a9bf;
-        }
-        .grid-content {
-            border-radius: 4px;
-            min-height: 36px;
-        }
-        .row-bg {
-            padding: 10px 0;
-            background-color: #f9fafc;
-        }
     }
 </style>

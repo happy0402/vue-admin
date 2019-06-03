@@ -1,6 +1,16 @@
 <!-- 布局 -->
 <template>
     <show-config-code :code="codeCreate">
+        <p>此处配置为常用配置,所有配置请查看
+            <el-link
+                    href="https://element.eleme.cn/#/zh-CN/component/layout"
+                    target="_blank"
+                    type="primary"
+                    :underline="false">
+                element-ui官方网站<i class="el-icon-view el-icon--right"></i>
+            </el-link>
+        </p>
+
         <template v-slot:show>
             <el-row :gutter="Number(paramForm.gutter)">
                 <el-col
@@ -36,9 +46,6 @@
                         <el-button @click.prevent="addCol()" type="primary" icon="el-icon-plus" circle></el-button>
                     </el-col>
                 </el-form-item>
-                <el-form-item class="alignRight">
-                    <el-button type="primary" @click="onSubmit">提交</el-button>
-                </el-form-item>
             </el-form>
         </template>
     </show-config-code>
@@ -61,8 +68,7 @@
                             span: undefined
                         }
                     ]
-                },
-                codeCreate: ''
+                }
             }
         },
         methods:{
@@ -76,17 +82,21 @@
                 if (index !== -1) {
                     this.paramForm.cols.splice(index, 1)
                 }
-            },
-            onSubmit(){
-                this.codeCreate = `<el-row${this.paramForm.gutter ? ' :gutter="' + this.paramForm.gutter + '"' : ''}>`
+            }
+        },
+        computed: {
+            codeCreate(){
+                let code = `<el-row${this.paramForm.gutter ? ' :gutter="' + this.paramForm.gutter + '"' : ''}>`
 
                 var cols = this.paramForm.cols
                 for(let i = 0; i < cols.length; i++){
-                    this.codeCreate += '\n\t<el-col' + (cols[i].span ? ' :span="' + cols[i].span + '"' : '') + '></el-col>'
+                    code += '\n\t<el-col' + (cols[i].span ? ' :span="' + cols[i].span + '"' : '') + '></el-col>'
                 }
 
-                this.codeCreate += `
+                code += `
 </el-row>`
+
+                return code
             }
         }
     }
@@ -97,23 +107,18 @@
         text-align: right;
     }
 
-    .showContainer{
-        max-height: 50%;
-        overflow-y: auto;
-
-        .el-col {
-            border-radius: 4px;
-        }
-        .bg-purple-dark {
-            background: #99a9bf;
-        }
-        .grid-content {
-            border-radius: 4px;
-            min-height: 36px;
-        }
-        .row-bg {
-            padding: 10px 0;
-            background-color: #f9fafc;
-        }
+    .el-col {
+        border-radius: 4px;
+    }
+    .bg-purple-dark {
+        background: #99a9bf;
+    }
+    .grid-content {
+        border-radius: 4px;
+        min-height: 36px;
+    }
+    .row-bg {
+        padding: 10px 0;
+        background-color: #f9fafc;
     }
 </style>

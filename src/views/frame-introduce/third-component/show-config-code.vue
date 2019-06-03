@@ -1,21 +1,31 @@
 <template>
     <el-container class="showConfigCodeContainer">
-        <el-container style="width: 50%; padding-right: 10px;">
-            <el-header height="auto" class="showContainer">
-                <slot name="show"></slot>
-            </el-header>
-            <el-main class="configContainer">
-                <slot name="config"></slot>
+        <el-header height="auto">
+            <slot></slot>
+        </el-header>
+        <el-container>
+            <el-container style="width: 40%; padding-right: 10px;">
+                <el-header height="auto" class="showContainer">
+                    <template v-if="analyseCode">
+                        <component :is="codeAnlyse"></component>
+                    </template>
+                    <template v-else>
+                        <slot name="show"></slot>
+                    </template>
+                </el-header>
+                <el-main class="configContainer">
+                    <slot name="config"></slot>
+                </el-main>
+            </el-container>
+            <el-main style="width: 60%;">
+                <el-input
+                        class="codePanel"
+                        type="textarea"
+                        placeholder="代码框"
+                        resize="none"
+                        v-model="code">
+                </el-input>
             </el-main>
-        </el-container>
-        <el-container style="width: 50%;">
-            <el-input
-                    class="codePanel"
-                    type="textarea"
-                    placeholder="代码框"
-                    resize="none"
-                    v-model="code">
-            </el-input>
         </el-container>
     </el-container>
 </template>
@@ -27,7 +37,35 @@
             code: {
                 type: String,
                 default: ''
+            },
+            analyseCode: {
+                type: Boolean,
+                default: false
             }
+        },
+        data(){
+            return {
+                codeAnlyse: undefined
+            }
+        },
+        watch: {
+            code(value){
+                this.createShow(value)
+            }
+        },
+        methods: {
+            createShow(code){
+                if(this.analyseCode){
+                    this.codeAnlyse = (resolve) => {
+                        resolve({
+                            template: code
+                        })
+                    }
+                }
+            }
+        },
+        created(){
+            this.createShow(this.code)
         }
     }
 </script>
@@ -36,6 +74,7 @@
     .showContainer{
         max-height: 50%;
         overflow-y: auto;
+        margin-bottom: 10px;
     }
 
     .codePanel{

@@ -4,6 +4,7 @@ const defaultSettings = require('./src/settings.js')
 
 const name = defaultSettings.title || 'vue Element Admin' // page title
 module.exports = {
+    // mode: 'production',
     // publicPath: process.env.NODE_ENV === 'production'
     //     ? '/'
     //     : './',
@@ -14,7 +15,10 @@ module.exports = {
         name: name,
         resolve: {
             alias: {
-                '@': path.resolve(__dirname, 'src')
+                '@': path.resolve(__dirname, 'src'),
+                //代码配置展示时使用
+                //https://cn.vuejs.org/v2/guide/installation.html#对不同构建版本的解释
+                'vue$': 'vue/dist/vue.esm.js'
             }
         }
     }

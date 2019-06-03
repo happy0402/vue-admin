@@ -1,41 +1,31 @@
 <!-- 布局 -->
 <template>
     <show-config-code :code="codeCreate">
-        <template v-slot:show>
-            <el-row :gutter="Number(paramForm.gutter)">
-                <el-col
-                        v-for="(col,index) in paramForm.cols"
-                        :key="index"
-                        :span="Number(col.span || 24)"><div class="grid-content bg-purple-dark"></div></el-col>
-            </el-row>
-        </template>
-
         <template v-slot:config>
             <el-form
                     label-position="left"
                     :model="paramForm"
-                    label-width="80px">
-                <el-divider>Row Attribute</el-divider>
-                <el-form-item label="栅格间隔">
-                    <el-input v-model="paramForm.gutter"></el-input>
+                    label-width="100px">
+                <el-form-item label="排列方向">
+                    <el-radio v-model="paramForm.direction" label="horizontal">水平</el-radio>
+                    <el-radio v-model="paramForm.direction" label="vertical">垂直</el-radio>
                 </el-form-item>
-                <el-divider>Col Attribute</el-divider>
-                <el-form-item
-                        v-for="(col, index) in paramForm.cols"
-                        :key="index"
-                        label="列">
-                    <el-col :span="20">
-                        <el-input v-model="col.span" placeholder="栅格占据的列数"></el-input>
-                    </el-col>
-                    <el-col :span="4" class="alignRight">
-                        <el-button @click.prevent="removeCol(col)" type="danger" icon="el-icon-minus" circle></el-button>
-                    </el-col>
+                <el-form-item label="是否嵌套布局">
+                    <el-radio v-model="paramForm.nest" :label="false">否</el-radio>
+                    <el-radio v-model="paramForm.nest" :label="true">是</el-radio>
                 </el-form-item>
-                <el-form-item class="alignRight">
-                    <el-col :span="24" class="alignRight">
-                        <el-button @click.prevent="addCol()" type="primary" icon="el-icon-plus" circle></el-button>
-                    </el-col>
-                </el-form-item>
+                <template v-if="paramForm.nest">
+                    <el-form-item label="嵌套方式" v-if="paramForm.direction === 'horizontal'">
+                        <el-radio v-model="paramForm.nestWayH" label="left">左边嵌套</el-radio>
+                        <el-radio v-model="paramForm.nestWayH" label="right">右边嵌套</el-radio>
+                        <el-radio v-model="paramForm.nestWayH" label="both">两边嵌套</el-radio>
+                    </el-form-item>
+                    <el-form-item label="嵌套方式" v-else>
+                        <el-radio v-model="paramForm.nestWayV" label="top">上层嵌套</el-radio>
+                        <el-radio v-model="paramForm.nestWayV" label="bottom">下层嵌套</el-radio>
+                        <el-radio v-model="paramForm.nestWayV" label="both">上下嵌套</el-radio>
+                    </el-form-item>
+                </template>
                 <el-form-item class="alignRight">
                     <el-button type="primary" @click="onSubmit">提交</el-button>
                 </el-form-item>
@@ -55,38 +45,72 @@
         data(){
             return {
                 paramForm:{
-                    gutter: undefined,
-                    cols: [
-                        {
-                            span: undefined
-                        }
-                    ]
+                    direction: 'horizontal',
+                    nest: false,
+                    nestWayH: 'left',
+                    nestWayV: 'top'
                 },
                 codeCreate: ''
             }
         },
         methods:{
-            addCol(){
-                this.paramForm.cols.push({
-                    span: undefined
-                });
-            },
-            removeCol(col){
-                var index = this.paramForm.cols.indexOf(col)
-                if (index !== -1) {
-                    this.paramForm.cols.splice(index, 1)
-                }
-            },
             onSubmit(){
-                this.codeCreate = `<el-row${this.paramForm.gutter ? ' :gutter="' + this.paramForm.gutter + '"' : ''}>`
-
-                var cols = this.paramForm.cols
-                for(let i = 0; i < cols.length; i++){
-                    this.codeCreate += '\n\t<el-col' + (cols[i].span ? ' :span="' + cols[i].span + '"' : '') + '></el-col>'
+                if(this.paramForm.direction == 'vertical'){
+                    //垂直
+                    if(this.paramForm.nest){
+                        //嵌套
+                        if(this.paramForm.nestWayV === 'top'){
+                            this.codeCreate = `<el-container>
+  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+  <el-footer height="auto">Footer</el-footer>
+</el-container>`
+                        }else if(this.paramForm.nestWayV === 'bottom'){
+                            this.codeCreate = `<el-container>
+  <el-header height="auto">Header</el-header>
+  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+</el-container>`
+                        }else{
+                            this.codeCreate = `<el-container direction="vertical">
+  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+</el-container>`
+                        }
+                    }else{
+                        //不嵌套
+                        this.codeCreate = `<el-container>
+  <el-header height="auto">Header</el-header>
+  <el-main>Main</el-main>
+  <el-footer height="auto">Footer</el-footer>
+</el-container>`
+                    }
+                }else{
+                    //水平
+                    if(this.paramForm.nest){
+                        //嵌套
+                        if(this.paramForm.nestWayH === 'left'){
+                            this.codeCreate = `<el-container>
+  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+  <el-main>Main</el-main>
+</el-container>`
+                        }else if(this.paramForm.nestWayH === 'right'){
+                            this.codeCreate = `<el-container>
+  <el-aside width="auto">Aside</el-aside>
+  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+</el-container>`
+                        }else{
+                            this.codeCreate = `<el-container>
+  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+</el-container>`
+                        }
+                    }else{
+                        //不嵌套
+                        this.codeCreate = `<el-container>
+  <el-aside width="auto">Aside</el-aside>
+  <el-main>Main</el-main>
+</el-container>`
+                    }
                 }
-
-                this.codeCreate += `
-</el-row>`
             }
         }
     }
