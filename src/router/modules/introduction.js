@@ -46,7 +46,7 @@ export default [
                         meta: {
                             title: 'showData',
                             roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['table', 'tree', 'badge']
+                            modules: ['table', 'tableColumn', 'tree', 'badge']
                         }
                     },
                     {

@@ -47,6 +47,7 @@ export default {
         form: '表单',
 
         table: '表格',
+        tableColumn: '表格列',
         tree: '树',
         badge: '标记',
 

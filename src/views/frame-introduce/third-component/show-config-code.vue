@@ -3,9 +3,41 @@
         <el-header height="auto">
             <slot></slot>
         </el-header>
+
+        <!-- 大展示区 -->
+        <!--<el-container v-if="bigShow">-->
+            <!--<el-aside width="50%" style="padding-right: 10px;">-->
+                <!--&lt;!&ndash; 展示区 &ndash;&gt;-->
+                <!--<template v-if="analyseCode">-->
+                    <!--<component :is="codeAnlyse"></component>-->
+                <!--</template>-->
+                <!--<template v-else>-->
+                    <!--<slot name="show"></slot>-->
+                <!--</template>-->
+            <!--</el-aside>-->
+            <!--<el-container style="width: 50%;">-->
+                <!--<el-header height="auto" class="showContainer">-->
+                    <!--&lt;!&ndash; 配置区 &ndash;&gt;-->
+                    <!--<slot name="config"></slot>-->
+                <!--</el-header>-->
+                <!--<el-main>-->
+                    <!--&lt;!&ndash; 代码区 &ndash;&gt;-->
+                    <!--<el-input-->
+                            <!--class="codePanel"-->
+                            <!--type="textarea"-->
+                            <!--placeholder="代码框"-->
+                            <!--resize="none"-->
+                            <!--v-model="code">-->
+                    <!--</el-input>-->
+                <!--</el-main>-->
+            <!--</el-container>-->
+        <!--</el-container> v-else-->
+
+        <!-- 小展示区 -->
         <el-container>
-            <el-container style="width: 40%; padding-right: 10px;">
+            <el-container style="width: 50%; padding-right: 10px;">
                 <el-header height="auto" class="showContainer">
+                    <!-- 展示区 -->
                     <template v-if="analyseCode">
                         <component :is="codeAnlyse"></component>
                     </template>
@@ -14,10 +46,12 @@
                     </template>
                 </el-header>
                 <el-main class="configContainer">
+                    <!-- 配置区 -->
                     <slot name="config"></slot>
                 </el-main>
             </el-container>
-            <el-main style="width: 60%;">
+            <el-main style="width: 50%;">
+                <!-- 代码区 -->
                 <el-input
                         class="codePanel"
                         type="textarea"
@@ -27,6 +61,7 @@
                 </el-input>
             </el-main>
         </el-container>
+
     </el-container>
 </template>
 
@@ -42,6 +77,11 @@
                 type: Boolean,
                 default: false
             }
+//            ,
+//            bigShow: {
+//                type: Boolean,
+//                default: false
+//            }
         },
         data(){
             return {

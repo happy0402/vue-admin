@@ -147,7 +147,6 @@
                     top: 5px;
                     right: 5px;
                     font-size: 18px;
-                    cursor: pointer;
                 }
             }
 

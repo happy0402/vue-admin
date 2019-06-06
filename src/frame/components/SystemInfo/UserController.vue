@@ -48,7 +48,7 @@
         cursor: pointer;
 
         &:hover{
-            color: $tiffany;
+            color: $light-blue;
         }
     }
 </style>

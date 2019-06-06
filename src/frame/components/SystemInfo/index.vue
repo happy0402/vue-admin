@@ -46,7 +46,7 @@
                 margin-right: 15px;
 
                 &:hover{
-                    color: $tiffany;
+                    color: $light-blue;
                 }
             }
         }

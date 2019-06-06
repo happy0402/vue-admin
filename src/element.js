@@ -4,7 +4,6 @@
 import Vue from 'vue';
 import {
     Link,
-
     Scrollbar,
     Autocomplete,
     Dropdown,
@@ -29,8 +28,6 @@ import {
     BreadcrumbItem,
     Form,
     FormItem,
-    Tabs,
-    TabPane,
     Icon,
     Row,
     Col,
@@ -39,9 +36,12 @@ import {
     Aside,
     Main,
     Divider,
-    Message
+    Message,
+
+    Table,
+    TableColumn
 } from 'element-ui';
-// import './styles/element-variables.scss'
+import './styles/element-variables.scss'
 
 import i18n from './lang' // Internationalization
 import ElementLocale from 'element-ui/lib/locale';
@@ -72,8 +72,9 @@ Vue.use(Icon);
 Vue.use(Row);
 Vue.use(Col);
 
-Vue.use(Tabs);
-Vue.use(TabPane);
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 
 Vue.use(Form);
 Vue.use(FormItem);
@@ -91,9 +92,8 @@ Vue.use(Button);
 Vue.use(ButtonGroup);
 Vue.use(Link);
 
-Vue.use(Dropdown);
-Vue.use(DropdownMenu);
-Vue.use(DropdownItem);
+Vue.use(Table);
+Vue.use(TableColumn);
 
 Vue.prototype.$message = Message;
 

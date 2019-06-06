@@ -1,6 +1,6 @@
 <template>
   <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
-    <div>
+    <div style="cursor: pointer;">
       <i class="el-icon-more-outline"></i>
     </div>
     <el-dropdown-menu slot="dropdown">
