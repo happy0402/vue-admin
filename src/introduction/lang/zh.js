@@ -4,7 +4,7 @@ export default {
 
         frameIntroduce: '框架说明',
 
-        fileIntroduce: '文件结构介绍',
+        fileIntroduce: '项目结构',
 
         thirdComponent: '三方组件',
         basic: '基础',

@@ -16,6 +16,7 @@ export default [
             {
                 path: 'file-introduce',
                 name: 'FileIntroduce',
+                component: () => import('@/introduction/views/frame-introduce/file-introduce'),
                 meta: {
                     title: 'fileIntroduce',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav

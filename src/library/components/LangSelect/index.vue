@@ -4,7 +4,7 @@
       <i class="el-icon-more-outline"></i>
     </div>
     <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item v-for="(lang, index) in langOptions" :disabled="language === lang" :command="lang">
+      <el-dropdown-item v-for="(lang, index) in langOptions" :key="index" :disabled="language === lang" :command="lang">
         {{ languages[lang] || lang }}
       </el-dropdown-item>
     </el-dropdown-menu>
@@ -31,7 +31,6 @@ export default {
     },
     methods: {
         handleSetLanguage(lang) {
-            console.log(this.$i18n)
             this.$i18n.locale = lang
             this.$store.dispatch('app/setLanguage', lang)
             this.$message({

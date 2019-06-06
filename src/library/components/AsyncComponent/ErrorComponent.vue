@@ -1,5 +1,5 @@
 <template>
-    <div>组件正在开发中</div>
+    <div>正在开发中...</div>
 </template>
 
 <script>
