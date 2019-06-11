@@ -36,8 +36,8 @@
         |   |   |- views //项目页面
         |   |- libarary //第二方代码库
         |   |   |- assets //系统资源
-        |   |   |- components //第三方组件库
-        |   |   |- directive //第三方指令库
+        |   |   |- components //第二方组件库
+        |   |   |- directive //第二方指令库
         |   |   |- frame //系统框架代码
         |   |   |- lang //系统框架多国语言支持文件
         |   |   |- router //系统路由加载

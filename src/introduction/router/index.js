@@ -3,6 +3,23 @@ import Frame from '#/frame'
 //The name has to be unique
 export default [
     {
+        path: '/',
+        component: Frame,
+        redirect: '/index',
+        children: [
+            {
+                path: 'index',
+                component: () => import('@/introduction/views'),
+                name: 'Index',
+                meta: {
+                    title: 'index',
+                    icon: 'el-icon-s-home',
+                    affix: true //tagsView default set
+                }
+            }
+        ]
+    },
+    {
         path: '/frame-introduction',
         component: Frame,
         alwaysShow: true, // will always show the root menu
