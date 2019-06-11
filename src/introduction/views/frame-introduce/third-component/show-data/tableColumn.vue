@@ -289,12 +289,10 @@
 
 <script>
     import ShowConfigCode from '../show-config-code.vue'
-    import ElCol from "element-ui/packages/col/src/col";
 
     export default {
         name: 'Layout',
         components:{
-            ElCol,
             ShowConfigCode
         },
         data(){
@@ -398,77 +396,77 @@
             codeCreate(){
                 let code = `<template>
     <el-table
-            :data="tableData"
-            height="100%"
-            border
-            stripe
-            highlight-current-row>
+        :data="tableData"
+        height="100%"
+        border
+        stripe
+        highlight-current-row>
 
         <el-table-column${
-                this.paramForm.label ? '\n\t\tlabel="' + this.paramForm.label + '"' : ''
+                    this.paramForm.label ? '\n\t\t\tlabel="' + this.paramForm.label + '"' : ''
             }${
-                this.paramForm.prop ? '\n\t\tprop="' + this.paramForm.prop + '"' : ''
+                this.paramForm.prop ? '\n\t\t\tprop="' + this.paramForm.prop + '"' : ''
             }${
-                this.paramForm.width ? '\n\t\twidth="' + this.paramForm.width + '"' : ''
+                this.paramForm.width ? '\n\t\t\twidth="' + this.paramForm.width + '"' : ''
             }${
-                this.paramForm.minWidth ? '\n\t\tmin-width="' + this.paramForm.minWidth + '"' : ''
+                this.paramForm.minWidth ? '\n\t\t\tmin-width="' + this.paramForm.minWidth + '"' : ''
             }${
-                this.paramForm.fixed ? '\n\t\tfixed="' + this.paramForm.fixed + '"' : ''
+                this.paramForm.fixed ? '\n\t\t\tfixed="' + this.paramForm.fixed + '"' : ''
             }${
-                this.paramForm.resizable === false ? '\n\t\t:resizable="false"' : ''
+                this.paramForm.resizable === false ? '\n\t\t\t:resizable="false"' : ''
             }${
-                this.paramForm.formatter ? '\n\t\t:formatter="formatter"' : ''
+                this.paramForm.formatter ? '\n\t\t\t:formatter="formatter"' : ''
             }${
-                this.paramForm.showOverflowTooltip ? '\n\t\tshow-cverflow-tooltip' : ''
+                this.paramForm.showOverflowTooltip ? '\n\t\t\tshow-cverflow-tooltip' : ''
             }${
-                this.paramForm.align === 'default' ? '' : '\n\t\talign="' + this.paramForm.align + '"'
+                this.paramForm.align === 'default' ? '' : '\n\t\t\talign="' + this.paramForm.align + '"'
             }${
-                this.paramForm.headerAlign === 'default' ? '' : '\n\t\theader-align="' + this.paramForm.headerAlign + '"'
+                this.paramForm.headerAlign === 'default' ? '' : '\n\t\t\theader-align="' + this.paramForm.headerAlign + '"'
             }${
-                this.paramForm.className ? '\n\t\tclass-name="' + this.paramForm.className + '"' : ''
+                this.paramForm.className ? '\n\t\t\tclass-name="' + this.paramForm.className + '"' : ''
             }${
-                this.paramForm.labelClassName ? '\n\t\tlabel-class-name="' + this.paramForm.labelClassName + '"' : ''
+                this.paramForm.labelClassName ? '\n\t\t\tlabel-class-name="' + this.paramForm.labelClassName + '"' : ''
             }${
-                this.paramForm.renderHeader ? '\n\t\t:render-header="renderHeader"' : ''
+                this.paramForm.renderHeader ? '\n\t\t\t:render-header="renderHeader"' : ''
             }${
-                this.paramForm.type === 'default' ? '' : '\n\t\ttype="' + this.paramForm.type + '"'
+                this.paramForm.type === 'default' ? '' : '\n\t\t\ttype="' + this.paramForm.type + '"'
             }${
-                this.paramForm.type === 'selection' && this.paramForm.selectable ? '\n\t\t:selectable="selectable"' : ''
+                this.paramForm.type === 'selection' && this.paramForm.selectable ? '\n\t\t\t:selectable="selectable"' : ''
             }${
-                this.paramForm.type === 'selection' && this.paramForm.reserveSelection ? '\n\t\treserve-selection' : ''
+                this.paramForm.type === 'selection' && this.paramForm.reserveSelection ? '\n\t\t\treserve-selection' : ''
             }${
-                this.paramForm.type === 'index' && this.paramForm.index ? '\n\t\t:index="index"' : ''
+                this.paramForm.type === 'index' && this.paramForm.index ? '\n\t\t\t:index="index"' : ''
             }${
-                this.paramForm.type === 'default' && this.paramForm.sortable ? '\n\t\tsortable' : ''
+                this.paramForm.type === 'default' && this.paramForm.sortable ? '\n\t\t\tsortable' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.sortable && this.paramForm.sortWay === 'sortMethod' ?
-                    '\n\t\t:sort-method="sortMethod"' : ''
+                    '\n\t\t\t:sort-method="sortMethod"' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.sortable && this.paramForm.sortWay === 'sortBy' ?
-                    '\n\t\t:sort-method="sortBy"' : ''
+                    '\n\t\t\t:sort-method="sortBy"' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.sortable && this.paramForm.sortOrders ?
-                    '\n\t\t:sort-orders="[\'ascending\', \'descending\', null]"' : ''
+                    '\n\t\t\t:sort-orders="[\'ascending\', \'descending\', null]"' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.filters ?
-                    '\n\t\t:filters="[{ text: \'text\', value: \'value\' }]"' +
-                    '\n\t\t:filter-method="filterMethod"' : ''
+                    '\n\t\t\t:filters="[{ text: \'text\', value: \'value\' }]"' +
+                    '\n\t\t\t:filter-method="filterMethod"' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.filters && this.paramForm.columnKey ?
-                    '\n\t\tcolumn-key="' + this.paramForm.columnKey + '"' : ''
+                    '\n\t\t\tcolumn-key="' + this.paramForm.columnKey + '"' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.filters && this.paramForm.filterPlacement !== 'default' ?
-                    '\n\t\tfilter-placement="' + this.paramForm.filterPlacement + '"' : ''
+                    '\n\t\t\tfilter-placement="' + this.paramForm.filterPlacement + '"' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.filters && !this.paramForm.filterMultipe ?
-                    '\n\t\t:filter-multipe="false"' : ''
+                    '\n\t\t\t:filter-multipe="false"' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.filters && this.paramForm.filteredValue ?
-                    '\n\t\t:filtered-value="[\'value\']"' : ''
+                    '\n\t\t\t:filtered-value="[\'value\']"' : ''
             }>${
-                this.paramForm.headerSlot ? `\n\t\t<template slot="header" slot-scope="scope"><!-- scope = { column, $index } --></template>` : ''
+                this.paramForm.headerSlot ? `\n\t\t\t<template slot="header" slot-scope="scope"><!-- scope = { column, $index } --></template>` : ''
             }${
-                this.paramForm.defaultSort ? `\n\t\t<template slot-scope="scope"><!-- scope = { row, column, $index } --></template>` : ''
+                this.paramForm.defaultSort ? `\n\t\t\t<template slot-scope="scope"><!-- scope = { row, column, $index } --></template>` : ''
             }
         </el-table-column>
 
@@ -498,41 +496,41 @@
           }
         },
         methods:{${
-                this.paramForm.formatter ? `\n\t\tformatter(row, column, cellValue, index){
-                    return cellValue;
-                },` : ''
+                this.paramForm.formatter ? `\n\t\t\tformatter(row, column, cellValue, index){
+                return cellValue;
+            },` : ''
             }${
-                this.paramForm.renderHeader ? `\n\t\trenderHeader(h, { column, $index }){
-                    //具体代码可参考https://segmentfault.com/a/1190000016364550
-                    return createElement('h1', 'content');
-                },` : ''
+                this.paramForm.renderHeader ? `\n\t\t\trenderHeader(h, { column, $index }){
+                //具体代码可参考https://segmentfault.com/a/1190000016364550
+                return createElement('h1', 'content');
+            },` : ''
             }${
-                this.paramForm.type === 'selection' && this.paramForm.selectable ? `\n\t\tselectable(row, index){
-                    return true;
-                },` : ''
+                this.paramForm.type === 'selection' && this.paramForm.selectable ? `\n\t\t\tselectable(row, index){
+                return true;
+            },` : ''
             }${
-                this.paramForm.type === 'index' && this.paramForm.index ? `\n\t\tindex(index){
-                    //若设置序号初始值，则可直接传参Number类型参数，无需注册此方法
-                    return index;
-                },` : ''
+                this.paramForm.type === 'index' && this.paramForm.index ? `\n\t\t\tindex(index){
+                //若设置序号初始值，则可直接传参Number类型参数，无需注册此方法
+                return index;
+            },` : ''
             }${
                     this.paramForm.type === 'default' && this.paramForm.sortable && this.paramForm.sortWay === 'sortMethod' ?
-                        `\n\t\tsortMethod(a, b){
-                    //与Array.sort 表现一致
-                    return 0; // -1 | 1
-                },` : ''
+                        `\n\t\t\tsortMethod(a, b){
+                //与Array.sort 表现一致
+                return 0; // -1 | 1
+            },` : ''
             }${
                     this.paramForm.type === 'default' && this.paramForm.sortable && this.paramForm.sortWay === 'sortBy' ?
-                        `\n\t\tsortBy(row, index){
-                    //String: 指定数据按照哪个属性进行排序
-                    //Array: 先按照第 1 个属性排序，如果第 1 个相等，再按照第 2 个排序，以此类推
-                    //Function: 按方法返回的值进行常规排序
-                },` : ''
+                        `\n\t\t\tsortBy(row, index){
+                //String: 指定数据按照哪个属性进行排序
+                //Array: 先按照第 1 个属性排序，如果第 1 个相等，再按照第 2 个排序，以此类推
+                //Function: 按方法返回的值进行常规排序
+            },` : ''
             }${
-                    this.paramForm.type === 'default' && this.paramForm.filters ? `\n\t\tfilterMethod(value, row, column){
-                    //多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示
-                    return true;//false
-                },` : ''
+                    this.paramForm.type === 'default' && this.paramForm.filters ? `\n\t\t\tfilterMethod(value, row, column){
+                //多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示
+                return true;//false
+            },` : ''
             }
         }
   }

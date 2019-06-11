@@ -366,7 +366,7 @@
                     border: true,
                     size: 'default',
                     fit: true,
-//                    currentRowKey: undefined,
+//                    currentRowKey: 3,
                     rowClassName: false,
                     rowStyle: false,
                     cellClassName: false,
@@ -412,42 +412,42 @@
             codeCreate(){
                 let code = `<template>
     <el-table
-                ref="table"
-                :data="tableData"
-                height="${ this.paramForm.height }"${
-                this.paramForm.border ? '\n\t\tborder' : '' }
-                stripe
-                highlight-current-row${
-                this.paramForm.size === 'default' ? '' : '\n\t\tsize="' + this.paramForm.size + '"' }${
-                this.paramForm.fit ? '' : '\n\t\t:fit="false"' }${
-                this.paramForm.rowKey ? '\n\t\trow-key="userId"' : '' }${
-                this.paramForm.rowKey ? '\n\t\t:row-key="rowKey"' : '' }${
-                this.paramForm.emptyText ? 'empty-text="' + this.paramForm.emptyText + '"' : '' }${
-                this.paramForm.defaultSort ? '\n\t\t:default-sort="{prop: \'date\', order: \'descending\'}"' : '' }${
-                this.paramForm.rowClassName ? '\n\t\t:row-class-name="rowClassName"' : '' }${
-                this.paramForm.rowStyle ? '\n\t\t:row-styles="rowStyle"' : '' }${
-                this.paramForm.cellClassName ? '\n\t\t:cell-class-name="cellClassName"' : '' }${
-                this.paramForm.cellStyle ? '\n\t\t:cell-styles="cellStyle"' : '' }${
-                this.paramForm.currentChange ? '\n\t\t@current-change="currentChange"' : '' }${
-                this.paramForm.filterChange ? '\n\t\t@filter-change="filterChange"' : '' }${
-                this.paramForm.sortChange ? '\n\t\t@sort-change="sortChange"' : '' }${
-                this.paramForm.select ? '\n\t\t@select="select"' : '' }${
-                this.paramForm.selectAll ? '\n\t\t@select-all="selectAll"' : '' }${
-                this.paramForm.selectionChange ? '\n\t\t@selection-change="selectionChange"' : '' }${
-                this.paramForm.rowClick ? '\n\t\t@row-click="rowClick"' : '' }${
-                this.paramForm.rowDblclick ? '\n\t\t@row-dblclick="rowDblclick"' : '' }${
-                this.paramForm.rowContextmenu ? '\n\t\t@row-contextmenu="rowContextmenu"' : '' }${
-                this.paramForm.cellClick ? '\n\t\t@cell-click="cellClick"' : '' }${
-                this.paramForm.cellDblclick ? '\n\t\t@cell-dblclick="cellDblclick"' : '' }${
-                this.paramForm.headerClick ? '\n\t\t@header-click="headerClick"' : '' }${
-                this.paramForm.headerContextmenu ? '\n\t\t@header-contextmenu="headerContextmenu"' : '' }${
-                this.paramForm.headerDragend ? '\n\t\t@header-dragend="headerDragend"' : '' }>
+        ref="table"
+        :data="tableData"
+        height="${ this.paramForm.height }"${
+        this.paramForm.border ? '\n\t\tborder' : '' }
+        stripe
+        highlight-current-row${
+        this.paramForm.size === 'default' ? '' : '\n\t\tsize="' + this.paramForm.size + '"' }${
+        this.paramForm.fit ? '' : '\n\t\t:fit="false"' }${
+        this.paramForm.rowKey ? '\n\t\trow-key="userId"' : '' }${
+        this.paramForm.rowKey ? '\n\t\t:row-key="rowKey"' : '' }${
+        this.paramForm.emptyText ? 'empty-text="' + this.paramForm.emptyText + '"' : '' }${
+        this.paramForm.defaultSort ? '\n\t\t:default-sort="{prop: \'date\', order: \'descending\'}"' : '' }${
+        this.paramForm.rowClassName ? '\n\t\t:row-class-name="rowClassName"' : '' }${
+        this.paramForm.rowStyle ? '\n\t\t:row-styles="rowStyle"' : '' }${
+        this.paramForm.cellClassName ? '\n\t\t:cell-class-name="cellClassName"' : '' }${
+        this.paramForm.cellStyle ? '\n\t\t:cell-styles="cellStyle"' : '' }${
+        this.paramForm.currentChange ? '\n\t\t@current-change="currentChange"' : '' }${
+        this.paramForm.filterChange ? '\n\t\t@filter-change="filterChange"' : '' }${
+        this.paramForm.sortChange ? '\n\t\t@sort-change="sortChange"' : '' }${
+        this.paramForm.select ? '\n\t\t@select="select"' : '' }${
+        this.paramForm.selectAll ? '\n\t\t@select-all="selectAll"' : '' }${
+        this.paramForm.selectionChange ? '\n\t\t@selection-change="selectionChange"' : '' }${
+        this.paramForm.rowClick ? '\n\t\t@row-click="rowClick"' : '' }${
+        this.paramForm.rowDblclick ? '\n\t\t@row-dblclick="rowDblclick"' : '' }${
+        this.paramForm.rowContextmenu ? '\n\t\t@row-contextmenu="rowContextmenu"' : '' }${
+        this.paramForm.cellClick ? '\n\t\t@cell-click="cellClick"' : '' }${
+        this.paramForm.cellDblclick ? '\n\t\t@cell-dblclick="cellDblclick"' : '' }${
+        this.paramForm.headerClick ? '\n\t\t@header-click="headerClick"' : '' }${
+        this.paramForm.headerContextmenu ? '\n\t\t@header-contextmenu="headerContextmenu"' : '' }${
+        this.paramForm.headerDragend ? '\n\t\t@header-dragend="headerDragend"' : '' }>
 
 
         <el-table-column
                 prop="date"
                 label="日期"${
-                this.paramForm.defaultSort ? '\n\t\tsortable' : ''}
+                this.paramForm.defaultSort ? '\n\t\t\t\tsortable' : ''}
                 width="180">
         </el-table-column>
         <el-table-column
@@ -503,50 +503,50 @@
         }${this.paramForm.doLayout ?
             '\n\t//this.$refs.table.doLayout();//进行表格操作后,可能需要此方法重新布局' : ''
         }
-        methods:{${this.paramForm.rowKey ? `\n\t\trowKey(row) {
-                    //自动生成的代码中存在rowKey的两种设置方式，请挑选一种使用
-                    return 'rowKey';
-                },` : '' }${this.paramForm.rowClassName ? `\n\t\trowClassName({row, rowIndex}) {
-                    //若返回值为一个确定的值，可直接直接将String类型传参，无需写此方法
-                    return 'rowClassName';
-                },` : '' }${this.paramForm.rowStyle ? `\n\t\trowStyle({row, rowIndex}) {
-                    //若返回值为一个确定的值，可直接直接将Object类型传参，无需写此方法
-                    return 'rowStyle';
-                },` : '' }${this.paramForm.cellClassName ? `\n\t\tcellClassName({row, column, rowIndex, columnIndex}) {
-                    //若返回值为一个确定的值，可直接直接将String类型传参，无需写此方法
-                    return 'cellClassName';
-                },` : '' }${this.paramForm.cellStyle ? `\n\t\tcellStyle({row, column, rowIndex, columnIndex}) {
-                    //若返回值为一个确定的值，可直接直接将Object类型传参，无需写此方法
-                    return 'cellStyle';
-                },` : '' }${this.paramForm.currentChange ? `\n\t\tcurrentChange(currentRow, oldCurrentRow) {
+        methods:{${this.paramForm.rowKey ? `\n\t\t\trowKey(row) {
+                //自动生成的代码中存在rowKey的两种设置方式，请挑选一种使用
+                return 'rowKey';
+            },` : '' }${this.paramForm.rowClassName ? `\n\t\t\trowClassName({row, rowIndex}) {
+                //若返回值为一个确定的值，可直接直接将String类型传参，无需写此方法
+                return 'rowClassName';
+            },` : '' }${this.paramForm.rowStyle ? `\n\t\t\trowStyle({row, rowIndex}) {
+                //若返回值为一个确定的值，可直接直接将Object类型传参，无需写此方法
+                return 'rowStyle';
+            },` : '' }${this.paramForm.cellClassName ? `\n\t\t\tcellClassName({row, column, rowIndex, columnIndex}) {
+                //若返回值为一个确定的值，可直接直接将String类型传参，无需写此方法
+                return 'cellClassName';
+            },` : '' }${this.paramForm.cellStyle ? `\n\t\t\tcellStyle({row, column, rowIndex, columnIndex}) {
+                //若返回值为一个确定的值，可直接直接将Object类型传参，无需写此方法
+                return 'cellStyle';
+            },` : '' }${this.paramForm.currentChange ? `\n\t\t\tcurrentChange(currentRow, oldCurrentRow) {
 
-                },` : '' }${this.paramForm.filterChange ? `\n\t\tfilterChange(filters) {
-                    console.log(filters)
-                },` : '' }${this.paramForm.sortChange ? `\n\t\tsortChange({ column, prop, order }) {
+            },` : '' }${this.paramForm.filterChange ? `\n\t\t\tfilterChange(filters) {
+                console.log(filters)
+            },` : '' }${this.paramForm.sortChange ? `\n\t\t\tsortChange({ column, prop, order }) {
 
-                },` : '' }${this.paramForm.select ? `\n\t\tselect(selection, row) {
+            },` : '' }${this.paramForm.select ? `\n\t\t\tselect(selection, row) {
 
-                },` : '' }${this.paramForm.selectAll ? `\n\t\tselectAll(selection) {
+            },` : '' }${this.paramForm.selectAll ? `\n\t\t\tselectAll(selection) {
 
-                },` : '' }${this.paramForm.selectionChange ? `\n\t\tselectionChange(selection) {
+            },` : '' }${this.paramForm.selectionChange ? `\n\t\t\tselectionChange(selection) {
 
-                },` : '' }${this.paramForm.rowClick ? `\n\t\trowClick(row, column, event) {
+            },` : '' }${this.paramForm.rowClick ? `\n\t\t\trowClick(row, column, event) {
 
-                },` : '' }${this.paramForm.rowDblclick ? `\n\t\trowDblclick(row, column, event) {
+            },` : '' }${this.paramForm.rowDblclick ? `\n\t\t\trowDblclick(row, column, event) {
 
-                },` : '' }${this.paramForm.rowContextmenu ? `\n\t\trowContextmenu(row, column, event) {
+            },` : '' }${this.paramForm.rowContextmenu ? `\n\t\t\trowContextmenu(row, column, event) {
 
-                },` : '' }${this.paramForm.cellClick ? `\n\t\tcellClick(row, column, cell, event) {
+            },` : '' }${this.paramForm.cellClick ? `\n\t\t\tcellClick(row, column, cell, event) {
 
-                },` : '' }${this.paramForm.cellDblclick ? `\n\t\tcellDblclick(row, column, cell, event) {
+            },` : '' }${this.paramForm.cellDblclick ? `\n\t\t\tcellDblclick(row, column, cell, event) {
 
-                },` : '' }${this.paramForm.headerClick ? `\n\t\theaderClick(column, event) {
+            },` : '' }${this.paramForm.headerClick ? `\n\t\t\theaderClick(column, event) {
 
-                },` : '' }${this.paramForm.headerContextmenu ? `\n\t\theaderContextmenu(column, event) {
+            },` : '' }${this.paramForm.headerContextmenu ? `\n\t\t\theaderContextmenu(column, event) {
 
-                },` : '' }${this.paramForm.headerDragend ? `\n\t\theaderDragend(newWidth, oldWidth, column, event) {
+            },` : '' }${this.paramForm.headerDragend ? `\n\t\t\theaderDragend(newWidth, oldWidth, column, event) {
 
-                },` : '' }
+            },` : '' }
         }
   }
 <\/script>`;

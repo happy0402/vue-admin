@@ -18,6 +18,7 @@ export default {
         dealData: 'Deal Data',
         animate: 'Animate',
         tinymce: 'Tinymce',
+        other: 'Others',
 
         directive: 'Directive',
         drag:'Drag',
@@ -62,6 +63,11 @@ export default {
         dialog: 'Dialog',
         tooltip: 'Tooltip',
         popover: 'Popover',
-        divider: 'Divider'
+        divider: 'Divider',
+        splitPane: 'Split Pane',
+        codeMirror: 'Code Mirror',
+
+        loadingComponent: 'Loading Component',
+        errorComponent: 'Error Component'
     }
 }

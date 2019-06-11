@@ -26,9 +26,6 @@
                         <el-radio v-model="paramForm.nestWayV" label="both">上下嵌套</el-radio>
                     </el-form-item>
                 </template>
-                <el-form-item class="alignRight">
-                    <el-button type="primary" @click="onSubmit">提交</el-button>
-                </el-form-item>
             </el-form>
         </template>
     </show-config-code>
@@ -49,35 +46,34 @@
                     nest: false,
                     nestWayH: 'left',
                     nestWayV: 'top'
-                },
-                codeCreate: ''
+                }
             }
         },
-        methods:{
-            onSubmit(){
+        computed: {
+            codeCreate(){
                 if(this.paramForm.direction == 'vertical'){
                     //垂直
                     if(this.paramForm.nest){
                         //嵌套
                         if(this.paramForm.nestWayV === 'top'){
-                            this.codeCreate = `<el-container>
+                            return `<el-container>
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
   <el-footer height="auto">Footer</el-footer>
 </el-container>`
                         }else if(this.paramForm.nestWayV === 'bottom'){
-                            this.codeCreate = `<el-container>
+                            return `<el-container>
   <el-header height="auto">Header</el-header>
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
 </el-container>`
                         }else{
-                            this.codeCreate = `<el-container direction="vertical">
+                            return `<el-container direction="vertical">
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
 </el-container>`
                         }
                     }else{
                         //不嵌套
-                        this.codeCreate = `<el-container>
+                        return `<el-container>
   <el-header height="auto">Header</el-header>
   <el-main>Main</el-main>
   <el-footer height="auto">Footer</el-footer>
@@ -88,56 +84,32 @@
                     if(this.paramForm.nest){
                         //嵌套
                         if(this.paramForm.nestWayH === 'left'){
-                            this.codeCreate = `<el-container>
+                            return `<el-container>
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
   <el-main>Main</el-main>
 </el-container>`
                         }else if(this.paramForm.nestWayH === 'right'){
-                            this.codeCreate = `<el-container>
+                            return `<el-container>
   <el-aside width="auto">Aside</el-aside>
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
 </el-container>`
                         }else{
-                            this.codeCreate = `<el-container>
+                            return `<el-container>
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
 </el-container>`
                         }
                     }else{
                         //不嵌套
-                        this.codeCreate = `<el-container>
+                        return `<el-container>
   <el-aside width="auto">Aside</el-aside>
   <el-main>Main</el-main>
 </el-container>`
                     }
                 }
+
+                return '';
             }
         }
     }
 </script>
-
-<style lang="scss" scoped="">
-    .alignRight{
-        text-align: right;
-    }
-
-    .showContainer{
-        max-height: 50%;
-        overflow-y: auto;
-
-        .el-col {
-            border-radius: 4px;
-        }
-        .bg-purple-dark {
-            background: #99a9bf;
-        }
-        .grid-content {
-            border-radius: 4px;
-            min-height: 36px;
-        }
-        .row-bg {
-            padding: 10px 0;
-            background-color: #f9fafc;
-        }
-    }
-</style>

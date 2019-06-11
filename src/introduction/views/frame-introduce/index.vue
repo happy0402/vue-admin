@@ -19,13 +19,18 @@
             <component :is="currentTabComponent"></component>
         </el-main>
     </el-container>
+    <el-container v-else>
+        <router-view/>
+    </el-container>
 </template>
 
 <script>
     import LoadingComponent from '#/components/AsyncComponent/LoadingComponent.vue'
     import ErrorComponent from '#/components/AsyncComponent/ErrorComponent.vue'
+    import ElContainer from "../../../../node_modules/element-ui/packages/container/src/main";
 
     export default {
+        components: {ElContainer},
         name: 'Index',
         created(){
             var matched = this.$route.fullPath.split('/')

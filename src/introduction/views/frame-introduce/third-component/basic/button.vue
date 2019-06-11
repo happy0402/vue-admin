@@ -89,13 +89,11 @@
 </template>
 
 <script>
-    import ShowConfigCode from '../show-config-code.vue'
-    import ElCol from "element-ui/packages/col/src/col";
+    import ShowConfigCode from '../show-config-code.vue';
 
     export default {
         name: 'Button',
         components:{
-            ElCol,
             ShowConfigCode
         },
         data(){
@@ -122,36 +120,30 @@
         computed: {
             codeCreate(){
                 let buttonCode = `<el-button${
-            this.paramForm.size === 'medium' ? '' :
-                '\n\tsize="' + this.paramForm.size + '"'
-            }${this.paramForm.type === 'default' ? '' :
-            '\n\ttype="' + this.paramForm.type + '"'
-            }${
-            this.paramForm.plain ? '\n\tplain' : ''
-            }${
-            this.paramForm.round ? '\n\tround' : ''
-            }${
-            this.paramForm.circle ? '\n\tcircle' : ''
-            }${
-            this.paramForm.loading ? '\n\tloading' : ''
-            }${
-            this.paramForm.autofocus ? '\n\tautofocus' : ''
-            }${
-            this.paramForm.disabled ? '\n\tdisabled' : ''
-            }${this.paramForm.nativeType === 'button' ? '' :
-            '\n\tnative-type="' + this.paramForm.nativeType + '"'
-            }
-            icon="${this.paramForm.icon}"
-    >${this.paramForm.text}</el-button>`
+                    this.paramForm.size === 'medium' ? '' :
+                        '\n\tsize="' + this.paramForm.size + '"'
+                    }${this.paramForm.type === 'default' ? '' :
+                    '\n\ttype="' + this.paramForm.type + '"'
+                    }${
+                    this.paramForm.plain ? '\n\tplain' : ''
+                    }${
+                    this.paramForm.round ? '\n\tround' : ''
+                    }${
+                    this.paramForm.circle ? '\n\tcircle' : ''
+                    }${
+                    this.paramForm.loading ? '\n\tloading' : ''
+                    }${
+                    this.paramForm.autofocus ? '\n\tautofocus' : ''
+                    }${
+                    this.paramForm.disabled ? '\n\tdisabled' : ''
+                    }${this.paramForm.nativeType === 'button' ? '' :
+                    '\n\tnative-type="' + this.paramForm.nativeType + '"'
+                    }
+        icon="${this.paramForm.icon}"
+    >${this.paramForm.text}</el-button>`;
 
-                return this.paramForm.buttonGroup ? '<el-button-group>\n\n\t' + buttonCode + '\n\n\t' + buttonCode + '\n\n</el-button-group>' : buttonCode
+                return this.paramForm.buttonGroup ? '<el-button-group>\n\n\t' + buttonCode + '\n\n\t' + buttonCode + '\n\n</el-button-group>' : buttonCode;
             }
         }
     }
 </script>
-
-<style lang="scss" scoped="">
-    .alignRight{
-        text-align: right;
-    }
-</style>

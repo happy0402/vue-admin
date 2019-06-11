@@ -82,7 +82,7 @@ export default [
                         meta: {
                             title: 'others',
                             roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['dialog', 'tooltip', 'popover', 'divider']
+                            modules: ['dialog', 'tooltip', 'popover', 'divider', 'splitPane', 'codeMirror']
                         }
                     }
                 ]
@@ -90,6 +90,7 @@ export default [
             {
                 path: 'second-component',
                 name: 'SecondComponent',
+                component: () => import('@/introduction/views/frame-introduce'),
                 meta: {
                     title: 'secondComponent',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -117,6 +118,15 @@ export default [
                         meta: {
                             title: 'tinymce',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                        }
+                    },
+                    {
+                        path: 'other',
+                        name: 'Other',
+                        meta: {
+                            title: 'other',
+                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
+                            modules: ['loadingComponent', 'errorComponent']
                         }
                     }
                 ]

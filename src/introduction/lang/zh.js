@@ -18,6 +18,7 @@ export default {
         dealData: '数据处理',
         animate: '动画',
         tinymce: '富文本编辑器',
+        other: '其他',
 
         directive: '自定义指令',
         drag:'Drag 拖拽',
@@ -62,6 +63,11 @@ export default {
         dialog: '对话框',
         tooltip: '文字提示',
         popover: '弹出框',
-        divider: '分割线'
+        divider: '分割线',
+        splitPane: '可拖拽分区',
+        codeMirror: '代码展示',
+
+        loadingComponent: '正在加载',
+        errorComponent: '加载失败'
     }
 }
