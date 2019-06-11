@@ -20,7 +20,7 @@
     git add src/introduction
     git stash -u -k //忽略其他文件
     git status //查看状态
-    git commit -m '提交文件'
+    git commit src/introduction '提交文件'
     git push  //推到远端仓库`
             }
         }
