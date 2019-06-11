@@ -20,29 +20,41 @@
             </p>
         </el-header>
         <el-main>
-            <textarea ref="codePanel" v-model="code"></textarea>
+            <vue-code-mirror :code="code"></vue-code-mirror>
         </el-main>
     </el-container>
 </template>
 
 <script>
-    import CodeMirror from 'codemirror'
-    import 'codemirror/lib/codemirror.css'
-    import 'codemirror/theme/monokai.css'
-    import 'codemirror/mode/vue/vue'
-    import 'codemirror/addon/selection/active-line'
-    import 'codemirror/addon/scroll/simplescrollbars.css'
-    import 'codemirror/addon/scroll/simplescrollbars'
+    import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
     export default {
         name: 'CodeMirror',
+        components:{
+            VueCodeMirror
+        },
+        data(){
+          return {
+              code: `<template>
+    <textarea ref="codePanel" v-model="code"></textarea>
+</template>
+
+<script>
+    import CodeMirror from 'codemirror'
+    import 'codemirror/lib/codemirror.css' //核心样式
+    import 'codemirror/theme/monokai.css' //主题样式 - 'codemirror/theme'目录下可选择
+    import 'codemirror/mode/vue/vue' //代码类型
+    import 'codemirror/addon/selection/active-line' //高光选中行
+    import 'codemirror/addon/scroll/simplescrollbars.css' //滚动条样式
+    import 'codemirror/addon/scroll/simplescrollbars' //滚动条组件
+
+    export default {
         components:{
             CodeMirror
         },
         data(){
           return {
-              CodeMirrorEditor: undefined,
-              code: ''
+              CodeMirrorEditor: undefined
           }
         },
         mounted(){
@@ -50,17 +62,16 @@
                 mode:'javascript',//编辑器语言
                 theme:'monokai', //编辑器主题
                 lineNumbers: true, //显示行号
-                scrollbarStyle: 'simple', //滚动条样式
+                scrollbarStyle: 'simple', //滚动条样式 | 'layout'
                 styleActiveLine: true //高光选中行
             });
 
-            this.CodeMirrorEditor.setValue(this.code)
+            //this.CodeMirrorEditor.setValue(“Hello Kitty”)：设置编辑器内容
+            //this.CodeMirrorEditor.getValue()：获取编辑器内容
+        }
+    }
+<\/script>`
+          }
         }
     }
 </script>
-
-<style scoped="">
-    .CodeMirrorContainer >>> .CodeMirror{
-        height: 100%;
-    }
-</style>

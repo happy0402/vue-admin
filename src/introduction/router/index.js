@@ -6,7 +6,7 @@ export default [
         path: '/frame-introduction',
         component: Frame,
         alwaysShow: true, // will always show the root menu
-        name: 'Frame',
+        name: 'FrameIntroduction',
         meta: {
             title: 'frameIntroduce',
             icon: 'el-icon-tickets',

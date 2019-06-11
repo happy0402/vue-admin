@@ -30,10 +30,10 @@ if(token !== ''){
             store.dispatch('user/resetUserInfo')
         }
 
-        require("#/initApp");
+        require("./initApp");
     }).catch((error) => {
         Message.error(error);
     })
 }else{
-    require("#/initApp");
+    require("./initApp");
 }

@@ -25,7 +25,7 @@
                 </template>
                 <template slot="paneR">
                     <!-- 代码区 -->
-                    <textarea ref="codePanel" v-model="code"></textarea>
+                    <vue-code-mirror :code="code"></vue-code-mirror>
                 </template>
             </split-pane>
         </el-main>
@@ -34,20 +34,13 @@
 
 <script>
     import SplitPane from 'vue-splitpane'
-
-    import CodeMirror from 'codemirror'
-    import 'codemirror/lib/codemirror.css'
-    import 'codemirror/theme/monokai.css'
-    import 'codemirror/mode/vue/vue'
-    import 'codemirror/addon/selection/active-line'
-    import 'codemirror/addon/scroll/simplescrollbars.css'
-    import 'codemirror/addon/scroll/simplescrollbars'
+    import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
     export default{
         name: 'ShowConfigCode',
         components:{
             SplitPane,
-            CodeMirror
+            VueCodeMirror
         },
         props:{
             code: {
@@ -62,12 +55,10 @@
         data(){
             return {
                 codeAnlyse: undefined,
-                CodeMirrorEditor: undefined
             }
         },
         watch: {
             code(value){
-                this.CodeMirrorEditor.setValue(value)
                 this.createShow(value)
             }
         },
@@ -84,14 +75,6 @@
         },
         mounted(){
             this.createShow(this.code)
-
-            this.CodeMirrorEditor = CodeMirror.fromTextArea(this.$refs.codePanel, {
-                mode:'javascript',//编辑器语言
-                theme:'monokai', //编辑器主题
-                lineNumbers: true, //显示行号
-                scrollbarStyle: 'simple', //滚动条样式
-                styleActiveLine: true //高光选中行
-            });
         }
     }
 </script>
@@ -101,9 +84,5 @@
         max-height: 50%;
         overflow-y: auto;
         margin-bottom: 10px;
-    }
-
-    .ShowConfigCodeContainer >>> .CodeMirror {
-        height: 100%;
     }
 </style>

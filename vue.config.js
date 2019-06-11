@@ -1,6 +1,6 @@
 'use strict'
 const path = require('path')
-const defaultSettings = require('./src/library/settings.js')
+const defaultSettings = require('./src/settings.js')
 
 const name = defaultSettings.title || 'vue Element Admin' // page title
 module.exports = {
@@ -19,8 +19,8 @@ module.exports = {
         name: name,
         resolve: {
             alias: {
-                '#': path.resolve(__dirname, 'src/library'),
-                '@': path.resolve(__dirname, 'src')
+                '@': path.resolve(__dirname, 'src'),
+                '#': path.resolve(__dirname, 'src/library')
             }
         },
         optimization: {

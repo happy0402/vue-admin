@@ -334,7 +334,7 @@
 </template>
 
 <script>
-    import ShowConfigCode from '../show-config-code.vue'
+    import ShowConfigCode from '../ShowConfigCode.vue'
 
     export default {
         name: 'Layout',
