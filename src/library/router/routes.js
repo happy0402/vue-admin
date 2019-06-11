@@ -39,23 +39,6 @@ function filterAsyncRoutes(routes, roles) {
 
 const frontRoutes = [
     {
-        path: '/',
-        component: Frame,
-        redirect: '/index',
-        children: [
-            {
-                path: 'index',
-                component: () => import('@/introduction/views'),
-                name: 'Index',
-                meta: {
-                    title: 'index',
-                    icon: 'el-icon-s-home',
-                    affix: true //tagsView default set
-                }
-            }
-        ]
-    },
-    {
         path: '/login',
         component: () => import('#/frame/login')
     }

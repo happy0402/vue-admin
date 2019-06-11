@@ -21,11 +21,11 @@
             </el-form-item>
             <el-form-item prop="app">
                 <el-select
-                        v-model="loginForm.app"
+                        v-model="loginForm.appCode"
                         :placeholder="$t('login.apps')"
                         style="width: 100%;">
                     <i slot="prefix" class="el-input__icon el-icon-thumb"></i>
-                    <el-option v-for="app in apps" :key="app.appCode" :label="app.appName" :value="app"></el-option>
+                    <el-option v-for="app in apps" :key="app.appCode" :label="app.appName" :value="app.appCode"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item>
@@ -60,10 +60,7 @@
                 loginForm: {
                     userName: 'frame',
                     password: '123456',
-                    app: {
-                        appCode: 'introduction',
-                        appName: '开发助手'
-                    }
+                    appCode: 'introduction'
                 },
                 apps: apps, /*正式系统代修改部分*/
                 users: users /*正式系统代修改部分*/
@@ -78,7 +75,7 @@
                     password: [
                         { required: true, message: this.$t('login.password') + this.$t('valid.inputRequired'), trigger: 'blur' },
                     ],
-                    app: [
+                    appCode: [
                         { required: true, message: this.$t('login.apps') + this.$t('valid.selectRequired'), trigger: 'change' }
                     ]
                 }
@@ -88,7 +85,7 @@
             $route: {
                 handler: function(route) {
                     //未实现
-                    this.redirect = route.query && route.query.redirect
+                    this.redirect = route.query && route.query.redirect;
                 },
                 immediate: true
             }
@@ -101,17 +98,17 @@
                         userLogin(this.loginForm).then((result) => {
                             if(!result.code){
                                 //设置全局变量
-                                this.$store.dispatch('user/setUserInfo', result.data.user)
-                                this.$store.dispatch('app/setAppMsg', result.data.app)
-                                this.$store.dispatch('app/setRoutes', result.data.routes)
+                                this.$store.dispatch('user/setUserInfo', result.data.user);
+                                this.$store.dispatch('app/setAppMsg', result.data.app);
+                                this.$store.dispatch('app/setRoutes', result.data.routes);
 
                                 //重新初始化系统
-                                resetRouter(result.data.routes)
-                                resetLang(result.data.app.appCode)
-                                resetStore(result.data.app.appCode)
+                                resetRouter(result.data.routes);
+                                resetLang(result.data.app.appCode);
+                                resetStore(result.data.app.appCode);
 
                                 //页面切换，进入系统
-                                this.$router.push({ path: this.redirect || '/' })
+                                this.$router.push({ path: this.redirect || '/' });
                             }else{
                                 this.$message.warning(result.msg);
                             }

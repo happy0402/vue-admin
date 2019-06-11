@@ -16,13 +16,14 @@ export function userLogin (loginForm) {
         let loginResult = users.filter((item) => {
             return loginForm.userName === item.userName
         });
-
         if(loginResult.length){
-            Cookies.set(loginResult[0].token, loginForm.app.appCode)
+            Cookies.set(loginResult[0].token, loginForm.appCode)
 
             let loginInfo = {
                 user: loginResult[0],
-                app: loginForm.app
+                app: apps.filter((item) => {
+                    return loginForm.appCode === item.appCode
+                })[0]
             }
             let routes = getRouters(loginInfo)
 
