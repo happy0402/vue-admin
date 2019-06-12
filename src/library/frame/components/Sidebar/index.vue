@@ -42,25 +42,28 @@ export default {
         return !this.sidebar.opened
     },
     validMenu(){
+        var menu = [];
+
         //父节点无法显示，提升一级子集
         function itemValid(item){
             if(item.meta){
-                return item
-            }else{
-                if(item.children){
-                    for(let i = 0; i < item.children.length; i++){
-                        item.children[i].path = path.resolve(item.path, item.children[i].path)
-                        return itemValid(item.children[i])
-                    }
+                menu.push(item);
+                return ;
+            }
+
+            if(item.children){
+                for(let i = 0; i < item.children.length; i++){
+                    item.children[i].path = path.resolve(item.path, item.children[i].path);
+                    itemValid(item.children[i]);
                 }
+                return ;
             }
         }
 
-        return JSON.parse(JSON.stringify(this.routes)).map((item) => {
-            return itemValid(item)
-        }).filter((item) => {
-            return item
+        [...this.routes].forEach((item) => {
+            itemValid(item)
         })
+        return menu;
     },
     activeMenu() {
 //      const { meta, path } = this.$route
@@ -71,7 +74,7 @@ export default {
       return this.$route.path
     },
     variables() {
-      return variables
+        return variables
     }
   }
 }

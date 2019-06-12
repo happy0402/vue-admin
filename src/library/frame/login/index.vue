@@ -104,8 +104,8 @@
 
                                 //重新初始化系统
                                 resetRouter(result.data.routes);
-                                resetLang(result.data.app.appCode);
                                 resetStore(result.data.app.appCode);
+                                resetLang(result.data.app.appCode);
 
                                 //页面切换，进入系统
                                 this.$router.push({ path: this.redirect || '/' });

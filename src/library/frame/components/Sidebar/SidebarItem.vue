@@ -44,28 +44,28 @@
                     return Object.assign({}, this.item, {
                         path: this.completePath,
                         title: [this.item.meta.title]
-                    })
+                    });
                 }else{
                     //此节点为子节点
                     return Object.assign({}, this.item, {
                         path: this.completePath,
                         title: [ ...this.parentNode.title, this.item.meta.title]
-                    })
+                    });
                 }
             },
             completePath(){
-                return this.parentNode ? path.resolve(this.parentNode.path, this.item.path) : this.item.path
+                return this.parentNode ? path.resolve(this.parentNode.path, this.item.path) : this.item.path;
             },
             hasChild(){
                 return this.item.children && this.item.children.some((item) => {
-                        return item.meta
-                    })
+                    return item.meta
+                });
             }
         },
         methods: {
             validMenu(routes){
                 return routes.filter((item) =>{
-                    return item.meta
+                    return item.meta.title
                 })
             }
         }
