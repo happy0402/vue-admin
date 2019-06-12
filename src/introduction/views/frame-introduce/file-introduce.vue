@@ -1,6 +1,8 @@
 <!-- 布局 -->
 <template>
-    <vue-code-mirror :code="code"></vue-code-mirror>
+    <div class="fileIntroduceContainer" style="height: 100%;">
+        <vue-code-mirror :code="code"></vue-code-mirror>
+    </div>
 </template>
 
 <script>
