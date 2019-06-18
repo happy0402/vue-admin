@@ -57,7 +57,9 @@
                         //嵌套
                         if(this.paramForm.nestWayV === 'top'){
                             return `<el-container>
-  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+  <el-header height="auto">
+    <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+  </el-header>
   <el-footer height="auto">Footer</el-footer>
 </el-container>`
                         }else if(this.paramForm.nestWayV === 'bottom'){
@@ -66,8 +68,10 @@
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
 </el-container>`
                         }else{
-                            return `<el-container direction="vertical">
-  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+                            return `<el-container>
+  <el-header height="auto">
+    <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+  </el-header>
   <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
 </el-container>`
                         }
@@ -85,8 +89,10 @@
                         //嵌套
                         if(this.paramForm.nestWayH === 'left'){
                             return `<el-container>
-  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
-  <el-main>Main</el-main>
+    <el-aside width="auto">
+        <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+    </el-aside>
+    <el-main>Main</el-main>
 </el-container>`
                         }else if(this.paramForm.nestWayH === 'right'){
                             return `<el-container>
@@ -95,8 +101,10 @@
 </el-container>`
                         }else{
                             return `<el-container>
-  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
-  <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+    <el-aside width="auto">
+        <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
+    </el-aside>
+    <el-container>使用将要嵌套的布局方式来替换此处的Container标签</el-container>
 </el-container>`
                         }
                     }else{

@@ -412,7 +412,6 @@
             codeCreate(){
                 let code = `<template>
     <el-table
-        ref="table"
         :data="tableData"
         height="${ this.paramForm.height }"${
         this.paramForm.border ? '\n\t\tborder' : '' }
@@ -447,18 +446,15 @@
         <el-table-column
                 prop="date"
                 label="日期"${
-                this.paramForm.defaultSort ? '\n\t\t\t\tsortable' : ''}
-                width="180">
+                this.paramForm.defaultSort ? '\n\t\t\t\tsortable' : ''}>
         </el-table-column>
         <el-table-column
                 prop="name"
-                label="姓名"
-                width="180">
+                label="姓名">
         </el-table-column>
         <el-table-column
                 prop="address"
-                label="地址"
-                show-overflow-tooltip>
+                label="地址">
         </el-table-column>
 
 

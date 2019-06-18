@@ -30,8 +30,9 @@ export default {
         personalCenter: 'Personal Center'
     },
     tabsTitle:{
-        layout: 'Layout',
         container: 'Container',
+        splitPane: 'Split Pane',
+        layout: 'Layout',
         color: 'Color',
         icon: 'Icon',
         button: 'Button',
@@ -64,7 +65,7 @@ export default {
         tooltip: 'Tooltip',
         popover: 'Popover',
         divider: 'Divider',
-        splitPane: 'Split Pane',
+        shortCut: 'Short Cut',
         codeMirror: 'Code Mirror',
 
         loadingComponent: 'Loading Component',

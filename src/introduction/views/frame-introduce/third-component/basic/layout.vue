@@ -38,7 +38,7 @@
                         <el-input v-model="col.span" placeholder="栅格占据的列数"></el-input>
                     </el-col>
                     <el-col :span="4" class="alignRight">
-                        <el-button @click.prevent="removeCol(col)" type="danger" icon="el-icon-minus" circle></el-button>
+                        <el-button @click.prevent="removeCol(index)" type="danger" icon="el-icon-minus" circle></el-button>
                     </el-col>
                 </el-form-item>
                 <el-form-item class="alignRight">
@@ -77,11 +77,11 @@
                     span: undefined
                 });
             },
-            removeCol(col){
-                var index = this.paramForm.cols.indexOf(col)
-                if (index !== -1) {
+            removeCol(index){
+//                var index = this.paramForm.cols.indexOf(col)
+//                if (index !== -1) {
                     this.paramForm.cols.splice(index, 1)
-                }
+//                }
             }
         },
         computed: {

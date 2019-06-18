@@ -30,8 +30,9 @@ export default {
         personalCenter: '个人中心'
     },
     tabsTitle:{
-        layout: '布局',
         container: '布局容器',
+        splitPane: '可拖拽分区',
+        layout: '布局',
         color: '色彩',
         icon: '图标',
         button: '按钮',
@@ -64,7 +65,7 @@ export default {
         tooltip: '文字提示',
         popover: '弹出框',
         divider: '分割线',
-        splitPane: '可拖拽分区',
+        shortCut: '快捷键',
         codeMirror: '代码展示',
 
         loadingComponent: '正在加载',
