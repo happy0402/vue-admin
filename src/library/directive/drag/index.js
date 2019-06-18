@@ -13,7 +13,7 @@ export default {
                     x: e.x,
                     y: e.y,
                     event: e
-                })
+                }, arguments)
             }
 
             oldPosition.x = e.x

@@ -13,6 +13,7 @@ import {
     Submenu,
     MenuItem,
     Input,
+    InputNumber,
     Radio,
     RadioGroup,
     RadioButton,
@@ -86,6 +87,7 @@ Vue.use(Switch);
 Vue.use(CheckboxGroup);
 Vue.use(Checkbox);
 Vue.use(Input);
+Vue.use(InputNumber);
 Vue.use(Autocomplete);
 Vue.use(Select);
 Vue.use(Option);

@@ -6,5 +6,9 @@ export default [
     {
         appCode: 'introduction',
         appName: '开发助手'
+    },
+    {
+        appCode: 'old-project',
+        appName: '系统开发'
     }
 ]

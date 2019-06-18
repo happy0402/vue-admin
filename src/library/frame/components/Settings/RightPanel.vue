@@ -50,9 +50,11 @@
         },
         methods:{
           drag(param){
-              this.dragging = true
-              let positionY = this.buttonTop + param.offsetY
-              this.buttonTop = positionY > 0 && positionY < (document.body.clientHeight - 35) ? positionY : this.buttonTop
+              if (Math.abs(param.offsetY) > 1){
+                  this.dragging = true
+                  let positionY = this.buttonTop + param.offsetY
+                  this.buttonTop = positionY > 0 && positionY < (document.body.clientHeight - 35) ? positionY : this.buttonTop
+              }
           },
           toggle(){
               if(!this.dragging) this.show = !this.show
