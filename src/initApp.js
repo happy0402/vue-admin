@@ -11,14 +11,23 @@ import App from './App.vue'
 import store from '#/store'
 import router from '#/router'
 
+//快捷键设置
+import { shortcutJS } from 'shortcutjs'
+import shortcuts from '#/shortcuts.json'
+
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import '#/styles/index.scss' // global css
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+// optional debug param
+shortcutJS.loadFromJson(shortcuts, {
+    preventDefault: true,
+});
 
 new Vue({
     router,
     store,
     i18n,
-    render: h => h(App),
-}).$mount('#app')
+    render: h => h(App)
+}).$mount('#app');
