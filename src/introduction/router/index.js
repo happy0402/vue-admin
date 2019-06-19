@@ -40,6 +40,15 @@ export default [
                 }
             },
             {
+                path: 'page-develop',
+                name: 'PageDevelop',
+                component: () => import('@/introduction/views/frame-introduce/page-develop'),
+                meta: {
+                    title: 'pageDevelop',
+                    roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                }
+            },
+            {
                 path: 'third-component',
                 name: 'ThirdComponent',
                 component: () => import('@/introduction/views/frame-introduce'),

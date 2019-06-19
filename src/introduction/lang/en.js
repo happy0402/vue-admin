@@ -6,6 +6,8 @@ export default {
 
         fileIntroduce: 'File Introduce',
 
+        pageDevelop: 'Page Develop Introduce',
+
         thirdComponent: 'Third Component',
         basic: 'Basic',
         form: 'Form',

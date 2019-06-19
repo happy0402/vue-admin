@@ -27,6 +27,9 @@ const mutations = {
     SET_FIXEDPAGE: (state, fixedPage) => {
         state.fixedPage = fixedPage;
     },
+    RESET_FIXED_PAGE: (state) => {
+        state.fixedPage = false;
+    },
     SET_APPMSG: (state, appMsg) => {
         state.appMsg = appMsg;
     },
@@ -57,6 +60,9 @@ const actions = {
     },
     setFixedPage({ commit }, fixedPage){
         commit('SET_FIXEDPAGE', fixedPage)
+    },
+    resetFixedPage({ commit }){
+      commit('RESET_FIXED_PAGE')
     },
     toggleSidebar({ commit }) {
         commit('TOGGLE_SIDEBAR')

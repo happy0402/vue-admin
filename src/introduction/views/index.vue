@@ -18,7 +18,9 @@
                 code: `//github 代码提交
     cd d:/ZKX/VueWorkspace/vue-admin
     git commit src/introduction -m '提交文件'
-    git push  //推到远端仓库`
+    git push  //推到远端仓库
+
+    npm run build --modern //构建现代打包代码模式，项目打包后系统介绍子应用部分功能因异步组件内的动态路径无法访问`
             }
         }
     }

@@ -6,6 +6,8 @@ export default {
 
         fileIntroduce: '项目结构',
 
+        pageDevelop: '页面开发说明',
+
         thirdComponent: '三方组件',
         basic: '基础',
         form: '表单',

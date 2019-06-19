@@ -2,6 +2,10 @@
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
+
 const name = defaultSettings.title || 'vue Element Admin' // page title
 module.exports = {
     // publicPath: process.env.NODE_ENV === 'production'
@@ -19,9 +23,19 @@ module.exports = {
         name: name,
         resolve: {
             alias: {
-                '@': path.resolve(__dirname, 'src'),
-                '#': path.resolve(__dirname, 'src/library')
+                '@': resolve('src'),
+                '#': resolve('src/library')
             }
+        },
+        //bable -> es5 转换
+        module:{
+            rules:[
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                    include: [resolve('node_modules/element-ui/packages'), resolve('node_modules/element-ui/src')]
+                }
+            ]
         },
         optimization: {
             splitChunks: {
@@ -66,7 +80,7 @@ module.exports = {
                 },
                 commons: {
                     name: 'chunk-commons',
-                    test: path.resolve(__dirname, 'src/library'), // can customize your rules
+                    test: resolve('src/library'), // can customize your rules
                     minChunks: 3, //  minimum common number
                     priority: 5,
                     reuseExistingChunk: true

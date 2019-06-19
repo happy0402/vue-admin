@@ -334,6 +334,7 @@
 </template>
 
 <script>
+    /* eslint-disable */
     import ShowConfigCode from '../ShowConfigCode.vue'
 
     export default {

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import routes from './routes'
+
+import store from '#/store'
+
 import Cookies from 'js-cookie'
 
 import NProgress from 'nprogress' // progress bar
@@ -33,6 +36,7 @@ router.beforeEach((to, from, next) => {
         next('/index')
     }
 
+    store.dispatch('app/setFixedPage') //页面高度初始化
     next()
 
     NProgress.done()

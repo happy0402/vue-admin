@@ -68,7 +68,7 @@
                                     <template v-else>
                                         <template
                                                 v-for="(item, index) in selected.target.fixedSource">
-                                            <el-row :gutter="5" style="margin-bottom: 5px;">
+                                            <el-row :gutter="5" style="margin-bottom: 5px;" :key="index">
                                                 <el-col :span="10">
                                                     <el-input v-model="item.code" placeholder="code"></el-input>
                                                 </el-col>

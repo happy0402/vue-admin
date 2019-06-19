@@ -107,13 +107,13 @@
 </template>
 
 <script>
-    import SplitPane from 'vue-splitpane'
+//    import SplitPane from 'vue-splitpane'
     import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
     export default{
         name: 'SplitPane',
         components:{
-            SplitPane,
+//            SplitPane,
             VueCodeMirror
         },
         data(){

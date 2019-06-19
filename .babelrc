@@ -1,5 +1,20 @@
 {
-  "presets": [["@babel/env", { "modules": false }]],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        //windowsXP最后浏览器版本号
+        "targets": {
+          "chrome": "49",
+          "ie": "8",
+          "firefox": "52"
+        }
+//        "useBuiltIns": "usage",
+//        "corejs": 2
+      }
+    ]
+  ],
   "plugins": [
     [
       "component",
@@ -8,5 +23,6 @@
         "styleLibraryName": "theme-chalk" //"styleLibraryName": "~theme"
       }
     ]
-  ]
+  ],
+  "comments": false
 }
