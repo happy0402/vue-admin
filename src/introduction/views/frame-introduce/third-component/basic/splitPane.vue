@@ -1,118 +1,109 @@
 <template>
-    <div>
-        <p>
-            <el-link
-            href="https://github.com/PanJiaChen/vue-split-pane"
-            target="_blank"
-            type="primary"
-            :underline="false">
-            Github官方网址<i class="el-icon-view el-icon--right"></i>
-            </el-link>
-        </p>
+    <!--<div>-->
+        <!--<h4>-->
+            <!--Show-->
+        <!--</h4>-->
+        <!--<div style="height: 200px;">-->
+            <!--<split-pane :min-percent='20' :default-percent='30' split="vertical">-->
+                <!--<template slot="paneL">-->
+                    <!--<div style="background-color: #f38181; height: 100%;"></div>-->
+                <!--</template>-->
+                <!--<template slot="paneR">-->
+                    <!--<split-pane split="horizontal">-->
+                        <!--<template slot="paneL">-->
+                            <!--<div style="background-color: #fce38a; height: 100%;"></div>-->
+                        <!--</template>-->
+                        <!--<template slot="paneR">-->
+                            <!--<div style="background-color: #95e1d3; height: 100%;"></div>-->
+                        <!--</template>-->
+                    <!--</split-pane>-->
+                <!--</template>-->
+            <!--</split-pane>-->
+        <!--</div>-->
         <div>
-            <!--<el-row>-->
-                <!--<el-col>-->
-                    <!--<h4>-->
-                        <!--Show-->
-                    <!--</h4>-->
-                <!--</el-col>-->
-            <!--</el-row>-->
-            <!--<el-row>-->
-                <!--<el-col>-->
-                    <!--<div style="height: 200px;">-->
-                        <!--<split-pane :min-percent='20' :default-percent='30' split="vertical">-->
-                            <!--<template slot="paneL">-->
-                                <!--<div style="background-color: #f38181; height: 100%;"></div>-->
-                            <!--</template>-->
-                            <!--<template slot="paneR">-->
-                                <!--<split-pane split="horizontal">-->
-                                    <!--<template slot="paneL">-->
-                                        <!--<div style="background-color: #fce38a; height: 100%;"></div>-->
-                                    <!--</template>-->
-                                    <!--<template slot="paneR">-->
-                                        <!--<div style="background-color: #95e1d3; height: 100%;"></div>-->
-                                    <!--</template>-->
-                                <!--</split-pane>-->
-                            <!--</template>-->
-                        <!--</split-pane>-->
-                    <!--</div>-->
-                <!--</el-col>-->
-            <!--</el-row>-->
+            <p>
+                <el-link
+                        href="https://github.com/PanJiaChen/vue-split-pane"
+                        target="_blank"
+                        type="primary"
+                        :underline="false">
+                    Github官方网址<i class="el-icon-view el-icon--right"></i>
+                </el-link>
+            </p>
+            <div>
+                <el-row>
+                    <el-col>
+                        <h4>
+                            How to use?
+                        </h4>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col>
+                        <vue-code-mirror :code="howToUse"></vue-code-mirror>
+                    </el-col>
+                </el-row>
 
-            <el-row>
-                <el-col>
-                    <h4>
-                        How to use?
-                    </h4>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col>
-                    <vue-code-mirror :code="howToUse"></vue-code-mirror>
-                </el-col>
-            </el-row>
+                <el-row>
+                    <el-col>
+                        <h4>
+                            Example
+                        </h4>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col>
+                        <vue-code-mirror :code="example"></vue-code-mirror>
+                    </el-col>
+                </el-row>
 
-            <el-row>
-                <el-col>
-                    <h4>
-                        Example
-                    </h4>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col>
-                    <vue-code-mirror :code="example"></vue-code-mirror>
-                </el-col>
-            </el-row>
+                <el-row>
+                    <el-col>
+                        <h4>
+                            Options
+                        </h4>
+                    </el-col>
+                </el-row>
+                <el-row>
+                    <el-col>
+                        <el-table
+                                :data="tableData"
+                                border
+                                stripe
+                                highlight-current-row>
 
-            <el-row>
-                <el-col>
-                    <h4>
-                        Options
-                    </h4>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col>
-                    <el-table
-                            :data="tableData"
-                            border
-                            stripe
-                            highlight-current-row>
+                            <el-table-column
+                                    prop="property"
+                                    label="Property">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="description"
+                                    label="Description">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="type"
+                                    label="Type">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="default"
+                                    label="Default">
+                            </el-table-column>
 
-                        <el-table-column
-                                prop="property"
-                                label="Property">
-                        </el-table-column>
-                        <el-table-column
-                                prop="description"
-                                label="Description">
-                        </el-table-column>
-                        <el-table-column
-                                prop="type"
-                                label="Type">
-                        </el-table-column>
-                        <el-table-column
-                                prop="default"
-                                label="Default">
-                        </el-table-column>
+                        </el-table>
+                    </el-col>
+                </el-row>
 
-                    </el-table>
-                </el-col>
-            </el-row>
-
+            </div>
         </div>
-
-    </div>
+    <!--</div>-->
 </template>
 
 <script>
-//    import SplitPane from 'vue-splitpane'
+    //    import SplitPane from 'vue-splitpane'
     import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
     export default{
-        name: 'SplitPane',
-        components:{
+        components: {
 //            SplitPane,
             VueCodeMirror
         },

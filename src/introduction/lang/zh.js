@@ -46,7 +46,7 @@ export default {
         inputNumber: '计数器',
         select: '选择器',
         switch: '开关',
-        dateTimePicker: '日期时间选择器',
+        datePicker: '日期选择器',
         transfer: '穿梭框',
         form: '表单',
 

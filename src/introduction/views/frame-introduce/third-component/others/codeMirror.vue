@@ -47,7 +47,6 @@
     import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
     export default {
-        name: 'CodeMirror',
         components:{
             VueCodeMirror
         },

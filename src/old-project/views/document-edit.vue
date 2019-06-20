@@ -185,7 +185,6 @@
 
     var idGlobal = 1;
     export default {
-        name: 'DocumentEdit',
         components: {
             ElFormItem,
             Draggable,

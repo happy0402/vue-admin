@@ -92,7 +92,6 @@
     import ShowConfigCode from '../ShowConfigCode.vue';
 
     export default {
-        name: 'Button',
         components:{
             ShowConfigCode
         },

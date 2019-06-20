@@ -9,7 +9,6 @@
     import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
     export default {
-        name: 'FileIntroduce',
         components:{
             VueCodeMirror
         },

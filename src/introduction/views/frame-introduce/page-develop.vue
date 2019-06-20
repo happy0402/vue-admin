@@ -19,7 +19,6 @@
     import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
     export default {
-        name: 'PageDevelop',
         components:{
             VueCodeMirror
         },

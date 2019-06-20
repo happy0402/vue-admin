@@ -23,7 +23,6 @@
     import shortcuts from '#/shortcuts.json'
 
     export default {
-        name: 'ShortCut',
         components:{
             VueCodeMirror
         },

@@ -35,7 +35,6 @@
     import ShowConfigCode from '../ShowConfigCode.vue'
 
     export default {
-        name: 'Container',
         components:{
             ShowConfigCode
         },

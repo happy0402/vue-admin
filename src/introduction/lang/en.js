@@ -46,7 +46,7 @@ export default {
         inputNumber: 'Input Number',
         select: 'Select',
         switch: 'Switch',
-        dateTimePicker: 'Date Time Picker',
+        datePicker: 'Date Picker',
         transfer: 'Transfer',
         form: 'Form',
 

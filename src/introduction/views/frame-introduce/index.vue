@@ -29,7 +29,6 @@
     import ErrorComponent from '#/components/AsyncComponent/ErrorComponent.vue'
 
     export default {
-        name: 'Index',
         created(){
             var matched = this.$route.fullPath.split('/')
             for(let i = 2; i < matched.length; i++){

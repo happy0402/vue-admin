@@ -103,7 +103,6 @@
 
 <script>
     export default {
-        name: 'CsCreate',
         data() {
             return {
                 csForm: {

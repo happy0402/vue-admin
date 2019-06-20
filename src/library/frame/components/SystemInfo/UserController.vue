@@ -27,8 +27,10 @@
                         this.changePassword();
                         break;
                     case 'logout':
-                        this.$store.dispatch('user/resetUserInfo')
-                        this.$router.push({ path: '/login' })
+                        this.$store.dispatch('user/resetUserInfo');
+                        this.$router.push({ path: '/login' });
+                        this.$store.dispatch('tagsView/clearViews');
+
                         break;
                     default:
                         break;

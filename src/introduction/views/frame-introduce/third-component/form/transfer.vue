@@ -25,6 +25,5 @@
 
 <script>
     export default {
-        name: 'Transfer'
     }
 </script>
