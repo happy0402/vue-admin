@@ -11,7 +11,7 @@
                     :underline="false">
                 element-ui官方网站<i class="el-icon-view el-icon--right"></i>
             </el-link>
-            <span style="font-size: 12px; padding-left: 10px;">( 注：官方还提供 展开行 | 表尾合计行 | 树形表 等功能,此页面暂时无法配置 )</span>
+            <span style="font-size: 12px; padding-left: 10px;color: #E65D6E;">( 注：官方还提供 展开行 | 表尾合计行 | 树形表 等功能,此页面暂时无法配置 )</span>
         </p>
 
         <template v-slot:show>
@@ -27,13 +27,11 @@
                 <el-table-column
                         prop="date"
                         label="日期"
-                        :sortable="paramForm.defaultSort"
-                        width="180">
+                        :sortable="paramForm.defaultSort">
                 </el-table-column>
                 <el-table-column
                         prop="name"
-                        label="姓名"
-                        width="180">
+                        label="姓名">
                 </el-table-column>
                 <el-table-column
                         prop="address"
@@ -338,6 +336,7 @@
     import ShowConfigCode from '../ShowConfigCode.vue'
 
     export default {
+        name: 'Layout',
         components:{
             ShowConfigCode
         },
@@ -410,6 +409,7 @@
         },
         computed: {
             codeCreate(){
+                // eslint-disable-next-line
                 let code = `<template>
     <el-table
         :data="tableData"

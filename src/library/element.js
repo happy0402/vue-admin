@@ -37,10 +37,10 @@ import {
     Aside,
     Main,
     Divider,
-    Message,
 
     Table,
-    TableColumn
+    TableColumn,
+    Tree
 } from 'element-ui';
 
 import './styles/element-variables.scss'
@@ -97,7 +97,6 @@ Vue.use(Link);
 
 Vue.use(Table);
 Vue.use(TableColumn);
-
-Vue.prototype.$message = Message;
+Vue.use(Tree);
 
 ElementLocale.i18n((key, value) => i18n.t(key, value));

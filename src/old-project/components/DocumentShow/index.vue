@@ -1,18 +1,19 @@
 <template>
     <div class="documentContainer">
         <el-row
-                v-for="(row,rowIndex) in showConfig"
+                v-for="(row, rowIndex) in showConfig"
                 :key="rowIndex"
                 :gutter="row.config.gutter"
                 :class="selected && row.controllerIndex == selected.controllerIndex ? 'activeController' : ''"
                 :style="row.config.controllerStyle">
             <el-col
-                    v-for="(col,colIndex) in row.children"
+                    v-for="(col, colIndex) in row.children"
                     :key="colIndex"
                     :span="col.config.span"
                     :offset="col.config.offset"
                     :class="selected && col.controllerIndex == selected.controllerIndex ? 'activeController' : ''"
-                    :style="col.config.controllerStyle">
+                    :style="col.config.controllerStyle"
+                    @click.native="$emit('selected-item', col , col._index, config)">
                 <template v-for="(controller, index) in col.children">
                     <span
                             v-if="controller.type==='Text'"
@@ -109,8 +110,9 @@
                 var Row = undefined,
                     Col = undefined;
 
-                this.config.forEach((controller) => {
+                this.config.forEach((controller, index) => {
                     this.analyseSource(controller);
+                    controller._index = index;
 
                     if(controller.type === 'Row'){
                         controller.children = [];

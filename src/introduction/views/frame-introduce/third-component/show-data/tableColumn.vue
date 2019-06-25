@@ -292,6 +292,7 @@
     import ShowConfigCode from '../ShowConfigCode.vue'
 
     export default {
+        name: 'Layout',
         components:{
             ShowConfigCode
         },

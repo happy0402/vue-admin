@@ -78,22 +78,22 @@
 
     .tabs{
         white-space: nowrap;
-        border-bottom: 1px solid #e4e7ed;
+        border-bottom: $firstBorder;
 
         .el-scrollbar{
             margin-bottom: -1px;
         }
 
         .tabsTitle{
-            border: 1px solid #e4e7ed;
+            border: $firstBorder;
             border-bottom: none;
             border-radius: 4px 4px 0 0;
             box-sizing: border-box;
             display: inline-block;
 
             .active-tab{
-                border-bottom-color: #fff;
-                color: #409eff;
+                border-bottom-color: $white;
+                color: $light-blue;
             }
         }
 
@@ -105,7 +105,7 @@
             font-size: 14px;
             font-weight: 500;
             border-bottom: 1px solid transparent;
-            border-left: 1px solid #e4e7ed;
+            border-left: $firstBorder;
             cursor: pointer;
             -webkit-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
             -moz-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
@@ -118,7 +118,7 @@
             }
 
             &:hover{
-                color: #409eff;
+                color: $light-blue;
             }
         }
     }

@@ -168,7 +168,12 @@
         </el-aside>
         <el-main>
 
-            <document-show ref="documentShow" :config="configList" :selected="selected.target"></document-show>
+            <document-show
+                    ref="documentShow"
+                    :config="configList"
+                    :selected="selected.target"
+                    @selected-item="selectedController"
+            ></document-show>
 
         </el-main>
     </el-container>

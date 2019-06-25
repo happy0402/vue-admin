@@ -1,9 +1,12 @@
+@import 'variables';
+
 body {
   height: 100%;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+  font-size: 14px;
 }
 
 html {
@@ -36,4 +39,51 @@ html {
 
 .el-main{
   padding: 0;
+}
+
+//Module 弹框样式重置
+.ordinaryModule{
+  .ivu-modal{
+    top: 35px;
+
+    .ivu-modal-body{
+      max-height: calc(100vh - 182px);
+      overflow: overlay;
+    }
+  }
+}
+
+//消息提示
+.ivu-message-notice{
+  .ivu-message-info{
+    color: $grey;
+
+    .ivu-icon{
+      color: $grey;
+    }
+  }
+
+  .ivu-message-success{
+    color: $green;
+
+    .ivu-icon{
+      color: $green;
+    }
+  }
+
+  .ivu-message-warning{
+    color: $yellow;
+
+    .ivu-icon{
+      color: $yellow;
+    }
+  }
+
+  .ivu-message-error{
+    color: $pink;
+
+    .ivu-icon{
+      color: $pink;
+    }
+  }
 }

@@ -5,7 +5,7 @@ import { resetLang } from '#/lang'
 import { resetStore } from '#/store'
 
 import Cookies from 'js-cookie'
-import { Message } from 'element-ui'
+import { Message } from 'iview'
 
 /*正式系统代修改部分 获取用户登录信息*/
 import { getLoginInfoByToken } from '#/test-data/databaseServer.js'

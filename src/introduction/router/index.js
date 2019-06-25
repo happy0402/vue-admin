@@ -63,7 +63,7 @@ export default [
                         meta: {
                             title: 'basic',
                             roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['container', 'splitPane', 'layout', 'color', 'icon', 'button', 'link']
+                            modules: ['container', 'layout', 'color', 'icon', 'button', 'link'] //, 'splitPane'
                         }
                     },
                     {
@@ -72,7 +72,7 @@ export default [
                         meta: {
                             title: 'form',
                             roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['datePicker','radio', 'checkbox', 'input', 'inputNumber', 'select', 'switch',  'transfer', 'form']
+                            modules: ['switch', 'radio', 'checkbox', 'select', 'inputNumber', 'input', 'buttonInput', 'datePicker', 'transfer', 'form']
                         }
                     },
                     {
@@ -90,7 +90,7 @@ export default [
                         meta: {
                             title: 'notice',
                             roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['loading', 'message', 'messageBox', 'notification']
+                            modules: ['loading', 'message', 'messageBox', 'modal', 'notification']
                         }
                     },
                     {

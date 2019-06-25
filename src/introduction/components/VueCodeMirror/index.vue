@@ -1,5 +1,5 @@
 <template>
-    <textarea ref="codePanel" v-model="code"></textarea>
+    <textarea ref="codePanel"></textarea>
 </template>
 
 <script>
@@ -21,12 +21,12 @@
         },
         watch:{
             code(value){
-              this.CodeMirrorEditor.setValue(value); //设置编辑器内容
+                this.CodeMirrorEditor.setValue(value); //设置编辑器内容
             }
         },
         methods:{
             getValue(){
-              return this.CodeMirrorEditor.getValue(); //获取编辑器内容
+                return this.CodeMirrorEditor.getValue(); //获取编辑器内容
             }
         },
         mounted(){
@@ -37,6 +37,7 @@
                 scrollbarStyle: 'simple', //滚动条样式 | 'layout'
                 styleActiveLine: true //高光选中行
             });
+            this.CodeMirrorEditor.setValue(this.code);
         }
     }
 </script>

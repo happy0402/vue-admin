@@ -9,6 +9,8 @@
                     :underline="false">
                 element-ui官方网站<i class="el-icon-view el-icon--right"></i>
             </el-link>
+            <span style="color: #E65D6E;padding-left: 10px;">注：</span>如需绑定事件，请添加.native修饰符。
+            <span style="color: #30B08F;">（如：@click.native="doSomething"）</span>
         </p>
 
         <template v-slot:show>
