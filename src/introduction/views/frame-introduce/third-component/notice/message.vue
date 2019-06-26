@@ -1,18 +1,18 @@
 <template>
     <el-container>
-        <el-aside width="50%">
+        <el-aside width="40%">
             <el-divider>基础用法</el-divider>
             <p>
-                <el-button :plain="true" @click="open1">消息</el-button>
-                <el-button :plain="true" @click="open2">成功</el-button>
-                <el-button :plain="true" @click="open3">警告</el-button>
-                <el-button :plain="true" @click="open4">错误</el-button>
-                <el-button :plain="true" @click="loading">加载中</el-button>
+                <el-button :plain="true" @click="open('info')">消息</el-button>
+                <el-button :plain="true" @click="open('success')">成功</el-button>
+                <el-button :plain="true" @click="open('warning')">警告</el-button>
+                <el-button :plain="true" @click="open('error')">错误</el-button>
+                <el-button :plain="true" @click="open('loading')">加载中</el-button>
             </p>
             <el-divider>可关闭</el-divider>
             <p>
-                <el-button :plain="true" @click="closable">手动关闭的提示</el-button>
-                <el-button :plain="true" @click="toggleTips">代码关闭的提示</el-button>
+                <el-button :plain="true" @click="closable">手动关闭</el-button>
+                <el-button :plain="true" @click="toggleTips">代码关闭</el-button>
             </p>
             <el-divider>自定义 Render 函数</el-divider>
             <p>
@@ -44,25 +44,33 @@
             }
         },
         methods: {
-            open1() {
-                this.$message.info('这是一条消息提示');
-                this.code = `this.$message.info('这是一条消息提示');`;
-            },
-            open2() {
-                this.$message.success('恭喜你，这是一条成功消息');
-                this.code = `this.$message.success('恭喜你，这是一条成功消息');`;
-            },
-            open3() {
-                this.$message.warning('警告哦，这是一条警告消息');
-                this.code = `this.$message.warning('警告哦，这是一条警告消息');`;
-            },
-            open4() {
-                this.$message.error('错了哦，这是一条错误消息');
-                this.code = `this.$message.error('错了哦，这是一条错误消息');`;
-            },
-            loading(){
-                this.$message.loading('Loading...');
-                this.code = `this.$message.loading('Loading...');`
+            open(type) {
+                switch (type) {
+                    case 'info':
+                        this.$message.info('这是一条消息提示');
+                        break;
+                    case 'success':
+                        this.$message.success('恭喜你，这是一条成功消息');
+                        break;
+                    case 'warning':
+                        this.$message.warning('警告哦，这是一条警告消息');
+                        break;
+                    case 'error':
+                        this.$message.error('错了哦，这是一条错误消息');
+                        break;
+                    case 'loading':
+                        this.$message.loading('正在加载中，请稍候...');
+                        break;
+                }
+                this.code = `this.$message.info('这是一条消息提示');
+
+this.$message.success('恭喜你，这是一条成功消息');
+
+this.$message.warning('警告哦，这是一条警告消息');
+
+this.$message.error('错了哦，这是一条错误消息');
+
+this.$message.loading('正在加载中，请稍候...');`;
             },
             closable(){
                 this.$message.info({

@@ -24,9 +24,9 @@
         },
         data(){
             return {
-                singlePageHeight: `//默认页面不固定高度
-this.$store.dispatch('app/setFixedPage', true) //设置页面定高（窗口高度）
-//页面视图组件请根据 框架说明 -> 三方组件 -> 基础 -> 布局容器 开发`
+                singlePageHeight: `//默认页面不固定高度：可按照 框架说明 -> 三方组件 -> 基础 -> 布局 开发
+
+this.$store.dispatch('app/setFixedPage', true) //设置页面定高（窗口高度）：当页面定高时,请根据 框架说明 -> 三方组件 -> 基础 -> 布局容器 开发`
             }
         }
     }

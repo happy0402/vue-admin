@@ -46,7 +46,6 @@ export default {
         select: 'Select',
         inputNumber: 'Input Number',
         input: 'Input',
-        buttonInput: 'Button Input',
         datePicker: 'Date Picker',
         transfer: 'Transfer',
         form: 'Form',

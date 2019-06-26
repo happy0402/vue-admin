@@ -46,7 +46,6 @@ export default {
         select: '下拉框',
         inputNumber: '计数器',
         input: '输入框',
-        buttonInput: '按钮输入框',
         datePicker: '日期选择器',
         transfer: '穿梭框',
         form: '表单',

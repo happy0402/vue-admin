@@ -72,7 +72,7 @@ export default [
                         meta: {
                             title: 'form',
                             roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['switch', 'radio', 'checkbox', 'select', 'inputNumber', 'input', 'buttonInput', 'datePicker', 'transfer', 'form']
+                            modules: ['switch', 'radio', 'checkbox', 'select', 'inputNumber', 'input', 'datePicker', 'transfer', 'form']
                         }
                     },
                     {

@@ -8,7 +8,7 @@ import {
     Modal
 } from 'iview';
 
-import 'iview/dist/styles/iview.css';
+import './styles/iview-variable.less';
 
 Vue.component('DatePicker', DatePicker);
 Vue.component('Modal', Modal);
@@ -17,3 +17,5 @@ Vue.prototype.$message = Message;
 Message.config({
     duration: 3
 });
+
+Vue.prototype.$modal = Modal;
