@@ -62,9 +62,13 @@
             </el-form>
         </template>
 
-        <Modal v-model="showDataSource" draggable class-name="ordinaryModule" title="数据类型">
+        <self-dialog
+                v-model="showDataSource"
+                title="数据类型"
+                draggable
+                footer-hide>
             <vue-code-mirror :code="JSON.stringify(dataSource, null, 2)"></vue-code-mirror>
-        </Modal>
+        </self-dialog>
     </show-config-code>
 </template>
 

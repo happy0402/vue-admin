@@ -8,7 +8,7 @@ export default {
 
         pageDevelop: 'Page Develop Introduce',
 
-        thirdComponent: 'Third Component',
+        baseComponent: 'Base Component',
         basic: 'Basic',
         form: 'Form',
         showData: 'Show Data',
@@ -16,7 +16,7 @@ export default {
         navigation: 'Navigation',
         others: 'Others',
 
-        secondComponent: 'Second Component',
+        complexComponent: 'Complex Component',
         dealData: 'Deal Data',
         animate: 'Animate',
         tinymce: 'Tinymce',

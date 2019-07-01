@@ -25,10 +25,9 @@ router.beforeEach((to, from, next) => {
     NProgress.start()
 
     var token = Cookies.get('token')
-
     if(!token && to.path !== '/login'){
         //未登陆
-        next(`/login?redirect=${to.path}`)
+        next(`/login?redirect=${window.location.hash.slice(1)}`)
     }
 
     if(token && to.path === '/login'){

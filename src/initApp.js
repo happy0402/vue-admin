@@ -5,6 +5,7 @@ import Vue from 'vue';
 import i18n from '#/lang/index'
 import '#/iview' //部分引入 iview
 import '#/element' //部分引入 element-ui
+import '#/self' //部分引入 二方库
 
 // Internationalization
 import "babel-polyfill" //ie 10兼容

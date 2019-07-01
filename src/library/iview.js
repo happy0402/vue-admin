@@ -3,12 +3,16 @@
  */
 import Vue from 'vue';
 import {
+    locale,
     DatePicker,
     Message,
     Modal
 } from 'iview';
 
 import './styles/iview-variable.less';
+
+import i18n from './lang' // Internationalization
+locale(i18n.messages[i18n.locale]);
 
 Vue.component('DatePicker', DatePicker);
 Vue.component('Modal', Modal);

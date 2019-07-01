@@ -8,7 +8,7 @@ export default {
 
         pageDevelop: '页面开发说明',
 
-        thirdComponent: '三方组件',
+        baseComponent: '基础组件',
         basic: '基础',
         form: '表单',
         showData: '数据展示',
@@ -16,7 +16,7 @@ export default {
         navigation: '导航',
         others: '其他',
 
-        secondComponent: '二方组件',
+        complexComponent: '高级组件',
         dealData: '数据处理',
         animate: '动画',
         tinymce: '富文本编辑器',

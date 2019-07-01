@@ -71,7 +71,10 @@
                         break;
                 }
 
-                this.code = `this.$modal.info({
+                this.code = `const title = '对话框的标题';
+const content = '<p>一些对话框内容</p><p>一些对话框内容</p>';
+
+this.$modal.info({
     title: title,
     content: content,
     width: 500 //宽度，单位 px
@@ -160,16 +163,13 @@ this.$modal.error({
                 this.$modal.confirm({
                     render: (h) => {
                         var that = this;
-                        return h('input', {
-                            'class': {
-                                'el-input__inner': true
-                            },
-                            attrs: {
-                                value: that.value
+                        return h('el-input', {
+                            props:{
+                              value: that.value //需注册data: value
                             },
                             on:{
-                                change(e){
-                                    that.value = e.target.value;
+                                input(value){
+                                    that.value = value;
                                 }
                             }
                         })
@@ -185,16 +185,13 @@ this.$modal.error({
 this.$modal.confirm({
     render: (h) => {
         var that = this;
-        return h('input', {
-            'class': {
-                'el-input__inner': true
-            },
-            attrs: {
-                value: that.value //需注册data: value
+        return h('el-input', {
+            props:{
+              value: that.value //需注册data: value
             },
             on:{
-                change(e){
-                    that.value = e.target.value;
+                input(value){
+                    that.value = value;
                 }
             }
         })

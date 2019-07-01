@@ -69,17 +69,30 @@ html {
 }
 
 //Module 弹框样式重置
+//弹框
 .ivu-modal{
   .ivu-modal-confirm-head-icon{
     top: -3px;
   }
 }
+//普通对话框
 .ordinaryModule{
   .ivu-modal{
     top: 35px;
 
     .ivu-modal-body{
-      max-height: calc(100vh - 182px);
+      max-height: calc(100vh - 178px);
+      overflow: overlay;
+    }
+  }
+}
+//无尾部对话框
+.footerHideModule{
+  .ivu-modal{
+    top: 35px;
+
+    .ivu-modal-body{
+      max-height: calc(100vh - 121px);
       overflow: overlay;
     }
   }

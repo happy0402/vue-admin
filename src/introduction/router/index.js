@@ -49,11 +49,11 @@ export default [
                 }
             },
             {
-                path: 'third-component',
-                name: 'ThirdComponent',
+                path: 'base-component',
+                name: 'BaseComponent',
                 component: () => import('@/introduction/views/frame-introduce'),
                 meta: {
-                    title: 'thirdComponent',
+                    title: 'baseComponent',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav
                 },
                 children: [
@@ -114,11 +114,11 @@ export default [
                 ]
             },
             {
-                path: 'second-component',
-                name: 'SecondComponent',
+                path: 'complex-component',
+                name: 'ComplexComponent',
                 component: () => import('@/introduction/views/frame-introduce'),
                 meta: {
-                    title: 'secondComponent',
+                    title: 'complexComponent',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav
                 },
                 children: [

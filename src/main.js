@@ -12,7 +12,7 @@ import { getLoginInfoByToken } from '#/test-data/databaseServer.js'
 //根据token获取用户登录信息
 var token = Cookies.get('token');
 if(token !== ''){
-    //获取用户信息 /*正式系统代修改部分*/
+    //获取用户信息 /*正式系统待修正部分*/
     getLoginInfoByToken(token).then((result) => {
         if(!result.code){
             //设置全局变量

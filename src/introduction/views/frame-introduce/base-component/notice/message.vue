@@ -91,14 +91,14 @@ this.$message.loading('正在加载中，请稍候...');`;
                 if(this.opened){
                     this.msg()
                 }else{
-                    this.msg = this.$message.info({
+                    this.msg = this.$message.loading({
                         content: '使用代码关闭的提示',
                         duration: 0
                     });
                 }
                 this.opened = !this.opened;
 
-                this.code = `var msg = this.$message.info({
+                this.code = `var msg = this.$message.loading({
     content: '使用代码关闭的提示',//提示内容
     duration: 0 //自动关闭的延时，单位秒，不关闭可以写 0
 });//打开

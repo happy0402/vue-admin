@@ -502,6 +502,8 @@
                             cursor: pointer;
                             float: right;
                             margin-left: 5px;
+                            height: 22px;
+                            line-height: 22px;
                         }
                     }
 

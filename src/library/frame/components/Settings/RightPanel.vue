@@ -108,12 +108,17 @@
                 display: inline-block;
                 width: 35px;
                 height: 35px;
-                padding: 8px 0 0 9px;
                 background-color: $light-blue;
                 color: $white;
                 border-radius: 5px 0 0 5px;
                 font-size: 18px;
                 cursor: pointer;
+                text-align: center;
+
+                i{
+                    height: 35px;
+                    line-height: 35px;
+                }
             }
         }
     }
