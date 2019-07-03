@@ -12,7 +12,6 @@ import {
 import './styles/iview-variable.less';
 
 import i18n from './lang' // Internationalization
-locale(i18n.messages[i18n.locale]);
 
 Vue.component('DatePicker', DatePicker);
 Vue.component('Modal', Modal);
@@ -23,3 +22,5 @@ Message.config({
 });
 
 Vue.prototype.$modal = Modal;
+
+locale(i18n.messages[i18n.locale]);

@@ -150,12 +150,12 @@
                 this.urlCode = `//EMRClient.DAL.NSISApiURL.cs
 case HttpUrl.${this.csForm.urlName}:
     {
-        urladdress = conneckUrl + string.Format("api/NSIS/${this.csForm.interfaceName}`
+        urladdress = conneckurl + string.Format("api/${this.csForm.interfaceName}`
 
                     if(params.length){
                         this.urlCode += '?'
                         for(let i = 0; i < params.length; i++){
-                            this.urlCode += '_____={' + i + '}&';
+                            this.urlCode += params[i].paramName + '={' + i + '}&';
                         }
                         this.urlCode = this.urlCode.slice(0,-1)
                         this.urlCode += '"'
@@ -191,7 +191,7 @@ namespace EMRClient
     [ComVisible(true)]
     public partial class ${this.csForm.formName} : DockContentEx
     {
-        public ${this.csForm.formName}
+        public ${this.csForm.formName}()
         {
             InitializeComponent();
             this.webBrowser1.Navigate(new Uri(PublicClass.WebUrl + "${this.csForm.htmlPath}.html?t=" + DateTime.Now));
@@ -210,7 +210,7 @@ namespace EMRClient
             this.csCode = this.csCode.slice(0,-1)
 
             this.csCode +=`);
-    public void ${this.csForm.eventName}(`
+    public string ${this.csForm.eventName}(`
 
                 //方法传参声明
                 for(let i = 0; i < params.length; i++){
@@ -221,25 +221,26 @@ namespace EMRClient
 
                 this.csCode +=`)
     {
-        List<string> params = new List<string>();
+        List<string> paras = new List<string>();
         `
 
                 //url传参组装
                 for(let i = 0; i < params.length; i++){
-                    this.csCode += 'params.Add(' + params[i].paramName + ');\n\t';
+                    this.csCode += 'paras.Add(' + params[i].paramName + ');\n\t';
                 }
 
-                this.csCode +=`Dictionary<string, string> httpurl = DAL.NSISApiURL.GetUrlAddress(NSISApiURL.HttpUrl.${this.csForm.urlName}, params);
+                this.csCode +=`Dictionary<string, string> httpurl = ApiURL.GetUrlAddress(EMRClient.DAL.ApiURL.HttpUrl.${this.csForm.urlName}, paras);
         //获取Http  Api 数据 (url, method, param[POST], userId, hospitalId, departmentId)
-        string respose = HttpHelp.HttpReq(httpurl["urladdress"], httpurl["method"]);
+        string response = HttpHelp.HttpReq(httpurl["urladdress"], httpurl["method"]);
 
         try
         {
             OperateData<OutPutModel<${this.csForm.className}>> output = new OperateData<OutPutModel<${this.csForm.className}>>();
-            OutPutModel<${this.csForm.className}> result = output.GetAsync(respose);
+            OutPutModel<${this.csForm.className}> result = output.GetAsync(response);
             if (result.resultStatus == "200")
             {
                 //result.resultData 返回的数据
+                return response;
             }
             else
             {
@@ -250,6 +251,7 @@ namespace EMRClient
         {
             PublicClass.MessageAlert.ShowMessageBox(MessageForm.messageType.IsFail, "服务端数据连接异常");
         }
+        return "{}";
     }
 }`
             }

@@ -34,7 +34,13 @@ const actions = {
         commit('ADD_VISITED_VIEW', view)
     },
     delVisitedView:({ commit }, view) =>{
-        commit('DEL_VISITED_VIEW', view)
+        return new Promise(resolve => {
+            commit('DEL_VISITED_VIEW', view);
+
+            resolve({
+                visitedViews: [...state.visitedViews]
+            });
+        });
     },
     clearViews: ({ commit }) => {
         commit('CLEAR_VIEWS')

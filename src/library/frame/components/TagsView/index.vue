@@ -86,7 +86,16 @@
                 })
             },
             closeTag(view){
-                this.$store.dispatch('tagsView/delVisitedView', view)
+                this.$store.dispatch('tagsView/delVisitedView', view).then(({ visitedViews }) => {
+                    const latestView = visitedViews.slice(-1)[0];
+                    if(this.$route.fullPath === view.fullPath){
+                        if(latestView){
+                            this.$router.push(latestView)
+                        }else{
+                            this.$router.push('/')
+                        }
+                    }
+                })
             },
             openMenu(view, $event){
                 this.showContextMemu = true

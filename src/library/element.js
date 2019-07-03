@@ -40,7 +40,9 @@ import {
 
     Table,
     TableColumn,
-    Tree
+    Tree,
+
+    Notification
 } from 'element-ui';
 
 import './styles/element-variables.scss'
@@ -50,7 +52,8 @@ import ElementLocale from 'element-ui/lib/locale';
 
 // import Cookies from 'js-cookie';
 
-Vue.prototype.$ELEMENT = { size: 'medium' };//Cookies.get('size') || 'small'
+//由于iview的部分引用无法进行全局配置，请不要改变此处配置
+Vue.prototype.$ELEMENT = { size: 'small' };//Cookies.get('size') || 'small'
 
 Vue.use(Container);
 Vue.use(Aside);
@@ -98,5 +101,7 @@ Vue.use(Link);
 Vue.use(Table);
 Vue.use(TableColumn);
 Vue.use(Tree);
+
+Vue.prototype.$notify = Notification;
 
 ElementLocale.i18n((key, value) => i18n.t(key, value));

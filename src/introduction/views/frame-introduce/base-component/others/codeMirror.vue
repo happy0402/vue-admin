@@ -3,7 +3,7 @@
     <el-container class="CodeMirrorContainer">
         <el-aside width="50%" style="margin-right: 10px;">
             <el-container>
-                <el-header>
+                <el-header height="auto">
                     <p>此处为默认使用方法,具体文档请查看
                         <el-link
                                 href="https://codemirror.net/"

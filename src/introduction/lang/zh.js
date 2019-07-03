@@ -49,6 +49,8 @@ export default {
         datePicker: '日期选择器',
         transfer: '穿梭框',
         form: '表单',
+        formValid: '表单校验',
+        validRules: '校验规则',
 
         table: '表格',
         tableColumn: '表格列',

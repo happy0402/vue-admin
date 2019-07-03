@@ -24,6 +24,11 @@ html {
   box-sizing: inherit;
 }
 
+//工具样式
+.alignRight{
+  text-align: right;
+}
+
 //布局容器样式重置
 .el-container{
   height: 100%;
@@ -40,6 +45,14 @@ html {
 //autocomplete 下拉框宽度自适应
 .el-autocomplete-suggestion{
   width: auto !important;
+}
+
+//iview 表单组件禁用样式重置(与element-ui统一)
+.ivu-input[disabled], fieldset[disabled] .ivu-input {
+  background-color: #F5F7FA;
+  border-color: #E4E7ED;
+  color: #C0C4CC;
+  cursor: not-allowed;
 }
 
 //Message 消息提示样式重置
@@ -85,6 +98,16 @@ html {
       overflow: overlay;
     }
   }
+
+  .ivu-modal-fullscreen{
+    top: 0;
+
+    .ivu-modal-body{
+      max-height: none;
+      overflow: overlay;
+      bottom: 57px;
+    }
+  }
 }
 //无尾部对话框
 .footerHideModule{
@@ -93,6 +116,15 @@ html {
 
     .ivu-modal-body{
       max-height: calc(100vh - 121px);
+      overflow: overlay;
+    }
+  }
+
+  .ivu-modal-fullscreen{
+    top: 0;
+
+    .ivu-modal-body{
+      max-height: none;
       overflow: overlay;
     }
   }

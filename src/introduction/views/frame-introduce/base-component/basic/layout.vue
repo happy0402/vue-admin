@@ -104,10 +104,6 @@
 </script>
 
 <style scoped="">
-    .alignRight{
-        text-align: right;
-    }
-
     .el-col {
         border-radius: 4px;
     }

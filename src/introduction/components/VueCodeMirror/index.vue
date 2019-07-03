@@ -31,7 +31,7 @@
         },
         mounted(){
             this.CodeMirrorEditor = CodeMirror.fromTextArea(this.$refs.codePanel, {
-                mode:'javascript',//编辑器语言
+                mode:'vue',//编辑器语言
                 theme:'monokai', //编辑器主题
                 lineNumbers: true, //显示行号
                 scrollbarStyle: 'simple', //滚动条样式 | 'layout'

@@ -1,6 +1,7 @@
 <template>
     <el-container>
         <el-aside width="40%">
+
             <el-divider>基础用法</el-divider>
             <p>
                 <el-button :plain="true" @click="open('info')">消息</el-button>
@@ -9,19 +10,19 @@
                 <el-button :plain="true" @click="open('error')">错误</el-button>
                 <el-button :plain="true" @click="open('loading')">加载中</el-button>
             </p>
-            <el-divider>可关闭</el-divider>
+
+            <el-divider>关闭</el-divider>
             <p>
                 <el-button :plain="true" @click="closable">手动关闭</el-button>
                 <el-button :plain="true" @click="toggleTips">代码关闭</el-button>
+                <el-button :plain="true" @click="closeAll">关闭所有tips</el-button>
             </p>
+
             <el-divider>自定义 Render 函数</el-divider>
             <p>
                 <el-button :plain="true" @click="renderFunc">显示render函数创建的内容</el-button>
             </p>
-            <el-divider>关闭所有</el-divider>
-            <p>
-                <el-button :plain="true" @click="closeAll">关闭所有tips</el-button>
-            </p>
+
         </el-aside>
         <el-main>
             <vue-code-mirror :code="code"></vue-code-mirror>

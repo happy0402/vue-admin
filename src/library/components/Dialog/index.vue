@@ -17,10 +17,21 @@
             :transition-names="transitionNames"
             :transfer="transfer"
             @on-cancel="close">
+
+        <!-- close -->
+        <template slot="close">
+            <slot name="close"></slot>
+        </template>
+
+        <!-- header -->
         <template slot="header">
             <slot name="header"></slot>
         </template>
+
+        <!-- content -->
         <slot name="default"></slot>
+
+        <!-- footer -->
         <template
                 v-if="$slots.footer"
                 slot="footer">
@@ -39,6 +50,7 @@
                     :loading="loadingButton"
             >{{ okText || $t('i.modal.okText') }}</el-button>
         </template>
+
     </Modal>
 </template>
 

@@ -49,6 +49,8 @@ export default {
         datePicker: 'Date Picker',
         transfer: 'Transfer',
         form: 'Form',
+        formValid: 'Form Valid',
+        validRules: 'Valid Rules',
 
         table: 'Table',
         tableColumn: 'Table Column',

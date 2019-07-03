@@ -137,8 +137,8 @@
                     this.paramForm.disabled ? '\n\tdisabled' : ''
                     }${this.paramForm.nativeType === 'button' ? '' :
                     '\n\tnative-type="' + this.paramForm.nativeType + '"'
-                    }
-        icon="${this.paramForm.icon}"
+                    }${this.paramForm.icon === '' ? '' :
+                    '\n\ticon="' + this.paramForm.icon + '"'}
     >${this.paramForm.text}</el-button>`;
 
                 return this.paramForm.buttonGroup ? '<el-button-group>\n\n\t' + buttonCode + '\n\n\t' + buttonCode + '\n\n</el-button-group>' : buttonCode;
