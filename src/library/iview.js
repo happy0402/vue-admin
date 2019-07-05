@@ -24,3 +24,5 @@ Message.config({
 Vue.prototype.$modal = Modal;
 
 locale(i18n.messages[i18n.locale]);
+
+import './styles/iview.scss';//iview 组件样式覆盖

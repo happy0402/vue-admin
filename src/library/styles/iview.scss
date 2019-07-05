@@ -1,0 +1,90 @@
+@import 'variables';
+
+//iview 表单组件禁用样式重置(与element-ui统一)
+.ivu-input[disabled], fieldset[disabled] .ivu-input {
+  background-color: #F5F7FA;
+  border-color: #E4E7ED;
+  color: #C0C4CC;
+  cursor: not-allowed;
+}
+.el-form-item.is-success .ivu-input{
+  border-color: $green;
+}
+.el-form-item.is-error .ivu-input{
+  border-color: $pink;
+}
+
+//Message 消息提示样式重置
+.ivu-message-notice-content{
+  min-width: 300px;
+  text-align: left;
+
+  .ivu-message-info{
+    color: $light-blue;
+  }
+
+  .ivu-message-success{
+    color: $green;
+  }
+
+  .ivu-message-warning{
+    color: $yellow;
+  }
+
+  .ivu-message-error{
+    color: $pink;
+  }
+
+  .ivu-message-loading{
+    color: $light-blue;
+  }
+}
+
+//Module 弹框样式重置
+//弹框
+.ivu-modal{
+  .ivu-modal-confirm-head-icon{
+    top: -3px;
+  }
+}
+//普通对话框
+.ordinaryModule{
+  .ivu-modal{
+    top: 35px;
+
+    .ivu-modal-body{
+      max-height: calc(100vh - 178px);
+      overflow: overlay;
+    }
+  }
+
+  .ivu-modal-fullscreen{
+    top: 0;
+
+    .ivu-modal-body{
+      max-height: none;
+      overflow: overlay;
+      bottom: 57px;
+    }
+  }
+}
+//无尾部对话框
+.footerHideModule{
+  .ivu-modal{
+    top: 35px;
+
+    .ivu-modal-body{
+      max-height: calc(100vh - 121px);
+      overflow: overlay;
+    }
+  }
+
+  .ivu-modal-fullscreen{
+    top: 0;
+
+    .ivu-modal-body{
+      max-height: none;
+      overflow: overlay;
+    }
+  }
+}

@@ -1,115 +1,132 @@
 <template>
-    <split-pane :min-percent='10' :default-percent='30' split="vertical">
-        <template slot="paneL">
+    <el-container>
+        <el-header height="auto">
+            <p>此处为可能用到的表单配置项，完整API请参考
+                <el-link
+                        href="https://element.eleme.cn/?#/zh-CN/component/form"
+                        target="_blank"
+                        type="primary"
+                        :underline="false">
+                    element-ui官方网站<i class="el-icon-view el-icon--right"></i>
+                </el-link>
+            </p>
+        </el-header>
+        <el-main>
 
-            <el-form
-                    ref="form"
-                    :model="form"
-                    label-width="60px"
-                    :label-position="paramForm.labelPosition"
-                    :size="paramForm.size ? 'mini' : 'small'"
-                    :inline="paramForm.inline"
-                    :disabled="paramForm.disabled"
-                    style="height: 100%; overflow-y: overlay; padding-right: 20px;">
-                <el-form-item label="输入框" prop="input">
-                    <el-input v-model="form.input"></el-input>
-                </el-form-item>
-
-                <template v-if="paramForm.dynamicForm">
-                    <el-form-item
-                            v-for="(domain, index) in form.domains"
-                            :label="'动态控件' + index"
-                            label-width="90px"
-                            :key="index"
-                            :prop="'domains.' + index + '.value'"
-                            class="alignRight">
-                        <el-input v-model="domain.value" style="width: 100%;padding-right: 40px;"></el-input>
-                        <el-button @click.prevent="removeDomain(index)" type="danger" icon="el-icon-minus" circle style="position: absolute;top: 0; right: 0;"></el-button>
-                    </el-form-item>
-                    <el-form-item class="alignRight">
-                        <el-button @click.prevent="addDomain()" type="primary" icon="el-icon-plus" circle></el-button>
-                    </el-form-item>
-                </template>
-
-                <el-form-item label="下拉框" prop="select">
-                    <el-select v-model="form.select" placeholder="请选择">
-                        <el-option label="选项一" value="option1"></el-option>
-                        <el-option label="选项二" value="option2"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="日期选择器" label-width="90px" prop="dareRange">
-                    <DatePicker
-                            v-model="form.dateRange"
-                            type="daterange"
-                            split-panels
-                            placeholder="选择日期范围"
-                            :size="paramForm.size ? 'small' : 'default'"
-                            :disabled="paramForm.disabled"></DatePicker>
-                </el-form-item>
-                <el-form-item label="开关" prop="switch">
-                    <el-switch v-model="form.switch"></el-switch>
-                </el-form-item>
-                <el-form-item label="多选框" prop="checkbox">
-                    <el-checkbox-group v-model="form.checkbox">
-                        <el-checkbox label="check1">多选1</el-checkbox>
-                        <el-checkbox label="check2">多选2</el-checkbox>
-                        <el-checkbox label="check3">多选3</el-checkbox>
-                        <el-checkbox label="check4" disabled>多选4</el-checkbox>
-                    </el-checkbox-group>
-                </el-form-item>
-                <el-form-item label="单选框" prop="radio">
-                    <el-radio-group v-model="form.radio">
-                        <el-radio label="radio1">单选1</el-radio>
-                        <el-radio label="radio2">单选2</el-radio>
-                        <el-radio label="radio3" disabled>单选3</el-radio>
-                    </el-radio-group>
-                </el-form-item>
-                <el-form-item label="输入框" prop="textarea">
-                    <el-input type="textarea" v-model="form.textarea"></el-input>
-                </el-form-item>
-                <el-form-item class="alignRight">
-                    <el-button @click="insertRecord">新增</el-button>
-                    <el-button type="primary" @click="onSubmit">保存</el-button>
-                </el-form-item>
-            </el-form>
-
-        </template>
-        <template slot="paneR">
-            <split-pane split="horizontal" :min-percent='5' :default-percent='10'>
+            <split-pane :min-percent='10' :default-percent='30' split="vertical">
                 <template slot="paneL">
 
-                    <el-form inline :model="paramForm">
-                        <el-form-item label="行内：">
-                            <el-switch v-model="paramForm.inline"></el-switch>
+                    <el-form
+                            ref="form"
+                            :model="form"
+                            label-width="60px"
+                            :label-position="paramForm.labelPosition"
+                            :size="paramForm.size ? 'mini' : 'small'"
+                            :inline="paramForm.inline"
+                            :disabled="paramForm.disabled"
+                            style="height: 100%; overflow-y: overlay; padding-right: 20px;">
+                        <el-form-item label="输入框" prop="input">
+                            <el-input v-model="form.input"></el-input>
                         </el-form-item>
-                        <el-form-item label="对齐方式：">
-                            <el-radio-group v-model="paramForm.labelPosition">
-                                <el-radio
-                                        v-for="(item, index) in positions"
-                                        :key="index"
-                                        :label="item.code">{{ item.name }}</el-radio>
+
+                        <template v-if="paramForm.dynamicForm">
+                            <el-form-item
+                                    v-for="(domain, index) in form.domains"
+                                    :label="'动态控件' + index"
+                                    label-width="90px"
+                                    :key="index"
+                                    prop="domains"
+                                    class="alignRight">
+                                <el-input v-model="domain.value" style="width: 100%;padding-right: 40px;"></el-input>
+                                <el-button @click.prevent="removeDomain(index)" type="danger" icon="el-icon-minus" circle style="position: absolute;top: 0; right: 0;"></el-button>
+                            </el-form-item>
+                            <el-form-item class="alignRight">
+                                <el-button @click.prevent="addDomain()" type="primary" icon="el-icon-plus" circle></el-button>
+                            </el-form-item>
+                        </template>
+
+                        <el-form-item label="下拉框" prop="select">
+                            <el-select v-model="form.select" placeholder="请选择">
+                                <el-option label="选项一" value="option1"></el-option>
+                                <el-option label="选项二" value="option2"></el-option>
+                            </el-select>
+                        </el-form-item>
+                        <el-form-item label="日期选择器" label-width="90px" prop="dareRange">
+                            <DatePicker
+                                    v-model="form.dateRange"
+                                    type="daterange"
+                                    split-panels
+                                    placeholder="选择日期范围"
+                                    :size="paramForm.size ? 'small' : 'default'"
+                                    :disabled="paramForm.disabled"></DatePicker>
+                        </el-form-item>
+                        <el-form-item label="开关" prop="switch">
+                            <el-switch v-model="form.switch"></el-switch>
+                        </el-form-item>
+                        <el-form-item label="多选框" prop="checkbox">
+                            <el-checkbox-group v-model="form.checkbox">
+                                <el-checkbox label="check1">多选1</el-checkbox>
+                                <el-checkbox label="check2">多选2</el-checkbox>
+                                <el-checkbox label="check3">多选3</el-checkbox>
+                                <el-checkbox label="check4" disabled>多选4</el-checkbox>
+                            </el-checkbox-group>
+                        </el-form-item>
+                        <el-form-item label="单选框" prop="radio">
+                            <el-radio-group v-model="form.radio">
+                                <el-radio label="radio1">单选1</el-radio>
+                                <el-radio label="radio2">单选2</el-radio>
+                                <el-radio label="radio3" disabled>单选3</el-radio>
                             </el-radio-group>
                         </el-form-item>
-                        <el-form-item label="禁用表单：">
-                            <el-switch v-model="paramForm.disabled"></el-switch>
+                        <el-form-item label="输入框" prop="textarea">
+                            <el-input type="textarea" v-model="form.textarea"></el-input>
                         </el-form-item>
-                        <el-form-item label="尺寸控制：">
-                            <el-switch v-model="paramForm.size"></el-switch>
-                        </el-form-item>
-                        <el-form-item label="动态增减：">
-                            <el-switch v-model="paramForm.dynamicForm"></el-switch>
+                        <el-form-item class="alignRight">
+                            <el-button @click="insertRecord">新增</el-button>
+                            <el-button type="primary" @click="onSubmit">保存</el-button>
                         </el-form-item>
                     </el-form>
 
                 </template>
                 <template slot="paneR">
+                    <split-pane split="horizontal" :min-percent='5' :default-percent='10'>
+                        <template slot="paneL">
 
-                    <vue-code-mirror :code="code"></vue-code-mirror>
+                            <el-form inline :model="paramForm">
+                                <el-form-item label="行内：">
+                                    <el-switch v-model="paramForm.inline"></el-switch>
+                                </el-form-item>
+                                <el-form-item label="对齐方式：">
+                                    <el-radio-group v-model="paramForm.labelPosition">
+                                        <el-radio
+                                                v-for="(item, index) in positions"
+                                                :key="index"
+                                                :label="item.code">{{ item.name }}</el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+                                <el-form-item label="禁用表单：">
+                                    <el-switch v-model="paramForm.disabled"></el-switch>
+                                </el-form-item>
+                                <el-form-item label="尺寸控制：">
+                                    <el-switch v-model="paramForm.size"></el-switch>
+                                </el-form-item>
+                                <el-form-item label="动态增减：">
+                                    <el-switch v-model="paramForm.dynamicForm"></el-switch>
+                                </el-form-item>
+                            </el-form>
 
+                        </template>
+                        <template slot="paneR">
+
+                            <vue-code-mirror :code="code"></vue-code-mirror>
+
+                        </template>
+                    </split-pane>
                 </template>
             </split-pane>
-        </template>
-    </split-pane>
+
+        </el-main>
+    </el-container>
 </template>
 
 <script>
@@ -152,7 +169,7 @@
                         }
                     ],
                     select: '',
-                    dateRange: '',
+                    dateRange: [],
                     switch: true,
                     checkbox: ['check1', 'check2'],
                     radio: 'radio1',
@@ -181,7 +198,7 @@
                 :label="'动态控件' + index"
                 label-width="90px"
                 :key="index"
-                :prop="'domains.' + index + '.value'"
+                prop="domains"
                 class="alignRight">
             <el-input v-model="domain.value" style="width: 100%;padding-right: 40px;"></el-input>
             <el-button @click.prevent="removeDomain(index)" type="danger" icon="el-icon-minus" circle style="position: absolute;top: 0; right: 0;"></el-button>
@@ -196,7 +213,7 @@
                 <el-option label="选项二" value="option2"></el-option>
             </el-select>
         </el-form-item>
-        <el-form-item label="日期选择器" label-width="90px" prop="dareRange">
+        <el-form-item label="日期选择器" label-width="90px" prop="dateRange">
             <DatePicker
                     v-model="form.dateRange"
                     type="daterange"
@@ -280,7 +297,7 @@
                 this.$refs.form.resetFields();
             },
             onSubmit() {
-                console.log(this.$refs.form);
+                console.log(this.form);
                 this.$message.info('保存');
             },
             addDomain(){

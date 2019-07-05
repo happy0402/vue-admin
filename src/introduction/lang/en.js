@@ -60,13 +60,12 @@ export default {
         loading: 'Loading',
         message: 'Message',
         messageBox: 'Message Box',
-        modal: 'Modal',
+        dialog: 'Dialog',
         notification: 'Notification',
 
         tabs: 'Tabs',
         steps: 'Steps',
 
-        dialog: 'Dialog',
         tooltip: 'Tooltip',
         popover: 'Popover',
         divider: 'Divider',

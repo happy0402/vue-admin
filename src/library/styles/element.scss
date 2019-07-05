@@ -1,0 +1,21 @@
+//布局容器样式重置
+.el-container{
+  height: 100%;
+}
+
+.el-header{
+  padding: 0;
+}
+
+.el-main{
+  padding: 0;
+}
+
+//autocomplete 下拉框宽度自适应
+.el-autocomplete-suggestion{
+  width: auto !important;
+}
+
+.el-checkbox-group{
+  display: inline-block;
+}

@@ -105,3 +105,5 @@ Vue.use(Tree);
 Vue.prototype.$notify = Notification;
 
 ElementLocale.i18n((key, value) => i18n.t(key, value));
+
+import './styles/element.scss' //element-ui 样式覆盖

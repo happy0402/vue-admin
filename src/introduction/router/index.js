@@ -90,7 +90,7 @@ export default [
                         meta: {
                             title: 'notice',
                             roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['loading', 'message', 'messageBox', 'modal', 'notification']
+                            modules: ['loading', 'message', 'messageBox', 'dialog', 'notification']
                         }
                     },
                     {
@@ -108,7 +108,7 @@ export default [
                         meta: {
                             title: 'others',
                             roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['dialog', 'tooltip', 'popover', 'divider', 'shortCut', 'codeMirror']
+                            modules: ['tooltip', 'popover', 'divider', 'shortCut', 'codeMirror']
                         }
                     }
                 ]

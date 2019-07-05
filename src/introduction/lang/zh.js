@@ -60,13 +60,12 @@ export default {
         loading: '加载',
         message: '消息提示',
         messageBox: '弹框',
-        modal: '对话框',
+        dialog: '对话框',
         notification: '通知',
 
         tabs: '标签页',
         steps: '步骤条',
 
-        dialog: '对话框',
         tooltip: '文字提示',
         popover: '弹出框',
         divider: '分割线',
