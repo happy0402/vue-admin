@@ -25,6 +25,10 @@ export default {
         directive: '自定义指令',
         drag:'Drag 拖拽',
 
+        util: '工具类',
+        valid: '校验',
+        string: '字符串',
+
         business: '业务相关',
 
         codeCreate: '代码生成',

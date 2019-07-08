@@ -29,8 +29,11 @@
                             :status-icon="paramForm.statusIcon"
                             :validate-on-rule-change="paramForm.validateOnRruleChange"
                             style="height: 100%; overflow-y: overlay; padding-right: 20px;">
-                        <el-form-item label="输入框" prop="input">
+                        <el-form-item label="输入框" prop="input" required>
                             <el-input v-model="form.input"></el-input>
+                        </el-form-item>
+                        <el-form-item label="数字" prop="number">
+                            <el-input-number v-model="form.number" :precision="2" :step="0.1" :max="10"></el-input-number>
                         </el-form-item>
 
                         <el-form-item
@@ -141,14 +144,7 @@
             VueCodeMirror
         },
         data(){
-            var validatePass = (rule, value, callback) => {
-                if (value === '') {
-                    callback(new Error('输入框'  + this.$t('valid.inputRequired')));
-                } else {
-                    callback();
-                }
-            };
-
+            const _this = this;
             return {
                 paramForm:{
                     hideRequiredAsterisk: false,
@@ -161,6 +157,7 @@
                 },
                 form: {
                     input: '',
+                    number: 1,
                     domains: [
                         {
                             value: ''
@@ -175,7 +172,17 @@
                 },
                 rules: {
                     input: [
-                        { validator: validatePass, trigger: 'blur' }
+                        { validator: (rule, value, callback) => {
+                            //自定义校验方法
+                            if (value === '') {
+                                callback(new Error(this.$util.valid.message.required('输入框')));
+                            } else {
+                                callback();
+                            }
+                        }, trigger: 'blur' }
+                    ],
+                    number: [
+                        { type: 'number', required: true, message: this.$util.valid.message.required('数字'), trigger: 'blur' }
                     ],
                     domains: [
                         {   type:'array',
@@ -187,27 +194,27 @@
                                     value: {
                                         type: "string",
                                         required: true,
-                                        message: '动态值' + this.$t('valid.inputRequired')
+                                        message: this.$util.valid.message.required('动态值')
                                     }
                                 }
                             }
                         }
                     ],
                     select: [
-                        { required: true, message: '下拉框' + this.$t('valid.selectRequired'), trigger: 'change' }
+                        { required: true, message: this.$util.valid.message.required('下拉框'), trigger: 'change' }
                     ],
                     dateRange: [
-                        { type: 'array', required: true, defaultField: { type: "date", required: true, message: '日期' + this.$t('valid.selectRequired') } }
+                        { type: 'array', defaultField: { type: "date", required: true, message: this.$util.valid.message.required('日期') } }
                     ],
                     checkbox: [
-                        { type: 'array', required: true, message: '复选框' + this.$t('valid.selectRequired'), trigger: 'change' }
+                        { type: 'array', required: true, message: this.$util.valid.message.required('复选框'), trigger: 'change' }
                     ],
                     radio: [
-                        { required: true, message: '单选框' + this.$t('valid.selectRequired'), trigger: 'change' }
+                        { required: true, message: this.$util.valid.message.required('单选框'), trigger: 'change' }
                     ],
                     textarea: [
-                        { required: true, message: '输入框'  + this.$t('valid.inputRequired'), trigger: 'blur' },
-                        { min: 5, max: 50, message: '长度在 5 到 50 个字符', trigger: 'blur' }
+                        { required: true, message: this.$util.valid.message.required('输入框'), trigger: 'blur' },
+                        { min: 5, max: 50, message: this.$util.valid.message.range(5, 50), trigger: 'blur' }
                     ]
                 }
             }
@@ -231,6 +238,9 @@
         this.paramForm.validateEvent ? '\n\t\t@validate="validateFormItem"':''
                     }>
 
+        <el-form-item label="输入框" prop="input" required>
+            <el-input v-model="form.input"></el-input>
+        </el-form-item>
         <el-form-item label="日期选择器" label-width="90px" prop="dateRange">
             <DatePicker
                     @on-change="$refs.form.validateField('dateRange')"></DatePicker>
@@ -242,11 +252,20 @@
         data(){
             return {
                 rules: {
-                    input: [
-                        { required: true, message: '输入框'  + this.$t('valid.inputRequired'), trigger: 'blur' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                   input: [
+                        { validator: (rule, value, callback) => {
+                            //自定义校验方法
+                            if (value === '') {
+                                callback(new Error(this.$util.valid.message.required('输入框')));
+                            } else {
+                                callback();
+                            }
+                        }, trigger: 'blur' }
                     ],
-                   domains: [
+                    number: [
+                        { type: 'number', required: true, message: this.$util.valid.message.required('数字'), trigger: 'blur' }
+                    ],
+                    domains: [
                         {   type:'array',
                             required: true,
                             defaultField: {
@@ -256,26 +275,27 @@
                                     value: {
                                         type: "string",
                                         required: true,
-                                        message: '动态值' + this.$t('valid.inputRequired')
+                                        message: this.$util.valid.message.required('动态值')
                                     }
                                 }
                             }
                         }
                     ],
                     select: [
-                        { required: true, message: '下拉框' + this.$t('valid.selectRequired'), trigger: 'change' }
+                        { required: true, message: this.$util.valid.message.required('下拉框'), trigger: 'change' }
                     ],
                     dateRange: [
-                        { type: 'array', required: true, defaultField: { type: "date", required: true, message: '日期' + this.$t('valid.selectRequired') } }
+                        { type: 'array', defaultField: { type: "date", required: true, message: this.$util.valid.message.required('日期') } }
                     ],
                     checkbox: [
-                        { type: 'array', required: true, message: '复选框' + this.$t('valid.selectRequired'), trigger: 'change' }
+                        { type: 'array', required: true, message: this.$util.valid.message.required('复选框'), trigger: 'change' }
                     ],
                     radio: [
-                        { required: true, message: '单选框' + this.$t('valid.selectRequired'), trigger: 'change' }
+                        { required: true, message: this.$util.valid.message.required('单选框'), trigger: 'change' }
                     ],
                     textarea: [
-                        { required: true, message: '输入框'  + this.$t('valid.inputRequired'), trigger: 'blur' }
+                        { required: true, message: this.$util.valid.message.required('输入框'), trigger: 'blur' },
+                        { min: 5, max: 50, message: '长度在 5 到 50 个字符', trigger: 'blur' }
                     ]
                 }
             }
@@ -316,11 +336,10 @@
                 this.$refs.form.resetFields();
             },
             onSubmit() {
-                console.log(this.form.domains);
+                console.log(this.form);
                 this.$refs.form.validate().then(() => {
                     this.$message.info('保存');
                 }).catch(() => {
-
                     this.$message.warning('未通过校验');
                 });
             },

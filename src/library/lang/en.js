@@ -17,7 +17,16 @@ export default {
         any: 'Any'
     },
     valid:{
-        inputRequired: ' is required',
-        selectRequired: ' is required'
+        string: 'String',
+        number: 'Number',
+        date: 'Date',
+        url: 'Url',
+        email: 'Email',
+        array: 'Content',
+        object: 'Content',
+        inputRight: 'Please input the right ',
+        isRequired: ' is required',
+        range: 'Please input %s to %s characters',
+        len: "Don't only contain whitespace"
     }
 }

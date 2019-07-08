@@ -45,9 +45,9 @@ import {
     Notification
 } from 'element-ui';
 
-import './styles/element-variables.scss'
+import '#/styles/element-variables.scss'
 
-import i18n from './lang' // Internationalization
+import i18n from '#/lang' // Internationalization
 import ElementLocale from 'element-ui/lib/locale';
 
 // import Cookies from 'js-cookie';
@@ -106,4 +106,4 @@ Vue.prototype.$notify = Notification;
 
 ElementLocale.i18n((key, value) => i18n.t(key, value));
 
-import './styles/element.scss' //element-ui 样式覆盖
+import '#/styles/element.scss' //element-ui 样式覆盖

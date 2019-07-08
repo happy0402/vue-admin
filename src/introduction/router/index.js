@@ -174,6 +174,32 @@ export default [
                         },
                     }
                 ]
+            },
+            {
+                path: 'util',
+                name: 'Util',
+                meta: {
+                    title: 'util',
+                    roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                },
+                children: [
+                    {
+                        path: 'valid',
+                        name: 'Valid',
+                        meta: {
+                            title: 'valid',
+                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                        },
+                    },
+                    {
+                        path: 'string',
+                        name: 'String',
+                        meta: {
+                            title: 'string',
+                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                        },
+                    }
+                ]
             }
         ]
     },

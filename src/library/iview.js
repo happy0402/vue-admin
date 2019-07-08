@@ -9,9 +9,9 @@ import {
     Modal
 } from 'iview';
 
-import './styles/iview-variable.less';
+import '#/styles/iview-variable.less';
 
-import i18n from './lang' // Internationalization
+import i18n from '#/lang' // Internationalization
 
 Vue.component('DatePicker', DatePicker);
 Vue.component('Modal', Modal);
@@ -25,4 +25,4 @@ Vue.prototype.$modal = Modal;
 
 locale(i18n.messages[i18n.locale]);
 
-import './styles/iview.scss';//iview 组件样式覆盖
+import '#/styles/iview.scss';//iview 组件样式覆盖

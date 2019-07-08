@@ -25,6 +25,10 @@ export default {
         directive: 'Directive',
         drag:'Drag',
 
+        util: 'Util',
+        valid: 'Valid',
+        string: 'String',
+
         business: 'Business',
 
         codeCreate: 'Code Create',

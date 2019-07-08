@@ -70,13 +70,13 @@
             rules(){
                 return {
                     userName: [
-                        { required: true, message: this.$t('login.userName') + this.$t('valid.inputRequired'), trigger: 'blur' }
+                        { required: true, message: this.$util.valid.message.required(this.$t('login.userName')), trigger: 'blur' }
                     ],
                     password: [
-                        { required: true, message: this.$t('login.password') + this.$t('valid.inputRequired'), trigger: 'blur' },
+                        { required: true, message: this.$util.valid.message.required(this.$t('login.password')), trigger: 'blur' },
                     ],
                     appCode: [
-                        { required: true, message: this.$t('login.apps') + this.$t('valid.selectRequired'), trigger: 'change' }
+                        { required: true, message: this.$util.valid.message.required(this.$t('login.apps')), trigger: 'change' }
                     ]
                 }
             }

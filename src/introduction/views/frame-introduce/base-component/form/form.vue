@@ -28,6 +28,9 @@
                         <el-form-item label="输入框" prop="input">
                             <el-input v-model="form.input"></el-input>
                         </el-form-item>
+                        <el-form-item label="数字" prop="number">
+                            <el-input-number v-model="form.number" :precision="2" :step="0.1" :max="10"></el-input-number>
+                        </el-form-item>
 
                         <template v-if="paramForm.dynamicForm">
                             <el-form-item
@@ -163,6 +166,7 @@
                 },
                 form: {
                     input: '',
+                    number: 1,
                     domains: [
                         {
                             value: ''
@@ -191,6 +195,9 @@
         ${this.paramForm.disabled ? '\n\t\t<!-- 表单禁用只针对element-ui控件有效，非element-ui控件（如：日期选择器）请使用额外方式禁用 -->' : ''}
         <el-form-item label="输入框" prop="input">
             <el-input v-model="form.input"></el-input>
+        </el-form-item>
+        <el-form-item label="数字" prop="number">
+            <el-input-number v-model="form.number" :precision="2" :step="0.1" :max="10"></el-input-number>
         </el-form-item>${this.paramForm.dynamicForm ? `
 
         <el-form-item
@@ -256,7 +263,8 @@
         data(){
             return {
                 form: {
-                    input: '',${this.paramForm.dynamicForm ? `
+                    input: '',
+                    number: 1,${this.paramForm.dynamicForm ? `
                     domains: [
                         {
                             value: ''
