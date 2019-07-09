@@ -1,5 +1,5 @@
 <template>
-    <el-container>
+    <el-container style="height: 100%;">
         <el-header height="auto">
             <p>此处为可能用到的表单配置项，完整API请参考
                 <el-link

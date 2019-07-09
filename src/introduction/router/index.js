@@ -33,7 +33,7 @@ export default [
             {
                 path: 'file-introduce',
                 name: 'FileIntroduce',
-                component: () => import('@/introduction/views/frame-introduce/file-introduce'),
+                component: () => import('@/introduction/views/frame-introduce/fileIntroduce.vue'),
                 meta: {
                     title: 'fileIntroduce',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -42,7 +42,7 @@ export default [
             {
                 path: 'page-develop',
                 name: 'PageDevelop',
-                component: () => import('@/introduction/views/frame-introduce/page-develop'),
+                component: () => import('@/introduction/views/frame-introduce/pageDevelop.vue'),
                 meta: {
                     title: 'pageDevelop',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -123,10 +123,11 @@ export default [
                 },
                 children: [
                     {
-                        path: 'deal-data',
-                        name: 'DealData',
+                        path: 'data-table',
+                        name: 'DataTable',
+                        component: () => import('@/introduction/views/frame-introduce/complex-component/dataTable.vue'),
                         meta: {
-                            title: 'dealData',
+                            title: 'dataTable',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
                         }
                     },

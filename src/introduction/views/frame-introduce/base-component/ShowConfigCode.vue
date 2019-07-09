@@ -1,5 +1,5 @@
 <template>
-    <el-container class="ShowConfigCodeContainer">
+    <el-container class="showConfigCodeContainer">
         <el-header height="auto">
             <slot></slot>
         </el-header>
@@ -80,6 +80,10 @@
 </script>
 
 <style scoped="">
+    .showConfigCodeContainer{
+        height: 100%;
+    }
+
     .showContainer{
         max-height: 50%;
         overflow-y: auto;

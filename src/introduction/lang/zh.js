@@ -17,7 +17,7 @@ export default {
         others: '其他',
 
         complexComponent: '高级组件',
-        dealData: '数据处理',
+        dataTable: '数据表格',
         animate: '动画',
         tinymce: '富文本编辑器',
         other: '其他',

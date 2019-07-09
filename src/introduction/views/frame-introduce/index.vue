@@ -19,9 +19,9 @@
             <component :is="currentTabComponent"></component>
         </el-main>
     </el-container>
-    <el-container v-else>
+    <div v-else>
         <router-view/>
-    </el-container>
+    </div>
 </template>
 
 <script>
@@ -29,16 +29,6 @@
     import ErrorComponent from '#/components/AsyncComponent/ErrorComponent.vue'
 
     export default {
-        created(){
-            var matched = this.$route.fullPath.split('/')
-            for(let i = 2; i < matched.length; i++){
-                this.filePath += matched[i] + '/'
-            }
-
-            this.activeModule = this.modules[0]
-
-            this.$store.dispatch('app/setFixedPage', true)
-        },
         data(){
             return {
                 modules: this.$route.meta.modules || [],
@@ -69,6 +59,18 @@
             clickTab(module){
                 this.activeModule = module;
             }
+        },
+        mounted(){
+            if(this.modules.length){
+                var matched = this.$route.fullPath.split('/')
+                for(let i = 2; i < matched.length; i++){
+                    this.filePath += matched[i] + '/'
+                }
+
+                this.activeModule = this.modules[0];
+
+                this.$store.dispatch('app/setFixedPage', true);
+            }
         }
     }
 </script>
@@ -76,49 +78,53 @@
 <style lang="scss">
     @import "~#/styles/variables.scss";
 
-    .tabs{
-        white-space: nowrap;
-        border-bottom: $firstBorder;
+    .introduce-container{
+        height: 100%;
 
-        .el-scrollbar{
-            margin-bottom: -1px;
-        }
+        .tabs{
+            white-space: nowrap;
+            border-bottom: $firstBorder;
 
-        .tabsTitle{
-            border: $firstBorder;
-            border-bottom: none;
-            border-radius: 4px 4px 0 0;
-            box-sizing: border-box;
-            display: inline-block;
-
-            .active-tab{
-                border-bottom-color: $white;
-                color: $light-blue;
-            }
-        }
-
-        .module-item{
-            padding: 0 15px;
-            height: 35px;
-            line-height: 35px;
-            display: inline-block;
-            font-size: 14px;
-            font-weight: 500;
-            border-bottom: 1px solid transparent;
-            border-left: $firstBorder;
-            cursor: pointer;
-            -webkit-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
-            -moz-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
-            -ms-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
-            -o-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
-            transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
-
-            &:first-child{
-                border-left: none;
+            .el-scrollbar{
+                margin-bottom: -1px;
             }
 
-            &:hover{
-                color: $light-blue;
+            .tabsTitle{
+                border: $firstBorder;
+                border-bottom: none;
+                border-radius: 4px 4px 0 0;
+                box-sizing: border-box;
+                display: inline-block;
+
+                .active-tab{
+                    border-bottom-color: $white;
+                    color: $light-blue;
+                }
+            }
+
+            .module-item{
+                padding: 0 15px;
+                height: 35px;
+                line-height: 35px;
+                display: inline-block;
+                font-size: 14px;
+                font-weight: 500;
+                border-bottom: 1px solid transparent;
+                border-left: $firstBorder;
+                cursor: pointer;
+                -webkit-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
+                -moz-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
+                -ms-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
+                -o-transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
+                transition: color .3s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);
+
+                &:first-child{
+                    border-left: none;
+                }
+
+                &:hover{
+                    color: $light-blue;
+                }
             }
         }
     }

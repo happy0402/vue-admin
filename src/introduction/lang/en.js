@@ -17,7 +17,7 @@ export default {
         others: 'Others',
 
         complexComponent: 'Complex Component',
-        dealData: 'Deal Data',
+        dataTable: 'Data Table',
         animate: 'Animate',
         tinymce: 'Tinymce',
         other: 'Others',

@@ -35,7 +35,7 @@ router.beforeEach((to, from, next) => {
         next('/index')
     }
 
-    store.dispatch('app/setFixedPage') //页面高度初始化
+    store.dispatch('app/resetFixedPage') //页面高度初始化
     next()
 
     NProgress.done()
