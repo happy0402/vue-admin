@@ -13,6 +13,7 @@
 
 <script>
 export default {
+    name: 'LangSelect',
     data(){
         return {
             languages: {

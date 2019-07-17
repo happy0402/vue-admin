@@ -364,7 +364,7 @@
             },
             getDataList(defaultValue){
                 //config -> data
-                return JSON.parse(JSON.stringify(this.configList)).map((item) => {
+                return this.$util.array.copy(this.configList).map((item) => {
                     if(item.sourceType === 'fixed'){
                         if(item.type === 'Radio' || item.type === 'Check' || item.type === 'Select'){
                             item.sourceValue = JSON.stringify(item.fixedSource);
@@ -398,7 +398,7 @@
                 });
             },
             cloneItem(defaultConfig) {
-                var controller = JSON.parse(JSON.stringify(defaultConfig));
+                var controller = this.$util.object.copy(defaultConfig);
                 controller.controllerIndex = ++idGlobal;
                 if(controller.type !== 'Row' && controller.type !== 'Col' && controller.type !== 'Text'){
                     controller.name += (new Date().getTime()).toString() + idGlobal;
@@ -472,12 +472,12 @@
 <style lang="scss">
     @import "~#/styles/variables.scss";
 
-    .alignRight{
-        text-align: right;
-    }
-
     .documentEditContainer{
+        height: 100%;
+
         .leftContainer{
+            height: 100%;
+
             .el-aside{
                 margin-right: 10px;
                 border: $firstBorder;

@@ -20,8 +20,10 @@
                     :height="paramForm.height"
                     :border="paramForm.border"
                     :size="paramForm.size"
+                    row-key="userId"
+                    :current-row-key="Number(paramForm.currentRowKey)"
                     :fit="paramForm.fit"
-                    :default-sort="{prop: 'date', order: 'descending'}"
+                    :default-sort="{prop: 'date', order: 'ascending'}"
                     stripe
                     highlight-current-row>
                 <el-table-column
@@ -49,9 +51,9 @@
                 <el-divider>Attributes</el-divider>
                 <el-row :gutter="10">
                     <el-col :span="12">
-                        <!--<el-form-item label="默认选中行key" label-width="110px">-->
-                            <!--<el-input v-model="paramForm.currentRowKey"></el-input>-->
-                        <!--</el-form-item>-->
+                        <el-form-item label="默认选中行key" label-width="110px">
+                            <el-input v-model="paramForm.currentRowKey"></el-input>
+                        </el-form-item>
                         <el-form-item label="行key">
                             <el-switch
                                     v-model="paramForm.rowKey"
@@ -343,7 +345,7 @@
         data(){
             return {
                 tableData: [{
-                    date: '2016-05-03',
+                    date: '2016-05-01',
                     userId: 1,
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1518 弄'
@@ -353,7 +355,7 @@
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1518 弄'
                 }, {
-                    date: '2016-05-04',
+                    date: '2016-05-03',
                     userId: 3,
                     name: '王小虎',
                     address: '上海市普陀区金沙江路 1518 弄'
@@ -365,7 +367,7 @@
                     border: true,
                     size: 'default',
                     fit: true,
-//                    currentRowKey: 3,
+                    currentRowKey: 1,
                     rowClassName: false,
                     rowStyle: false,
                     cellClassName: false,
@@ -374,7 +376,7 @@
 //                    headerRowStyle: false,
 //                    headerCellClassName: false,
 //                    headerCellStyle: false,
-                    rowKey: false,
+                    rowKey: true,
                     emptyText: undefined,
                     defaultSort: false,
                     /***** Events *****/
@@ -421,8 +423,9 @@
         this.paramForm.fit ? '' : '\n\t\t:fit="false"' }${
         this.paramForm.rowKey ? '\n\t\trow-key="userId"' : '' }${
         this.paramForm.rowKey ? '\n\t\t:row-key="rowKey"' : '' }${
+        this.paramForm.rowKey && this.paramForm.currentRowKey ? '\n\t\t:current-row-key="' + this.paramForm.currentRowKey + '"' : ''}${
         this.paramForm.emptyText ? 'empty-text="' + this.paramForm.emptyText + '"' : '' }${
-        this.paramForm.defaultSort ? '\n\t\t:default-sort="{prop: \'date\', order: \'descending\'}"' : '' }${
+        this.paramForm.defaultSort ? '\n\t\t:default-sort="{prop: \'date\', order: \'ascending[descending]\'}"' : '' }${
         this.paramForm.rowClassName ? '\n\t\t:row-class-name="rowClassName"' : '' }${
         this.paramForm.rowStyle ? '\n\t\t:row-styles="rowStyle"' : '' }${
         this.paramForm.cellClassName ? '\n\t\t:cell-class-name="cellClassName"' : '' }${
@@ -466,7 +469,7 @@
         data() {
           return {
             tableData: [{
-                date: '2016-05-03',
+                date: '2016-05-01',
                 userId: 1,
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'
@@ -476,7 +479,7 @@
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'
             }, {
-                date: '2016-05-04',
+                date: '2016-05-03',
                 userId: 3,
                 name: '王小虎',
                 address: '上海市普陀区金沙江路 1518 弄'

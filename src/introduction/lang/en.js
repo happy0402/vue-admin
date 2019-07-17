@@ -24,6 +24,7 @@ export default {
 
         directive: 'Directive',
         drag:'Drag',
+        infiniteScroll: 'Infinite Scroll',
 
         util: 'Util',
         valid: 'Valid',

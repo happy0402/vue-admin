@@ -7,10 +7,10 @@
   color: #C0C4CC;
   cursor: not-allowed;
 }
-.el-form-item.is-success .ivu-input{
+.el-form-item.is-success .ivu-input, .el-form-item.is-success .ivu-input:focus{
   border-color: $green;
 }
-.el-form-item.is-error .ivu-input{
+.el-form-item.is-error .ivu-input, .el-form-item.is-error .ivu-input:focus{
   border-color: $pink;
 }
 

@@ -227,20 +227,18 @@
             border: 1px dashed $tiffany;
         }
 
-        .el-input--medium {
-            .el-input__inner{
-                height: 17.5px;
-                line-height: 17.5px;
-                font-size: 16px;
-                border-top: none;
-                border-left: none;
-                border-right: none;
-                padding: 0 0 1px 0;
-            }
+        .el-input__inner{
+            height: 17.5px;
+            line-height: 17.5px;
+            font-size: 16px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            padding: 0 0 1px 0;
+        }
 
-            .el-input__icon{
-                line-height: 18.25px;
-            }
+        .el-input__icon{
+            line-height: 18.25px;
         }
     }
 </style>

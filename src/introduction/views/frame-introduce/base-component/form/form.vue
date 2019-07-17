@@ -55,13 +55,11 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item label="日期选择器" label-width="90px" prop="dareRange">
-                            <DatePicker
+                            <sf-datePicker
                                     v-model="form.dateRange"
                                     type="daterange"
-                                    split-panels
                                     placeholder="选择日期范围"
-                                    :size="paramForm.size ? 'small' : 'default'"
-                                    :disabled="paramForm.disabled"></DatePicker>
+                                    :size="paramForm.size ? 'small' : 'default'"></sf-datePicker>
                         </el-form-item>
                         <el-form-item label="开关" prop="switch">
                             <el-switch v-model="form.switch"></el-switch>
@@ -221,15 +219,14 @@
             </el-select>
         </el-form-item>
         <el-form-item label="日期选择器" label-width="90px" prop="dateRange">
-            <DatePicker
+            <sf-datePicker
                     v-model="form.dateRange"
                     type="daterange"
-                    split-panels
                     placeholder="选择日期范围"${
                     this.paramForm.size ? `
                     size="small"` : ''}${
                     this.paramForm.disabled ? `
-                    disabled` : ''}></DatePicker>
+                    disabled` : ''}></sf-datePicker>
         </el-form-item>
         <el-form-item label="开关" prop="switch">
             <el-switch v-model="form.switch"></el-switch>

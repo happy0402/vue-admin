@@ -173,6 +173,14 @@ export default [
                             title: 'drag',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
                         },
+                    },
+                    {
+                        path: 'infinite-scroll',
+                        name: 'InfiniteScroll',
+                        meta: {
+                            title: 'infiniteScroll',
+                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                        },
                     }
                 ]
             },

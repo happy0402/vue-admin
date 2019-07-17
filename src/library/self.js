@@ -3,5 +3,9 @@
  */
 import Vue from 'vue';
 import Dialog from './components/Dialog';
+import DatePicker from './components/DatePicker';
 
-Vue.component('self-dialog', Dialog);
+Vue.component('sf-dialog', Dialog);
+Vue.component('sf-datePicker', DatePicker);
+
+Vue.prototype.$modal = Dialog;

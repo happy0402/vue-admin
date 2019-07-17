@@ -1,3 +1,5 @@
+@import 'variables';
+
 //布局容器样式重置
 .el-header{
   padding: 0;
@@ -5,6 +7,14 @@
 
 .el-main{
   padding: 0;
+}
+
+//控件校验正确样式
+.el-form-item.is-success .el-input__inner,
+.el-form-item.is-success .el-input__inner:focus,
+.el-form-item.is-success .el-textarea__inner,
+.el-form-item.is-success .el-textarea__inner:focus{
+  border-color: $green;
 }
 
 //autocomplete 下拉框宽度自适应

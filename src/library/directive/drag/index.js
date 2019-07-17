@@ -1,8 +1,19 @@
 /**
- * Created by Administrator on 2019/5/26.
+ * Created by zkx on 2019/5/26.
  */
 export default {
     bind(el, binding, vnode){
+        var selectWrap = el;
+
+        //指令配置项处理
+        if(binding.value){
+            if(typeof binding.value === 'string'){
+                selectWrap = el.querySelector(binding.value);
+            }else{
+                selectWrap = el.querySelector(binding.value.target);
+            }
+        }
+
         //鼠标移动
         var oldPosition = {}
         function move(e){
@@ -38,7 +49,7 @@ export default {
 
         //功能入口
         var startPosition = {}
-        el.onmousedown = (e) => {
+        selectWrap.onmousedown = (e) => {
             startPosition.x = e.x
             startPosition.y = e.y
 

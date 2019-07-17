@@ -57,12 +57,10 @@
                             </el-select>
                         </el-form-item>
                         <el-form-item label="日期选择器" label-width="110px" prop="dateRange">
-                            <DatePicker
+                            <sf-datePicker
                                     v-model="form.dateRange"
                                     type="daterange"
-                                    split-panels
-                                    placeholder="选择日期范围"
-                                    @on-change="$refs.form.validateField('dateRange')"></DatePicker>
+                                    placeholder="选择日期范围"></sf-datePicker>
                         </el-form-item>
                         <el-form-item label="开关" prop="switch">
                             <el-switch v-model="form.switch"></el-switch>
@@ -240,10 +238,6 @@
 
         <el-form-item label="输入框" prop="input" required>
             <el-input v-model="form.input"></el-input>
-        </el-form-item>
-        <el-form-item label="日期选择器" label-width="90px" prop="dateRange">
-            <DatePicker
-                    @on-change="$refs.form.validateField('dateRange')"></DatePicker>
         </el-form-item>
     </el-form>
 </template>

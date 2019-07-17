@@ -19,7 +19,7 @@
             <component :is="currentTabComponent"></component>
         </el-main>
     </el-container>
-    <div v-else>
+    <div v-else style="height: 100%;">
         <router-view/>
     </div>
 </template>

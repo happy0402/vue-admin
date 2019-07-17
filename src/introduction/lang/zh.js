@@ -23,7 +23,8 @@ export default {
         other: '其他',
 
         directive: '自定义指令',
-        drag:'Drag 拖拽',
+        drag:'拖拽',
+        infiniteScroll: '无限滚动',
 
         util: '工具类',
         valid: '校验',

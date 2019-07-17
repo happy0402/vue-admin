@@ -1,7 +1,7 @@
 <!-- 布局 -->
 <template>
     <show-config-code :code="codeCreate">
-        <p>此处配置为常用配置,所有配置请查看
+        <p>此处配置为二次封装后配置,较源生配置有些许不同。源生配置（都可使用）可参考
             <el-link
                     href="https://iviewui.com/components/date-picker"
                     target="_blank"
@@ -12,45 +12,43 @@
         </p>
 
         <template v-slot:show>
-            <DatePicker
+            <sf-datePicker
                     v-show="paramForm.type.key === 'date'"
                     type="date"
                     :options="options"
-                    placeholder="选择日期"></DatePicker>
-            <DatePicker
+                    placeholder="选择日期"></sf-datePicker>
+            <sf-datePicker
                     v-show="paramForm.type.key === 'daterange'"
-                    split-panels
                     type="daterange"
                     :options="options"
-                    placeholder="选择日期范围"></DatePicker>
-            <DatePicker
+                    placeholder="选择日期范围"></sf-datePicker>
+            <sf-datePicker
                     v-show="paramForm.type.key === 'datetime'"
                     type="datetime"
                     :options="options"
-                    placeholder="选择日期时间"></DatePicker>
-            <DatePicker
+                    placeholder="选择日期时间"></sf-datePicker>
+            <sf-datePicker
                     v-show="paramForm.type.key === 'datetimerange'"
-                    split-panels
                     type="datetimerange"
                     :options="options"
-                    placeholder="选择日期时间范围"></DatePicker>
-            <DatePicker
+                    placeholder="选择日期时间范围"></sf-datePicker>
+            <sf-datePicker
                     v-show="paramForm.type.key === 'year'"
                     type="year"
                     :options="options"
-                    placeholder="选择年"></DatePicker>
-            <DatePicker
+                    placeholder="选择年"></sf-datePicker>
+            <sf-datePicker
                     v-show="paramForm.type.key === 'month'"
                     type="month"
                     :options="options"
-                    placeholder="选择月"></DatePicker>
+                    placeholder="选择月"></sf-datePicker>
         </template>
 
         <template v-slot:config>
             <el-form
                     label-position="left"
                     :model="paramForm"
-                    label-width="80px">
+                    label-width="100px">
                 <el-form-item label="类型">
                     <el-select v-model="paramForm.type" placeholder="请选择类型">
                         <el-option
@@ -69,6 +67,11 @@
                     </el-radio-group>
                 </el-form-item>
                 <el-divider>此页面不展示，请复制代码测试</el-divider>
+                <el-form-item label="结果格式化">
+                    <el-switch
+                            v-model="paramForm.valueFormat">
+                    </el-switch>
+                </el-form-item>
                 <el-form-item label="快捷方式">
                     <el-switch
                             v-model="paramForm.shortcuts">
@@ -126,6 +129,7 @@
                         value: '日期'
                     },
                     enableDate: 'auto',
+                    valueFormat: false,
                     shortcuts: false,
                     startDate: false
                 }
@@ -150,23 +154,29 @@
             },
             codeCreate(){
                 var code = `<template>
-    <DatePicker
+    <sf-datePicker
+        ref="datePicker"
+        v-model="date"
         type="${this.paramForm.type.key}"${
-                    this.paramForm.type.key === 'daterange' || this.paramForm.type.key === 'datetimerange' ? '\n\t\tsplit-panels' : ''}${
                     this.paramForm.enableDate !== 'auto' || this.paramForm.shortcuts ? '\n\t\t:options="options"' : ''
                     }${
                     this.paramForm.startDate ? '\n\t\t:start-date="new Date(1991, 4, 14)"' : ''
                     }
-        placeholder="选择${this.paramForm.type.value}"></DatePicker>
+        placeholder="选择${this.paramForm.type.value}"${
+                    this.paramForm.valueFormat ? '\n\t\tvalue-format="yyyy-MM-dd HH:mm:ss"' : ''
+                    }></sf-datePicker>${
+            this.paramForm.valueFormat ? '\n\t<!-- 配置value-format后,v-model的绑定值将直接进行格式化 --> ' +
+                '\n\t<!-- 注：一旦配置此参数则不可进行 el-form 的配置校验 -->' : ''
+                    }
 </template>
 <script>
     export default {
         data () {
             return {
-                `;
+                date: '',`;
 
                 if (this.paramForm.enableDate !== 'auto' || this.paramForm.shortcuts) {
-                    code += `options: {
+                    code += `\noptions: {
                 `;
 
                     if (this.paramForm.enableDate === 'futrue') {
@@ -225,7 +235,12 @@
 
                 code += `
             }
-        }
+        }${
+        !this.paramForm.valueFormat ? `,
+        methods:{
+            //this.$refs.datePicker.formatDate(date, 'yyyy-MM-dd HH:mm:ss'); //结果格式化
+        }` : ''
+                    }
     }
 <\/script>`;
 

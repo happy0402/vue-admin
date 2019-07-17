@@ -7,7 +7,7 @@
         <el-main>
             <split-pane :min-percent='20' :default-percent='40' split="vertical">
                 <template slot="paneL">
-                    <el-container>
+                    <el-container style="height: 100%">
                         <el-header height="auto" class="showContainer">
                             <!-- 展示区 -->
                             <template v-if="analyseCode">

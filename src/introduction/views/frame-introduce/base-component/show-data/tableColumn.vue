@@ -299,7 +299,7 @@
         data(){
             return {
                 tableData: [{
-                    date: '2016-05-03',
+                    date: '2016-05-01',
                     userId: 1,
                     name: '王小虎',
                     job: '前端开发工程师',
@@ -311,7 +311,7 @@
                     job: '前端开发工程师',
                     address: '浙江省温州市鹿城区黄龙住宅区盛锦路1号 温州医科大学附属康宁医院'
                 }, {
-                    date: '2016-05-04',
+                    date: '2016-05-03',
                     userId: 3,
                     name: '王小虎',
                     job: '前端开发工程师',
@@ -362,7 +362,7 @@
                     fixed: false,
                     resizable: true,
                     formatter: false,
-                    showOverflowTooltip: false,
+                    showOverflowTooltip: true,
                     align: 'default',
                     headerAlign: 'default',
                     className: undefined,
@@ -418,7 +418,7 @@
             }${
                 this.paramForm.formatter ? '\n\t\t\t:formatter="formatter"' : ''
             }${
-                this.paramForm.showOverflowTooltip ? '\n\t\t\tshow-cverflow-tooltip' : ''
+                this.paramForm.showOverflowTooltip ? '\n\t\t\tshow-overflow-tooltip' : ''
             }${
                 this.paramForm.align === 'default' ? '' : '\n\t\t\talign="' + this.paramForm.align + '"'
             }${
@@ -444,7 +444,7 @@
                     '\n\t\t\t:sort-method="sortMethod"' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.sortable && this.paramForm.sortWay === 'sortBy' ?
-                    '\n\t\t\t:sort-method="sortBy"' : ''
+                    '\n\t\t\t:sort-by="sortBy"' : ''
             }${
                 this.paramForm.type === 'default' && this.paramForm.sortable && this.paramForm.sortOrders ?
                     '\n\t\t\t:sort-orders="[\'ascending\', \'descending\', null]"' : ''
@@ -479,7 +479,7 @@
         data() {
           return {
             tableData: [{
-                date: '2016-05-03',
+                date: '2016-05-01',
                 userId: 1,
                 name: '王小虎',
                 address: '浙江省温州市鹿城区黄龙住宅区盛锦路1号 温州医科大学附属康宁医院'
@@ -489,7 +489,7 @@
                 name: '王小虎',
                 address: '浙江省温州市鹿城区黄龙住宅区盛锦路1号 温州医科大学附属康宁医院'
             }, {
-                date: '2016-05-04',
+                date: '2016-05-03',
                 userId: 3,
                 name: '王小虎',
                 address: '浙江省温州市鹿城区黄龙住宅区盛锦路1号 温州医科大学附属康宁医院'
@@ -522,11 +522,10 @@
             },` : ''
             }${
                     this.paramForm.type === 'default' && this.paramForm.sortable && this.paramForm.sortWay === 'sortBy' ?
-                        `\n\t\t\tsortBy(row, index){
-                //String: 指定数据按照哪个属性进行排序
-                //Array: 先按照第 1 个属性排序，如果第 1 个相等，再按照第 2 个排序，以此类推
-                //Function: 按方法返回的值进行常规排序
-            },` : ''
+                        `\n\t\t\tsortBy(row, index){},
+            //String: 指定数据按照哪个属性进行排序
+            //Array: 先按照第 1 个属性排序，如果第 1 个相等，再按照第 2 个排序，以此类推
+            //Function(row, index){}: 按方法返回的值进行常规排序` : ''
             }${
                     this.paramForm.type === 'default' && this.paramForm.filters ? `\n\t\t\tfilterMethod(value, row, column){
                 //多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示
