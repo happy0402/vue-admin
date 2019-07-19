@@ -1,6 +1,6 @@
 <!-- 框架介绍 -->
 <template>
-    <el-container class="introduce-container" v-if="modules.length">
+    <el-container class="introduce-container" v-if="modules.length" style="height: 100%">
         <el-header height="auto">
             <div class="tabs">
                 <el-scrollbar ref="scrollbar" viewClass="tabsTitle">
@@ -19,9 +19,7 @@
             <component :is="currentTabComponent"></component>
         </el-main>
     </el-container>
-    <div v-else style="height: 100%;">
-        <router-view/>
-    </div>
+    <router-view v-else/>
 </template>
 
 <script>
@@ -68,8 +66,6 @@
                 }
 
                 this.activeModule = this.modules[0];
-
-                this.$store.dispatch('app/setFixedPage', true);
             }
         }
     }

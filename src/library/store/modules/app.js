@@ -28,7 +28,7 @@ const mutations = {
         state.fixedPage = fixedPage;
     },
     RESET_FIXED_PAGE: (state) => {
-        state.fixedPage = false;
+        state.fixedPage = true;
     },
     SET_APPMSG: (state, appMsg) => {
         state.appMsg = appMsg;

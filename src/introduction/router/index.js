@@ -161,6 +161,7 @@ export default [
             {
                 path: 'directive',
                 name: 'Directive',
+                component: () => import('@/introduction/views/frame-introduce'),
                 meta: {
                     title: 'directive',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -169,6 +170,7 @@ export default [
                     {
                         path: 'drag',
                         name: 'Drag',
+                        component: () => import('@/introduction/views/frame-introduce/directive/drag.vue'),
                         meta: {
                             title: 'drag',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav

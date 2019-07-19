@@ -33,8 +33,8 @@ export default {
 
         //鼠标放开
         function up(e){
-            if(typeof vnode.data.on.dragEnd === 'function'){
-                vnode.data.on.dragEnd({
+            if(typeof vnode.data.on.dragStop === 'function'){
+                vnode.data.on.dragStop({
                     offsetX: e.x - startPosition.x,
                     offsetY: e.y - startPosition.y,
                     x: e.x,

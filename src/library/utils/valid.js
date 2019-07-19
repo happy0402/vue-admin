@@ -1,5 +1,50 @@
 import i18n from '#/lang' // Internationalization
 import stringUtil from './string'
+import AsyncValidator from 'async-validator';
+
+const Validator = (function () {
+    function validate(target, rules, callback){
+        const validator = new AsyncValidator(rules);
+
+        let promise;
+        if (typeof callback !== 'function' && window.Promise) {
+            promise = new window.Promise((resolve, reject) => {
+                callback = function(errors, invalidFields) {
+                    !errors ? resolve() : reject(errors, invalidFields);
+                };
+            });
+        }
+
+        validator.validate(target, (errors, invalidFields) => {
+            if (typeof callback === 'function') {
+                callback(errors, invalidFields);
+            }
+        });
+
+        if (promise) {
+            return promise;
+        }
+    }
+
+    function Validator(rules) {
+        this.rules = rules;
+    }
+    Validator.prototype.validateSingle = function (target, callback) {
+        //根据target的内容校验部分
+        return validate(target, this.rules, callback);
+    };
+    Validator.prototype.validateAll = function (target, callback) {
+        //按照rules进行校验
+        var source = {};
+
+        for(let key in this.rules){
+            source[key] = target[key];
+        }
+
+        return validate(source, this.rules, callback);
+    };
+    return Validator;
+})();
 
 export default {
     message:{
@@ -62,5 +107,8 @@ export default {
         }
 
         return undefined;
+    },
+    createValidator: (rules) => {
+        return new Validator(rules);
     }
 }

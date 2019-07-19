@@ -2,7 +2,7 @@
 <template>
     <el-container class="CodeMirrorContainer">
         <el-aside width="50%" style="margin-right: 10px;">
-            <el-container>
+            <el-container style="height: 100%;">
                 <el-header height="auto">
                     <p>此处为默认使用方法,具体文档请查看
                         <el-link
@@ -53,7 +53,7 @@
         data(){
           return {
               code: `<template>
-    <textarea ref="codePanel" v-model="code"></textarea>
+    <textarea ref="codePanel"></textarea>
 </template>
 
 <script>
@@ -66,14 +66,22 @@
     import 'codemirror/addon/scroll/simplescrollbars' //滚动条组件
 
     export default {
-        components:{
-            CodeMirror
-        },
+        name: 'VueCodeMirror',
+        props: ['code'],
         data(){
-          return {
-              CodeMirrorEditor: undefined,
-              code: ''
-          }
+            return {
+                CodeMirrorEditor: undefined
+            }
+        },
+        watch:{
+            code(value){
+                this.CodeMirrorEditor.setValue(value); //设置编辑器内容
+            }
+        },
+        methods:{
+            getValue(){
+                return this.CodeMirrorEditor.getValue(); //获取编辑器内容
+            }
         },
         mounted(){
             this.CodeMirrorEditor = CodeMirror.fromTextArea(this.$refs.codePanel, {
@@ -83,9 +91,7 @@
                 scrollbarStyle: 'simple', //滚动条样式 | 'layout'
                 styleActiveLine: true //高光选中行
             });
-
-            //this.CodeMirrorEditor.setValue(“Hello Kitty”)：设置编辑器内容
-            //this.CodeMirrorEditor.getValue()：获取编辑器内容
+            this.CodeMirrorEditor.setValue(this.code);
         }
     }
 <\/script>`,

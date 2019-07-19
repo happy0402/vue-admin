@@ -1,11 +1,9 @@
 <template>
-    <section class="app-main">
-        <transition name="fade-transform" mode="out-in">
-            <keep-alive>
-                <router-view :key="key" />
-            </keep-alive>
-        </transition>
-    </section>
+    <transition name="fade-transform" mode="out-in">
+        <keep-alive>
+            <router-view :key="key" />
+        </keep-alive>
+    </transition>
 </template>
 
 <script>
@@ -21,9 +19,3 @@
         }
     }
 </script>
-
-<style scoped="">
-    .app-main{
-        height: 100%;
-    }
-</style>

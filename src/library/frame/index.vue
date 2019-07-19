@@ -1,9 +1,9 @@
 <template>
-    <el-container>
+    <el-container :style="fixedPage ? 'height: 100%' : 'height: auto;'">
         <el-aside :width="asideWidth">
             <sidebar></sidebar>
         </el-aside>
-        <el-container>
+        <el-container style="height: 100%;">
             <el-header :height="headerHeight">
                 <div
                         class="fram-header"
@@ -15,9 +15,7 @@
                     <settings></settings>
                 </div>
             </el-header>
-            <el-main :style="fixedPage ?
-                'height: calc(100vh - ' + headerHeight + ')' :
-                'min-height: calc(100vh - ' + headerHeight + ')'">
+            <el-main style="height: 100%;padding: 10px;">
                 <app-main></app-main>
             </el-main>
         </el-container>
@@ -78,9 +76,5 @@ export default {
         z-index: 9;
 
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
-    }
-
-    .el-main{
-        padding: 10px;
     }
 </style>

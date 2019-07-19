@@ -62,13 +62,13 @@
             </el-form>
         </template>
 
-        <self-dialog
+        <sf-dialog
                 v-model="showDataSource"
                 title="数据类型"
                 draggable
                 footer-hide>
             <vue-code-mirror :code="JSON.stringify(dataSource, null, 2)"></vue-code-mirror>
-        </self-dialog>
+        </sf-dialog>
     </show-config-code>
 </template>
 

@@ -432,8 +432,6 @@
             }
         },
         created(){
-            this.$store.dispatch('app/setFixedPage', true);
-
             //加载configList
 
             //configList数据源预处理 sourceValue -> fixedSource | dynamicSource

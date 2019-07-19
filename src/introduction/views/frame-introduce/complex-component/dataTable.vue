@@ -30,7 +30,7 @@
                         label="地址"
                         sortable>
                     <template slot-scope="{row}">
-                        <el-input v-model="row.address"></el-input>
+                        <el-input v-model="row.address" @blur="addressBlur"></el-input>
                     </template>
                 </el-table-column>
 
@@ -49,6 +49,12 @@
         data() {
             return {
                 tableData: [],
+                rules: {
+                    address: [
+                        { type: 'string', required: true, message: this.$util.valid.message.required('地址') }
+                    ]
+                },
+                validator: undefined
             }
         },
         methods:{
@@ -74,7 +80,7 @@
             appendData(){
                 this.$refs.table.prependRow({
                     date: '2016-05-01',
-                        name: '小李',
+                    name: '小李',
                     address: ''
                 });
             },
@@ -83,41 +89,54 @@
             },
             saveData(){
                 var modifiedData = this.$refs.table.getModifiedData();
+                console.log(modifiedData);
+
+                var invalidateData = {
+                    insert: [],
+                    update: [],
+                    delete: []
+                }
                 for(let i = 0; i < modifiedData.insert.length; i++){
                     let data = modifiedData.insert[i];
-                    modifiedData.insert[i] = {
-                        data: data,
-                        msg: '新增数据错误信息' + i
-                    }
+                    this.validator.validateAll( data, (errors) => {
+                        if(errors){
+                            invalidateData.insert.push({
+                                data: data,
+                                msg: errors[0].message
+                            });
+                        }
+                    } );
                 }
                 for(let i = 0; i < modifiedData.update.length; i++){
                     let data = modifiedData.update[i].new;
-                    modifiedData.update[i] = {
-                        data: data,
-                        msg: '修改数据错误信息' + i
-                    }
+                    this.validator.validateAll( data, (errors) => {
+                        if(errors){
+                            invalidateData.update.push({
+                                data: data,
+                                msg: errors[0].message
+                            });
+                        }
+                    } );
                 }
-                for(let i = 0; i < modifiedData.delete.length; i++){
-                    let data = modifiedData.delete[i];
-                    modifiedData.delete[i] = {
-                        data: data,
-                        msg: '删除数据错误信息' + i
-                    }
-                }
-                console.log(modifiedData);
+                console.log(invalidateData);
 
                 this.tableData = this.createSource();
                 this.$refs.table.refreshTable(this.tableData);
-                this.$refs.table.setErrorData(modifiedData);
+                this.$refs.table.setErrorData(invalidateData);
             },
             scrollToError(){
                 this.$refs.table.scrollToError();
+            },
+            addressBlur(event){
+                this.validator.validateSingle( { address: event.target.value} ).catch((errors) => {
+                    this.$message.warning(errors[0].message);
+                });
             }
         },
         created(){
             this.tableData = this.createSource();
 
-            this.$store.dispatch('app/setFixedPage', true);
+            this.validator = this.$util.valid.createValidator(this.rules);
         }
     }
 </script>
