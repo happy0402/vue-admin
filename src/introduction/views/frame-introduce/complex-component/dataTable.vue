@@ -89,7 +89,7 @@
             },
             saveData(){
                 var modifiedData = this.$refs.table.getModifiedData();
-                console.log(modifiedData);
+//                console.log(modifiedData);
 
                 var invalidateData = {
                     insert: [],
@@ -98,7 +98,7 @@
                 }
                 for(let i = 0; i < modifiedData.insert.length; i++){
                     let data = modifiedData.insert[i];
-                    this.validator.validateAll( data, (errors) => {
+                    this.validator.validateAllRules( data, (errors) => {
                         if(errors){
                             invalidateData.insert.push({
                                 data: data,
@@ -109,7 +109,7 @@
                 }
                 for(let i = 0; i < modifiedData.update.length; i++){
                     let data = modifiedData.update[i].new;
-                    this.validator.validateAll( data, (errors) => {
+                    this.validator.validateAllRules( data, (errors) => {
                         if(errors){
                             invalidateData.update.push({
                                 data: data,
@@ -128,8 +128,8 @@
                 this.$refs.table.scrollToError();
             },
             addressBlur(event){
-                this.validator.validateSingle( { address: event.target.value} ).catch((errors) => {
-                    this.$message.warning(errors[0].message);
+                this.validator.validateSingleProp( { address: event.target.value} ).catch((errors) => {
+                    !errors || this.$message.warning(errors[0].message);
                 });
             }
         },

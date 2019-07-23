@@ -21,23 +21,29 @@
         },
         watch:{
             code(value){
-                this.CodeMirrorEditor.setValue(value); //设置编辑器内容
+                !this.CodeMirrorEditor || this.CodeMirrorEditor.setValue(value); //设置编辑器内容
             }
         },
         methods:{
             getValue(){
                 return this.CodeMirrorEditor.getValue(); //获取编辑器内容
+            },
+            refresh(){
+                this.CodeMirrorEditor.refresh();
             }
         },
         mounted(){
-            this.CodeMirrorEditor = CodeMirror.fromTextArea(this.$refs.codePanel, {
-                mode:'vue',//编辑器语言
-                theme:'monokai', //编辑器主题
-                lineNumbers: true, //显示行号
-                scrollbarStyle: 'simple', //滚动条样式 | 'layout'
-                styleActiveLine: true //高光选中行
+            this.$nextTick(function () {
+                this.CodeMirrorEditor = CodeMirror.fromTextArea(this.$refs.codePanel, {
+                    mode:'vue',//编辑器语言
+                    theme:'monokai', //编辑器主题
+                    lineNumbers: true, //显示行号
+                    scrollbarStyle: 'simple', //滚动条样式 | 'layout'
+                    styleActiveLine: true //高光选中行
+                });
+
+                this.CodeMirrorEditor.setValue(this.code);
             });
-            this.CodeMirrorEditor.setValue(this.code);
         }
     }
 </script>

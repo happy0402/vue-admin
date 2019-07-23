@@ -176,7 +176,7 @@
                 date: '',`;
 
                 if (this.paramForm.enableDate !== 'auto' || this.paramForm.shortcuts) {
-                    code += `\noptions: {
+                    code += `\n\t\t\t\toptions: {
                 `;
 
                     if (this.paramForm.enableDate === 'futrue') {

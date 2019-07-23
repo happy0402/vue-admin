@@ -8,9 +8,6 @@ import '#/iview' //部分引入 iview
 import '#/element' //部分引入 element-ui
 import '#/self' //部分引入 二方库
 
-// Internationalization
-import "babel-polyfill" //ie 10兼容
-
 import App from './App.vue'
 
 import store from '#/store'
@@ -36,7 +33,6 @@ shortcutJS.loadFromJson(shortcuts, {
 });
 
 Vue.prototype.$util = Util;
-
 new Vue({
     router,
     store,

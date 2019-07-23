@@ -12,7 +12,7 @@ export default {
         basic: '基础',
         form: '表单',
         showData: '数据展示',
-        notice: '消息提示',
+        notice: '信息提示',
         navigation: '导航',
         others: '其他',
 
@@ -20,7 +20,7 @@ export default {
         dataTable: '数据表格',
         animate: '动画',
         tinymce: '富文本编辑器',
-        other: '其他',
+        print: '打印',
 
         directive: '自定义指令',
         drag:'拖拽',
@@ -29,6 +29,9 @@ export default {
         util: '工具类',
         valid: '校验',
         string: '字符串',
+        dateTime: '日期时间',
+        array: '数组',
+        object: '类',
 
         business: '业务相关',
 
@@ -40,6 +43,7 @@ export default {
         container: '布局容器',
         splitPane: '可拖拽分区',
         layout: '布局',
+        divider: '分割线',
         color: '色彩',
         icon: '图标',
         button: '按钮',
@@ -62,6 +66,8 @@ export default {
         tree: '树',
         badge: '标记',
 
+        tooltip: '文字提示',
+        popover: '弹出框',
         loading: '加载',
         message: '消息提示',
         messageBox: '弹框',
@@ -71,13 +77,9 @@ export default {
         tabs: '标签页',
         steps: '步骤条',
 
-        tooltip: '文字提示',
-        popover: '弹出框',
-        divider: '分割线',
         shortCut: '快捷键',
+        asyncComponent: '异步组件',
+        menu: '目录配置',
         codeMirror: '代码展示',
-
-        loadingComponent: '正在加载',
-        errorComponent: '加载失败'
     }
 }

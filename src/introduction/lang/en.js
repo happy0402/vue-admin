@@ -20,7 +20,7 @@ export default {
         dataTable: 'Data Table',
         animate: 'Animate',
         tinymce: 'Tinymce',
-        other: 'Others',
+        print: 'Print',
 
         directive: 'Directive',
         drag:'Drag',
@@ -29,6 +29,9 @@ export default {
         util: 'Util',
         valid: 'Valid',
         string: 'String',
+        dateTime: 'Date Time',
+        array: 'Array',
+        object: 'Object',
 
         business: 'Business',
 
@@ -40,6 +43,7 @@ export default {
         container: 'Container',
         splitPane: 'Split Pane',
         layout: 'Layout',
+        divider: 'Divider',
         color: 'Color',
         icon: 'Icon',
         button: 'Button',
@@ -62,6 +66,8 @@ export default {
         tree: 'Tree',
         badge: 'Badge',
 
+        tooltip: 'Tooltip',
+        popover: 'Popover',
         loading: 'Loading',
         message: 'Message',
         messageBox: 'Message Box',
@@ -71,13 +77,9 @@ export default {
         tabs: 'Tabs',
         steps: 'Steps',
 
-        tooltip: 'Tooltip',
-        popover: 'Popover',
-        divider: 'Divider',
         shortCut: 'Short Cut',
+        asyncComponent: 'Async Component',
+        menu: 'Menu Dispose',
         codeMirror: 'Code Mirror',
-
-        loadingComponent: 'Loading Component',
-        errorComponent: 'Error Component'
     }
 }

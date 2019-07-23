@@ -22,7 +22,7 @@ export default [
     {
         path: '/router',
         component: Frame,
-        alwaysShow: true, // will always show the root menu
+        alwaysShow: true, // will always show the root Menu
         name: 'Router',
         meta: {
             title: 'router',

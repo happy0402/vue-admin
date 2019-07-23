@@ -24,22 +24,22 @@ NProgress.configure({ showSpinner: false });
 router.beforeEach((to, from, next) => {
     NProgress.start();
 
-    var token = Cookies.get('token');
-    if(!token && to.path !== '/login'){
-        //未登陆
-        next(`/login?redirect=${window.location.hash.slice(1)}`);
-    }
-
-    if(token && to.path === '/login'){
-        //已登陆
-        next('/index');
-    }
+    // var token = Cookies.get('token');
+    // if(!token && to.path !== '/login'){
+    //     //未登陆
+    //     next(`/login?redirect=${window.location.hash.slice(1)}`);
+    // }
+    //
+    // if(token && to.path === '/login'){
+    //     //已登陆
+    //     next('/index');
+    // }
 
     store.dispatch('app/resetFixedPage') //页面高度初始化
     next();
 
     NProgress.done();
-})
+});
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter(routes) {

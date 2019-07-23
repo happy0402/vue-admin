@@ -27,6 +27,7 @@ export default {
         inputRight: 'Please input the right ',
         isRequired: ' is required',
         range: 'Please input %s to %s characters',
-        len: "Don't only contain whitespace"
+        len: 'Please input %s characters',
+        whitespace: "Don't only contain whitespace"
     }
 }

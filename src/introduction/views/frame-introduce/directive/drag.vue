@@ -1,5 +1,7 @@
 <template>
-    <vue-code-mirror :code="directiveDrag"></vue-code-mirror>
+    <div>
+        <vue-code-mirror :code="directiveDrag"></vue-code-mirror>
+    </div>
 </template>
 
 <script>
@@ -13,8 +15,10 @@
             return {
                 directiveDrag: `<template>
     <!-- 若绑定复杂的组件且事件不生效，可使用 .native 关键字。如：@dragStart.native -->
+    <!-- target: 默认为组件最外层 @eg. v-drag -->
+    <!-- target: 可传string类型的 class|id，使用jq元素选择器 @eg. v-drag="'.el-table__body-wrapper'" -->
     <component
-        v-drag
+        v-drag="target"
         @dragStart="dragStart"
         @drag="drag"
         @dragStop="dragStop"></component>

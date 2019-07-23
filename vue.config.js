@@ -21,19 +21,23 @@ module.exports = {
         // provide the app's title in webpack's name field, so that
         // it can be accessed in index.html to inject the correct title.
         name: name,
+        // bable -> es5 转换
+        entry: [
+            'babel-polyfill',
+            resolve("src/main.js"),
+        ],//vue router 路由懒加载
         resolve: {
             alias: {
                 '@': resolve('src'),
                 '#': resolve('src/library')
             }
         },
-        //bable -> es5 转换
+        // bable -> es5 转换
         module:{
             rules:[
                 {
                     test: /\.js$/,
                     loader: 'babel-loader',
-                    include: [resolve('node_modules/element-ui/packages'), resolve('node_modules/element-ui/src')]
                 }
             ]
         },

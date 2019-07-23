@@ -66,8 +66,9 @@
                 v-model="showDataSource"
                 title="数据类型"
                 draggable
-                footer-hide>
-            <vue-code-mirror :code="JSON.stringify(dataSource, null, 2)"></vue-code-mirror>
+                footer-hide
+                @on-visible-change="dialogVisible">
+            <vue-code-mirror ref="codeMirror" :code="JSON.stringify(dataSource, null, 2)"></vue-code-mirror>
         </sf-dialog>
     </show-config-code>
 </template>
@@ -326,6 +327,13 @@
             handleNodeClick(data) {
                 // eslint-disable-next-line
                 console.log(data);
+            },
+            dialogVisible(status){
+                if(status){
+                    this.$nextTick(function () {
+                        this.$refs.codeMirror.refresh();
+                    });
+                }
             }
         }
     }

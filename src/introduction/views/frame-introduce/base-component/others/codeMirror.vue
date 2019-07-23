@@ -81,6 +81,9 @@
         methods:{
             getValue(){
                 return this.CodeMirrorEditor.getValue(); //获取编辑器内容
+            },
+            refresh(){
+                this.CodeMirrorEditor.refresh();
             }
         },
         mounted(){

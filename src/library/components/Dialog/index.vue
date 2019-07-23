@@ -140,6 +140,7 @@
                 if(this.loading && status === false){
                     this.loadingButton = false;
                 }
+                this.$emit('on-visible-change', status);
                 this.$emit('input', status);
             },
             onOk(){

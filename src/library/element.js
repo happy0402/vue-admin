@@ -29,6 +29,8 @@ import {
     BreadcrumbItem,
     Form,
     FormItem,
+    Tabs,
+    TabPane,
     Icon,
     Row,
     Col,
@@ -59,6 +61,10 @@ Vue.use(Container);
 Vue.use(Aside);
 Vue.use(Header);
 Vue.use(Main);
+
+Vue.use(Row);
+Vue.use(Col);
+
 Vue.use(Divider);
 
 Vue.use(Menu);
@@ -74,8 +80,8 @@ Vue.use(Scrollbar);
 
 Vue.use(Icon);
 
-Vue.use(Row);
-Vue.use(Col);
+Vue.use(Tabs);
+Vue.use(TabPane);
 
 Vue.use(Dropdown);
 Vue.use(DropdownMenu);

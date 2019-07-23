@@ -29,11 +29,17 @@ const Validator = (function () {
     function Validator(rules) {
         this.rules = rules;
     }
-    Validator.prototype.validateSingle = function (target, callback) {
+    Validator.prototype.validateSingleProp = function (target, callback) {
         //根据target的内容校验部分
-        return validate(target, this.rules, callback);
+        var rule = {};
+
+        for(let key in target){
+            if(this.rules[key]) rule[key] = this.rules[key];
+        }
+
+        return validate(target, rule, callback);
     };
-    Validator.prototype.validateAll = function (target, callback) {
+    Validator.prototype.validateAllRules = function (target, callback) {
         //按照rules进行校验
         var source = {};
 

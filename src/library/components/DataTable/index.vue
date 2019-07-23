@@ -227,7 +227,7 @@
             },
             setOriginalData(originalData){
                 this.filteredData = originalData;
-                this.originalData = this.$util.array.copy(originalData);
+                this.originalData = this.$util.object.copy(originalData);
             },
             refreshTable(dataSource){
                 //复制数据源

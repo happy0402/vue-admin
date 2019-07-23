@@ -364,7 +364,7 @@
             },
             getDataList(defaultValue){
                 //config -> data
-                return this.$util.array.copy(this.configList).map((item) => {
+                return this.$util.object.copy(this.configList).map((item) => {
                     if(item.sourceType === 'fixed'){
                         if(item.type === 'Radio' || item.type === 'Check' || item.type === 'Select'){
                             item.sourceValue = JSON.stringify(item.fixedSource);

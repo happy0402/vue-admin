@@ -1,6 +1,6 @@
 <!-- 框架介绍 -->
 <template>
-    <el-container class="introduce-container" v-if="modules.length" style="height: 100%">
+    <el-container class="introduce-container" style="height: 100%">
         <el-header height="auto">
             <div class="tabs">
                 <el-scrollbar ref="scrollbar" viewClass="tabsTitle">
@@ -16,42 +16,40 @@
             </div>
         </el-header>
         <el-main style="padding-top: 10px;">
-            <component :is="currentTabComponent"></component>
+            <!--<component :is="currentTabComponent"></component>-->
+            <router-view :name="activeModule"></router-view>
         </el-main>
     </el-container>
-    <router-view v-else/>
 </template>
 
 <script>
-    import LoadingComponent from '#/components/AsyncComponent/LoadingComponent.vue'
-    import ErrorComponent from '#/components/AsyncComponent/ErrorComponent.vue'
+//    import LoadingComponent from '#/components/AsyncComponent/LoadingComponent.vue'
+//    import ErrorComponent from '#/components/AsyncComponent/ErrorComponent.vue'
 
     export default {
         data(){
             return {
                 modules: this.$route.meta.modules || [],
-                filePath: '',
+//                filePath: '',
                 activeModule: '',
-                currentTabComponent: undefined
+//                currentTabComponent: undefined
             }
         },
         watch:{
-            activeModule(){
-                var that = this;
-                this.currentTabComponent = () => ({
-                    // 需要加载的组件 (应该是一个 `Promise` 对象)
-                    component: import('./' + that.filePath + that.activeModule + '.vue'),
-                    // 异步组件加载时使用的组件
-                    loading: LoadingComponent,
-                    // 加载失败时使用的组件
-                    error: ErrorComponent,
-                    // 展示加载时组件的延时时间。默认值是 200 (毫秒)
-                    delay: 200,
-                    // 如果提供了超时时间且组件加载也超时了，
-                    // 则使用加载失败时使用的组件。默认值是：`Infinity`
-                    timeout: 3000
-                });
-            }
+//            activeModule(){
+//                var that = this;
+//                this.currentTabComponent = () => ({
+//                    // 需要加载的组件 (应该是一个 `Promise` 对象)
+//                    component: import('./' + that.filePath + that.activeModule + '.vue'),
+//                    // 异步组件加载时使用的组件
+//                    loading: LoadingComponent,
+//                    // 加载失败时使用的组件
+//                    error: ErrorComponent,
+//                    // 如果提供了超时时间且组件加载也超时了，
+//                    // 则使用加载失败时使用的组件。默认值是：`Infinity`
+//                    timeout: 3000
+//                });
+//            }
         },
         methods:{
             clickTab(module){
@@ -60,10 +58,10 @@
         },
         mounted(){
             if(this.modules.length){
-                var matched = this.$route.fullPath.split('/')
-                for(let i = 2; i < matched.length; i++){
-                    this.filePath += matched[i] + '/'
-                }
+//                var matched = this.$route.fullPath.split('/')
+//                for(let i = 2; i < matched.length; i++){
+//                    this.filePath += matched[i] + '/'
+//                }
 
                 this.activeModule = this.modules[0];
             }

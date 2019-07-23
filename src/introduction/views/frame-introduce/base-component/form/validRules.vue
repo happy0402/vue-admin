@@ -81,14 +81,15 @@
             codeCreate(){
                 var rules = [];
 
-                for( let i = 0; i < this.paramForm.valid.length; i++ ){
-                    switch(this.paramForm.valid[i]){
-                        case 'required':
-                            rules.push(`
+                if(this.paramForm.valid.length){
+                    for( let i = 0; i < this.paramForm.valid.length; i++ ){
+                        switch(this.paramForm.valid[i]){
+                            case 'required':
+                                rules.push(`
     { type: '${this.paramForm.type}', required: true, message: this.$util.valid.message.required('label'), trigger: 'blur' }`);
-                            break;
-                        case 'validator':
-                            rules.push(`
+                                break;
+                            case 'validator':
+                                rules.push(`
     {
         type: '${this.paramForm.type}',
         validator(rule,value,callback){
@@ -116,9 +117,9 @@
         }, trigger: 'blur'
     }` : ''}
     `);
-                            break;
-                        case 'asyncValidator':
-                            rules.push(`
+                                break;
+                            case 'asyncValidator':
+                                rules.push(`
     {
         type: '${this.paramForm.type}',
         asyncValidator(rule,value,callback){
@@ -132,32 +133,32 @@
           });
         }, trigger: 'blur'
     }`);
-                            break;
-                        case 'pattern':
-                            rules.push(`
+                                break;
+                            case 'pattern':
+                                rules.push(`
     { pattern: /^[a-z]+$/, message: '相关错误提示', trigger: 'blur'}`);
-                            break;
-                        case 'range':
-                            rules.push(`
+                                break;
+                            case 'range':
+                                rules.push(`
     { min: 5, max: 50, message: this.$util.valid.message.range(5, 50), trigger: 'blur'}`);
-                            break;
-                        case 'length':
-                            rules.push(`
+                                break;
+                            case 'length':
+                                rules.push(`
     { len: 50, message: this.$util.valid.message.len(50), trigger: 'blur'}`);
-                            break;
-                        case 'whitespace':
-                            rules.push(`
+                                break;
+                            case 'whitespace':
+                                rules.push(`
     { whitespace: true, message: this.$util.valid.message.whitespace(), trigger: 'blur'}`);
-                            break;
-                        case 'defaultField':
-                            rules.push(`
+                                break;
+                            case 'defaultField':
+                                rules.push(`
     {
         type: "array",
         defaultField: {type: "string", message: "相关错误提示"}
     }`);
-                            break;
-                        case 'fields':
-                            rules.push(`
+                                break;
+                            case 'fields':
+                                rules.push(`
     {
         type: "object",
         fields: {
@@ -175,9 +176,14 @@
           2: {type: "string", required: true, message: "相关错误提示"}
         }
     }`);
-                            break;
+                                break;
+                        }
                     }
+                }else{
+                    rules.push(`
+    { type: '${this.paramForm.type}', message: this.$util.valid.message.type('${this.paramForm.type}'), trigger: 'blur' }`);
                 }
+
 
                 for( let i = 0; i < this.paramForm.selfValid.length; i++ ){
                     switch(this.paramForm.selfValid[i]){
