@@ -1,5 +1,5 @@
 /**
- * Created by tx on 2019/6/27.
+ * Created by zkx on 2019/6/27.
  */
 import Vue from 'vue';
 import Dialog from './components/Dialog';

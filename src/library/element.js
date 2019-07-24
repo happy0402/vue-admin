@@ -31,7 +31,7 @@ import {
     FormItem,
     Tabs,
     TabPane,
-    Icon,
+    // Icon,
     Row,
     Col,
     Container,
@@ -78,7 +78,7 @@ Vue.use(BreadcrumbItem);
 
 Vue.use(Scrollbar);
 
-Vue.use(Icon);
+// Vue.use(Icon);
 
 Vue.use(Tabs);
 Vue.use(TabPane);

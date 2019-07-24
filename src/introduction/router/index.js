@@ -246,10 +246,11 @@ export default [
                         }
                     },
                     {
-                        path: 'date-time',
-                        name: 'DateTime',
+                        path: 'moment',
+                        name: 'Moment',
+                        component: () => import('@/introduction/views/frame-introduce/util/moment.vue'),
                         meta: {
-                            title: 'dateTime',
+                            title: 'moment',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
                         }
                     },

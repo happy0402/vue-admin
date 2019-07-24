@@ -3,7 +3,9 @@
         <el-tab-pane lazy label="全局引入">
             <el-row>
                 <el-col>
-                    深度拷贝(array 也可使用此方法进行深度拷贝)
+                    <h4>
+                        深度拷贝(array 也可使用此方法进行深度拷贝)
+                    </h4>
                 </el-col>
             </el-row>
             <el-row>

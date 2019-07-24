@@ -29,7 +29,7 @@ export default {
         util: 'Util',
         valid: 'Valid',
         string: 'String',
-        dateTime: 'Date Time',
+        moment: 'Moment',
         array: 'Array',
         object: 'Object',
 

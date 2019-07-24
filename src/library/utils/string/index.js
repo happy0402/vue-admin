@@ -1,5 +1,5 @@
 /**
- * Created by tx on 2019/7/5.
+ * Created by zkx on 2019/7/5.
  */
 export default {
     format: (str, args) => {
@@ -16,5 +16,25 @@ export default {
             return arg;
         });
         return flag ? str : '';
+    },
+    fuzzyMatch: (source, target, type) => {
+        var reg;
+        switch(type){
+            case 'post':
+                reg = '^' + target + '.*$';
+                reg = new RegExp(reg, 'i');
+                break;
+            case 'all':
+                reg = target.split("").join('.*');
+                reg = '.*' + reg + '.*';
+                reg = new RegExp(reg, 'i');
+                break;
+            default:
+                reg = '^.*' + target + '.*$';
+                reg = new RegExp(reg, 'i');
+                break;
+        }
+
+        return reg.test(source);
     }
 }

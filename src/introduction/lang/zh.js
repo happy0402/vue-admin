@@ -29,7 +29,7 @@ export default {
         util: '工具类',
         valid: '校验',
         string: '字符串',
-        dateTime: '日期时间',
+        moment: '日期时间',
         array: '数组',
         object: '类',
 

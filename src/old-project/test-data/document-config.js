@@ -1,5 +1,5 @@
 /**
- * Created by tx on 2019/6/13.
+ * Created by zkx on 2019/6/13.
  */
 export default [{"type": "Row", "configs": "{\"gutter\":0,\"style\":\"\"}"}, {
     "type": "Col",

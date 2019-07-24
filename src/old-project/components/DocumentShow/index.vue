@@ -136,10 +136,10 @@
 
                     if(Col){
                         if(controller.type === 'Text'){
-                            controller.config.controllerStyle = controller.config.style + 'font-size:' + controller.config.fontSize + 'px;';
+                            controller.config.controllerStyle = controller.config.style + 'fonts-size:' + controller.config.fontSize + 'px;';
                             controller.config.controllerStyle += 'letter-spacing:' + controller.config.letterSpacing + 'px;';
                             controller.config.fontWeight ?
-                                controller.config.controllerStyle += 'font-weight: bold;' : '';
+                                controller.config.controllerStyle += 'fonts-weight: bold;' : '';
                         }else if(controller.type === 'Input' || controller.type === 'Select'){
                             if(isNaN(Number(controller.config.width))){
                                 controller.config.controllerStyle = controller.config.style + 'width:' + controller.config.width;

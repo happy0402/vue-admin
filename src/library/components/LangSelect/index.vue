@@ -1,7 +1,7 @@
 <template>
   <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
     <div style="cursor: pointer;">
-      <i class="el-icon-more-outline"></i>
+      <i class="sf-icon-language"></i>
     </div>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item v-for="(lang, index) in langOptions" :key="index" :disabled="language === lang" :command="lang">

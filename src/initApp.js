@@ -1,5 +1,5 @@
 /**
- * Created by tx on 2019/6/6.
+ * Created by zkx on 2019/6/6.
  */
 import Vue from 'vue';
 import i18n from '#/lang/index'
