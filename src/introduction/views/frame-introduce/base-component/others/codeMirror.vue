@@ -1,44 +1,27 @@
 <!-- 布局 -->
 <template>
     <el-container class="CodeMirrorContainer">
-        <el-aside width="50%" style="margin-right: 10px;">
-            <el-container style="height: 100%;">
-                <el-header height="auto">
-                    <p>此处为默认使用方法,具体文档请查看
-                        <el-link
-                                href="https://codemirror.net/"
-                                target="_blank"
-                                type="primary"
-                                :underline="false">
-                            Code Mirror官方网站<i class="el-icon-view el-icon--right"></i>
-                        </el-link>
-                        <el-link
-                                href="https://blog.csdn.net/jlu_lei/article/details/80259697"
-                                target="_blank"
-                                type="primary"
-                                :underline="false">
-                            Code Mirror使用博客<i class="el-icon-view el-icon--right"></i>
-                        </el-link>
-                    </p>
-                </el-header>
-                <el-main>
-                    <vue-code-mirror v-model="code"></vue-code-mirror>
-                </el-main>
-            </el-container>
-        </el-aside>
-        <el-container>
-            <el-header height="auto">
-                <el-tag type="danger">
-                    此处为基于codeMirror二次封装组件，组件位于introduction子应用中，不建议其他子应用使用。
-                </el-tag>
-                <el-tag type="danger">
-                    若其他系统中需要二次封装codeMirror插件，请通知相关人员移交代码到类库。
-                </el-tag>
-            </el-header>
-            <el-main>
-                <vue-code-mirror v-model="secondCode"></vue-code-mirror>
-            </el-main>
-        </el-container>
+        <el-header height="auto">
+            <p>此处为默认使用方法,具体文档请查看
+                <el-link
+                        href="https://codemirror.net/"
+                        target="_blank"
+                        type="primary"
+                        :underline="false">
+                    Code Mirror官方网站<i class="el-icon-view el-icon--right"></i>
+                </el-link>
+                <el-link
+                        href="https://blog.csdn.net/jlu_lei/article/details/80259697"
+                        target="_blank"
+                        type="primary"
+                        :underline="false">
+                    Code Mirror使用博客<i class="el-icon-view el-icon--right"></i>
+                </el-link>
+            </p>
+        </el-header>
+        <el-main>
+            <vue-code-mirror v-model="code"></vue-code-mirror>
+        </el-main>
     </el-container>
 </template>
 
@@ -66,16 +49,10 @@
     import 'codemirror/addon/scroll/simplescrollbars' //滚动条组件
 
     export default {
-        name: 'VueCodeMirror',
-        props: ['code'],
         data(){
             return {
+                code: '',
                 CodeMirrorEditor: undefined
-            }
-        },
-        watch:{
-            code(value){
-                this.CodeMirrorEditor.setValue(value); //设置编辑器内容
             }
         },
         methods:{

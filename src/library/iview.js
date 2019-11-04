@@ -23,7 +23,7 @@ Vue.component('i-dropdown', Dropdown);
 Vue.component('i-dropdown-menu', DropdownMenu);
 Vue.component('i-dropdown-item', DropdownItem);
 
-Vue.prototype.$loading = LoadingBar;
+Vue.prototype.$loadingBar = LoadingBar;
 
 Vue.prototype.$message = Message;
 Message.config({

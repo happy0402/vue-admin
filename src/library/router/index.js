@@ -6,8 +6,6 @@ import store from '#/store';
 
 import Cookies from 'js-cookie';
 
-import { LoadingBar } from 'iview';
-
 Vue.use(Router);
 
 const createRouter = (routes) => new Router({
@@ -68,7 +66,7 @@ const createRouter = (routes) => new Router({
 const router = createRouter(routes);
 
 router.beforeEach((to, from, next) => {
-    LoadingBar.start();
+    Vue.prototype.$loadingBar.start();
 
     var token = Cookies.get('token');
     if(!token && to.path !== '/login'){
@@ -84,7 +82,7 @@ router.beforeEach((to, from, next) => {
     store.dispatch('app/resetFixedPage') //页面高度初始化
     next();
 
-    LoadingBar.finish();
+    Vue.prototype.$loadingBar.finish();
 });
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465

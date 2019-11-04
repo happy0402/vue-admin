@@ -29,13 +29,6 @@
                 <vue-code-mirror v-model="international"></vue-code-mirror>
             </el-col>
         </el-row>
-
-        <el-divider>系统加载进度条</el-divider>
-        <el-row>
-            <el-col>
-                <vue-code-mirror v-model="systemProgress"></vue-code-mirror>
-            </el-col>
-        </el-row>
     </div>
 </template>
 
@@ -85,9 +78,7 @@
 
     // js
     import i18n from '#/lang' // Internationalization
-    i18n.t('menu.index')`,
-                systemProgress: ''
-
+    i18n.t('menu.index')`
             }
         },
         activated(){

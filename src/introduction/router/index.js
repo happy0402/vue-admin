@@ -58,15 +58,25 @@ export default [
                         name: 'Basic',
                         meta: {
                             title: 'basic',
-                            modules: ['container', 'splitPane', 'layout', 'divider', 'color', 'icon', 'button', 'link']
+                            modules: ['color', 'icon', 'button', 'link']
                         },
                         components: {
-                            container: () => import('@/introduction/views/frame-introduce/base-component/basic/container.vue'),
-                            splitPane: () => import('@/introduction/views/frame-introduce/base-component/basic/splitPane.vue'),
-                            layout: () => import('@/introduction/views/frame-introduce/base-component/basic/layout.vue'),
                             color: () => import('@/introduction/views/frame-introduce/base-component/basic/color.vue'),
                             icon: () => import('@/introduction/views/frame-introduce/base-component/basic/icon.vue'),
                             button: () => import('@/introduction/views/frame-introduce/base-component/basic/button.vue')
+                        }
+                    },
+                    {
+                        path: 'layout',
+                        name: 'Layout',
+                        meta: {
+                            title: 'layout',
+                            modules: ['container', 'splitPane', 'layout', 'card', 'divider']
+                        },
+                        components: {
+                            container: () => import('@/introduction/views/frame-introduce/base-component/layout/container.vue'),
+                            splitPane: () => import('@/introduction/views/frame-introduce/base-component/layout/splitPane.vue'),
+                            layout: () => import('@/introduction/views/frame-introduce/base-component/layout/layout.vue')
                         }
                     },
                     {
@@ -117,7 +127,7 @@ export default [
                         name: 'Navigation',
                         meta: {
                             title: 'navigation',
-                            modules: ['tabs', 'steps']
+                            modules: ['loadingBar', 'tabs', 'steps', 'timeline', 'dropdown']
                         }
                     },
                     {
@@ -252,7 +262,30 @@ export default [
         meta: {
             title: 'business',
             icon: 'el-icon-suitcase-1'
-        }
+        },
+        children: [
+            {
+                path: 'introduction',
+                component: () => import('@/introduction/views/frame-introduce'),
+                name: 'Introduction',
+                meta: {
+                    title: 'introduction', // 目录名称：在lang中配置不同语言环境下的目录名称
+                },
+                children: [
+                    {
+                        path: 'introduction-components',
+                        name: 'IntroductionComponents',
+                        meta: {
+                            title: 'introductionComponents', // 目录名称：在lang中配置不同语言环境下的目录名称
+                            modules: ['codeMirror', 'markdown']
+                        },
+                        components: {
+                            codeMirror: () => import('@/introduction/views/business/introduction/components/codeMirror.vue')
+                        }
+                    }
+                ]
+            }
+        ]
     },
     {
         path: '/code-create',
