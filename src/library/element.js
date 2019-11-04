@@ -6,9 +6,6 @@ import {
     Link,
     Scrollbar,
     Autocomplete,
-    Dropdown,
-    DropdownMenu,
-    DropdownItem,
     Menu,
     Submenu,
     MenuItem,
@@ -31,13 +28,18 @@ import {
     FormItem,
     Tabs,
     TabPane,
-    // Icon,
+    Tag,
     Row,
     Col,
     Container,
     Header,
     Aside,
     Main,
+    Footer,
+
+    Timeline,
+    TimelineItem,
+
     Divider,
 
     Table,
@@ -61,11 +63,15 @@ Vue.use(Container);
 Vue.use(Aside);
 Vue.use(Header);
 Vue.use(Main);
+Vue.use(Footer);
 
 Vue.use(Row);
 Vue.use(Col);
 
 Vue.use(Divider);
+
+Vue.use(Timeline);
+Vue.use(TimelineItem);
 
 Vue.use(Menu);
 Vue.use(Submenu);
@@ -78,14 +84,10 @@ Vue.use(BreadcrumbItem);
 
 Vue.use(Scrollbar);
 
-// Vue.use(Icon);
-
 Vue.use(Tabs);
 Vue.use(TabPane);
 
-Vue.use(Dropdown);
-Vue.use(DropdownMenu);
-Vue.use(DropdownItem);
+Vue.use(Tag);
 
 Vue.use(Form);
 Vue.use(FormItem);

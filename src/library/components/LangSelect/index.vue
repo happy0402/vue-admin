@@ -1,14 +1,12 @@
 <template>
-  <el-dropdown trigger="click" class="international" @command="handleSetLanguage">
-    <div style="cursor: pointer;">
-      <i class="sf-icon-language"></i>
-    </div>
-    <el-dropdown-menu slot="dropdown">
-      <el-dropdown-item v-for="(lang, index) in langOptions" :key="index" :disabled="language === lang" :command="lang">
+  <i-dropdown slot="extra" class="international" @on-click="handleSetLanguage" trigger="click" transfer>
+    <el-link type="primary" :underline="false"><i class="sf-icon-language"></i></el-link>
+    <i-dropdown-menu slot="list">
+      <i-dropdown-item v-for="(lang, index) in langOptions" :key="index" :disabled="language === lang" :name="lang">
         {{ languages[lang] || lang }}
-      </el-dropdown-item>
-    </el-dropdown-menu>
-  </el-dropdown>
+      </i-dropdown-item>
+    </i-dropdown-menu>
+  </i-dropdown>
 </template>
 
 <script>

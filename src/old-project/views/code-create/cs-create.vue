@@ -2,19 +2,39 @@
     <div class="csCreate-container">
         <el-row :gutter="10">
             <el-col :span="8">
+                <p>string[] paras = new string[1];</p>
+                <p>paras[0] = number;</p>
+                <p>webBrowser1.Document.InvokeScript("functionName", paras);</p>
                 <el-form label-position="left" :model="csForm" label-width="110px">
+                    <el-form-item label="namespace">
+                        <el-input v-model="csForm.namespace"></el-input>
+                    </el-form-item>
                     <el-form-item label="CsForm名称">
                         <el-input v-model="csForm.formName"></el-input>
                     </el-form-item>
                     <el-form-item label="HTML页面路径">
                         <el-input v-model="csForm.htmlPath"></el-input>
                     </el-form-item>
-                    <el-divider>事件相关</el-divider>
-                    <el-form-item label="事件名称">
-                        <el-input v-model="csForm.eventName"></el-input>
+                    <el-form-item class="alignRight">
+                        <el-button type="primary" @click="createCs">提交</el-button>
+                    </el-form-item>
+                </el-form>
+
+                <el-divider>事件相关</el-divider>
+                <el-form label-position="left" :model="eventForm" label-width="110px">
+                    <el-form-item label="请求方式">
+                        <el-select
+                                v-model="eventForm.urlMethod"
+                                placeholder="请选择接口请求方式">
+                            <el-option label="get" value="get"></el-option>
+                            <el-option label="post" value="post"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="接口名">
+                        <el-input v-model="eventForm.interfaceName"></el-input>
                     </el-form-item>
                     <el-form-item
-                            v-for="(param, index) in csForm.params"
+                            v-for="(param, index) in eventForm.params"
                             :key="index"
                             label="参数">
                         <el-col :span="10">
@@ -41,7 +61,7 @@
                             </el-select>
                         </el-col>
                         <el-col :span="10" prop="paramName">
-                            <el-input v-model="param.paramName"></el-input>
+                            <el-input v-model="param.paramName" @keyup.enter.native="addDomain"></el-input>
                         </el-col>
                         <el-col :span="4" class="alignRight">
                             <el-button @click.prevent="removeParam(param)" type="danger" icon="el-icon-minus" circle></el-button>
@@ -49,129 +69,81 @@
                     </el-form-item>
                     <el-form-item class="alignRight">
                         <el-col :span="24" class="alignRight">
-                            <el-button @click.prevent="addDomain()" type="primary" icon="el-icon-plus" circle></el-button>
+                            <el-button @click.prevent="addDomain" type="primary" icon="el-icon-plus" circle></el-button>
                         </el-col>
                     </el-form-item>
                     <el-form-item label="url名称">
-                        <el-input v-model="csForm.urlName"></el-input>
+                        <el-input v-model="eventForm.urlName"></el-input>
                     </el-form-item>
-                    <el-form-item label="请求方式">
-                        <el-select
-                                v-model="csForm.urlMethod"
-                                placeholder="请选择接口请求方式">
-                            <el-option label="get" value="get"></el-option>
-                            <el-option label="post" value="post"></el-option>
-                        </el-select>
-                    </el-form-item>
-                    <el-form-item label="接口名">
-                        <el-input v-model="csForm.interfaceName"></el-input>
-                    </el-form-item>
-                    <el-form-item label="实体类名">
-                        <el-input v-model="csForm.className"></el-input>
+                    <el-form-item label="事件名称">
+                        <el-input v-model="eventForm.eventName"></el-input>
                     </el-form-item>
                     <el-form-item class="alignRight">
-                        <el-button type="primary" @click="onSubmit">提交</el-button>
+                        <el-button type="primary" @click="createEvent">提交</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
             <el-col :span="16">
                 <el-row>
-                    <el-col :span="24">
-                        <el-input
-                                type="textarea"
-                                :autosize="{ minRows: 4, maxRows: 8}"
-                                placeholder="代码框"
-                                v-model="urlCode">
-                        </el-input>
-                    </el-col>
-                </el-row>
-                <el-row>
-                    <el-col :span="24">
-                        <el-input
-                                type="textarea"
-                                :autosize="{ minRows: 8, maxRows: 20}"
-                                placeholder="代码框"
-                                v-model="csCode">
-                        </el-input>
-                    </el-col>
-                </el-row>
+                    <el-divider>窗体代码</el-divider>
+                    <vue-code-mirror v-model="windowCode"></vue-code-mirror>
 
+                    <el-divider>方法代码</el-divider>
+                    <vue-code-mirror v-model="funCode"></vue-code-mirror>
+                </el-row>
             </el-col>
         </el-row>
     </div>
 </template>
 
 <script>
+    import VueCodeMirror from '@/introduction/components/VueCodeMirror'
+
     export default {
+        components:{
+            VueCodeMirror
+        },
         data() {
             return {
                 csForm: {
+                    namespace: '',
                     formName: 'Form',
-                    htmlPath: 'Web/loading',
-//                    event:[
-//                        {
-//
-//                        }
-//                    ]
+                    htmlPath: 'Web/DrugStoreSyster/InDrugStoreUI/Purchase/Purchase.html'
+                },
+                eventForm:{
                     eventName: 'ClickEvent',
                     params: [
                         {
                             paramType: 'string',
-                            paramName: 'param'
+                            paramName: ''
                         }
                     ],
                     urlName: '_____urlName',
                     urlMethod: 'get',
-                    interfaceName: '____interface',
-                    className: '_____className'
-
+                    interfaceName: '____interface'
                 },
-                csCode: '',
-                urlCode: ''
+                funCode: '',
+                windowCode: ''
             }
         },
         methods: {
             addDomain() {
-                this.csForm.params.push({
+                this.eventForm.params.push({
                     paramType: 'string',
-                    paramName: 'param'
+                    paramName: ''
                 });
             },
             removeParam(param) {
-                var index = this.csForm.params.indexOf(param)
+                var index = this.eventForm.params.indexOf(param)
                 if (index !== -1) {
-                    this.csForm.params.splice(index, 1)
+                    this.eventForm.params.splice(index, 1)
                 }
             },
-            onSubmit() {
-                var params = this.csForm.params
+            createCs(){
+                this.windowCode = '';
 
-                /****** url注册代码生成 ******/
-                this.urlCode = `//EMRClient.DAL.NSISApiURL.cs
-case HttpUrl.${this.csForm.urlName}:
-    {
-        urladdress = conneckurl + string.Format("api/${this.csForm.interfaceName}`
-
-                    if(params.length){
-                        this.urlCode += '?'
-                        for(let i = 0; i < params.length; i++){
-                            this.urlCode += params[i].paramName + '={' + i + '}&';
-                        }
-                        this.urlCode = this.urlCode.slice(0,-1)
-                        this.urlCode += '"'
-                        for(let i = 0; i < params.length; i++){
-                            this.urlCode += ', paras[' + i + ']';
-                        }
-                    }else{
-                        this.urlCode += '"'
-                    }
-
-                this.urlCode +=`);${this.csForm.urlMethod === 'get' ? '': '\n\tmethod = "post";'}
-        break;
-    }`
-
-                /****** cs代码生成 ******/
-                this.csCode = `//${this.csForm.formName}.cs
+                    /****** cs代码生成 ******/
+                this.funCode = `//${this.csForm.formName}.cs
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -184,9 +156,9 @@ using System.Runtime.InteropServices;
 using KNYY.HttpHelp;
 using EMRClient.DAL;
 using EMRViewModels.Public;//OutPutModel
-//using EMRViewModels;//实体类可能引用路径
+using EMRViewModels.Drug;//实体类可能引用路径
 
-namespace EMRClient
+namespace ${this.csForm.namespace}
 {
     [ComVisible(true)]
     public partial class ${this.csForm.formName} : DockContentEx
@@ -194,66 +166,132 @@ namespace EMRClient
         public ${this.csForm.formName}()
         {
             InitializeComponent();
-            this.webBrowser1.Navigate(new Uri(PublicClass.WebUrl + "${this.csForm.htmlPath}.html?t=" + DateTime.Now));
+            this.webBrowser1.Navigate(new Uri(PublicClass.WebUrl + "${this.csForm.htmlPath}?t=" + DateTime.Now + "&hospitalName=" + PublicClass.HospitalName));
             this.webBrowser1.ObjectForScripting = this;
-            PublicClass.MessageAlert = new MessageForm();
-            //PublicClass.MessageSureAlert = new MessageSureForm();
         }
-    }
 
-    //js调用 -> window.external.${this.csForm.eventName}(`
-
-            //页面调用注释
-            for(let i = 0; i < params.length; i++){
-                this.csCode += params[i].paramName + ',';
-            }
-            this.csCode = this.csCode.slice(0,-1)
-
-            this.csCode +=`);
-    public string ${this.csForm.eventName}(`
-
-                //方法传参声明
-                for(let i = 0; i < params.length; i++){
-                    this.csCode += params[i].paramType + ' ' + params[i].paramName + ',';
-                }
-                this.csCode = this.csCode.slice(0,-1)
-
-
-                this.csCode +=`)
-    {
-        List<string> paras = new List<string>();
-        `
-
-                //url传参组装
-                for(let i = 0; i < params.length; i++){
-                    this.csCode += 'paras.Add(' + params[i].paramName + ');\n\t';
-                }
-
-                this.csCode +=`Dictionary<string, string> httpurl = ApiURL.GetUrlAddress(EMRClient.DAL.ApiURL.HttpUrl.${this.csForm.urlName}, paras);
-        //获取Http  Api 数据 (url, method, param[POST], userId, hospitalId, departmentId)
-        string response = HttpHelp.HttpReq(httpurl["urladdress"], httpurl["method"]);
-
-        try
+        /// <summary>
+        /// 弹出提示框
+        /// </summary>
+        /// window.external.MessageShow(0, 'message');
+        /// <param name="type"></param> tip -> 0 | IsSuccess -> 1 | IsFail -> -1
+        /// <param name="msg"></param>
+        public void MessageShow(int type, string msg)
         {
-            OperateData<OutPutModel<${this.csForm.className}>> output = new OperateData<OutPutModel<${this.csForm.className}>>();
-            OutPutModel<${this.csForm.className}> result = output.GetAsync(response);
-            if (result.resultStatus == "200")
-            {
-                //result.resultData 返回的数据
-                return response;
-            }
-            else
-            {
-                PublicClass.MessageAlert.ShowMessageBox(MessageForm.messageType.tip, result.msg);
-            }
+            MessageForm.messageType messageType = (MessageForm.messageType)type;
+            PublicClass.MessageAlert.ShowMessageBox(messageType, msg);
         }
-        catch(Exception ex)
+
+        /// <summary>
+        /// 弹出选择提示框
+        /// </summary>
+        /// if(window.external.MessageSureShow('message')){};
+        /// <param name="msg"></param>
+        public bool MessageSureShow(string msg)
         {
-            PublicClass.MessageAlert.ShowMessageBox(MessageForm.messageType.IsFail, "服务端数据连接异常");
+            return PublicClass.MessageSureAlert.ShowMessageBox(msg) == DialogResult.Yes;
         }
-        return "{}";
+
+        //#region 加载等待框
+        //public void WaitingShow()
+        //{
+        //    if (PublicClass.MessageLoad == null)
+        //    {
+        //        PublicClass.MessageLoad = new EMRClient.BodyTemperUI.BodyTemperEntry.WaitDialogForm();
+        //        //使用线程池显示等待框
+        //        ThreadPool.QueueUserWorkItem(state =>
+        //        {
+        //            PublicClass.MessageLoad.ShowDialog();
+        //        });
+        //    }
+        //}
+
+        //public void CloseWaiting()
+        //{
+        //    if (PublicClass.MessageLoad != null)
+        //        PublicClass.MessageLoad.Close();
+        //    PublicClass.MessageLoad = null;
+        //}
+        //#endregion
     }
 }`
+            },
+            createEvent(){
+                var params = this.eventForm.params
+
+                /****** url注册代码生成 ******/
+                this.windowCode = `case HttpUrl.${this.eventForm.urlName}:
+    {
+        urladdress = conneckurl + string.Format("${this.eventForm.interfaceName}`
+
+                if(params.length){
+                    this.windowCode += '?'
+                    for(let i = 0; i < params.length; i++){
+                        this.windowCode += params[i].paramName + '={' + i + '}&';
+                    }
+                    this.windowCode = this.windowCode.slice(0,-1)
+                    this.windowCode += '"'
+                    for(let i = 0; i < params.length; i++){
+                        this.windowCode += ', paras[' + i + ']';
+                    }
+                }else{
+                    this.windowCode += '"'
+                }
+
+                this.windowCode +=`);${this.eventForm.urlMethod === 'get' ? '': '\n\tmethod = "post";'}
+        break;
+    }`
+
+                /****** cs代码生成 ******/
+                this.funCode = `/// <summary>
+/// ${this.eventForm.urlName}
+/// </summary>
+//js调用 ->
+//var result = JSON.parse(window.external.${this.eventForm.eventName}(${this.eventForm.urlMethod === 'post' ? 'JSON.stringify(tableData)' : ''}`
+
+                //页面调用注释
+                if(params.length) {
+                    this.funCode += (this.eventForm.urlMethod === 'post' ? ',' : '');
+                    for(let i = 0; i < params.length; i++){
+                        this.funCode += params[i].paramName + ',';
+                    }
+                    this.funCode = this.funCode.slice(0,-1)
+                }
+
+                this.funCode +=`));
+${this.eventForm.urlMethod === 'post' ? `// window.external.MessageShow((result.resultStatus == '200' ? 1 : -1), result.msg);` : `//if(result.resultStatus == '200'){
+//
+//}else{
+//      window.external.MessageShow(-1, result.msg);
+//}`}
+public string ${this.eventForm.eventName}(${this.eventForm.urlMethod === 'post' ? 'string postData': ''}`
+
+                //方法传参声明
+                if(params.length) {
+                    this.eventForm.urlMethod === 'post' ? (this.funCode += ', '): '';
+                    for(let i = 0; i < params.length; i++){
+                        this.funCode += params[i].paramType + ' ' + params[i].paramName + ',';
+                    }
+                    this.funCode = this.funCode.slice(0,-1)
+                }
+
+                this.funCode +=`){
+    `
+
+                if(params.length) {
+                    this.funCode += 'List<string> paras = new List<string>();\n\t    ';
+                }
+                //url传参组装
+                for(let i = 0; i < params.length; i++){
+                    this.funCode += 'paras.Add(' + params[i].paramName + ');\n\t    ';
+                }
+
+                this.funCode +=`Dictionary<string, string> httpurl = HisApiURL.GetUrlAddress(EMRClient.DAL.HisApiURL.HttpUrl.${this.eventForm.urlName}, ${ params.length ? 'paras': 'null'});
+    //获取Http  Api 数据 (url, method, param[POST], userId, hospitalId, departmentId)
+    string response = HttpHelp.HttpReq(httpurl["urladdress"], httpurl["method"], ${this.eventForm.urlMethod === 'get' ? '""': 'postData'}, PublicClass.CurUserId, PublicClass.HospitalId, PublicClass.CurDepartmentId);
+
+    return response;
+}`;
             }
         }
     }

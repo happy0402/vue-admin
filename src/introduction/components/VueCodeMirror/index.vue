@@ -13,14 +13,14 @@
 
     export default {
         name: 'VueCodeMirror',
-        props: ['code'],
+        props: ['value'],
         data(){
             return {
                 CodeMirrorEditor: undefined
             }
         },
         watch:{
-            code(value){
+            value(value){
                 !this.CodeMirrorEditor || this.CodeMirrorEditor.setValue(value); //设置编辑器内容
             }
         },
@@ -34,6 +34,7 @@
         },
         mounted(){
             this.$nextTick(function () {
+                var that = this;
                 this.CodeMirrorEditor = CodeMirror.fromTextArea(this.$refs.codePanel, {
                     mode:'vue',//编辑器语言
                     theme:'monokai', //编辑器主题
@@ -42,7 +43,12 @@
                     styleActiveLine: true //高光选中行
                 });
 
-                this.CodeMirrorEditor.setValue(this.code);
+                this.CodeMirrorEditor.setValue(this.value);
+
+                this.CodeMirrorEditor.on("blur",function(codeMirror){
+                    //事件触发后执行事件
+                    that.$emit('input', codeMirror.getValue());
+                });
             });
         }
     }

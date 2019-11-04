@@ -4,15 +4,26 @@
 import Vue from 'vue';
 import {
     locale,
-    // DatePicker,
-    Message
+    Card,
+
+    Dropdown,
+    DropdownMenu,
+    DropdownItem,
+
+    Message,
+    LoadingBar
 } from 'iview';
 
 import '#/styles/iview-variable.less';
 
 import i18n from '#/lang' // Internationalization
 
-// Vue.component('DatePicker', DatePicker);
+Vue.component('i-card', Card);
+Vue.component('i-dropdown', Dropdown);
+Vue.component('i-dropdown-menu', DropdownMenu);
+Vue.component('i-dropdown-item', DropdownItem);
+
+Vue.prototype.$loading = LoadingBar;
 
 Vue.prototype.$message = Message;
 Message.config({

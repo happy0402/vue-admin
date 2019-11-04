@@ -21,7 +21,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment()"></vue-code-mirror>
+                        <vue-code-mirror v-model="now"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -33,7 +33,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('1970-01-01 09:30:26.123')"></vue-code-mirror>
+                        <vue-code-mirror v-model="stringAnalyze"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -45,7 +45,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('01-01-1970 09:30:26', 'MM-DD-YYYY HH:mm:ss')"></vue-code-mirror>
+                        <vue-code-mirror v-model="stringFormatAnalyze"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -57,7 +57,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('01-01-1970 09:30:26', ['MM-DD-YYYY', 'DD-MM', 'DD-MM-YYYY'])"></vue-code-mirror>
+                        <vue-code-mirror v-model="stringFormatsAnalyze"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -69,7 +69,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('1970-01-01 09:30:26.123').isValid()"></vue-code-mirror>
+                        <vue-code-mirror v-model="isValidAnalyze"></vue-code-mirror>
                     </el-col>
                 </el-row>
             </el-tab-pane>
@@ -85,7 +85,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().add(7, 'days').add(1, 'h')"></vue-code-mirror>
+                                <vue-code-mirror v-model="addOperate"></vue-code-mirror>
                             </el-col>
                         </el-row>
                         <el-row>
@@ -97,7 +97,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().subtract(7, 'days').subtract(1, 'h')"></vue-code-mirror>
+                                <vue-code-mirror v-model="subtractOperate"></vue-code-mirror>
                             </el-col>
                         </el-row>
                     </el-col>
@@ -160,7 +160,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().startOf('year')"></vue-code-mirror>
+                                <vue-code-mirror v-model="startOfOperate"></vue-code-mirror>
                             </el-col>
                         </el-row>
                         <el-row>
@@ -172,7 +172,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().endOf('month')"></vue-code-mirror>
+                                <vue-code-mirror v-model="endOfOperate"></vue-code-mirror>
                             </el-col>
                         </el-row>
                     </el-col>
@@ -236,7 +236,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().format('YYYY/MM/DD HH:mm:ss')"></vue-code-mirror>
+                                <vue-code-mirror v-model="format"></vue-code-mirror>
                             </el-col>
                         </el-row>
                         <el-row>
@@ -248,7 +248,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().format('L LTS')"></vue-code-mirror>
+                                <vue-code-mirror v-model="formatByExpress"></vue-code-mirror>
                             </el-col>
                         </el-row>
                         <el-row>
@@ -260,7 +260,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().format('[today] dddd')"></vue-code-mirror>
+                                <vue-code-mirror v-model="formatBySpecial"></vue-code-mirror>
                             </el-col>
                         </el-row>
                     </el-col>
@@ -316,7 +316,6 @@
                     </el-col>
                 </el-row>
 
-
                 <el-row>
                     <el-col :span="12">
                         <el-row class="contentTitle">
@@ -341,7 +340,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().add(20, 'seconds').fromNow()"></vue-code-mirror>
+                                <vue-code-mirror v-model="fromNow"></vue-code-mirror>
                             </el-col>
                         </el-row>
                         <el-row>
@@ -353,7 +352,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().subtract(40, 'seconds').from(this.$util.moment().subtract(20, 'seconds')) "></vue-code-mirror>
+                                <vue-code-mirror v-model="from"></vue-code-mirror>
                             </el-col>
                         </el-row>
                         <el-row>
@@ -365,7 +364,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().add(20, 'seconds').toNow()"></vue-code-mirror>
+                                <vue-code-mirror v-model="toNow"></vue-code-mirror>
                             </el-col>
                         </el-row>
                         <el-row>
@@ -377,7 +376,7 @@
                         </el-row>
                         <el-row>
                             <el-col>
-                                <vue-code-mirror code="this.$util.moment().subtract(40, 'seconds').to(this.$util.moment().subtract(20, 'seconds')) "></vue-code-mirror>
+                                <vue-code-mirror v-model="to"></vue-code-mirror>
                             </el-col>
                         </el-row>
                     </el-col>
@@ -458,7 +457,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment().unix()"></vue-code-mirror>
+                        <vue-code-mirror v-model="getUnix"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -470,7 +469,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment().daysInMonth()"></vue-code-mirror>
+                        <vue-code-mirror v-model="daysInMonth"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -482,7 +481,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment().toDate()"></vue-code-mirror>
+                        <vue-code-mirror v-model="toDate"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -494,7 +493,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment().toArray()"></vue-code-mirror>
+                        <vue-code-mirror v-model="toArray"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -506,7 +505,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment().toJSON()"></vue-code-mirror>
+                        <vue-code-mirror v-model="toJSON"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -518,7 +517,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment().toISOString()"></vue-code-mirror>
+                        <vue-code-mirror v-model="toISOString"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -530,7 +529,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment().toObject()"></vue-code-mirror>
+                        <vue-code-mirror v-model="toObject"></vue-code-mirror>
                     </el-col>
                 </el-row>
             </el-tab-pane>
@@ -549,7 +548,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('2010-10-20').isBefore('2010-10-21')"></vue-code-mirror>
+                        <vue-code-mirror v-model="isBefore"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -561,7 +560,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('2010-10-21').isSameOrBefore('2010-10-21')"></vue-code-mirror>
+                        <vue-code-mirror v-model="isSameOrBefore"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -573,7 +572,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('2010-10-20').isSame('2010-10-20')"></vue-code-mirror>
+                        <vue-code-mirror v-model="isSame"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -585,7 +584,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('2010-10-20').isAfter('2010-10-19')"></vue-code-mirror>
+                        <vue-code-mirror v-model="isAfter"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -597,7 +596,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('2010-10-19').isSameOrAfter('2010-10-19')"></vue-code-mirror>
+                        <vue-code-mirror v-model="isSameOrAfter"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -609,7 +608,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment('2010-10-20').isBetween('2010-10-19', '2010-10-25')"></vue-code-mirror>
+                        <vue-code-mirror v-model="isBetween"></vue-code-mirror>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -621,7 +620,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                        <vue-code-mirror code="this.$util.moment([2000]).isLeapYear()"></vue-code-mirror>
+                        <vue-code-mirror v-model="isLeapYear"></vue-code-mirror>
                     </el-col>
                 </el-row>
             </el-tab-pane>
@@ -635,6 +634,45 @@
     export default{
         components: {
             VueCodeMirror
+        },
+        data(){
+            return {
+                now: `this.$util.moment()`,
+                stringAnalyze: `this.$util.moment('1970-01-01 09:30:26.123')`,
+                stringFormatAnalyze: `this.$util.moment('01-01-1970 09:30:26', 'MM-DD-YYYY HH:mm:ss')`,
+                stringFormatsAnalyze: `this.$util.moment('01-01-1970 09:30:26', ['MM-DD-YYYY', 'DD-MM', 'DD-MM-YYYY'])`,
+                isValidAnalyze: `this.$util.moment('1970-01-01 09:30:26.123').isValid()`,
+
+                addOperate: `this.$util.moment().add(7, 'days').add(1, 'h')`,
+                subtractOperate: `this.$util.moment().subtract(7, 'days').subtract(1, 'h')`,
+                startOfOperate: `this.$util.moment().startOf('year')`,
+                endOfOperate: `this.$util.moment().endOf('month')`,
+
+                format: `this.$util.moment().format('YYYY/MM/DD HH:mm:ss')`,
+                formatByExpress: `this.$util.moment().format('L LTS')`,
+                formatBySpecial: `this.$util.moment().format('[today] dddd')`,
+
+                fromNow: `this.$util.moment().add(20, 'seconds').fromNow()`,
+                from: `this.$util.moment().subtract(40, 'seconds').from(this.$util.moment().subtract(20, 'seconds'))`,
+                toNow: `this.$util.moment().add(20, 'seconds').toNow()`,
+                to: `this.$util.moment().subtract(40, 'seconds').to(this.$util.moment().subtract(20, 'seconds'))`,
+
+                getUnix: `this.$util.moment().unix()`,
+                daysInMonth: `this.$util.moment().daysInMonth()`,
+                toDate: `this.$util.moment().toDate()`,
+                toArray: `this.$util.moment().toArray()`,
+                toJSON: `this.$util.moment().toJSON()`,
+                toISOString: `this.$util.moment().toISOString()`,
+                toObject: `this.$util.moment().toObject()`,
+
+                isBefore: `this.$util.moment('2010-10-20').isBefore('2010-10-21')`,
+                isSameOrBefore: `this.$util.moment('2010-10-21').isSameOrBefore('2010-10-21')`,
+                isSame: `this.$util.moment('2010-10-20').isSame('2010-10-20')`,
+                isAfter: `this.$util.moment('2010-10-20').isAfter('2010-10-19')`,
+                isSameOrAfter: `this.$util.moment('2010-10-19').isSameOrAfter('2010-10-19')`,
+                isBetween: `this.$util.moment('2010-10-20').isBetween('2010-10-19', '2010-10-25')`,
+                isLeapYear: `this.$util.moment([2000]).isLeapYear()`
+            }
         }
     }
 </script>

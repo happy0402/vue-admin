@@ -1,10 +1,11 @@
 <template>
     <div>
-        <vue-code-mirror :code="directiveDrag"></vue-code-mirror>
+        <vue-code-mirror v-model="directiveDrag"></vue-code-mirror>
     </div>
 </template>
 
 <script>
+    /* eslint-disable */
     import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
     export default {

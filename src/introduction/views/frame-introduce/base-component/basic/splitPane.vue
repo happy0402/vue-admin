@@ -19,7 +19,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror :code="howToUse"></vue-code-mirror>
+                    <vue-code-mirror v-model="howToUse"></vue-code-mirror>
                 </el-col>
             </el-row>
 
@@ -61,7 +61,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror :code="example"></vue-code-mirror>
+                    <vue-code-mirror v-model="example"></vue-code-mirror>
                 </el-col>
             </el-row>
 

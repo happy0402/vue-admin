@@ -62,8 +62,8 @@
           }
         },
         mounted(){
-            let body = document.querySelector('body')
-            body.insertBefore(this.$refs.rightPanel, body.firstChild)
+            let app = document.querySelector('#app');
+            app.insertBefore(this.$refs.rightPanel, app.firstChild);
         }
     }
 </script>
@@ -94,13 +94,13 @@
             right: 0;
             top: 0;
             bottom: 0;
-            z-index: 2500;
+            z-index: 500;
             -webkit-transition: all .25s cubic-bezier(.7,.3,.1,1);
             transition: all .25s cubic-bezier(.7,.3,.1,1);
             -webkit-transform: translate(100%);
             transform: translate(100%);
             background-color: $white;
-            padding: 0 20px;
+            padding: 10px 20px;
 
             .toggle-button{
                 position: absolute;
@@ -131,7 +131,7 @@
             width: 100%;
             height: 100%;
             opacity: 1;
-            z-index: 2000;
+            z-index: 400;
         }
 
         .rightPanel{

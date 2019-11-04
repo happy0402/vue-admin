@@ -10,7 +10,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.string.format('replace %s to A, replace %s to B.', ['A', 'B'])"></vue-code-mirror>
+                    <vue-code-mirror v-model="stringConnect"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -22,7 +22,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror :code="fuzzyMatch"></vue-code-mirror>
+                    <vue-code-mirror v-model="fuzzyMatch"></vue-code-mirror>
                 </el-col>
             </el-row>
         </el-tab-pane>
@@ -38,6 +38,7 @@
         },
         data(){
             return {
+                stringConnect: `this.$util.string.format('replace %s to A, replace %s to B.', ['A', 'B'])`,
                 fuzzyMatch: `/*
 * 字符串模糊匹配
 * @param    source  String  匹配源

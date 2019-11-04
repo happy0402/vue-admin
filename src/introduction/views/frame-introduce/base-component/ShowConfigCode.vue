@@ -25,7 +25,7 @@
                 </template>
                 <template slot="paneR">
                     <!-- 代码区 -->
-                    <vue-code-mirror :code="code"></vue-code-mirror>
+                    <vue-code-mirror v-model="code"></vue-code-mirror>
                 </template>
             </split-pane>
         </el-main>

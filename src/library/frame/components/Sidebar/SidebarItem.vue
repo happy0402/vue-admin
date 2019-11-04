@@ -65,7 +65,7 @@
         methods: {
             validMenu(routes){
                 return routes.filter((item) =>{
-                    return item.meta.title
+                    return item.meta && item.meta.title
                 })
             }
         }

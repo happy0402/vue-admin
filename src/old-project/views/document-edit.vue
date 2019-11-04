@@ -184,14 +184,12 @@
     import DocumentShow from '@/old-project/components/DocumentShow'
     import { shortcutJS } from 'shortcutjs'
 
-    //test-data
-    import ConfigData from '@/old-project/test-data/document-config'
-    import ElFormItem from "../../../node_modules/element-ui/packages/form/src/form-item";
+    //mock
+    import ConfigData from '@/old-project/mock/document-config'
 
     var idGlobal = 1;
     export default {
         components: {
-            ElFormItem,
             Draggable,
             DocumentShow
         },
@@ -428,6 +426,7 @@
             },
             onSubmit(){
                 let answer = this.$refs.documentShow.getAnwser();
+                // eslint-disable-next-line
                 console.log(JSON.stringify(this.getDataList(answer)));
             }
         },

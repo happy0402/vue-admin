@@ -10,12 +10,13 @@
             </el-link>
         </p>
         <div>
-            <vue-code-mirror :code="code"></vue-code-mirror>
+            <vue-code-mirror v-model="code"></vue-code-mirror>
         </div>
     </div>
 </template>
 
 <script>
+    /* eslint-disable */
     import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
     export default {
@@ -35,7 +36,7 @@
     export default{
         data(){
             return {
-                AsyncComponent: () => ({
+                asyncComponent: () => ({
                   // 需要加载的组件 (应该是一个 'Promise' 对象)
                   component: import('./MyComponent.vue'), //需加载组件所在位置的路径
                   // 异步组件加载时使用的组件

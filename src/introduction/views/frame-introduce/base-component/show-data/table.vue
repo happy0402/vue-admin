@@ -11,7 +11,7 @@
                     :underline="false">
                 element-ui官方网站<i class="el-icon-view el-icon--right"></i>
             </el-link>
-            <span style="font-size: 12px; padding-left: 10px;color: #E65D6E;">( 注：官方还提供 展开行 | 表尾合计行 | 树形表 等功能,此页面暂时无法配置 )</span>
+            <el-tag type="danger">注：官方还提供 展开行 | 表尾合计行 | 树形表 等功能,此页面暂时无法配置</el-tag>
         </p>
 
         <template v-slot:show>

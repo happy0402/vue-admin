@@ -8,7 +8,7 @@
                     :underline="false">
                 element-ui官方网站<i class="el-icon-view el-icon--right"></i>
             </el-link>
-            <span style="font-size: 12px; padding-left: 10px;color: #E65D6E;">( 注：官方还提供 节点操作 等功能,此页面暂时无法配置 )</span>
+            <el-tag type="danger">注：官方还提供 节点操作 等功能,此页面暂时无法配置</el-tag>
         </p>
 
         <template v-slot:show>
@@ -68,7 +68,7 @@
                 draggable
                 footer-hide
                 @on-visible-change="dialogVisible">
-            <vue-code-mirror ref="codeMirror" :code="JSON.stringify(dataSource, null, 2)"></vue-code-mirror>
+            <vue-code-mirror ref="codeMirror" v-model="dataSource"></vue-code-mirror>
         </sf-dialog>
     </show-config-code>
 </template>
@@ -83,9 +83,9 @@
     import DealRecursionData from '#/utils/tree/deal-recursion-data'
 
     /* 测试数据 */
-    import MultData from '@/introduction/test-data/tree/mult-data';//多级表
-    import NestData from '@/introduction/test-data/tree/nest-data';//主键嵌套
-    import RecursionData from '@/introduction/test-data/tree/recursion-data';//单表递归
+    import MultData from '@/introduction/mock/tree/mult-data';//多级表
+    import NestData from '@/introduction/mock/tree/nest-data';//主键嵌套
+    import RecursionData from '@/introduction/mock/tree/recursion-data';//单表递归
 
     export default{
         components:{
@@ -163,26 +163,29 @@
         },
         computed:{
             treeData(){
-                if(this.paramForm.dataType === 'original'){
-                    return this.data;
-                }else if(this.paramForm.dataType === 'mult'){
+                if(this.paramForm.dataType === 'mult'){
                     return this.multData;
                 }else if(this.paramForm.dataType === 'nest'){
                     return this.nestData;
-                }else{
+                }else if(this.paramForm.dataType === 'recursion'){
                     return this.recursionData;
+                }else{
+                    return this.data;
                 }
             },
             dataSource(){
-                if(this.paramForm.dataType === 'original'){
-                    return this.data;
+                var data = undefined;
+                if(this.paramForm.dataType === 'recursion'){
+                    data = RecursionData;
                 }else if(this.paramForm.dataType === 'mult'){
-                    return MultData;
+                    data = MultData;
                 }else if(this.paramForm.dataType === 'nest'){
-                    return NestData;
+                    data = NestData;
                 }else{
-                    return RecursionData;
+                    data = this.data;
                 }
+
+                return JSON.stringify(data, null, 2);
             },
             codeCreate(){
                 return `<template>${

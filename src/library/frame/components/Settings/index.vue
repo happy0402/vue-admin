@@ -1,6 +1,6 @@
 <template>
     <right-panel>
-        <h3>系统设置</h3>
+        <h3 style="margin-bottom: 10px;">系统设置</h3>
         <el-form v-model="systemSettings" label-width="80px" label-position="left">
             <el-form-item label="系统头部">
                 <el-radio-group v-model="systemSettings.headerView" size="mini" @change="headerViewChanged">

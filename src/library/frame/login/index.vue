@@ -35,22 +35,24 @@
             </el-form-item>
 
             <div style="color: #fff;">
-                <p v-for="user in users" :key="user.userName">{{ $t('login.userName') }} : {{ user.userName }}  {{ $t('login.password') }} : {{ $t('login.any') }}</p>
+                <p>{{ $t('login.userName') }} : frame  {{ $t('login.password') }}:任意</p>
+                <p>{{ $t('login.userName') }} : business  {{ $t('login.password') }}:任意</p>
             </div>
         </el-form>
     </div>
 </template>
 
 <script>
-    /*正式系统代修改部分*/
-    import apps from '#/test-data/apps.js' //获取系统所有可选应用
-    import users from '#/test-data/user.js' //测试系统用户名提示
-    import { userLogin } from '#/test-data/databaseServer.js' //虚拟登录接口
+    import { userLogin, getInfo } from '#/api/user.js'
+    import { fetchList as fetchAppsList } from '#/api/app.js'
 
     import LangSelect from '#/components/LangSelect'
+    import { getRouters } from '#/router/routes.js'
     import { resetRouter } from '#/router'
     import { resetLang } from '#/lang'
     import { resetStore } from '#/store'
+
+    import { createMocks } from '#/mock';
 
     export default {
         name: 'Login',
@@ -62,8 +64,7 @@
                     password: '123456',
                     appCode: 'introduction'
                 },
-                apps: apps, /*正式系统代修改部分*/
-                users: users /*正式系统代修改部分*/
+                apps: []
             }
         },
         computed: {
@@ -94,30 +95,42 @@
             onSubmit() {
                 this.$refs.loginForm.validate((valid) => {
                     if (valid) {
-                        //登录 /*正式系统代修改部分*/
+                        //登录
                         userLogin(this.loginForm).then((result) => {
-                            if(!result.code){
+                            this.$store.dispatch('user/setToken', result.token);
+
+                            //获取用户信息
+                            getInfo(result.token).then((result) => {
                                 //设置全局变量
-                                this.$store.dispatch('user/setUserInfo', result.data.user);
-                                this.$store.dispatch('app/setAppMsg', result.data.app);
-                                this.$store.dispatch('app/setRoutes', result.data.routes);
+                                this.$store.dispatch('user/setUserInfo', result.user);
+                                this.$store.dispatch('app/setAppMsg', result.app);
+
+                                const routes = getRouters(result.app.appCode, result.user.roles);
+                                this.$store.dispatch('app/setRoutes', routes);
 
                                 //重新初始化系统
-                                resetRouter(result.data.routes);
-                                resetStore(result.data.app.appCode);
-                                resetLang(result.data.app.appCode);
+                                resetRouter(routes);
+                                resetStore(result.app.appCode);
+                                resetLang(result.app.appCode);
+
+                                //创建虚拟数据
+                                if(process.env.NODE_ENV === 'development'){
+                                    var { default: mocks } = require('@/' + result.app.appCode + '/mock');
+                                    createMocks(mocks);
+                                }
 
                                 //页面切换，进入系统
                                 this.$router.push({ path: this.redirect || '/' });
-                            }else{
-                                this.$message.warning(result.msg);
-                            }
-                        }).catch((error) => {
-                            this.$message.error(error);
-                        })
+                            });
+                        });
                     }
                 });
             }
+        },
+        created(){
+            fetchAppsList().then((result) => {
+                this.apps = result;
+            })
         }
     }
 </script>

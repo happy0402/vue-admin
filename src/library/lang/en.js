@@ -14,7 +14,9 @@ export default {
         password: 'Password',
         apps: 'Apps',
         login: 'Login',
-        any: 'Any'
+        any: 'Any',
+        confirmLogout: 'Confirm logout',
+        logoutContent: 'You have been logged out, you can cancel to stay on this page, or log in again'
     },
     valid:{
         string: 'String',

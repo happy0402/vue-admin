@@ -26,8 +26,7 @@ export default [
         name: 'FrameIntroduction',
         meta: {
             title: 'frameIntroduce',
-            icon: 'el-icon-tickets',
-            roles: ['frame', 'business'] // you can set roles in root nav
+            icon: 'el-icon-tickets'
         },
         children: [
             {
@@ -35,8 +34,7 @@ export default [
                 name: 'FileIntroduce',
                 component: () => import('@/introduction/views/frame-introduce/fileIntroduce.vue'),
                 meta: {
-                    title: 'fileIntroduce',
-                    roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                    title: 'fileIntroduce'
                 }
             },
             {
@@ -44,8 +42,7 @@ export default [
                 name: 'PageDevelop',
                 component: () => import('@/introduction/views/frame-introduce/pageDevelop.vue'),
                 meta: {
-                    title: 'pageDevelop',
-                    roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                    title: 'pageDevelop'
                 }
             },
             {
@@ -53,8 +50,7 @@ export default [
                 name: 'BaseComponent',
                 component: () => import('@/introduction/views/frame-introduce'),
                 meta: {
-                    title: 'baseComponent',
-                    roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                    title: 'baseComponent'
                 },
                 children: [
                     {
@@ -62,7 +58,6 @@ export default [
                         name: 'Basic',
                         meta: {
                             title: 'basic',
-                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
                             modules: ['container', 'splitPane', 'layout', 'divider', 'color', 'icon', 'button', 'link']
                         },
                         components: {
@@ -79,7 +74,6 @@ export default [
                         name: 'Form',
                         meta: {
                             title: 'form',
-                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
                             modules: ['switch', 'radio', 'checkbox', 'select', 'inputNumber', 'input', 'datePicker', 'transfer', 'form', 'formValid', 'validRules']
                         },
                         components: {
@@ -95,7 +89,6 @@ export default [
                         name: 'ShowData',
                         meta: {
                             title: 'showData',
-                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
                             modules: ['table', 'tableColumn', 'tree', 'badge']
                         },
                         components: {
@@ -109,7 +102,6 @@ export default [
                         name: 'Notice',
                         meta: {
                             title: 'notice',
-                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
                             modules: ['tooltip', 'popover', 'loading', 'message', 'messageBox', 'dialog', 'notification']
                         },
                         components: {
@@ -125,7 +117,6 @@ export default [
                         name: 'Navigation',
                         meta: {
                             title: 'navigation',
-                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
                             modules: ['tabs', 'steps']
                         }
                     },
@@ -134,12 +125,12 @@ export default [
                         name: 'Others',
                         meta: {
                             title: 'others',
-                            roles: ['frame', 'developer'], // or you can only set roles in sub nav
-                            modules: ['shortCut', 'asyncComponent', 'menu', 'codeMirror']
+                            modules: ['shortCut', 'clipboard', 'asyncComponent', 'print', 'codeMirror']
                         },
                         components: {
                             shortCut: () => import('@/introduction/views/frame-introduce/base-component/others/shortCut.vue'),
                             asyncComponent: () => import('@/introduction/views/frame-introduce/base-component/others/asyncComponent.vue'),
+                            print: () => import('@/introduction/views/frame-introduce/base-component/others/print.vue'),
                             codeMirror: () => import('@/introduction/views/frame-introduce/base-component/others/codeMirror.vue')
                         }
                     }
@@ -150,8 +141,7 @@ export default [
                 name: 'ComplexComponent',
                 component: () => import('#/components/Menu/EmptyMenu.vue'),
                 meta: {
-                    title: 'complexComponent',
-                    roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                    title: 'complexComponent'
                 },
                 children: [
                     {
@@ -159,32 +149,21 @@ export default [
                         name: 'DataTable',
                         component: () => import('@/introduction/views/frame-introduce/complex-component/dataTable.vue'),
                         meta: {
-                            title: 'dataTable',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'dataTable'
                         }
                     },
                     {
                         path: 'animate',
                         name: 'Animate',
                         meta: {
-                            title: 'animate',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'animate'
                         }
                     },
                     {
                         path: 'tinymce',
                         name: 'Tinymce',
                         meta: {
-                            title: 'tinymce',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
-                        }
-                    },
-                    {
-                        path: 'print',
-                        name: 'Print',
-                        meta: {
-                            title: 'print',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'tinymce'
                         }
                     }
                 ]
@@ -194,8 +173,7 @@ export default [
                 name: 'Directive',
                 component: () => import('#/components/Menu/EmptyMenu.vue'),
                 meta: {
-                    title: 'directive',
-                    roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                    title: 'directive'
                 },
                 children: [
                     {
@@ -203,8 +181,7 @@ export default [
                         name: 'Drag',
                         component: () => import('@/introduction/views/frame-introduce/directive/drag.vue'),
                         meta: {
-                            title: 'drag',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'drag'
                         }
                     },
                     {
@@ -212,8 +189,7 @@ export default [
                         name: 'InfiniteScroll',
                         component: () => import('@/introduction/views/frame-introduce/directive/infiniteScroll.vue'),
                         meta: {
-                            title: 'infiniteScroll',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'infiniteScroll'
                         }
                     }
                 ]
@@ -223,8 +199,7 @@ export default [
                 name: 'Util',
                 component: () => import('#/components/Menu/EmptyMenu.vue'),
                 meta: {
-                    title: 'util',
-                    roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                    title: 'util'
                 },
                 children: [
                     {
@@ -232,8 +207,7 @@ export default [
                         name: 'Valid',
                         component: () => import('@/introduction/views/frame-introduce/util/valid.vue'),
                         meta: {
-                            title: 'valid',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'valid'
                         }
                     },
                     {
@@ -241,8 +215,7 @@ export default [
                         name: 'String',
                         component: () => import('@/introduction/views/frame-introduce/util/string.vue'),
                         meta: {
-                            title: 'string',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'string'
                         }
                     },
                     {
@@ -250,16 +223,14 @@ export default [
                         name: 'Moment',
                         component: () => import('@/introduction/views/frame-introduce/util/moment.vue'),
                         meta: {
-                            title: 'moment',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'moment'
                         }
                     },
                     {
                         path: 'array',
                         name: 'Array',
                         meta: {
-                            title: 'array',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'array'
                         }
                     },
                     {
@@ -267,8 +238,7 @@ export default [
                         name: 'Object',
                         component: () => import('@/introduction/views/frame-introduce/util/object.vue'),
                         meta: {
-                            title: 'object',
-                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                            title: 'object'
                         }
                     }
                 ]
@@ -281,8 +251,7 @@ export default [
         name: 'Business',
         meta: {
             title: 'business',
-            icon: 'el-icon-suitcase-1',
-            roles: ['frame', 'business'] // you can set roles in root nav
+            icon: 'el-icon-suitcase-1'
         }
     },
     {
@@ -291,8 +260,7 @@ export default [
         name: 'CodeCreate',
         meta: {
             title: 'codeCreate',
-            icon: 'el-icon-document-copy',
-            roles: ['frame', 'business'] // you can set roles in root nav
+            icon: 'el-icon-document-copy'
         }
     },
     {
@@ -301,8 +269,22 @@ export default [
         name: 'PersonalCenter',
         meta: {
             title: 'personalCenter',
-            icon: 'el-icon-s-custom',
-            roles: ['frame', 'business'] // you can set roles in root nav
-        }
+            icon: 'el-icon-s-custom'
+        },
+        children:[
+            {
+                path: 'issues',
+                component: () => import('@/introduction/views/personal-center/issues.vue'),//具体目录组件所在位置，#/components/Menu/EmptyMenu.vue为空目录，无特殊父级组件时使用
+                name: 'Issues',
+                meta: {
+                    title: 'issues' // 目录名称：在lang中配置不同语言环境下的目录名称
+                }
+            },
+            {
+                path: 'issues-detail/:issueId',
+                component: () => import('@/introduction/views/personal-center/issuesDetail.vue'),//具体目录组件所在位置，#/components/Menu/EmptyMenu.vue为空目录，无特殊父级组件时使用
+                name: 'IssuesDetail'
+            }
+        ]
     }
 ]

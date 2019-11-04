@@ -14,7 +14,9 @@ export default {
         password: '密码',
         apps: '应用',
         login: '登录',
-        any: '任意'
+        any: '任意',
+        confirmLogout: '登录失效',
+        logoutContent: '您的登录失效了，您可以点击取消停留在本页面，或者重新登录'
     },
     valid:{
         string: '字符串',

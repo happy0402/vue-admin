@@ -10,7 +10,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.validator = this.$util.valid.createValidator(this.rules);//this.rules 参考校验规则"></vue-code-mirror>
+                    <vue-code-mirror v-model="createValidator"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -22,7 +22,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror :code="validatorSingle"></vue-code-mirror>
+                    <vue-code-mirror v-model="validatorSingle"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -34,7 +34,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror :code="validatorAll"></vue-code-mirror>
+                    <vue-code-mirror v-model="validatorAll"></vue-code-mirror>
                 </el-col>
             </el-row>
         </el-tab-pane>
@@ -56,7 +56,7 @@
                     <el-col>
                         使用方式及动态生成代码可使用：
                         <router-link to="/frame-introduction/base-component/form">基础组件 -> 表单 -> 校验规则</router-link>。
-                        注：trigger为form特殊属性，正常的校验不提供trigger功能
+                        <el-tag type="danger">注：trigger为form特殊属性，正常的校验不提供trigger功能</el-tag>
                     </el-col>
                 </el-row>
             </div>
@@ -70,7 +70,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.phone ： /^1[3|4|5|7|8][0-9]{9}$/"></vue-code-mirror>
+                    <vue-code-mirror v-model="phone"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -82,7 +82,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.tel ： /^(\(\d{3,4}\)|\d{3,4}-)?\d{7,8}$/"></vue-code-mirror>
+                    <vue-code-mirror v-model="tel"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -94,7 +94,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.postalCode ： /[1-9]\d{5}(?!\d)/"></vue-code-mirror>
+                    <vue-code-mirror v-model="postalCode"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -106,7 +106,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.checkIdCard(idCard)"></vue-code-mirror>
+                    <vue-code-mirror v-model="checkIdCard"></vue-code-mirror>
                 </el-col>
             </el-row>
         </el-tab-pane>
@@ -125,7 +125,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.message.type('string')"></vue-code-mirror>
+                    <vue-code-mirror v-model="typeMessage"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -137,7 +137,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.message.required('label')"></vue-code-mirror>
+                    <vue-code-mirror v-model="requiredMessage"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -149,7 +149,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.message.range(30, 50)"></vue-code-mirror>
+                    <vue-code-mirror v-model="rangeMessage"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -161,7 +161,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.message.len(50)"></vue-code-mirror>
+                    <vue-code-mirror v-model="lenMessage"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -173,7 +173,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.message.whitespace()"></vue-code-mirror>
+                    <vue-code-mirror v-model="whitespaceMessage"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -185,7 +185,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.message.phone()"></vue-code-mirror>
+                    <vue-code-mirror v-model="phoneMessage"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -197,7 +197,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.message.tel()"></vue-code-mirror>
+                    <vue-code-mirror v-model="telMessage"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -209,7 +209,7 @@
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.valid.message.postalCode()"></vue-code-mirror>
+                    <vue-code-mirror v-model="postalCodeMessage"></vue-code-mirror>
                 </el-col>
             </el-row>
             <el-row>
@@ -232,12 +232,28 @@
         },
         data(){
             return {
+                createValidator: 'this.validator = this.$util.valid.createValidator(this.rules);//this.rules 参考校验规则',
                 validatorSingle: `this.validator.validateSingleProp( { prop: 'test' } ).catch((errors) => {
     !errors || this.$message.warning(errors[0].message);
 });`,
                 validatorAll: `this.validator.validateAllRules( data, (errors) => {
     !errors || this.$message.warning(errors[0].message);
-} );`
+} );`,
+
+                phone: 'this.$util.valid.phone ： /^1[3|4|5|7|8][0-9]{9}$/',
+                tel: 'this.$util.valid.tel ： /^(\\(\\d{3,4}\\)|\\d{3,4}-)?\\d{7,8}$/',
+                postalCode: 'this.$util.valid.postalCode ： /[1-9]\\d{5}(?!\\d)/',
+                checkIdCard: 'this.$util.valid.checkIdCard(idCard)',
+
+                typeMessage: `this.$util.valid.message.type('string')`,
+                requiredMessage: `this.$util.valid.message.required('label')`,
+                rangeMessage: `this.$util.valid.message.range(30, 50)`,
+                lenMessage: `this.$util.valid.message.len(50)`,
+                whitespaceMessage: `this.$util.valid.message.whitespace()`,
+                phoneMessage: `this.$util.valid.message.phone()`,
+                telMessage: `this.$util.valid.message.tel()`,
+                postalCodeMessage: `this.$util.valid.message.postalCode()`,
+
             }
         }
     }

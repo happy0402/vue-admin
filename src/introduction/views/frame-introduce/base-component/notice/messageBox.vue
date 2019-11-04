@@ -20,7 +20,7 @@
             </p>
         </el-aside>
         <el-main>
-            <vue-code-mirror :code="code"></vue-code-mirror>
+            <vue-code-mirror v-model="code"></vue-code-mirror>
         </el-main>
     </el-container>
 </template>

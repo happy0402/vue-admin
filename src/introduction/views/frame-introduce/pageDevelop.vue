@@ -1,16 +1,39 @@
 <template>
     <div>
+        <el-divider>
+            目录配置
+            <el-link
+                    href="https://router.vuejs.org/zh/"
+                    target="_blank"
+                    type="primary"
+                    :underline="false">
+                Vue Router官方网址<i class="el-icon-view el-icon--right"></i>
+            </el-link>
+        </el-divider>
+        <el-row>
+            <el-col>
+                <vue-code-mirror v-model="menu"></vue-code-mirror>
+            </el-col>
+        </el-row>
+
         <el-divider>页面高度设置（页面是否不定高）</el-divider>
         <el-row>
             <el-col>
-                <vue-code-mirror :code="singlePageHeight"></vue-code-mirror>
+                <vue-code-mirror v-model="singlePageHeight"></vue-code-mirror>
             </el-col>
         </el-row>
 
         <el-divider>国际化</el-divider>
         <el-row>
             <el-col>
-                <vue-code-mirror :code="international"></vue-code-mirror>
+                <vue-code-mirror v-model="international"></vue-code-mirror>
+            </el-col>
+        </el-row>
+
+        <el-divider>系统加载进度条</el-divider>
+        <el-row>
+            <el-col>
+                <vue-code-mirror v-model="systemProgress"></vue-code-mirror>
             </el-col>
         </el-row>
     </div>
@@ -25,6 +48,24 @@
         },
         data(){
             return {
+                menu: `{
+        path: 'parent-menu-path', //目录路径
+        component: Frame, //一级目录设置系统框架做组件
+        name: 'ParentMenu', //目录名称：不可重复
+        children: [
+            {
+                path: 'child-menu-path',
+                component: () => import('#/components/Menu/EmptyMenu.vue'),//具体目录组件所在位置，#/components/Menu/EmptyMenu.vue为空目录，无特殊父级组件时使用
+                name: 'ChildMenu',
+                meta: {
+                    title: 'childMenu', // 目录名称：在lang中配置不同语言环境下的目录名称
+                    //icon: 'el-icon-s-home', //目录图标，一级目录必须配置
+                    //roles: ['frame', 'developer'], // 配置目录权限，若目录无限制则可省略，与用户的角色有关
+                    //affix: true //tagsView 默认设置
+                } //若无meta,则目录不显示
+            }
+        ] //子级目录
+    }`,
                 singlePageHeight: `//默认页面定高（窗口高度）
 
     //页面不固定高度
@@ -44,7 +85,8 @@
 
     // js
     import i18n from '#/lang' // Internationalization
-    i18n.t('menu.index')`
+    i18n.t('menu.index')`,
+                systemProgress: ''
 
             }
         },

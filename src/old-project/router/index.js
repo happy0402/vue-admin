@@ -9,16 +9,22 @@ export default [
         children: [
             {
                 path: 'index',
-                // component: () => import('@/empty/views'),
+                component: () => import('@/old-project/views'),
                 name: 'Index',
                 meta: {
                     title: 'index',
                     icon: 'el-icon-s-home',
                     affix: true //tagsView default set
                 }
-            },
+            }
+        ]
+    },
+    {
+        path: '/document-edit',
+        component: Frame,
+        children: [
             {
-                path: 'document-edit',
+                path: 'index',
                 component: () => import('@/old-project/views/document-edit'),
                 name: 'DocumentEdit',
                 meta: {
@@ -40,12 +46,59 @@ export default [
         },
         children: [
             {
-                path: 'csCreate',
+                path: 'page-create',
+                name: 'PageCreate',
+                component: () => import('@/old-project/views/code-create/page-create'),
+                meta: {
+                    title: 'pageCreate',
+                }
+            },
+            {
+                path: 'controller-create',
+                name: 'ControllerCreate',
+                component: () => import('@/old-project/views/code-create/form-controller'),
+                meta: {
+                    title: 'controllerCreate',
+                }
+            },
+            {
+                path: 'table-create',
+                name: 'TableCreate',
+                component: () => import('@/old-project/views/code-create/table-create'),
+                meta: {
+                    title: 'tableCreate',
+                }
+            },
+            {
+                path: 'dialog-create',
+                name: 'DialogCreate',
+                component: () => import('@/old-project/views/code-create/dialog-create'),
+                meta: {
+                    title: 'dialogCreate',
+                }
+            },
+            {
+                path: 'cs-create',
                 name: 'CsCreate',
                 component: () => import('@/old-project/views/code-create/cs-create'),
                 meta: {
                     title: 'csCreate',
-                    roles: ['frame', 'business'] // you can set roles in root nav
+                }
+            },
+            {
+                path: 'export-excel',
+                name: 'ExportExcel',
+                component: () => import('@/old-project/views/code-create/export-excel'),
+                meta: {
+                    title: 'exportExcel',
+                }
+            },
+            {
+                path: 'print',
+                name: 'Print',
+                component: () => import('@/old-project/views/code-create/print'),
+                meta: {
+                    title: 'print',
                 }
             }
         ]

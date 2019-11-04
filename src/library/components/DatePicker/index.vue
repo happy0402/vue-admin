@@ -145,7 +145,7 @@
         },
         data(){
             return {
-              dateTime: undefined
+              dateTime: this.value
             }
         },
         computed:{

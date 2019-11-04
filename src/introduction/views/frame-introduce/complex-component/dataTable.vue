@@ -12,7 +12,7 @@
                     ref="table"
                     :data="tableData"
                     height="100%"
-                    row-key="userId"
+                    row-key="id"
                     :current-row-key="20">
 
                 <el-table-column
@@ -64,10 +64,10 @@
             },
             createSource(){
                 var source = [];
-                for(let i = 0; i < 10000; i++){
+                for(let i = 0; i < 1000; i++){
                     source.push({
                         date: '2016-05-01',
-                        userId: i,
+                        id: i,
                         name: '王小虎' + i,
                         address: '上海市普陀区金沙江路 ' + i + ' 弄'
                     });
@@ -89,7 +89,6 @@
             },
             saveData(){
                 var modifiedData = this.$refs.table.getModifiedData();
-//                console.log(modifiedData);
 
                 var invalidateData = {
                     insert: [],
@@ -118,8 +117,6 @@
                         }
                     } );
                 }
-                console.log(invalidateData);
-
                 this.tableData = this.createSource();
                 this.$refs.table.refreshTable(this.tableData);
                 this.$refs.table.setErrorData(invalidateData);

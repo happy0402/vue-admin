@@ -119,7 +119,7 @@
         computed: {
             codeCreate(){
                 let buttonCode = `<el-button${
-                    this.paramForm.size === 'small' ? '' :
+                    this.paramForm.size === 'default' ? '' :
                         '\n\tsize="' + this.paramForm.size + '"'
                     }${this.paramForm.type === 'default' ? '' :
                     '\n\ttype="' + this.paramForm.type + '"'

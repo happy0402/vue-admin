@@ -4,13 +4,13 @@
             <el-row>
                 <el-col>
                     <h4>
-                        深度拷贝(array 也可使用此方法进行深度拷贝)
+                        深度拷贝<el-tag type="danger">array 也可使用此方法进行深度拷贝</el-tag>
                     </h4>
                 </el-col>
             </el-row>
             <el-row>
                 <el-col>
-                    <vue-code-mirror code="this.$util.object.copy(object)"></vue-code-mirror>
+                    <vue-code-mirror v-model="deepCopy"></vue-code-mirror>
                 </el-col>
             </el-row>
         </el-tab-pane>
@@ -23,6 +23,11 @@
     export default{
         components: {
             VueCodeMirror
+        },
+        data(){
+            return {
+                deepCopy: `this.$util.object.copy(object)`
+            }
         }
     }
 </script>

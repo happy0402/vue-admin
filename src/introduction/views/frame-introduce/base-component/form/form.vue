@@ -119,7 +119,7 @@
                         </template>
                         <template slot="paneR">
 
-                            <vue-code-mirror :code="code"></vue-code-mirror>
+                            <vue-code-mirror v-model="code"></vue-code-mirror>
 
                         </template>
                     </split-pane>
@@ -131,6 +131,7 @@
 </template>
 
 <script>
+    /* eslint-disable */
     import SplitPane from 'vue-splitpane'
     import VueCodeMirror from '@/introduction/components/VueCodeMirror'
 
@@ -180,16 +181,18 @@
             }
         },
         computed:{
-            code(){
-                return `<template>
+            code: {
+                // getter
+                get: function () {
+                    return `<template>
     <el-form
         ref="form"
         :model="form"
         label-width="60px"${
-        this.paramForm.labelPosition !== 'right' ? '\n\t\tlabel-position="' + this.paramForm.labelPosition + '"' : ''}${
-        this.paramForm.inline ? '\n\t\tinline' : ''}${
-        this.paramForm.size ? '\n\t\tsize="mini"' : ''}${
-        this.paramForm.disabled ? '\n\t\tdisabled' : ''}>
+                        this.paramForm.labelPosition !== 'right' ? '\n\t\tlabel-position="' + this.paramForm.labelPosition + '"' : ''}${
+                        this.paramForm.inline ? '\n\t\tinline' : ''}${
+                        this.paramForm.size ? '\n\t\tsize="mini"' : ''}${
+                        this.paramForm.disabled ? '\n\t\tdisabled' : ''}>
         ${this.paramForm.disabled ? '\n\t\t<!-- 表单禁用只针对element-ui控件有效，非element-ui控件（如：日期选择器）请使用额外方式禁用 -->' : ''}
         <el-form-item label="输入框" prop="input">
             <el-input v-model="form.input"></el-input>
@@ -223,9 +226,9 @@
                     v-model="form.dateRange"
                     type="daterange"
                     placeholder="选择日期范围"${
-                    this.paramForm.size ? `
+                        this.paramForm.size ? `
                     size="small"` : ''}${
-                    this.paramForm.disabled ? `
+                        this.paramForm.disabled ? `
                     disabled` : ''}></sf-datePicker>
         </el-form-item>
         <el-form-item label="开关" prop="switch">
@@ -294,7 +297,12 @@
             }`:''}
         }
     }
-<\/script>`
+<\/script>`;
+                },
+                // setter
+                set: function (newValue) {
+
+                }
             }
         },
         methods: {

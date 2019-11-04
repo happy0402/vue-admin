@@ -121,7 +121,7 @@
                         </template>
                         <template slot="paneR">
 
-                            <vue-code-mirror :code="code"></vue-code-mirror>
+                            <vue-code-mirror v-model="code"></vue-code-mirror>
 
                         </template>
                     </split-pane>
@@ -218,8 +218,10 @@
             }
         },
         computed:{
-            code(){
-                return `//此处代码仅展示表单校验时需配置的内容，请在 【表单】 代码的基础上进行配置
+            code: {
+                // getter
+                get: function () {
+                    return `//此处代码仅展示表单校验时需配置的内容，请在 【表单】 代码的基础上进行配置
 <template>
     <el-form
         :rules="rules"${
@@ -322,7 +324,11 @@
             }
         }
     }
-<\/script>`
+<\/script>`;
+                },
+                set: function(newValue){
+
+                }
             }
         },
         methods: {

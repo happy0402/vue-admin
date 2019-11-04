@@ -22,21 +22,23 @@ const mutations = {
     },
     SET_TOKEN: (state, token) => {
         state.token = token
-        Cookies.set('token', token)
+        Cookies.set('token', token);
     }
 }
 
 const actions = {
+    setToken({ commit }, token){
+        commit('SET_TOKEN', token);
+    },
     setUserInfo({ commit }, userInfo) {
-        const { userName, roles, power, token } = userInfo
-        commit('SET_NAME', userName)
-        commit('SET_ROLES', roles)
-        commit('SET_ROWER', power)
-        commit('SET_TOKEN', token)
+        const { userName, roles, power } = userInfo;
+        commit('SET_NAME', userName);
+        commit('SET_ROLES', roles);
+        commit('SET_ROWER', power);
     },
     resetUserInfo({commit}){
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
+        commit('SET_TOKEN', '');
+        commit('SET_ROLES', []);
     }
 }
 

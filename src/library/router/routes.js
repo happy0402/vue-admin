@@ -58,14 +58,12 @@ const behindRoutes = [
     }
 ]
 
-export function getRouters(loginInfo){
-    var allRoutes = frontRoutes.concat(behindRoutes);
+export function getRouters(appCode, power){
+    const { default: routes } = require('@/' + appCode + '/router');
+    const appRoute = filterAsyncRoutes(routes, power);
+    const allRoutes = frontRoutes.concat(appRoute, behindRoutes);
 
-    let { default: routes } = require('@/' + loginInfo.app.appCode + '/router')
-    let appRoute = filterAsyncRoutes(routes, loginInfo.user.roles);
-    allRoutes = frontRoutes.concat(appRoute, behindRoutes);
-
-    return allRoutes
+    return allRoutes;
 }
 
 export default frontRoutes.concat(behindRoutes)

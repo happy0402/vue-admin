@@ -20,7 +20,6 @@ export default {
         dataTable: '数据表格',
         animate: '动画',
         tinymce: '富文本编辑器',
-        print: '打印',
 
         directive: '自定义指令',
         drag:'拖拽',
@@ -37,7 +36,8 @@ export default {
 
         codeCreate: '代码生成',
 
-        personalCenter: '个人中心'
+        personalCenter: '个人中心',
+        issues: '问题反馈'
     },
     tabsTitle:{
         container: '布局容器',
@@ -78,8 +78,9 @@ export default {
         steps: '步骤条',
 
         shortCut: '快捷键',
+        clipboard: '粘贴板',
         asyncComponent: '异步组件',
-        menu: '目录配置',
+        print: '打印',
         codeMirror: '代码展示',
     }
 }

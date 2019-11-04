@@ -10,7 +10,7 @@
                         :underline="false">
                     iview官方网站<i class="el-icon-view el-icon--right"></i>
                 </el-link>
-                <span style="font-size: 12px; padding-left: 10px;color: #E65D6E;">( 注：由于二次分装，官方上某些Modal events效果更改,封装后events请参考本页面 )</span>
+                <el-tag type="danger">注：由于二次分装，官方上某些Modal events效果更改,封装后events效果请参考本页面</el-tag>
             </p>
         </el-header>
         <el-container>
@@ -119,7 +119,7 @@
 
             </el-aside>
             <el-main>
-                <vue-code-mirror :code="code"></vue-code-mirror>
+                <vue-code-mirror v-model="code"></vue-code-mirror>
             </el-main>
         </el-container>
     </el-container>

@@ -1,7 +1,7 @@
 <!-- 首页 -->
 <template>
     <div class="indexContainer">
-        <vue-code-mirror :code="code"></vue-code-mirror>
+        <vue-code-mirror v-model="code"></vue-code-mirror>
     </div>
 </template>
 

@@ -5,6 +5,12 @@ export default {
         documentEdit: 'Document Edit',
 
         codeCreate: 'Code Create',
-            csCreate: 'CS Create'
+            pageCreate: 'Page Create',
+            controllerCreate: 'Controller Create',
+            tableCreate: 'Table Create',
+            dialogCreate: 'Dialog Create',
+            csCreate: 'CS Create',
+            exportExcel: 'Export Excel',
+            print: 'Print'
     }
 }

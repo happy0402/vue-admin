@@ -22,21 +22,21 @@
                     </p>
                 </el-header>
                 <el-main>
-                    <vue-code-mirror :code="code"></vue-code-mirror>
+                    <vue-code-mirror v-model="code"></vue-code-mirror>
                 </el-main>
             </el-container>
         </el-aside>
         <el-container>
             <el-header height="auto">
-                <p>
+                <el-tag type="danger">
                     此处为基于codeMirror二次封装组件，组件位于introduction子应用中，不建议其他子应用使用。
-                </p>
-                <p>
+                </el-tag>
+                <el-tag type="danger">
                     若其他系统中需要二次封装codeMirror插件，请通知相关人员移交代码到类库。
-                </p>
+                </el-tag>
             </el-header>
             <el-main>
-                <vue-code-mirror :code="secondCode"></vue-code-mirror>
+                <vue-code-mirror v-model="secondCode"></vue-code-mirror>
             </el-main>
         </el-container>
     </el-container>
@@ -99,7 +99,7 @@
     }
 <\/script>`,
               secondCode: `<template>
-    <vue-code-mirror :code="code"></vue-code-mirror>
+    <vue-code-mirror v-model="code"></vue-code-mirror>
 </template>
 
 <script>

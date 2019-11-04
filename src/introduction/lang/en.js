@@ -20,7 +20,6 @@ export default {
         dataTable: 'Data Table',
         animate: 'Animate',
         tinymce: 'Tinymce',
-        print: 'Print',
 
         directive: 'Directive',
         drag:'Drag',
@@ -37,7 +36,8 @@ export default {
 
         codeCreate: 'Code Create',
 
-        personalCenter: 'Personal Center'
+        personalCenter: 'Personal Center',
+        issues: 'Issues'
     },
     tabsTitle:{
         container: 'Container',
@@ -78,8 +78,9 @@ export default {
         steps: 'Steps',
 
         shortCut: 'Short Cut',
+        clipboard: 'Clipboard',
         asyncComponent: 'Async Component',
-        menu: 'Menu Dispose',
+        print: 'Print',
         codeMirror: 'Code Mirror',
     }
 }

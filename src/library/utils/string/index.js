@@ -1,6 +1,24 @@
 /**
  * Created by zkx on 2019/7/5.
  */
+export const URLUtil = {
+    getUrlParam: (url) => {
+        const search = url.split('#')[0].split('?')[1]
+        if (!search) {
+            return {}
+        }
+        return JSON.parse(
+            '{"' +
+            decodeURIComponent(search)
+                .replace(/"/g, '\\"')
+                .replace(/&/g, '","')
+                .replace(/=/g, '":"')
+                .replace(/\+/g, ' ') +
+            '"}'
+        )
+    }
+}
+
 export default {
     format: (str, args) => {
         var flag = true,

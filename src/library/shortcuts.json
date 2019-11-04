@@ -1,22 +1,6 @@
 [
   {
-    "combo": "ctrl a",
-    "action": "selectAll"
-  },
-  {
-    "combo": "up",
-    "action": "up"
-  },
-  {
-    "combo": "down",
-    "action": "down"
-  },
-  {
-    "combo": "left",
-    "action": "left"
-  },
-  {
-    "combo": "right",
-    "action": "right"
+    "combo": "ctrl d",
+    "action": "deleteRow"
   }
 ]

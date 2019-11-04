@@ -465,9 +465,13 @@
                 this.paramForm.type === 'default' && this.paramForm.filters && this.paramForm.filteredValue ?
                     '\n\t\t\t:filtered-value="[\'value\']"' : ''
             }>${
-                this.paramForm.headerSlot ? `\n\t\t\t<template slot="header" slot-scope="scope"><!-- scope = { column, $index } --></template>` : ''
+                this.paramForm.headerSlot ? `\n\t\t\t<template slot="header" slot-scope="scope">
+                <!-- scope = { column, $index } -->
+            </template>` : ''
             }${
-                this.paramForm.defaultSort ? `\n\t\t\t<template slot-scope="scope"><!-- scope = { row, column, $index } --></template>` : ''
+                this.paramForm.defaultSort ? `\n\t\t\t<template slot-scope="scope">
+                <!-- scope = { row, column, $index } -->
+            </template>` : ''
             }
         </el-table-column>
 
