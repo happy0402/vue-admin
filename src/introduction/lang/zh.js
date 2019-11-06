@@ -77,6 +77,7 @@ export default {
         table: '表格',
         tableColumn: '表格列',
         tree: '树',
+        tag: '标签',
         badge: '标记',
         //frame-introduce/base-component/notice
         tooltip: '文字提示',

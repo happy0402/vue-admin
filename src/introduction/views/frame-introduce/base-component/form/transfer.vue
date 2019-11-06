@@ -18,12 +18,28 @@
             </el-link>
         </p>
         <div>
-
+            <vue-code-mirror v-model="code"></vue-code-mirror>
         </div>
     </div>
 </template>
 
 <script>
+    import VueCodeMirror from '@/introduction/components/VueCodeMirror'
     export default {
+        components:{
+            VueCodeMirror
+        },
+        data(){
+            return {
+                code: `//此组件未全局引用，使用前请先引用
+import Draggable from 'vuedraggable';
+
+export default {
+    components:{
+        Draggable
+    }
+}`
+            }
+        }
     }
 </script>

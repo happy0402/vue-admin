@@ -2,5 +2,13 @@
   {
     "combo": "ctrl d",
     "action": "deleteRow"
+  },
+  {
+    "combo": "up",
+    "action": "up"
+  },
+  {
+    "combo": "down",
+    "action": "down"
   }
 ]

@@ -227,8 +227,8 @@
             for(var j = 0; j < columns.length; j++){
                 var type = columns[j].type || 'text';
                 var cellClass = columns[j].class || '';
-                var originalData = data[i][columns[j].field] == null ? '' : data[i][columns[j].field];
-                var cellData = typeof columns[j].formatter == 'function' ? columns[j].formatter(originalData) : originalData;
+                var originalData = rowData[columns[j].field] == null ? '' : rowData[columns[j].field];
+                var cellData = typeof columns[j].formatter == 'function' ? columns[j].formatter(rowData, originalData) : originalData;
 
                 var $cell = $('<td class="' + cellClass + '"></td>');
                 var $control;
@@ -252,7 +252,7 @@
                 }else if(type == 'other'){
                     $control = (columns[j].init || function(){})(rowData);
                 }else{
-                    $control = $('<span>' + cellData + '</span>');
+                    $control = $('<div>' + cellData + '</div>');
                 }
 
                 if($control){
@@ -285,7 +285,7 @@
 
                 var row = '<tr>';
                 for(var i = 0; i < cols.length; i++){
-                    row += '<td colspan="' + (cols[i].colspan || 1) + '" style="' + cols[i].style + '">' + options.countData[cols[i].field] + '</td>';
+                    row += <td colspan="' + (cols[i].colspan || 1) + '" style="' + (cols[i].style || '') + '" class="' + (cols[i].class || '') + '">' + options.countData[cols[i].field] + '</td>';
                 }
                 row += '</tr>';
 
@@ -320,23 +320,20 @@
 
         //添加行
         function appendRow($table, rowData){
-        var options = $table.data('options');
+            var options = $table.data('options');
 
-        var $lastRow = $table.find('.contentTable tbody tr:last-child');
-        if(options && options.countData){
-            $lastRow = $table.find('.contentTable tbody tr:nth-last-child(2)');
+            var columns = $table.data('columns');
+            var $row = createRow(columns, rowData);
+
+            var $lastRow = $table.find('.contentTable tbody tr:last-child');
+            if(options && options.countData){
+                $row.insertBefore($lastRow);
+            }else{
+                $row.appendTo($table.find('.contentTable tbody'));
+            }
+
+            return $row;
         }
-
-        var columns = $table.data('columns');
-        var $row = createRow(columns, rowData);
-
-        if($lastRow.length){
-            $row.insertAfter($lastRow);
-        }else{
-            $row.appendTo($table.find('.contentTable tbody'));
-        }
-        return $row;
-    }
 
         //路由解析
         function getUrlParam(url){

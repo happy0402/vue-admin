@@ -180,12 +180,12 @@
 </template>
 
 <script>
-    import Draggable from 'vuedraggable'
-    import DocumentShow from '@/old-project/components/DocumentShow'
-    import { shortcutJS } from 'shortcutjs'
+    import Draggable from 'vuedraggable';
+    import DocumentShow from '@/old-project/components/DocumentShow';
+    import { shortcutJS } from 'shortcutjs';
 
     //mock
-    import ConfigData from '@/old-project/mock/document-config'
+    import ConfigData from '@/old-project/mock/document-config';
 
     var idGlobal = 1;
     export default {

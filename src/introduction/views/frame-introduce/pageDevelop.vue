@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <el-divider>
-            目录配置
+    <el-tabs v-model="activeName" type="card">
+        <el-tab-pane label="目录配置" name="menuConfig" lazy>
             <el-link
                     href="https://router.vuejs.org/zh/"
                     target="_blank"
@@ -9,27 +8,25 @@
                     :underline="false">
                 Vue Router官方网址<i class="el-icon-view el-icon--right"></i>
             </el-link>
-        </el-divider>
-        <el-row>
-            <el-col>
-                <vue-code-mirror v-model="menu"></vue-code-mirror>
-            </el-col>
-        </el-row>
 
-        <el-divider>页面高度设置（页面是否不定高）</el-divider>
-        <el-row>
-            <el-col>
-                <vue-code-mirror v-model="singlePageHeight"></vue-code-mirror>
-            </el-col>
-        </el-row>
+            <vue-code-mirror v-model="menu"></vue-code-mirror>
+        </el-tab-pane>
+        <el-tab-pane label="页面高度设置" name="SetPageHeight" lazy>
+            <vue-code-mirror v-model="singlePageHeight"></vue-code-mirror>
+        </el-tab-pane>
+        <el-tab-pane label="国际化" name="international" lazy>
+            <el-link
+                    href="https://kazupon.github.io/vue-i18n/zh/started.html#html"
+                    target="_blank"
+                    type="primary"
+                    :underline="false">
+                Vue I18n官方网址<i class="el-icon-view el-icon--right"></i>
+            </el-link>
+            <el-tag type="danger">注：需翻墙 -_-||</el-tag>
 
-        <el-divider>国际化</el-divider>
-        <el-row>
-            <el-col>
-                <vue-code-mirror v-model="international"></vue-code-mirror>
-            </el-col>
-        </el-row>
-    </div>
+            <vue-code-mirror v-model="international"></vue-code-mirror>
+        </el-tab-pane>
+    </el-tabs>
 </template>
 
 <script>
@@ -41,6 +38,7 @@
         },
         data(){
             return {
+                activeName: 'menuConfig',
                 menu: `{
         path: 'parent-menu-path', //目录路径
         component: Frame, //一级目录设置系统框架做组件
@@ -65,10 +63,8 @@
     activated(){
         this.$store.dispatch('app/setFixedPage', false);
     } `,
-                international: `// 基于vue I18n. 官方网址：https://kazupon.github.io/vue-i18n/zh/started.html#html (需翻墙 -_-||)
-
-    // 使用方式：先在 lang 文件夹中进行相应配置
-    // 配置时可使用 %s。在使用时，使用 this.$util.string.format(i18n.t('menu.index'), []) 解析即可,format函数具体请参考 工具类 -> 字符串
+                international: `// 使用方式：先在 lang 文件夹中进行相应配置
+    // 配置时可使用 %s  使用时,使用 this.$util.string.format(i18n.t('menu.index'), []) 解析即可,format函数具体请参考 工具类 -> 字符串
 
     // HTML
     {{ $t('menu.index') }}
@@ -76,7 +72,7 @@
     // VUE
     this.$t('menu.index')
 
-    // js
+    // JS
     import i18n from '#/lang' // Internationalization
     i18n.t('menu.index')`
             }

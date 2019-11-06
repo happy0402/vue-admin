@@ -50,6 +50,20 @@
                     </el-timeline-item>
                     <el-timeline-item hide-timestamp placement="top">
                         <markdown-editor ref="markdown" v-model="content">
+                            <template v-slot:options>
+                                <el-divider direction="vertical"></el-divider>
+                                <i-dropdown slot="extra" @on-click="callUser($event, content.id)" trigger="click" transfer>
+                                    <el-link :underline="false"><i class="sf-icon-user"></i></el-link>
+                                    <i-dropdown-menu slot="list">
+                                        <i-dropdown-item name="luguokong">luguokong</i-dropdown-item>
+                                        <i-dropdown-item name="element-bot">element-bot</i-dropdown-item>
+                                        <i-dropdown-item name="iamkun">iamkun</i-dropdown-item>
+                                        <i-dropdown-item name="matjaz">matjaz</i-dropdown-item>
+                                    </i-dropdown-menu>
+                                </i-dropdown>
+                                <el-link :underline="false"><i class="sf-icon-pushpin"></i></el-link>
+                            </template>
+
                             <template v-slot:footer>
                                 <el-button type="primary" @click="getContent" style="margin-top: 10px;float: right;">提交</el-button>
                             </template>
@@ -104,6 +118,9 @@
                     default:
                         break;
                 }
+            },
+            callUser(command){
+
             }
         },
         created(){

@@ -13,7 +13,7 @@
                     @click="clickTab('preview')">
                     预览
             </span>
-            <span class="headerItem" style="float: right">
+            <span v-show="activeModule === 'editor'" class="headerItem" style="float: right">
                 <el-link :underline="false" @click="insertContent('### ')"><i class="sf-icon-font-size"></i></el-link>
                 <el-link :underline="false" @click="insertContent('**', '**')"><i class="sf-icon-bold"></i></el-link>
                 <el-link :underline="false" @click="insertContent('_', '_')"><i class="sf-icon-italic"></i></el-link>
@@ -25,17 +25,8 @@
                 <el-link :underline="false" @click="insertContent('\n\n- ','\n\n')"><i class="sf-icon-list"></i></el-link>
                 <el-link :underline="false" @click="insertContent('\n\n1. ','\n\n')"><i class="sf-icon-list-number"></i></el-link>
                 <el-link :underline="false" @click="insertContent('\n\n- [ ] ','\n\n')"><i class="sf-icon-list-check"></i></el-link>
-                <el-divider direction="vertical"></el-divider>
-                <i-dropdown slot="extra" @on-click="handleCommand($event, content.id)" trigger="click" transfer>
-                    <el-link :underline="false"><i class="sf-icon-user"></i></el-link>
-                    <i-dropdown-menu slot="list">
-                        <i-dropdown-item>luguokong</i-dropdown-item>
-                        <i-dropdown-item>element-bot</i-dropdown-item>
-                        <i-dropdown-item>iamkun</i-dropdown-item>
-                        <i-dropdown-item>matjaz</i-dropdown-item>
-                    </i-dropdown-menu>
-                </i-dropdown>
-                <el-link :underline="false"><i class="sf-icon-pushpin"></i></el-link>
+
+                <slot name="options"></slot>
             </span>
         </div>
 

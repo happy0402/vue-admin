@@ -77,6 +77,7 @@ export default {
         table: 'Table',
         tableColumn: 'Table Column',
         tree: 'Tree',
+        tag: 'Tag',
         badge: 'Badge',
         //frame-introduce/base-component/notice
         tooltip: 'Tooltip',

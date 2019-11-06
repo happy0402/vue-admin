@@ -29,7 +29,9 @@ Vue.config.productionTip = false;
 //快捷键设置
 // optional debug param
 shortcutJS.loadFromJson(shortcuts, {
-    preventDefault: true,
+    debug: false, // Prints debug notes in the console
+    preventDefault: false, // Automatically calls ev.preventDefault() when an action is matched
+    onlyStateCombos: false, // Only process combos which includes any state key (cmd, ctrl, alt, shift)
 });
 
 Vue.prototype.$util = Util;

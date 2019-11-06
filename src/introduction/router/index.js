@@ -99,7 +99,7 @@ export default [
                         name: 'ShowData',
                         meta: {
                             title: 'showData',
-                            modules: ['table', 'tableColumn', 'tree', 'badge']
+                            modules: ['table', 'tableColumn', 'tree', 'tag', 'badge']
                         },
                         components: {
                             table: () => import('@/introduction/views/frame-introduce/base-component/show-data/table.vue'),
@@ -141,7 +141,8 @@ export default [
                             shortCut: () => import('@/introduction/views/frame-introduce/base-component/others/shortCut.vue'),
                             asyncComponent: () => import('@/introduction/views/frame-introduce/base-component/others/asyncComponent.vue'),
                             print: () => import('@/introduction/views/frame-introduce/base-component/others/print.vue'),
-                            codeMirror: () => import('@/introduction/views/frame-introduce/base-component/others/codeMirror.vue')
+                            codeMirror: () => import('@/introduction/views/frame-introduce/base-component/others/codeMirror.vue'),
+                            clipboard: () => import('@/introduction/views/frame-introduce/base-component/others/clipboard.vue')
                         }
                     }
                 ]
@@ -280,7 +281,8 @@ export default [
                             modules: ['codeMirror', 'markdown']
                         },
                         components: {
-                            codeMirror: () => import('@/introduction/views/business/introduction/components/codeMirror.vue')
+                            codeMirror: () => import('@/introduction/views/business/introduction/components/codeMirror.vue'),
+                            markdown: () => import('@/introduction/views/business/introduction/components/markdown.vue')
                         }
                     }
                 ]

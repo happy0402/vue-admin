@@ -130,7 +130,7 @@
         created(){
             fetchAppsList().then((result) => {
                 this.apps = result;
-            })
+            });
         }
     }
 </script>

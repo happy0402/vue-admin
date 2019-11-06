@@ -37,9 +37,9 @@
             VueCodeMirror
         },
         data(){
-          return {
+            return {
               code: ''
-          }
+            }
         }
     }
 <\/script>`
