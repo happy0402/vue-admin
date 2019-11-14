@@ -17,6 +17,11 @@
   border-color: $green;
 }
 
+//el-rate 在表单中部分样式有bug
+.el-form-item .el-rate{
+  line-height: 2;
+}
+
 //autocomplete 下拉框宽度自适应
 .el-autocomplete-suggestion{
   width: auto !important;

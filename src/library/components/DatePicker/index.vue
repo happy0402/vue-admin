@@ -31,9 +31,9 @@
 </template>
 
 <script>
-    import { DatePicker } from 'iview';
-    import Emitter from 'iview/src/mixins/emitter'
-    import { TYPE_VALUE_RESOLVER_MAP } from 'iview/src/components/date-picker/util';
+    import { DatePicker } from 'view-design';
+    import Emitter from 'view-design/src/mixins/emitter'
+    import { TYPE_VALUE_RESOLVER_MAP } from 'view-design/src/components/date-picker/util';
 
     export default {
         nane: 'DatePicker',

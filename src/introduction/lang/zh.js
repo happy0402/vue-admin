@@ -47,7 +47,7 @@ export default {
         /******************* 一级目录 *******************/
         personalCenter: '个人中心',
         /********* 二级目录 *********/
-        issues: '问题反馈'
+        feedback: '问题反馈'
     },
     tabsTitle:{
         //frame-introduce/base-component/basic
@@ -69,6 +69,7 @@ export default {
         inputNumber: '计数器',
         input: '输入框',
         datePicker: '日期选择器',
+        upload: '上传',
         transfer: '穿梭框',
         form: '表单',
         formValid: '表单校验',
@@ -102,5 +103,21 @@ export default {
 
         //bessiness/introduce/components
         markdown: 'Markdown编辑器'
+    },
+    feedback:{
+        new: '新建',
+        open: '打开的',
+        close: '关闭的',
+        created: '由我创建',
+        assigned: '分配给我',
+        mentioned: '提到我的',
+        total: '所有的',
+        sort: '排序',
+        newest: '最新的',
+        oldest: '最旧的',
+        recentlyUpdated: '最近更新的',
+        leastRecentlyUpdated: '最久不动的',
+        worst: '最严重的',
+        minimal: '最轻微的'
     }
 }

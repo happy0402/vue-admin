@@ -228,7 +228,7 @@
                 var type = columns[j].type || 'text';
                 var cellClass = columns[j].class || '';
                 var originalData = rowData[columns[j].field] == null ? '' : rowData[columns[j].field];
-                var cellData = typeof columns[j].formatter == 'function' ? columns[j].formatter(rowData, originalData) : originalData;
+                var cellData = typeof columns[j].formatter == 'function' ? columns[j].formatter(rowData, columns[j].field) : originalData;
 
                 var $cell = $('<td class="' + cellClass + '"></td>');
                 var $control;

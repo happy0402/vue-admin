@@ -12,6 +12,7 @@ import App from './App.vue'
 
 import store from '#/store'
 import router from '#/router'
+import { hasPermission } from '#/router/routes.js'
 
 //工具类导入
 import Util from '#/utils'
@@ -32,6 +33,26 @@ shortcutJS.loadFromJson(shortcuts, {
     debug: false, // Prints debug notes in the console
     preventDefault: false, // Automatically calls ev.preventDefault() when an action is matched
     onlyStateCombos: false, // Only process combos which includes any state key (cmd, ctrl, alt, shift)
+});
+
+Vue.mixin({
+    beforeRouteEnter (to, from, next) {
+        next(() => {
+            // 通过 `vm` 访问组件实例
+            //页面控件控制
+            if(to.meta.controllers){
+                let userRoles = store.getters.roles;
+                to.meta.controllers.forEach((controller) => {
+                    if(hasPermission(userRoles, controller)){
+                        let $target = document.querySelector(controller.target);
+                        if($target){
+                            $target.style.display = 'none';
+                        }
+                    }
+                });
+            }
+        });
+    }
 });
 
 Vue.prototype.$util = Util;

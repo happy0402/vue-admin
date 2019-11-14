@@ -8,11 +8,11 @@ const modulesFiles = require.context('./modules', false, /\.js$/)
 
 const mocks = modulesFiles.keys().reduce((mocks, modulePath) => {
     // ./app.js -> export (Object)
-    const value = modulesFiles(modulePath)
+    const value = modulesFiles(modulePath);
     // export default
-    mocks = mocks.concat(value.default)
+    mocks = mocks.concat(value.default);
     // { app: {(default)}}
-    return mocks
+    return mocks;
 }, []);
 
 // for front mock
@@ -36,20 +36,21 @@ Mock.XHR.prototype.send = function() {
 export function createMocks(mocks){
     function XHR2ExpressReqWrap(respond) {
         return function(options) {
-            let result = null
+            let result = null;
+
             if (respond instanceof Function) {
-                const { body, type, url } = options
+                const { body, type, url } = options;
                 // https://expressjs.com/en/4x/api.html#req
                 result = respond({
                     url: url,
                     type: type,
-                    body: JSON.parse(body),
+                    body: typeof body == 'string' ? JSON.parse(body) : body,
                     query: URLUtil.getUrlParam(url)
-                })
+                });
             } else {
-                result = respond
+                result = respond;
             }
-            return Mock.mock(result)
+            return Mock.mock(result);
         }
     }
 

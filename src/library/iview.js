@@ -6,22 +6,24 @@ import {
     locale,
     Card,
 
-    Dropdown,
-    DropdownMenu,
-    DropdownItem,
+    Badge,
+
+    BackTop,
 
     Message,
     LoadingBar
-} from 'iview';
+} from 'view-design';
 
+import 'view-design/dist/styles/iview.css';
 import '#/styles/iview-variable.less';
 
 import i18n from '#/lang' // Internationalization
 
 Vue.component('i-card', Card);
-Vue.component('i-dropdown', Dropdown);
-Vue.component('i-dropdown-menu', DropdownMenu);
-Vue.component('i-dropdown-item', DropdownItem);
+
+Vue.component('i-badge', Badge);
+
+Vue.component('i-back-top', BackTop);
 
 Vue.prototype.$loadingBar = LoadingBar;
 

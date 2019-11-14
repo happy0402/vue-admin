@@ -6,8 +6,8 @@ import VueI18n from 'vue-i18n'
 import Cookies from 'js-cookie'
 import elementEnLocale from 'element-ui/lib/locale/lang/en' // element-ui lang
 import elementZhLocale from 'element-ui/lib/locale/lang/zh-CN'// element-ui lang
-import iviewEnLocale from 'iview/dist/locale/en-US';
-import iviewZhLocale from 'iview/dist/locale/zh-CN';
+import iviewEnLocale from 'view-design/dist/locale/en-US';
+import iviewZhLocale from 'view-design/dist/locale/zh-CN';
 import enLocale from './en'
 import zhLocale from './zh'
 

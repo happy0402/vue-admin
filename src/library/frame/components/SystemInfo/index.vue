@@ -6,6 +6,8 @@
         <div class="right-title">
             <lang-select></lang-select>
             <user-controller></user-controller>
+
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -43,7 +45,7 @@
             float: right;
 
             .international{
-                margin-right: 15px;
+                margin-right: 10px;
 
                 &:hover{
                     color: $light-blue;

@@ -1,11 +1,11 @@
 <template>
-    <i-dropdown slot="extra" @on-click="handleCommand" trigger="click" transfer>
+    <el-dropdown slot="extra" @command="handleCommand" trigger="click">
         <el-link :underline="false">{{ $t('header.hello') + userName }}<i class="el-icon-arrow-down el-icon--right"></i></el-link>
-        <i-dropdown-menu slot="list">
-            <i-dropdown-item name="changePassword">{{ $t('header.changePassword') }}</i-dropdown-item>
-            <i-dropdown-item name="logout">{{ $t('header.logout') }}</i-dropdown-item>
-        </i-dropdown-menu>
-    </i-dropdown>
+        <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="changePassword">{{ $t('header.changePassword') }}</el-dropdown-item>
+            <el-dropdown-item command="logout">{{ $t('header.logout') }}</el-dropdown-item>
+        </el-dropdown-menu>
+    </el-dropdown>
 </template>
 
 <script>

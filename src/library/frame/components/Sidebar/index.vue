@@ -46,7 +46,7 @@ export default {
 
         //父节点无法显示，提升一级子集
         function itemValid(item){
-            if(item.meta){
+            if(item.meta && item.meta.title){
                 menu.push(item);
                 return ;
             }

@@ -6,7 +6,6 @@ import Cookies from 'js-cookie'
 const state = {
     name: '',
     roles: [],
-    power: 0,
     token: undefined
 }
 
@@ -16,9 +15,6 @@ const mutations = {
     },
     SET_ROLES: (state, roles) => {
         state.roles = roles
-    },
-    SET_ROWER: (state, power) => {
-        state.power = power
     },
     SET_TOKEN: (state, token) => {
         state.token = token
@@ -31,10 +27,9 @@ const actions = {
         commit('SET_TOKEN', token);
     },
     setUserInfo({ commit }, userInfo) {
-        const { userName, roles, power } = userInfo;
+        const { userName, roles } = userInfo;
         commit('SET_NAME', userName);
         commit('SET_ROLES', roles);
-        commit('SET_ROWER', power);
     },
     resetUserInfo({commit}){
         commit('SET_TOKEN', '');

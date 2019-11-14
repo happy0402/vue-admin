@@ -1,19 +1,20 @@
 /**
- * Created by Administrator on 2019/5/12.
+ * Created by ZKX on 2019/5/12.
+ * 若目录权限配置转移到数据库中,可能包括(推荐目录做加法,控件做减法): 1.目录控件表 2.用户表 3.角色表 4.角色-目录控件表 5.用户-角色表 6.用户-目录控件表
  */
 import Frame from '#/frame'
 
 /**
- * 通过meta.role判断是否与当前用户权限匹配
- * @param roles
+ * 判断当前用户是否有目录或控件的权限
+ * @param userRoles
  * @param route
  */
-function hasPermission(roles, route) {
-    if (route.meta && route.meta.roles) {
-        return roles.some(role => route.meta.roles.includes(role))
-    } else {
-        return true
+export function hasPermission(userRoles, route) {
+    if(route.roles){
+        return userRoles.some(role => route.roles.includes(role))
     }
+
+    return true;
 }
 
 /**
@@ -21,18 +22,18 @@ function hasPermission(roles, route) {
  * @param routes asyncRoutes
  * @param roles
  */
-function filterAsyncRoutes(routes, roles) {
+function filterAsyncRoutes(routes, userRoles) {
     const res = []
 
     routes.forEach(route => {
         const tmp = { ...route }
-        if (hasPermission(roles, tmp)) {
+        if (!tmp.meta || hasPermission(userRoles, tmp.meta)) {
             if (tmp.children) {
-                tmp.children = filterAsyncRoutes(tmp.children, roles)
+                tmp.children = filterAsyncRoutes(tmp.children, userRoles)
             }
             res.push(tmp)
         }
-    })
+    });
 
     return res
 }
@@ -58,9 +59,10 @@ const behindRoutes = [
     }
 ]
 
-export function getRouters(appCode, power){
+export function getRouters(appCode, userRoles){
     const { default: routes } = require('@/' + appCode + '/router');
-    const appRoute = filterAsyncRoutes(routes, power);
+    //页面路由过滤
+    const appRoute = filterAsyncRoutes(routes, userRoles);
     const allRoutes = frontRoutes.concat(appRoute, behindRoutes);
 
     return allRoutes;

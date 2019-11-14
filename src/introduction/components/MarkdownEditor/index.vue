@@ -4,27 +4,40 @@
             <span
                     class="headerItem"
                     :class="{'activeItem': activeModule === 'editor'}"
-                    @click="clickTab('editor')">
+                    @click="activeModule = 'editor'">
                     编辑
             </span>
             <span
                     class="headerItem"
                     :class="{'activeItem': activeModule === 'preview'}"
-                    @click="clickTab('preview')">
+                    @click="activeModule = 'preview'">
                     预览
             </span>
             <span v-show="activeModule === 'editor'" class="headerItem" style="float: right">
-                <el-link :underline="false" @click="insertContent('### ')"><i class="sf-icon-font-size"></i></el-link>
-                <el-link :underline="false" @click="insertContent('**', '**')"><i class="sf-icon-bold"></i></el-link>
-                <el-link :underline="false" @click="insertContent('_', '_')"><i class="sf-icon-italic"></i></el-link>
+                <el-link :underline="false" @click="markdownShortcuts('### ')"><i class="sf-icon-font-size"></i></el-link>
+                <el-link :underline="false" @click="markdownShortcuts('**', '**')"><i class="sf-icon-bold"></i></el-link>
+                <el-link :underline="false" @click="markdownShortcuts('_', '_')"><i class="sf-icon-italic"></i></el-link>
                 <el-divider direction="vertical"></el-divider>
-                <el-link :underline="false" @click="insertContent('\n\n> ', '\n\n')"><i class="sf-icon-quote-left"></i></el-link>
-                <el-link :underline="false" @click="insertContent('\n```\n', '\n```\n')"><i class="sf-icon-embed"></i></el-link>
-                <el-link :underline="false" @click="insertContent('[', '](url)')"><i class="sf-icon-link"></i></el-link>
+                <el-link :underline="false" @click="markdownShortcuts('\n\n> ', '\n\n')"><i class="sf-icon-quote-left"></i></el-link>
+                <el-link :underline="false" @click="markdownShortcuts('\n```\n', '\n```\n')"><i class="sf-icon-embed"></i></el-link>
+                <el-link :underline="false" @click="markdownShortcuts('[', '](url)')"><i class="sf-icon-link"></i></el-link>
+                <el-upload
+                        :action="fileUploadUrl"
+                        :headers="{'X-Token': $store.getters.token}"
+                        multiple
+                        :show-file-list="false"
+                        style="display: inline;"
+                        @on-progress="uploadProgress"
+                        @on-success="uploadSuccess"
+                        @on-error="uploadError"
+                        @on-change="fileChange"
+                        @before-upload="beforeUpload">
+                    <el-link :underline="false" @click=""><i class="el-icon-upload"></i></el-link>
+                </el-upload>
                 <el-divider direction="vertical"></el-divider>
-                <el-link :underline="false" @click="insertContent('\n\n- ','\n\n')"><i class="sf-icon-list"></i></el-link>
-                <el-link :underline="false" @click="insertContent('\n\n1. ','\n\n')"><i class="sf-icon-list-number"></i></el-link>
-                <el-link :underline="false" @click="insertContent('\n\n- [ ] ','\n\n')"><i class="sf-icon-list-check"></i></el-link>
+                <el-link :underline="false" @click="markdownShortcuts('\n\n- ','\n\n')"><i class="sf-icon-list"></i></el-link>
+                <el-link :underline="false" @click="markdownShortcuts('\n\n1. ','\n\n')"><i class="sf-icon-list-number"></i></el-link>
+                <el-link :underline="false" @click="markdownShortcuts('\n\n- [ ] ','\n\n')"><i class="sf-icon-list-check"></i></el-link>
 
                 <slot name="options"></slot>
             </span>
@@ -39,8 +52,22 @@
                         @input="$emit('input', markContent)"
                         :autosize="{ minRows: 7, maxRows: 14}"
                 ></el-input>
+
+                <!--<el-upload-->
+                        <!--:action="fileUploadUrl"-->
+                        <!--:headers="{'X-Token': $store.getters.token}"-->
+                        <!--multiple-->
+                        <!--:file-list="fileList"-->
+                        <!--@on-progress="uploadProgress"-->
+                        <!--@on-success="uploadSuccess"-->
+                        <!--@on-error="uploadError"-->
+                        <!--@on-change="fileChange"-->
+                        <!--@before-upload="beforeUpload">-->
+                    <!--<el-button size="small" type="primary">点击上传</el-button>-->
+                    <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
+                <!--</el-upload>-->
             </div>
-            <div v-show="activeModule === 'preview'" class="pane">
+            <div v-show="activeModule === 'preview'" class="pane" style="min-height: 145px;">
                 <div class="markdown-editor-contents" v-html="marked(value)"></div>
             </div>
 
@@ -58,22 +85,21 @@
         data(){
             return {
                 markContent: this.value,
-                activeModule: 'editor'
+                activeModule: 'editor',
+                fileUploadUrl: window.location.origin + '/files/upload'
             }
         },
         watch:{
-            value(newValue, oldValue){
+            value(newValue){
                 this.markContent = newValue;
             }
         },
         methods: {
             marked(value){
-                return marked(value);
+                return marked(value || '');
             },
-            clickTab(pane){
-                this.activeModule = pane;
-            },
-            insertContent(startContent = '', endContent = ''){
+            markdownShortcuts(startContent = '', endContent = ''){
+                //markdown快捷键功能实现
                 let textArea = this.$refs.editArea.$refs.textarea;
 
                 textArea.focus();
@@ -108,6 +134,28 @@
                 }
 
                 this.$emit('input', this.markContent);
+            },
+            uploadProgress(event, file, fileList){
+//                console.log(event);
+//                console.log(file);
+//                console.log(fileList);
+            },
+            uploadSuccess(response, file, fileList){
+//                console.log(response);
+//                console.log(file);
+//                console.log(fileList);
+            },
+            uploadError(err, file, fileList){
+//                console.log(err);
+//                console.log(file);
+//                console.log(fileList);
+            },
+            fileChange(file, fileList){
+//                console.log(file);
+//                console.log(fileList);
+            },
+            beforeUpload(file){
+//                console.log(file);
             }
         }
     }

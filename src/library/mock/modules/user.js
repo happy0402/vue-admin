@@ -14,14 +14,14 @@ const tokens = {
 
 const users = {
     'frame-token': {
+        userId: 1,
         userName: 'frame',
-        roles: ['frame'],
-        power: 9
+        roles: ['frame']
     },
     'business-token': {
+        userId: 2,
         userName: 'business',
-        roles: ['business'],
-        power: 9
+        roles: ['developer']
     }
 };
 
@@ -34,7 +34,7 @@ export default [
         type: 'post',
         response: config => {
             const { userName, appCode } = config.body;
-            const token = tokens[userName];
+            const token = tokens[userName.trim()];
 
             // mock error
             if (!token) {

@@ -1,5 +1,10 @@
-import Frame from '#/frame'
+import Frame from '#/frame';
+// import EmptyMenu from '#/components/Menu/EmptyMenu.vue';
 
+// const FrameViews = {
+//     default: () => EmptyMenu,//具体目录组件所在位置，#/components/Menu/EmptyMenu.vue为空目录，无特殊父级组件时使用
+//     headInfo: ()=> import('@/empty/views/headInfo.vue') //Frame框架提供的slot配置项
+// };
 //The name has to be unique
 export default [
     {
@@ -16,13 +21,34 @@ export default [
                     icon: 'el-icon-s-home',
                     affix: true //tagsView default set
                 }
+            },
+            {
+                path: 'router',
+                // components: FrameViews,
+                // component: EmptyMenu,
+                name: 'Router',
+                meta: {
+                    title: 'router',
+                    icon: 'el-icon-tickets',
+                    roles: ['frame', 'business'] // you can set roles in root nav
+                },
+                children: [
+                    {
+                        path: 'router-child',
+                        name: 'RouterChild',
+                        // component: () => import('@/empty'),
+                        meta: {
+                            title: 'routerChild',
+                            roles: ['frame', 'developer'] // or you can only set roles in sub nav
+                        }
+                    }
+                ]
             }
         ]
     },
     {
         path: '/router',
         component: Frame,
-        alwaysShow: true, // will always show the root Menu
         name: 'Router',
         meta: {
             title: 'router',
@@ -33,7 +59,8 @@ export default [
             {
                 path: 'router-child',
                 name: 'RouterChild',
-                // component: () => import('@/empty'),
+                // components: FrameViews,
+                // component: EmptyMenu,
                 meta: {
                     title: 'routerChild',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav

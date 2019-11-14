@@ -10,6 +10,10 @@
             </el-link>
 
             <vue-code-mirror v-model="menu"></vue-code-mirror>
+
+            <el-divider>Special Menu Component</el-divider>
+
+            <vue-code-mirror v-model="specialMenuComponent"></vue-code-mirror>
         </el-tab-pane>
         <el-tab-pane label="页面高度设置" name="SetPageHeight" lazy>
             <vue-code-mirror v-model="singlePageHeight"></vue-code-mirror>
@@ -31,32 +35,33 @@
 
 <script>
     import VueCodeMirror from '@/introduction/components/VueCodeMirror'
+    import ElDivider from "element-ui/packages/divider/src/main";
 
     export default {
         components:{
+            ElDivider,
             VueCodeMirror
         },
         data(){
             return {
                 activeName: 'menuConfig',
                 menu: `{
-        path: 'parent-menu-path', //目录路径
-        component: Frame, //一级目录设置系统框架做组件
-        name: 'ParentMenu', //目录名称：不可重复
-        children: [
-            {
-                path: 'child-menu-path',
-                component: () => import('#/components/Menu/EmptyMenu.vue'),//具体目录组件所在位置，#/components/Menu/EmptyMenu.vue为空目录，无特殊父级组件时使用
-                name: 'ChildMenu',
-                meta: {
-                    title: 'childMenu', // 目录名称：在lang中配置不同语言环境下的目录名称
-                    //icon: 'el-icon-s-home', //目录图标，一级目录必须配置
-                    //roles: ['frame', 'developer'], // 配置目录权限，若目录无限制则可省略，与用户的角色有关
-                    //affix: true //tagsView 默认设置
-                } //若无meta,则目录不显示
-            }
-        ] //子级目录
-    }`,
+    path: 'menu-path',
+    component: () => import('#/components/Menu/EmptyMenu.vue'),//具体目录组件所在位置
+    name: 'Menu',
+    meta: {
+        title: 'menu', // 目录名称：在lang中配置不同语言环境下的目录名称,若无title,则目录不显示
+        //icon: 'el-icon-s-home', //目录图标，一级目录必须配置
+        //roles: ['frame', 'developer'], // 配置目录权限，若目录无限制则可省略，与用户的角色有关
+        //affix: true //tagsView 默认设置
+    },
+    children: [] //子路由集
+}`,
+                specialMenuComponent: `//EmptyMenu
+import EmptyMenu from '#/components/Menu/EmptyMenu.vue'; //#/components/Menu/EmptyMenu.vue为空目录组件，无特殊父级组件时使用
+
+//Frame
+import Frame from '#/frame'; //系统框架级组件,使用时可额外配置 headInfo(系统头部内容) 组件`,
                 singlePageHeight: `//默认页面定高（窗口高度）
 
     //页面不固定高度

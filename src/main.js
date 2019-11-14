@@ -14,6 +14,9 @@ import { getRouters } from '#/router/routes.js'
 //根据token获取用户登录信息
 var token = Cookies.get('token');
 if(token !== '' && token !== undefined){
+    //重新设置token
+    store.dispatch('user/setToken', token);
+
     //获取用户信息 /*正式系统待修正部分*/
     getInfo(token).then((result) => {
         //设置全局变量

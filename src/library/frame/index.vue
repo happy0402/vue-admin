@@ -11,8 +11,11 @@
                         v-show="headerView !== 'hidden'"
                         :class="{ 'fixed-header': headerView === 'fixed'}"
                         :style="{ 'margin-left': headerView === 'fixed' ? asideWidth : 0 }">
-                    <system-info></system-info>
+                    <system-info>
+                        <router-view name="headInfo" key="headInfo"/>
+                    </system-info>
                     <tags-view v-if="tagsView"></tags-view>
+                    <!-- 右边栏 -->
                     <settings></settings>
                 </div>
             </el-header>

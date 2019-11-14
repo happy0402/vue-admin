@@ -31,7 +31,7 @@
         },
         data(){
             return {
-                code: `//此组件未全局引用，使用前请先引用
+                code: `//此组件未全局引入，使用前请先引入组件
 import Draggable from 'vuedraggable';
 
 export default {

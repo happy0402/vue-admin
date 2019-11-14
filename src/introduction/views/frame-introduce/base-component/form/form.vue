@@ -281,6 +281,7 @@
         },
         methods: {
             insertRecord(){
+                //新增，清空旧数据
                 //在使用 resetFields 方法的情况下，el-form-item 的 prop 属性是必填的
                 this.$refs.form.resetFields();
             },

@@ -10,7 +10,7 @@ const name = defaultSettings.title || 'vue Element Admin' // page title
 // If your port is set to 80,
 // use administrator privileges to execute the command line.
 // For example, Mac: sudo npm run
-const port = 8080 // dev port
+const port = 50000 // dev port
 module.exports = {
     /**
      * You will need to set publicPath if you plan to deploy your site under a sub path,

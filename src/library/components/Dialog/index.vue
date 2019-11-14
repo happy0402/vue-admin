@@ -50,7 +50,7 @@
 </template>
 
 <script>
-    import { Modal } from 'iview';
+    import { Modal } from 'view-design';
 
     export default {
         nane: 'Dialog',

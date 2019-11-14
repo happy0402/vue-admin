@@ -4,16 +4,25 @@
 import Mock from 'mockjs'
 
 const issues = [];
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 50; i++) {
     issues.push(Mock.mock({
         'id': '@increment',
         'title': '@ctitle',
         'project|1': ['introduction','old-project'],
         'assign': '@cname',
-        'state|1': ['open','close'],
-        'author': '@cname',
-        'createdTime':'@datetime'
-    }))
+        'state|1': ['open', 'close'],
+        'grade|1': [1, 2, 3, 4],
+        'type|1': ['bug', 'design', 'optimize', 'capability', 'config', 'standard', 'others'],
+        'result|1': ['fixed', 'repeat', 'notBug', 'noReproduce', 'noSolve', 'byDesign', 'delay'],
+        'ownerId': 'Random.natural()',
+        'owner': '@cname',
+        'createTime':'@datetime',
+        'assigneesId': 'Random.natural()',
+        'assignees': '@cname',
+        'modifierId': 'Random.natural()',
+        'modifier': '@cname',
+        'modifyTime':'@datetime',
+    }));
 }
 
 export default [
@@ -54,8 +63,8 @@ export default [
                 'content|5-15' : [{
                     'id|+1': 0,
                     'content': '@cparagraph',
-                    'author': '@cname',
-                    'createdTime':'@datetime'
+                    'modifier': '@cname',
+                    'modifyTime':'@datetime'
                 }]
             });
 

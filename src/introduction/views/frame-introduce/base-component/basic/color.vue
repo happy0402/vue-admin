@@ -63,12 +63,22 @@
                     </div>
                 </el-col>
                 <el-col :span="8">
+                    <div class="demo-color-box" style="background-color: #909399;">
+                        $grey
+                        <p>#909399</p>
+                    </div>
+                </el-col>
+                <el-col :span="8">
                     <div class="demo-color-box" style="background-color: #000;">
                         $black
                         <p>#000</p>
                     </div>
                 </el-col>
-                <el-col :span="8">
+            </el-row>
+
+            <el-divider>边框</el-divider>
+            <el-row :gutter="6">
+                <el-col :span="24">
                     <div class="demo-color-box" style="background-color: #DCDFE6;color: #000;">
                         $firstBorder
                         <p>1px solid #DCDFE6</p>

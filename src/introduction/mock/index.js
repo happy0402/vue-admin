@@ -5,9 +5,9 @@ const modulesFiles = require.context('./modules', false, /\.js$/)
 
 export default modulesFiles.keys().reduce((mocks, modulePath) => {
     // ./app.js -> export (Object)
-    const value = modulesFiles(modulePath)
+    const value = modulesFiles(modulePath);
     // export default
-    mocks = mocks.concat(value.default)
+    mocks = mocks.concat(value.default);
     // { app: {(default)}}
-    return mocks
+    return mocks;
 }, []);

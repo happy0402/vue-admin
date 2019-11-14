@@ -166,7 +166,6 @@
         .active-view{
             background-color: $light-blue;
             color: $white;
-            border: none;
 
             .el-icon-close:hover{
                 background-color: $blue;

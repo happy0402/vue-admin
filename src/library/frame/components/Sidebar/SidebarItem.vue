@@ -58,7 +58,7 @@
             },
             hasChild(){
                 return this.item.children && this.item.children.some((item) => {
-                    return item.meta
+                    return item.meta && item.meta.title
                 });
             }
         },

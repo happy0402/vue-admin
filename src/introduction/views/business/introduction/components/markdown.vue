@@ -1,6 +1,10 @@
 <template>
     <el-container>
         <el-header height="auto">
+            <el-tag type="danger">
+                import marked from 'marked'; //markdown解析函数 ( marked == this.$refs.markdownEditor.marked )
+            </el-tag>
+
             <markdown-editor v-model="content">
                 <template v-slot:options>
                     <el-divider direction="vertical"></el-divider>
@@ -30,9 +34,9 @@
         },
         data(){
             return {
-                content: '### hello world',
+                content: '',
                 code: `<template>
-    <markdown-editor v-model="content">
+    <markdown-editor ref="markdownEditor" v-model="content">
         <template v-slot:options>
             <el-divider direction="vertical"></el-divider>
             <el-link :underline="false"><i class="sf-icon-user"></i></el-link>
@@ -54,7 +58,12 @@
         },
         data(){
             return {
-                content: '### hello world'
+                content: ''
+            }
+        },
+        methods:{
+            marked(content){
+                return this.$refs.markdownEditor.marked(content);
             }
         }
     }

@@ -4,5 +4,9 @@
 import axios from '#/utils/axios.js'
 
 export function fetchList() {
-    return axios.get('app/list');
+    return axios.get('/app/list');
+}
+
+export function getInfo(appCode) {
+    return axios.get('/app/info?appCode=' + appCode);
 }

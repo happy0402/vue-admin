@@ -1,10 +1,11 @@
 <template>
     <el-container>
+        <!-- 头部问题说明 -->
         <el-header height="auto">
             <div style="text-align: center;">
                 <el-tag :type="issue.state == 'open' ? 'danger' : 'success'" style="margin-right: 10px;">
                     <i
-                            :class="issue.state == 'open' ? 'sf-icon-baffled' : 'sf-icon-happy'"
+                            :class="issue.state == 'open' ? 'el-icon-warning-outline' : 'ivu-icon ivu-icon-md-checkmark-circle-outline'"
                             :style="issue.state == 'open' ? 'color: #E65D6E;':'color: #30B08F;'"
                             style="margin-right: 5px;"
                     ></i>
@@ -17,110 +18,125 @@
                 <i style="margin-right: 10px;">#{{ issue.id }}</i>
 
                 <sub>
-                    由 {{ issue.author }} 于 {{ $util.moment(issue.createdTime).fromNow() }} 创建
+                    由 {{ issue.owner }} 于 {{ $util.moment(issue.createTime).fromNow() }} 创建
                 </sub>
             </div>
 
             <el-divider></el-divider>
         </el-header>
         <el-container>
-            <el-aside width="70%" style="padding-right: 5px;">
+            <!-- 左侧时间线 -->
+            <el-aside width="70%" style="padding-right: 20px;">
                 <el-timeline>
                     <el-timeline-item
-                            v-for="content in issueContent"
+                            v-for="content in issueContents"
                             :key="content.id"
                             :id="'issuecomment-' + content.id"
                             hide-timestamp
                             placement="top">
                         <i-card :class="[targetComment == '#issuecomment-' + content.id ? 'targetComment':'']">
                             <p slot="title">
-                                {{ content.author }} 于 {{ $util.moment(content.createdTime).fromNow() }} 提交
+                                {{ content.modifier }} 于 {{ $util.moment(content.modifyTime).fromNow() }} 提交
                             </p>
-                            <i-dropdown slot="extra" @on-click="handleCommand($event, content)" trigger="click" transfer>
+                            <el-dropdown slot="extra" @command="handleCommand($event, content)" trigger="click">
                                 <el-link :underline="false"><i class="el-icon-more"></i></el-link>
-                                <i-dropdown-menu slot="list">
-                                    <i-dropdown-item name="copyLink">复制链接</i-dropdown-item>
-                                    <i-dropdown-item name="quoteReply">引用回复</i-dropdown-item>
-                                </i-dropdown-menu>
-                            </i-dropdown>
+                                <el-dropdown-menu slot="dropdown">
+                                    <el-dropdown-item command="copyLink">复制链接</el-dropdown-item>
+                                    <el-dropdown-item command="quoteReply">引用回复</el-dropdown-item>
+                                </el-dropdown-menu>
+                            </el-dropdown>
 
                             <div class="markdown-editor-contents" v-html="marked(content.content)"></div>
 
                         </i-card>
                     </el-timeline-item>
-                    <el-timeline-item hide-timestamp placement="top">
-                        <markdown-editor ref="markdown" v-model="content">
-                            <template v-slot:options>
-                                <el-divider direction="vertical"></el-divider>
-                                <i-dropdown slot="extra" @on-click="callUser($event, content.id)" trigger="click" transfer>
-                                    <el-link :underline="false"><i class="sf-icon-user"></i></el-link>
-                                    <i-dropdown-menu slot="list">
-                                        <i-dropdown-item name="luguokong">luguokong</i-dropdown-item>
-                                        <i-dropdown-item name="element-bot">element-bot</i-dropdown-item>
-                                        <i-dropdown-item name="iamkun">iamkun</i-dropdown-item>
-                                        <i-dropdown-item name="matjaz">matjaz</i-dropdown-item>
-                                    </i-dropdown-menu>
-                                </i-dropdown>
-                                <el-link :underline="false"><i class="sf-icon-pushpin"></i></el-link>
-                            </template>
-
+                    <!-- markdownEditor编辑器 -->
+                    <el-timeline-item hide-timestamp placement="top" v-if="issue.state == 'open'">
+                        <content-editor v-model="comment">
                             <template v-slot:footer>
-                                <el-button type="primary" @click="getContent" style="margin-top: 10px;float: right;">提交</el-button>
+                                <el-button type="primary" @click="submitComment" style="margin-top: 10px;float: right;">提交</el-button>
                             </template>
-                        </markdown-editor>
+                        </content-editor>
                     </el-timeline-item>
                 </el-timeline>
             </el-aside>
-            <el-main>
-
+            <!-- 右侧表单 -->
+            <el-main style="padding: 0 20px;">
+                <issue-form v-model="issue">
+                    <template v-slot:footer>
+                        <el-form-item class="alignRight">
+                            <el-button type="primary" @click="onSubmit">保存</el-button>
+                            <el-button type="danger" @click="closeIssue" id="closeBtn">关闭Bug</el-button>
+                        </el-form-item>
+                    </template>
+                </issue-form>
             </el-main>
         </el-container>
     </el-container>
 </template>
 
 <script>
-    import MarkdownEditor from '@/introduction/components/MarkdownEditor'
+    import marked from 'marked';
     import copy from 'copy-to-clipboard';
 
-    import { fetchIssue, fatchContent } from '@/introduction/api/issues.js'
+    import { fetchIssue, fatchContent } from '@/introduction/api/issues.js';
+
+    import ContentEditor from './component/issueContentEditor.vue';
+    import IssueForm from './component/issueForm.vue';
 
     export default{
         components:{
-            MarkdownEditor
+            ContentEditor,
+            IssueForm
         },
         data(){
           return {
               targetComment: this.$route.hash,
               issueId: this.$route.params.issueId,
               issue: {},
-              issueContent: [],
-              content: '### hello world'
+              issueContents: [],
+              comment: '',
+              mentionedUsers: []
           }
         },
         methods:{
             marked(value){
-                return this.$refs.markdown.marked(value);
+                return marked(value);
             },
-            getContent(){
-                console.log(this.content);
+            submitComment(){
+//                console.log(this.comment);
+                this.$message.info('提交成功!');
             },
             handleCommand(command, content) {
+                function quoteReply(){
+                    let comments = content.content.split('\n');
+                    for(let i = 0; i < comments.length; i++){
+                        this.content += ('\n> ' + comments[i]);
+                    }
+                }
+
                 switch (command){
                     case 'copyLink':
                         copy(window.location.origin + '/#/personal-center/issues-detail/' + this.issueId + '#issuecomment-' + content.id);
                         break;
                     case 'quoteReply':
-                        let comments = content.content.split('\n');
-                        for(let i = 0; i < comments.length; i++){
-                            this.content += ('\n> ' + comments[i]);
-                        }
+                        quoteReply();
                         break;
                     default:
                         break;
                 }
             },
-            callUser(command){
-
+            onSubmit(){
+                this.$message.success('保存成功!');
+            },
+            closeIssue(){
+                this.$modal.confirm({
+                    title: '操作确认',
+                    content: '是否确认关闭此问题?',
+                    onOk: () => {
+                        this.$message.info('成功关闭此问题!');
+                    }
+                });
             }
         },
         created(){
@@ -130,7 +146,7 @@
 
             fatchContent(this.issueId).then((result) => {
 //                console.log(result);
-                this.issueContent = result;
+                this.issueContents = result;
 
                 this.$nextTick(function () {
                     // Code that will run only after the

@@ -6,6 +6,9 @@ import {
     Link,
     Scrollbar,
     Autocomplete,
+    Dropdown,
+    DropdownMenu,
+    DropdownItem,
     Menu,
     Submenu,
     MenuItem,
@@ -19,6 +22,8 @@ import {
     Switch,
     Select,
     Option,
+    Upload,
+    Rate,
     Button,
     ButtonGroup,
     Tooltip,
@@ -89,6 +94,10 @@ Vue.use(TabPane);
 
 Vue.use(Tag);
 
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
+
 Vue.use(Form);
 Vue.use(FormItem);
 Vue.use(RadioButton);
@@ -102,9 +111,14 @@ Vue.use(InputNumber);
 Vue.use(Autocomplete);
 Vue.use(Select);
 Vue.use(Option);
+Vue.use(Upload);
+Vue.use(Rate);
+
 Vue.use(Button);
 Vue.use(ButtonGroup);
 Vue.use(Link);
+
+
 
 Vue.use(Table);
 Vue.use(TableColumn);

@@ -3,8 +3,7 @@
  */
 import Axios from 'axios';
 import store from '#/store';
-import { Message } from 'iview';
-import Dialog from '#/components/Dialog';
+import Vue from 'vue';
 import i18n from '#/lang/index';
 
 // create an axios instance
@@ -52,7 +51,7 @@ axios.interceptors.response.use(
         // if the custom code is not 20000, it is judged as an error.
         if (res.code !== 20000) {
             //请求失败
-            Message.error({
+            Vue.prototype.$message.error({
                 content: res.message || 'error',//提示内容
                 duration: 5 * 1000 //自动关闭的延时，单位秒，不关闭可以写 0
             });
@@ -60,7 +59,7 @@ axios.interceptors.response.use(
             // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
             if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
                 // to re-login
-                Dialog.warning({
+                Vue.prototype.$modal.warning({
                     title: i18n.$t('login.confirmLogout'),
                     content: i18n.$t('login.logoutContent'),
                     onOk: () => {
@@ -79,7 +78,7 @@ axios.interceptors.response.use(
     error => {
         // 对响应错误做点什么
         console.log('err' + error) // for debug
-        Message.error({
+        Vue.prototype.$message.error({
             content: error.message,//提示内容
             duration: 5 * 1000 //自动关闭的延时，单位秒，不关闭可以写 0
         });

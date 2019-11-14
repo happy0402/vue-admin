@@ -9,7 +9,7 @@
         <el-tabs tab-position="left">
             <el-tab-pane label="element-ui">
                 <el-row>
-                    <el-col>使用方法：&lt;i class="<code>el-icon-</code>ice-cream-round"&gt;&lt;/i&gt;</el-col>
+                    <el-col>使用方法：&lt;i class="<code>el-icon-</code>loading"&gt;&lt;/i&gt;</el-col>
                 </el-row>
                 <ul class="icons-list">
                     <li
@@ -41,7 +41,7 @@
             </el-tab-pane>
             <el-tab-pane label="iview">
                 <el-row>
-                    <el-col>使用方法：&lt;i class="<code>ivu-icon ivu-icon-</code>ios-add-circle-outline"&gt;&lt;/i&gt;</el-col>
+                    <el-col>使用方法：&lt;i class="<code>ivu-icon ivu-icon-</code>ios-alarm"&gt;&lt;/i&gt;</el-col>
                 </el-row>
                 <ul class="icons-list">
                     <li
