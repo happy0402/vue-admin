@@ -174,27 +174,23 @@
         methods: {
             //操作class的通用方法，直接使用即可
             animateCSS(element, animationNames, callback) {
-                let that = this;
                 const node = document.querySelector(element);
                 node.classList.add('animated', ...animationNames);
-
-                that.btnLoading = true;//页面按钮状态改变
 
                 function handleAnimationEnd() {
                     node.classList.remove('animated', ...animationNames);
                     node.removeEventListener('animationend', handleAnimationEnd);
 
                     if (typeof callback === 'function') callback();
-
-                    that.btnLoading = false;//页面按钮状态改变
                 }
-
                 node.addEventListener('animationend', handleAnimationEnd);
             }
         },
         mounted(){
             //给元素添加动画效果
-            this.animateCSS('#animateSandbox', ['${animationNames.join("','")}']);
+            this.animateCSS('#animateSandbox', ['${animationNames.join("','")}'], function(){
+                //动画结束后的回调函数
+            });
         }
     }
 <\/script>`
