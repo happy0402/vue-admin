@@ -47,7 +47,7 @@
                 activeName: 'menuConfig',
                 menu: `{
     path: 'menu-path',
-    component: () => import('#/components/Menu/EmptyMenu.vue'),//具体目录组件所在位置
+    component: EmptyMenu,//具体目录组件所在位置
     name: 'Menu',
     meta: {
         title: 'menu', // 目录名称：在lang中配置不同语言环境下的目录名称,若无title,则目录不显示
@@ -55,10 +55,21 @@
         //roles: ['frame', 'developer'], // 配置目录权限，若目录无限制则可省略，与用户的角色有关
         //affix: true //tagsView 默认设置
     },
-    children: [] //子路由集
+    children: [
+        {
+            path: 'child-path',
+            name: 'ChildName',
+            component: EmptyPage,
+            meta: {
+                title: 'childTitle',
+                //roles: ['frame', 'developer'], // 配置目录权限，若目录无限制则可省略，与用户的角色有关
+            }
+        }
+    ] //子路由集
 }`,
                 specialMenuComponent: `//EmptyMenu
 import EmptyMenu from '#/components/Menu/EmptyMenu.vue'; //#/components/Menu/EmptyMenu.vue为空目录组件，无特殊父级组件时使用
+import EmptyPage from '#/components/Menu/EmptyPage.vue'; //#/components/Menu/EmptyPage.vue为空白页
 
 //Frame
 import Frame from '#/frame'; //系统框架级组件,使用时可额外配置 headInfo(系统头部内容) 组件`,

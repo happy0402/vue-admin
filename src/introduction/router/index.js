@@ -1,5 +1,6 @@
 import Frame from '#/frame';
 import EmptyMenu from '#/components/Menu/EmptyMenu.vue'; //#/components/Menu/EmptyMenu.vue为空目录，无特殊父级组件时使用
+import EmptyPage from '#/components/Menu/EmptyPage.vue'; //#/components/Menu/EmptyPage.vue为空白页
 import HeadInfo from '@/introduction/views/headInfo.vue';
 
 import ViewsTab from '@/introduction/views/frame-introduce';
@@ -175,6 +176,7 @@ export default [
                             {
                                 path: 'animate',
                                 name: 'Animate',
+                                component: () => import('@/introduction/views/frame-introduce/complex-component/animate.vue'),
                                 meta: {
                                     title: 'animate',
                                     roles: ['frame'], // 配置目录权限，若目录无限制则可省略，与用户的角色有关
@@ -183,6 +185,7 @@ export default [
                             {
                                 path: 'tinymce',
                                 name: 'Tinymce',
+                                component: EmptyPage,
                                 meta: {
                                     title: 'tinymce',
                                     roles: ['frame'], // 配置目录权限，若目录无限制则可省略，与用户的角色有关
@@ -254,6 +257,7 @@ export default [
                             {
                                 path: 'array',
                                 name: 'Array',
+                                component: EmptyPage,
                                 meta: {
                                     title: 'array',
                                     roles: ['frame'], // 配置目录权限，若目录无限制则可省略，与用户的角色有关

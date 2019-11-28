@@ -4,6 +4,9 @@
 import Vue from 'vue';
 import {
     locale,
+    // List,
+    // ListItem,
+    // ListItemMeta,
     Card,
 
     Badge,
@@ -18,6 +21,10 @@ import 'view-design/dist/styles/iview.css';
 import '#/styles/iview-variable.less';
 
 import i18n from '#/lang' // Internationalization
+
+// Vue.component('i-list', List);
+// Vue.component('i-list-item', ListItem);
+// Vue.component('i-list-item-meta', ListItemMeta);
 
 Vue.component('i-card', Card);
 

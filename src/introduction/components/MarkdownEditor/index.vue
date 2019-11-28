@@ -27,12 +27,10 @@
                         multiple
                         :show-file-list="false"
                         style="display: inline;"
-                        @on-progress="uploadProgress"
+                        @before-upload="beforeUpload"
                         @on-success="uploadSuccess"
-                        @on-error="uploadError"
-                        @on-change="fileChange"
-                        @before-upload="beforeUpload">
-                    <el-link :underline="false" @click=""><i class="el-icon-upload"></i></el-link>
+                        @on-error="uploadError">
+                    <el-link :underline="false"><i :class="uploading ? 'el-icon-loading' : 'el-icon-upload'"></i></el-link>
                 </el-upload>
                 <el-divider direction="vertical"></el-divider>
                 <el-link :underline="false" @click="markdownShortcuts('\n\n- ','\n\n')"><i class="sf-icon-list"></i></el-link>
@@ -52,20 +50,6 @@
                         @input="$emit('input', markContent)"
                         :autosize="{ minRows: 7, maxRows: 14}"
                 ></el-input>
-
-                <!--<el-upload-->
-                        <!--:action="fileUploadUrl"-->
-                        <!--:headers="{'X-Token': $store.getters.token}"-->
-                        <!--multiple-->
-                        <!--:file-list="fileList"-->
-                        <!--@on-progress="uploadProgress"-->
-                        <!--@on-success="uploadSuccess"-->
-                        <!--@on-error="uploadError"-->
-                        <!--@on-change="fileChange"-->
-                        <!--@before-upload="beforeUpload">-->
-                    <!--<el-button size="small" type="primary">点击上传</el-button>-->
-                    <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
-                <!--</el-upload>-->
             </div>
             <div v-show="activeModule === 'preview'" class="pane" style="min-height: 145px;">
                 <div class="markdown-editor-contents" v-html="marked(value)"></div>
@@ -86,7 +70,8 @@
             return {
                 markContent: this.value,
                 activeModule: 'editor',
-                fileUploadUrl: window.location.origin + '/files/upload'
+                fileUploadUrl: window.location.origin + '/files/upload',
+                uploading: false
             }
         },
         watch:{
@@ -135,27 +120,29 @@
 
                 this.$emit('input', this.markContent);
             },
-            uploadProgress(event, file, fileList){
-//                console.log(event);
-//                console.log(file);
-//                console.log(fileList);
+            beforeUpload(){
+                this.uploading = true;
             },
-            uploadSuccess(response, file, fileList){
+            uploadSuccess(response, file){
 //                console.log(response);
 //                console.log(file);
 //                console.log(fileList);
+                this.uploading = false;
+
+                let breakPosition = file.name.lastIndexOf('.');
+                let fileName = file.name.substring(0, breakPosition),
+                    fileType = file.name.substring(breakPosition + 1);
+
+                if(fileType == 'png' || fileType == 'jpeg' || fileType == 'jpg'){
+                    this.markContent += '![' + fileName + '](' + window.location.origin + '/files/get/' + file.response.id + '.' + fileType + ')';
+                }else{
+                    this.markContent += '[' + fileName + '](' + window.location.origin + '/files/get/' + file.response.id + ')';
+                }
             },
-            uploadError(err, file, fileList){
-//                console.log(err);
-//                console.log(file);
-//                console.log(fileList);
-            },
-            fileChange(file, fileList){
-//                console.log(file);
-//                console.log(fileList);
-            },
-            beforeUpload(file){
-//                console.log(file);
+            uploadError(err){
+                this.uploading = false;
+
+                this.$message.warning('图片上传失败，请重试!' + err);
             }
         }
     }

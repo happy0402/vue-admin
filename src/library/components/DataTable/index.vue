@@ -188,7 +188,7 @@
             },
             beforeSortFilter(states){
                 this.states = states;
-                //阻止表格排序
+                //阻止表格排序、过滤
                 this.showData = [];
             },
             onSortChange(){

@@ -21,6 +21,7 @@ import {
     CheckboxGroup,
     Switch,
     Select,
+    OptionGroup,
     Option,
     Upload,
     Rate,
@@ -110,6 +111,7 @@ Vue.use(Input);
 Vue.use(InputNumber);
 Vue.use(Autocomplete);
 Vue.use(Select);
+Vue.use(OptionGroup);
 Vue.use(Option);
 Vue.use(Upload);
 Vue.use(Rate);

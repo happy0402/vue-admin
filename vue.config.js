@@ -33,7 +33,7 @@ module.exports = {
     runtimeCompiler: true,
     devServer: {
         port: port,
-        open: true,
+        open: true, //启动后打开默认浏览器
         overlay: {
             warnings: false,
             errors: true

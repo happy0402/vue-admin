@@ -1,5 +1,6 @@
 import Frame from '#/frame';
 // import EmptyMenu from '#/components/Menu/EmptyMenu.vue';
+// import EmptyPage from '#/components/Menu/EmptyPage.vue'; //#/components/Menu/EmptyPage.vue为空白页
 
 // const FrameViews = {
 //     default: () => EmptyMenu,//具体目录组件所在位置，#/components/Menu/EmptyMenu.vue为空目录，无特殊父级组件时使用
@@ -36,7 +37,7 @@ export default [
                     {
                         path: 'router-child',
                         name: 'RouterChild',
-                        // component: () => import('@/empty'),
+                        // component: EmptyPage,
                         meta: {
                             title: 'routerChild',
                             roles: ['frame', 'developer'] // or you can only set roles in sub nav
@@ -60,7 +61,7 @@ export default [
                 path: 'router-child',
                 name: 'RouterChild',
                 // components: FrameViews,
-                // component: EmptyMenu,
+                // component: EmptyPage,
                 meta: {
                     title: 'routerChild',
                     roles: ['frame', 'developer'] // or you can only set roles in sub nav

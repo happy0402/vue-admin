@@ -64,7 +64,7 @@
             },
             createSource(){
                 var source = [];
-                for(let i = 0; i < 1000; i++){
+                for(let i = 0; i < 10000; i++){
                     source.push({
                         date: '2016-05-01',
                         id: i,
