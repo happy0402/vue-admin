@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-header height="auto">
-            <el-tag type="danger">注：使用时在CSS中引入文件：<span class="importantLetter">@import "~#/styles/variables.scss";</span></el-tag>
+            <el-tag type="danger">注：使用时在SCSS中引入文件：<span class="importantLetter">@import "~#/styles/variables.scss";</span></el-tag>
         </el-header>
         <el-main>
             <el-divider>主色</el-divider>

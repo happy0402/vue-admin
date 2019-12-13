@@ -22,11 +22,6 @@
 
     export default {
         name: 'SidebarItem',
-        created(){
-            if(!this.hasChild){
-                this.$store.dispatch('app/addSearchRoute', this.node)
-            }
-        },
         components:{
             SidebarItem
         },
@@ -67,6 +62,11 @@
                 return routes.filter((item) =>{
                     return item.meta && item.meta.title
                 })
+            }
+        },
+        created(){
+            if(!this.hasChild){
+                this.$store.dispatch('app/addSearchRoute', this.node)
             }
         }
     }

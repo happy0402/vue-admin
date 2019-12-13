@@ -21,7 +21,7 @@
     <!-- options: 可传object类型的配置项，options.target | options.scrollDistance @eg. v-infinite-scroll="options" -->
     <component
         v-infinite-scroll="options"
-        @reachEdge.native="reachEdge"></component>
+        @reachEdge="reachEdge"></component>
 </template>
 
 <script>

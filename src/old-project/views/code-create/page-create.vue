@@ -1,6 +1,6 @@
 <template>
-    <div class="csCreate-container">
-        <el-row :gutter="10">
+    <div class="csCreate-container" style="height: 100%;">
+        <el-row :gutter="10" style="height: 100%;">
             <el-col :span="8">
                 <el-form label-position="left" :model="tableForm" label-width="80px">
                     <el-form-item label="标题">
@@ -8,12 +8,8 @@
                     </el-form-item>
                 </el-form>
             </el-col>
-            <el-col :span="16">
-                <el-row>
-                    <el-col :span="24">
-                        <vue-code-mirror v-model="code"></vue-code-mirror>
-                    </el-col>
-                </el-row>
+            <el-col :span="16" style="height: 100%;">
+                <vue-code-mirror v-model="code"></vue-code-mirror>
             </el-col>
         </el-row>
     </div>

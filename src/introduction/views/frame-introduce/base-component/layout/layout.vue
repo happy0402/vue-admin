@@ -13,12 +13,14 @@
         </p>
 
         <template v-slot:show>
-            <el-row :gutter="Number(paramForm.gutter)">
-                <el-col
-                        v-for="(col,index) in paramForm.cols"
-                        :key="index"
-                        :span="Number(col.span || 24)"><div class="grid-content bg-purple-dark"></div></el-col>
-            </el-row>
+            <div>
+                <el-row :gutter="Number(paramForm.gutter)">
+                    <el-col
+                            v-for="(col,index) in paramForm.cols"
+                            :key="index"
+                            :span="Number(col.span || 24)"><div class="grid-content bg-purple-dark"></div></el-col>
+                </el-row>
+            </div>
         </template>
 
         <template v-slot:config>
@@ -28,9 +30,17 @@
                     label-width="80px">
                 <el-divider>Row Attribute</el-divider>
                 <el-form-item label="栅格间隔">
-                    <el-input v-model="paramForm.gutter"></el-input>
+                    <el-slider v-model="paramForm.gutter"></el-slider>
                 </el-form-item>
                 <el-divider>Col Attribute</el-divider>
+                <el-form-item label="栅格数">
+                    <el-slider
+                            v-model="paramForm.colLength"
+                            :max="12"
+                            :step="1"
+                            show-stops
+                            @change="changeCols"></el-slider>
+                </el-form-item>
                 <el-form-item
                         v-for="(col, index) in paramForm.cols"
                         :key="index"
@@ -44,7 +54,7 @@
                 </el-form-item>
                 <el-form-item class="alignRight">
                     <el-col :span="24" class="alignRight">
-                        <el-button @click.prevent="addCol()" type="primary" icon="el-icon-plus" circle></el-button>
+                        <el-button @click.prevent="addCol" type="primary" icon="el-icon-plus" circle></el-button>
                     </el-col>
                 </el-form-item>
             </el-form>
@@ -63,9 +73,10 @@
             return {
                 paramForm:{
                     gutter: undefined,
+                    colLength: 1,
                     cols: [
                         {
-                            span: undefined
+                            span: 24
                         }
                     ]
                 }
@@ -76,12 +87,22 @@
                 this.paramForm.cols.push({
                     span: undefined
                 });
+                this.paramForm.colLength ++;
+            },
+            changeCols(value){
+                this.paramForm.cols = [];
+                for(let i = 0; i < value - 1; i++){
+                    this.paramForm.cols.push({
+                        span: parseInt(24/value)
+                    });
+                }
+                this.paramForm.cols.push({
+                    span: 24%value + parseInt(24/value)
+                });
             },
             removeCol(index){
-//                var index = this.paramForm.cols.indexOf(col)
-//                if (index !== -1) {
-                this.paramForm.cols.splice(index, 1)
-//                }
+                this.paramForm.cols.splice(index, 1);
+                this.paramForm.colLength --;
             }
         },
         computed: {

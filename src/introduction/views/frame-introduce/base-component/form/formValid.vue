@@ -44,7 +44,7 @@
                                 prop="domains"
                                 class="alignRight">
                             <el-input v-model="domain.value" style="width: 100%;padding-right: 40px;"></el-input>
-                            <el-button @click.prevent="removeDomain(index)" type="danger" icon="el-icon-minus" circle style="position: absolute;top: 0; right: 0;"></el-button>
+                            <el-button @click.prevent="removeDomain(domain)" type="danger" icon="el-icon-minus" circle style="position: absolute;top: 0; right: 0;"></el-button>
                         </el-form-item>
                         <el-form-item class="alignRight">
                             <el-button @click.prevent="addDomain()" type="primary" icon="el-icon-plus" circle></el-button>
@@ -348,8 +348,11 @@
                     value: ''
                 });
             },
-            removeDomain(index){
-                this.form.domains.splice(index, 1);
+            removeDomain(domain){
+                var index = this.form.domains.indexOf(domain);
+                if (index !== -1) {
+                    this.form.domains.splice(index, 1);
+                }
             }
         }
     }

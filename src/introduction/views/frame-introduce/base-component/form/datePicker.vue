@@ -66,7 +66,7 @@
                         <el-radio label="past">过去</el-radio>
                     </el-radio-group>
                 </el-form-item>
-                <el-divider>此页面不展示，请复制代码测试</el-divider>
+                <el-divider>以下选项此页面不展示,请复制代码</el-divider>
                 <el-form-item label="结果格式化">
                     <el-switch
                             v-model="paramForm.valueFormat">

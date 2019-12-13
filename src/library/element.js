@@ -20,6 +20,7 @@ import {
     Checkbox,
     CheckboxGroup,
     Switch,
+    Slider,
     Select,
     OptionGroup,
     Option,
@@ -105,6 +106,7 @@ Vue.use(RadioButton);
 Vue.use(RadioGroup);
 Vue.use(Radio);
 Vue.use(Switch);
+Vue.use(Slider);
 Vue.use(CheckboxGroup);
 Vue.use(Checkbox);
 Vue.use(Input);
