@@ -21,7 +21,7 @@
         },
         watch:{
             value(value){
-                !this.CodeMirrorEditor || this.CodeMirrorEditor.setValue(value); //设置编辑器内容
+                this.CodeMirrorEditor && this.CodeMirrorEditor.setValue(value); //设置编辑器内容
             }
         },
         methods:{

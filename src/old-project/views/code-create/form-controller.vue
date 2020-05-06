@@ -12,7 +12,7 @@
                         </el-radio-group>
                     </el-form-item>
                     <el-form-item label="标题">
-                        <el-input v-model="form.title" @keyup.enter.native="controllerPlus"></el-input>
+                        <el-input v-model="form.title" @keyup.enter.native.prevent="controllerPlus"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="controllerPlus">添加</el-button>
@@ -67,11 +67,13 @@
         <label>${this.form.title}</label>
         <span onclick="clickEvent(this, 1)" class="check-span" onselectstart="return false;">
             <input type="radio" name="radio" value="0" checked/>
-            <span class="check-span check"></span>选项一
+            <span class="check-span check"></span>
+            <label>选项一</label>
         </span>
         <span onclick="clickEvent(this, 2)" class="check-span" onselectstart="return false;">
             <input type="radio" name="radio" value="1" />
-            <span class="check-span check"></span>选项二
+            <span class="check-span check"></span>
+            <label>选项二</label>
         </span>
     </div>
 `;
@@ -82,12 +84,12 @@
         <span onclick="clickEvent(this, 1)" class="check-span checkbox" onselectstart="return false;">
             <input type="checkbox" checked>
             <span class="check-span check" ></span>
-            选项一
+            <label>选项一</label>
         </span>
         <span onclick="clickEvent(this, 2)" class="check-span checkbox" onselectstart="return false;">
             <input type="checkbox">
             <span class="check-span check" ></span>
-            选项二
+            <label>选项二</label>
         </span>
     </div>
 `;
@@ -119,13 +121,15 @@
                         break;
                     case 'button':
                         this.code += `    <div class="fleft">
-        <a class="a_btn " onclick="clickEvent()">${this.form.title}</a>
+        <button class="a_btn " onclick="clickEvent()">${this.form.title}</button>
     </div>
 `;
                         break;
                     default:
                         break;
                 }
+
+                this.form.title = '';
             }
         }
     }

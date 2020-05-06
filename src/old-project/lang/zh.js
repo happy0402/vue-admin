@@ -8,9 +8,7 @@ export default {
             pageCreate: '页面',
             controllerCreate: '控件',
             tableCreate: '表格',
-            dialogCreate: '弹出框',
             csCreate: 'CS',
-            exportExcel: '导出Excel',
             print: '打印'
     }
 }

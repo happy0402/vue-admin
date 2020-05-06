@@ -7,17 +7,6 @@
                     :model="paramForm"
                     label-width="80px"
                     style="padding: 0 10px;">
-                <el-row :gutter="10">
-                    <el-col>
-                        <el-form-item label="按钮组">
-                            <el-switch
-                                    v-model="paramForm.buttonGroup"
-                                    :active-value="true"
-                                    :inactive-value="false">
-                            </el-switch>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
 
                 <el-row :gutter="10">
                     <el-col :span="12">
@@ -34,10 +23,12 @@
                                 </el-option>
                             </el-select>
                         </el-form-item>
-                        <el-form-item label="形状">
-                            <el-checkbox v-model="paramForm.plain">朴素</el-checkbox>
-                            <el-checkbox v-model="paramForm.round">圆角</el-checkbox>
-                            <el-checkbox v-model="paramForm.circle">圆形</el-checkbox>
+                        <el-form-item label="按钮组">
+                            <el-switch
+                                    v-model="paramForm.buttonGroup"
+                                    :active-value="true"
+                                    :inactive-value="false">
+                            </el-switch>
                         </el-form-item>
                         <el-form-item label="禁用">
                             <el-switch
@@ -45,12 +36,6 @@
                                     :active-value="true"
                                     :inactive-value="false">
                             </el-switch>
-                        </el-form-item>
-                        <el-form-item label="原生type">
-                            <el-radio v-for="(nativeType,index) in nativeTypeArray"
-                                      :key="index"
-                                      v-model="paramForm.nativeType"
-                                      :label="nativeType">{{ nativeType }}</el-radio>
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -80,6 +65,26 @@
                                     :active-value="true"
                                     :inactive-value="false">
                             </el-switch>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+
+                <el-row :gutter="10">
+                    <el-col>
+                        <el-form-item label="形状">
+                            <el-checkbox v-model="paramForm.plain">朴素</el-checkbox>
+                            <el-checkbox v-model="paramForm.round">圆角</el-checkbox>
+                            <el-checkbox v-model="paramForm.circle">圆形</el-checkbox>
+                        </el-form-item>
+                    </el-col>
+                </el-row>
+                <el-row :gutter="10">
+                    <el-col>
+                        <el-form-item label="原生type">
+                            <el-radio v-for="(nativeType,index) in nativeTypeArray"
+                                      :key="index"
+                                      v-model="paramForm.nativeType"
+                                      :label="nativeType">{{ nativeType }}</el-radio>
                         </el-form-item>
                     </el-col>
                 </el-row>

@@ -1,5 +1,5 @@
 <template>
-    <transition name="fade-transform" mode="out-in">
+    <transition name="slide-fade" mode="out-in">
         <keep-alive>
             <router-view :key="key" />
         </keep-alive>
@@ -19,3 +19,17 @@
         }
     }
 </script>
+
+<style scoped="">
+    .slide-fade-enter-active, .slide-fade-leave-active {
+        transition: all .4s ease;
+    }
+    .slide-fade-enter{
+        transform: translateX(-10px);
+        opacity: 0;
+    }
+    .slide-fade-leave-to {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+</style>

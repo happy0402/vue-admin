@@ -83,14 +83,11 @@
             }
         },
         methods:{
-            addCol(){
-                this.paramForm.cols.push({
-                    span: undefined
-                });
-                this.paramForm.colLength ++;
-            },
             changeCols(value){
                 this.paramForm.cols = [];
+                if(value === 0){
+                    return;
+                }
                 for(let i = 0; i < value - 1; i++){
                     this.paramForm.cols.push({
                         span: parseInt(24/value)
@@ -99,6 +96,12 @@
                 this.paramForm.cols.push({
                     span: 24%value + parseInt(24/value)
                 });
+            },
+            addCol(){
+                this.paramForm.cols.push({
+                    span: 24
+                });
+                this.paramForm.colLength ++;
             },
             removeCol(index){
                 this.paramForm.cols.splice(index, 1);

@@ -43,6 +43,24 @@
     <link href="../../../css/YFYK_CommonStyle.css?t=2" rel="stylesheet" />
 
     <style>
+        /*html{*/
+            /*height: 100%;*/
+        /*}*/
+        body{
+            padding: 10px 20px;
+            /*background: #F3FBFF;*/
+            /*position: relative;*/
+            /*border-left: 1px solid #2F94ED;*/
+            /*border-right: 1px solid #2F94ED;*/
+            /*border-bottom: 1px solid #2F94ED;*/
+            /*overflow: hidden;*/
+            /*height: 95%;*/
+        }
+
+        .checkbox{
+            margin-right: 5px;
+        }
+
         .check-span{
             position: relative;
         }
@@ -88,9 +106,61 @@
             width:100%;
             height:100%;
         }
+        .contentTable tr:nth-child(odd) {
+            background-color:#fff;
+        }
+        .contentTable tr:nth-child(even) {
+            background-color:#ddd;
+        }
+
+        .redStar:before{
+            content: '*';
+            color: #C03639;
+            padding-right: 3px;
+        }
+
+        .tableContainer {
+            overflow: hidden;
+        }
+
+        .a_btn {
+            display: inline-block;
+            float: none;
+            border: 0px;
+            outline: none;
+            vertical-align: middle;
+            box-sizing: unset;
+            font-family: "Helvetica Neue", "Helvetica", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "Arial", "sans-serif";
+        }
+        button{
+            border: none;
+        }
+        button:disabled{
+            background-color: #ddd;
+            color: #999;
+        }
+        button:disabled:hover{
+            background-color: #ddd;
+            color: #999;
+        }
+
+        .laydate_body .laydate_choose:hover, .laydate_body .laydate_y .laydate_yms a:hover{
+            background-color: #2F94ED!important;
+        }
+        .laydate_body .laydate_choose{
+            background-color: #2F94ED!important;
+        }
+        .laydate_body .laydate_y .laydate_yms a{
+            background-color: #2F94ED!important;
+        }
+
+        .selectBg {
+            background: #aad6ff!important;
+            border: 1px solid #2F94ED!important;
+        }
     </style>
 </head>
-<body style="padding: 10px;">
+<body>
 
 
     <script type='text/javascript' src='../../../js/CommonJS.js' charset='utf-8'><\/script>
@@ -105,6 +175,18 @@
             //下拉框初始化
             $("select").cssSelect({limit:3});
         });
+    <\/script>
+    <script>
+        $(".tableContainer").css("width", $(".tableMainHead").css("width"));
+        $(".tableMain").css("width", $(".tableMainHead").css("width"));
+        $(".tableContainer").css("height", window.innerHeight-110+"px");
+        $(".content1").css("height", window.innerHeight-110+"px");
+        window.onresize = function () {
+            $(".tableContainer").css("width", $(".tableMainHead").css("width"));
+            $(".tableMain").css("width", $(".tableMainHead").css("width"));
+            $(".tableContainer").css("height", window.innerHeight-110+"px");
+            $(".content1").css("height", window.innerHeight-110+"px");
+        }
 
         //选择表格行
         var $selectedRow = undefined;
@@ -114,6 +196,9 @@
             }
             $selectedRow = $(this);
             $selectedRow.addClass('selectBg');
+            $selectedRow.find('input[type="checkbox"]').each(function(){
+                $(this).trigger('click');
+            });
         });
 
         //聚焦下一个控件
@@ -142,12 +227,11 @@
         //全选
         function checkAll(dom, target){
             $(target + ' .checkbox').each(function(){
-                controlCheck(this, dom.checked);
+                var $input = $(this).find('input');
+                if($input[0].checked != dom.checked){
+                    $input.click();
+                }
             });
-        }
-        function controlCheck(control, isCheck){
-            $(control).find('input').prop('checked', isCheck);
-            checkDataSet($(control).find('input')[0]);
         }
         function checkDataSet(input){
             var $row = $(input).parent().parent().parent();
@@ -229,10 +313,14 @@
                 var $cell = $('<td class="' + cellClass + '"></td>');
                 var $control;
                 if(type == 'checkbox'){
-                     $control = $('<span class="check-span checkbox" onselectstart="return false;" onclick="cellDataSet(this, \\'' + columns[j].field + '\\')">' +
+                     if(cellData || cellData === ''){
+                        $control = $('<span class="check-span checkbox" onselectstart="return false;" onclick="cellDataSet(this, \\'' + columns[j].field + '\\')">' +
                             '<input type="checkbox" onchange="checkDataSet(this)">' +
                             '<span class="check-span check" ></span>' +
-                        '</span>');
+                            '</span>');
+                    }else{
+                        $control = $('<span></span>')
+                    }
                 }else if(type == 'select'){
                     var control = '<select onchange="cellDataSet(this, \\'' + columns[j].field + '\\')">';
 
@@ -259,16 +347,20 @@
 
             return $row.data('row', rowData);
         }
+
         function loadTableData($table, data, option){
             var options = $.extend($table.data('options'), option);
             $table.data('options', options);
 
-            if(!data){
+            var $tbody = $table.find('.contentTable tbody');
+            var columns = $table.data('columns');
+            $tbody.html('');
+            if(!data || !data.length){
+                var row = '<tr><td colspan="' + columns.length + '">暂无数据！</td></tr>';
+                $(row).appendTo($tbody);
                 return;
             }
 
-            var $tbody = $table.find('.contentTable tbody');
-            var columns = $table.data('columns');
             $tbody.html('');
             for(var i = 0; i < data.length; i++){
                 var $row = createRow(columns, data[i]);
@@ -281,7 +373,7 @@
 
                 var row = '<tr>';
                 for(var i = 0; i < cols.length; i++){
-                    row += <td colspan="' + (cols[i].colspan || 1) + '" style="' + (cols[i].style || '') + '" class="' + (cols[i].class || '') + '">' + options.countData[cols[i].field] + '</td>';
+                    row += '<td colspan="' + (cols[i].colspan || 1) + '" style="' + (cols[i].style || '') + '" class="' + (cols[i].class || '') + '">' + options.countData[cols[i].field] + '</td>';
                 }
                 row += '</tr>';
 
@@ -342,8 +434,7 @@
                 decodeURIComponent(search)
                     .replace(/"/g, '\\\\"')
                     .replace(/&/g, '","')
-                    .replace(/=/g, '":"')
-                    .replace(/\\+/g, ' ') +
+                    .replace(/=/g, '":"') +
                 '"}'
             )
         }

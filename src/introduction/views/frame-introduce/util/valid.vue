@@ -234,10 +234,10 @@
             return {
                 createValidator: 'this.validator = this.$util.valid.createValidator(this.rules);//this.rules 参考校验规则',
                 validatorSingle: `this.validator.validateSingleProp( { prop: 'test' } ).catch((errors) => {
-    !errors || this.$message.warning(errors[0].message);
+    errors && this.$message.warning(errors[0].message);
 });`,
                 validatorAll: `this.validator.validateAllRules( data, (errors) => {
-    !errors || this.$message.warning(errors[0].message);
+    errors && this.$message.warning(errors[0].message);
 } );`,
 
                 phone: 'this.$util.valid.phone ： /^1[3|4|5|7|8][0-9]{9}$/',

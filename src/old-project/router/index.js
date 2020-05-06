@@ -68,27 +68,11 @@ export default [
                         }
                     },
                     {
-                        path: 'dialog-create',
-                        name: 'DialogCreate',
-                        component: () => import('@/old-project/views/code-create/dialog-create'),
-                        meta: {
-                            title: 'dialogCreate',
-                        }
-                    },
-                    {
                         path: 'cs-create',
                         name: 'CsCreate',
                         component: () => import('@/old-project/views/code-create/cs-create'),
                         meta: {
                             title: 'csCreate',
-                        }
-                    },
-                    {
-                        path: 'export-excel',
-                        name: 'ExportExcel',
-                        component: () => import('@/old-project/views/code-create/export-excel'),
-                        meta: {
-                            title: 'exportExcel',
                         }
                     },
                     {

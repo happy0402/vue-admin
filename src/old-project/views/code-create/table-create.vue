@@ -11,7 +11,7 @@
                             <el-input v-model="col.width" placeholder="列宽"></el-input>
                         </el-col>
                         <el-col :span="10">
-                            <el-input v-model="col.title" placeholder="列名" @keyup.enter.native="addCol" class="colName"></el-input>
+                            <el-input v-model="col.title" placeholder="列名(回车添加行)" @keyup.enter.native="addCol()" class="colName"></el-input>
                         </el-col>
                         <el-col :span="4" class="alignRight">
                             <el-button @click.prevent="removeCol(index)" type="danger" icon="el-icon-minus" circle></el-button>
@@ -19,7 +19,7 @@
                     </el-form-item>
                     <el-form-item class="alignRight">
                         <el-col :span="24" class="alignRight">
-                            <el-button @click.prevent="addCol" type="primary" icon="el-icon-plus" circle></el-button>
+                            <el-button @click="addCol()" type="primary" icon="el-icon-plus" circle></el-button>
                         </el-col>
                     </el-form-item>
                 </el-form>
@@ -59,8 +59,10 @@
 
                 this.$nextTick(function () {
                     var nodes = document.querySelectorAll('.colName input');
-                    nodes[nodes.length - 1].focus();
-                })
+                    setTimeout(function(){
+                        nodes[nodes.length - 1].focus();
+                    }, 100);
+                });
             },
             removeCol(index){
                 this.tableForm.cols.splice(index, 1)
@@ -75,7 +77,7 @@
         <thead>
             <tr>
                 <th>
-                    <table class="topTable" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <table class="topTable tableMainHead" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                         <colgroup>`
 
                     for(let i = 0; i < cols.length; i++){
@@ -101,8 +103,8 @@
         <tbody>
             <tr>
                 <td align="left" valign="top">
-                    <div style="height: 100%; overflow-y: auto;">
-                        <table class="contentTable" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
+                    <div class="tableContainer" style="height: 100%; overflow-y: auto;">
+                        <table class="contentTable tableMain" border="0" cellpadding="0" cellspacing="0" style="width: 100%;">
                             <colgroup>`;
 
                     for(let i = 0; i < cols.length; i++){
