@@ -9,6 +9,7 @@ export default {
             controllerCreate: 'Controller Create',
             tableCreate: 'Table Create',
             csCreate: 'CS Create',
-            print: 'Print'
+            print: 'Print',
+            component: 'Component'
     }
 }

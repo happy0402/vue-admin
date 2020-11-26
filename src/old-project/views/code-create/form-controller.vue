@@ -11,8 +11,9 @@
                                     :label="type"></el-radio>
                         </el-radio-group>
                     </el-form-item>
+                    <input type="hidden"></input>
                     <el-form-item label="标题">
-                        <el-input v-model="form.title" @keyup.enter.native.prevent="controllerPlus"></el-input>
+                        <el-input ref="title" id="title" v-model="form.title" @keyup.enter.native="controllerPlus"></el-input>
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="controllerPlus">添加</el-button>
@@ -42,35 +43,34 @@
             return {
                 typeList: ['text', 'radio','checkbox','input','select','dataTime','button'],
                 form: {
-                    type: '',
+                    type: 'text',
                     title: '标题:'
                 },
-                code: `<div style="height: 30px;">
-`
+                code: ''
             }
         },
         methods: {
             clear(){
-              this.code = '<div style="height: 30px;">\n';
+              this.code = '<div>\n';
             },
             controllerPlus(){
                 switch (this.form.type){
                     case 'text':
-                        this.code += `    <div class="fleft">
+                        this.code += `    <div class="controlWarp">
         <label>${this.form.title}</label>
         <span></span>
     </div>
 `;
                         break;
                     case 'radio':
-                        this.code += `    <div class="fleft">
+                        this.code += `    <div class="controlWarp">
         <label>${this.form.title}</label>
-        <span onclick="clickEvent(this, 1)" class="check-span" onselectstart="return false;">
+        <span class="check-span" onselectstart="return false;">
             <input type="radio" name="radio" value="0" checked/>
             <span class="check-span check"></span>
             <label>选项一</label>
         </span>
-        <span onclick="clickEvent(this, 2)" class="check-span" onselectstart="return false;">
+        <span class="check-span" onselectstart="return false;">
             <input type="radio" name="radio" value="1" />
             <span class="check-span check"></span>
             <label>选项二</label>
@@ -79,14 +79,14 @@
 `;
                         break;
                     case 'checkbox':
-                        this.code += `    <div class="fleft">
+                        this.code += `    <div class="controlWarp">
         <label>${this.form.title}</label>
-        <span onclick="clickEvent(this, 1)" class="check-span checkbox" onselectstart="return false;">
+        <span class="check-span checkbox" onselectstart="return false;">
             <input type="checkbox" checked>
             <span class="check-span check" ></span>
             <label>选项一</label>
         </span>
-        <span onclick="clickEvent(this, 2)" class="check-span checkbox" onselectstart="return false;">
+        <span class="check-span checkbox" onselectstart="return false;">
             <input type="checkbox">
             <span class="check-span check" ></span>
             <label>选项二</label>
@@ -95,15 +95,15 @@
 `;
                         break;
                     case 'input':
-                        this.code += `    <div class="fleft">
+                        this.code += `    <div class="controlWarp">
         <label>${this.form.title}</label>
         <input type="text" class="input_text" />
     </div>
 `;
                         break;
                     case 'select':
-                        this.code += `    <div class="fleft">
-        <label class="fleft">${this.form.title}</label>
+                        this.code += `    <div class="controlWarp">
+        <label>${this.form.title}</label>
         <select onchange="changeEvent(this)">
             <option value="0">选项一</option>
             <option value="1">选项二</option>
@@ -113,14 +113,14 @@
 `;
                         break;
                     case 'dataTime':
-                        this.code += `    <div class="fleft">
+                        this.code += `    <div class="controlWarp">
         <label>${this.form.title}</label>
         <input class="laydate-icon" type="text" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
     </div>
 `;
                         break;
                     case 'button':
-                        this.code += `    <div class="fleft">
+                        this.code += `    <div class="controlWarp">
         <button class="a_btn " onclick="clickEvent()">${this.form.title}</button>
     </div>
 `;
@@ -129,8 +129,16 @@
                         break;
                 }
 
-                this.form.title = '';
+                if(this.form.type != 'button') this.form.title = ':';
+                else this.form.title = '';
+
+                setTimeout(function(){
+                    document.getElementById('title').setSelectionRange(0,0);
+                }, 0);
             }
+        },
+        mounted(){
+            this.clear();
         }
     }
 </script>

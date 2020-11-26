@@ -100,6 +100,18 @@
                                 <vue-code-mirror v-model="subtractOperate"></vue-code-mirror>
                             </el-col>
                         </el-row>
+                        <el-row>
+                            <el-col>
+                                <h4>
+                                    差值 ：{{ $util.moment().diff( $util.moment('1995-04-02'), 'years') }}
+                                </h4>
+                            </el-col>
+                        </el-row>
+                        <el-row>
+                            <el-col>
+                                <vue-code-mirror v-model="diffOperate"></vue-code-mirror>
+                            </el-col>
+                        </el-row>
                     </el-col>
                     <el-col :span="12">
                         <table class="table">
@@ -451,7 +463,7 @@
                 <el-row>
                     <el-col>
                         <h4>
-                            获取时间戳（秒） : {{ $util.moment().unix() }}
+                            获取时间戳（单位：秒） : {{ $util.moment().unix() }}
                         </h4>
                     </el-col>
                 </el-row>
@@ -645,6 +657,7 @@
 
                 addOperate: `this.$util.moment().add(7, 'days').add(1, 'h')`,
                 subtractOperate: `this.$util.moment().subtract(7, 'days').subtract(1, 'h')`,
+                diffOperate: `$util.moment().diff( $util.moment('1995-04-02'), 'years')`,
                 startOfOperate: `this.$util.moment().startOf('year')`,
                 endOfOperate: `this.$util.moment().endOf('month')`,
 

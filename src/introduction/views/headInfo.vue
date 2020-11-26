@@ -1,6 +1,5 @@
 <template>
     <div style="display: inline-block;">
-        <el-divider direction="vertical"></el-divider>
         <i-badge :dot="hasBugs" :offset="[10,1]">
             <el-dropdown>
                 <el-button
@@ -14,6 +13,8 @@
                 </el-dropdown-menu>
             </el-dropdown>
         </i-badge>
+
+        <el-divider direction="vertical"></el-divider>
     </div>
 </template>
 

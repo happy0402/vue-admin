@@ -14,6 +14,7 @@
                             <el-option label="上传" value="upload"></el-option>
                             <el-option label="下载" value="download"></el-option>
                             <el-option label="获取App.config" value="appConfig"></el-option>
+                            <el-option label="添加开关" value="onOff"></el-option>
                         </el-select>
                     </el-col>
                 </el-row>
@@ -34,6 +35,14 @@
                 </el-form>
 
                 <el-form v-show="csCodeType == 'interface'" label-position="left" :model="eventForm" label-width="110px">
+                    <el-form-item label="API类型">
+                        <el-select
+                                v-model="eventForm.apiType"
+                                placeholder="请选择API类型">
+                            <el-option label="ApiURL" value="normal"></el-option>
+                            <el-option label="YBApiURL" value="YB"></el-option>
+                        </el-select>
+                    </el-form-item>
                     <el-form-item label="请求方式">
                         <el-select
                                 v-model="eventForm.urlMethod"
@@ -97,6 +106,21 @@
                         <el-button type="primary" @click="createEvent">提交</el-button>
                     </el-form-item>
                 </el-form>
+
+                <el-form v-show="csCodeType == 'dialog'" label-position="left" :model="dialogForm" label-width="110px">
+                    <el-form-item label="namespace">
+                        <el-input v-model="dialogForm.namespace"></el-input>
+                    </el-form-item>
+                    <el-form-item label="Dialog名称">
+                        <el-input v-model="dialogForm.dialogName"></el-input>
+                    </el-form-item>
+                    <el-form-item label="HTML页面路径">
+                        <el-input v-model="dialogForm.htmlPath"></el-input>
+                    </el-form-item>
+                    <el-form-item class="alignRight">
+                        <el-button type="primary" @click="createDialog">提交</el-button>
+                    </el-form-item>
+                </el-form>
             </el-col>
             <el-col :span="16">
                 <el-row>
@@ -127,6 +151,7 @@
                     htmlPath: 'Web/DrugStoreSyster/InDrugStoreUI/Purchase/Purchase.html'
                 },
                 eventForm:{
+                    apiType: 'normal',
                     eventName: 'ClickEvent',
                     params: [
                         {
@@ -138,6 +163,11 @@
                     remark: '',
                     urlMethod: 'get',
                     interfaceName: '____interface'
+                },
+                dialogForm: {
+                    namespace: '',
+                    dialogName: 'DialogForm',
+                    htmlPath: 'Web/DrugStoreSyster/InDrugStoreUI/Purchase/Purchase.html'
                 },
                 firstCode: '',
                 secondCode: ''
@@ -174,7 +204,7 @@ webBrowser1.Document.InvokeScript("functionName", paras);`;
         if (result.resultStatus == "200")
         {
             List<string> paras2 = new List<string>();
-            paras2.Add(result.resultData[0]);
+            paras2.Add(result.resultData[0].Substring(1, response.Length - 2));
 
             Dictionary<string, string> httpurl1 = ApiURL.GetUrlAddress(EMRClient.DAL.ApiURL.HttpUrl.下载文件, paras2);
 
@@ -274,24 +304,233 @@ public void downloadFile(string FileName, string DefaultExt, string filePath)
 }`;
                         this.secondCode = '';
                         break;
-                    case 'dialog':
-                        this.firstCode = `public void CallBack()
+                    case 'appConfig':
+                        this.firstCode = 'string isLis = System.Configuration.ConfigurationManager.AppSettings["IsLis"].ToString();';
+                        this.secondCode = '';
+                        break;
+                    case 'onOff':
+                        this.firstCode = `public string isOptimize()
+{
+    string str = "0";
+    string r_cfg = string.Empty;
+    if (SwitchCfg("TemperChange", ref r_cfg))
+    {
+        str = "1";
+    }
+    return str;
+}`;
+                        this.secondCode = '';
+                        break;
+                    default:
+                        this.firstCode = '';
+                        this.secondCode = '';
+                        break;
+                }
+            }
+        },
+        methods: {
+            addDomain() {
+                this.eventForm.params.push({
+                    paramType: 'string',
+                    paramName: ''
+                });
+            },
+            removeParam(param) {
+                var index = this.eventForm.params.indexOf(param)
+                if (index !== -1) {
+                    this.eventForm.params.splice(index, 1)
+                }
+            },
+            createCs(){
+                this.secondCode = '';
+
+                    /****** cs代码生成 ******/
+                this.firstCode = `//${this.csForm.formName}.cs
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Reflection;
+using Newtonsoft.Json;
+using System.Threading;
+using System.Net;
+using EMRClient.DAL;
+using KNYY.HttpHelp;
+using EMRViewModels.Public;
+
+namespace ${this.csForm.namespace}
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public partial class ${this.csForm.formName} : DockContentEx
+    {
+        public ${this.csForm.formName}()
+        {
+            InitializeComponent();
+            this.webBrowser1.Navigate(new Uri(PublicClass.WebUrl + "${this.csForm.htmlPath}?t=" + DateTime.Now + "&hospitalName=" + PublicClass.HospitalName));
+            this.webBrowser1.ObjectForScripting = this;
+            this.webBrowser1.Dock = DockStyle.Fill;
+            webBrowser1.ScrollBarsEnabled = false;
+        }
+
+        /// <summary>
+        /// 弹出提示框
+        /// </summary>
+        /// window.external.MessageShow(0, 'message');
+        /// <param name="type"></param> tip -> 0 | IsSuccess -> 1 | IsFail -> -1
+        /// <param name="msg"></param>
+        public void MessageShow(int type, string msg)
+        {
+            MessageForm.messageType messageType = (MessageForm.messageType)type;
+            PublicClass.MessageAlert.ShowMessageBox(messageType, msg);
+        }
+
+        /// <summary>
+        /// 弹出选择提示框
+        /// </summary>
+        /// if(window.external.MessageSureShow('message')){};
+        /// <param name="msg"></param>
+        public bool MessageSureShow(string msg)
+        {
+            return PublicClass.MessageSureAlert.ShowMessageBox(msg) == DialogResult.Yes;
+        }
+
+        //#region 加载等待框
+        //public void WaitingShow()
+        //{
+        //    if (PublicClass.MessageLoad == null)
+        //    {
+        //        PublicClass.MessageLoad = new EMRClient.BodyTemperUI.BodyTemperEntry.WaitDialogForm();
+        //        //使用线程池显示等待框
+        //        ThreadPool.QueueUserWorkItem(state =>
+        //        {
+        //            PublicClass.MessageLoad.ShowDialog();
+        //        });
+        //    }
+        //}
+
+        //public void CloseWaiting()
+        //{
+        //    if (PublicClass.MessageLoad != null)
+        //        PublicClass.MessageLoad.Close();
+        //    PublicClass.MessageLoad = null;
+        //}
+        //#endregion
+    }
+}`;
+            },
+            createEvent(){
+                var params = this.eventForm.params;
+
+                /****** url注册代码生成 ******/
+                this.firstCode = `case HttpUrl.${this.eventForm.urlName}:
+    {
+        urladdress = conneckurl + string.Format("${this.eventForm.interfaceName}`
+
+                if(params.length){
+                    this.firstCode += '?'
+                    for(let i = 0; i < params.length; i++){
+                        this.firstCode += params[i].paramName + '={' + i + '}&';
+                    }
+                    this.firstCode = this.firstCode.slice(0,-1)
+                    this.firstCode += '"'
+                    for(let i = 0; i < params.length; i++){
+                        this.firstCode += ', paras[' + i + ']';
+                    }
+                }else{
+                    this.firstCode += '"'
+                }
+
+                this.firstCode +=`);${this.eventForm.urlMethod === 'get' ? '': '\n\tmethod = "post";'}
+        break;
+    }`;
+
+                /****** cs代码生成 ******/
+                this.secondCode = `/// <summary>
+/// ${this.eventForm.urlName}
+/// </summary>
+//js调用 ->
+//var result = JSON.parse(window.external.${this.eventForm.eventName}(${this.eventForm.urlMethod === 'post' ? 'JSON.stringify(postData)' : ''}`;
+
+                //页面调用注释
+                if(params.length) {
+                    this.secondCode += (this.eventForm.urlMethod === 'post' ? ',' : '');
+                    for(let i = 0; i < params.length; i++){
+                        this.secondCode += params[i].paramName + ',';
+                    }
+                    this.secondCode = this.secondCode.slice(0,-1);
+                }
+
+                this.secondCode +=`));
+${this.eventForm.urlMethod === 'post' ? `//window.external.MessageShow((result.${this.eventForm.apiType == 'normal' ? 'resultStatus' : 'state'} == '200' ? 1 : -1), result.msg);` : `//if(result.${this.eventForm.apiType == 'normal' ? 'resultStatus' : 'state'} == '200'){
+//  //result.resultData
+//}else{
+//  window.external.MessageShow(-1, result.msg);
+//}`}
+public string ${this.eventForm.eventName}(${this.eventForm.urlMethod === 'post' ? 'string postData': ''}`;
+
+                //方法传参声明
+                if(params.length) {
+                    this.eventForm.urlMethod === 'post' ? (this.secondCode += ', '): '';
+                    for(let i = 0; i < params.length; i++){
+                        this.secondCode += params[i].paramType + ' ' + params[i].paramName + ',';
+                    }
+                    this.secondCode = this.secondCode.slice(0,-1);
+                }
+
+                this.secondCode +=`){
+    //${this.eventForm.remark}
+    `;
+
+                if(params.length) {
+                    this.secondCode += 'List<string> paras = new List<string>();\n\t    ';
+                }
+                //url传参组装
+                for(let i = 0; i < params.length; i++){
+                    this.secondCode += 'paras.Add(' + params[i].paramName + ');\n\t    ';
+                }
+
+                switch (this.eventForm.apiType){
+                    case 'normal':
+                        this.secondCode +=`Dictionary<string, string> httpurl = ApiURL.GetUrlAddress(EMRClient.DAL.ApiURL.HttpUrl.${this.eventForm.urlName}, ${ params.length ? 'paras': 'null'});
+    //获取Http  Api 数据 (url, method, param[POST], userId, hospitalId, departmentId)
+    string response = HttpHelp.HttpReq(httpurl["urladdress"], httpurl["method"], ${this.eventForm.urlMethod === 'get' ? '""': 'postData'}, PublicClass.CurUserId, PublicClass.HospitalId, PublicClass.CurDepartmentId);
+
+    return response;
+}`;
+                        break;
+                    case 'YB':
+                        this.secondCode +=`Dictionary<string, string> httpurl = YBApiURL.GetUrlAddress(EMRClient.DAL.YBApiURL.HttpUrl.${this.eventForm.urlName}, ${ params.length ? 'paras': 'null'});
+    //获取Http  Api 数据 (reqUrl, method, paramData, YBLB, YLJGDM, XZQH, OtherTxt, userId, hospitalId, departmentId)
+    string response = HttpHelp.YBNetCoreReq(httpurl["urladdress"], httpurl["method"], ${this.eventForm.urlMethod === 'get' ? '""': 'postData'}, "", PublicClass.NationwideMedical.YLJGDM, PublicClass.NationwideMedical.XZQH, "", PublicClass.CurUserId, PublicClass.HospitalId, PublicClass.CurDepartmentId);
+
+    return response;
+}`;
+                        break;
+                }
+
+            },
+            createDialog(){
+                this.firstCode = `public void ${this.dialogForm.dialogName}CallBack()
 {
     //窗体结束后的回调函数
 }
 
 /// <summary>
 /// 打开选择界面
-/// window.external.OpenDialog();
+/// window.external.Open${this.dialogForm.dialogName}();
 /// </summary>
-public void OpenDialog()
+public void Open${this.dialogForm.dialogName}()
 {
-    SelectType Dialog = new DialogForm();//新建一个Form
-    Dialog.refreshLedgerForm += new DialogForm.refreshLedger(CallBack);
+    ${this.dialogForm.dialogName} Dialog = new ${this.dialogForm.dialogName}();//新建一个Form
+    Dialog.refreshLedgerForm += new ${this.dialogForm.dialogName}.refreshLedger(${this.dialogForm.dialogName}CallBack);
     Dialog.StartPosition = FormStartPosition.CenterParent;//Form居中显示
     Dialog.ShowDialog();//Form显示
 }`;
-                        this.secondCode = `using System;
+                this.secondCode = `using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -306,18 +545,18 @@ using EMRClient.DAL;
 using EMRViewModels.Public;//OutPutModel
 //using EMRViewModels;//实体类可能引用路径
 
-namespace EMRClient
+namespace ${this.dialogForm.namespace}
 {
     [ComVisible(true)]
-    public partial class DialogForm : Form
+    public partial class ${this.dialogForm.dialogName} : Form
     {
         public delegate void refreshLedger();//接收父级CallBack方法
         public event refreshLedger refreshLedgerForm;//父级事件触发
 
-        public Form()
+        public ${this.dialogForm.dialogName}()
         {
             InitializeComponent();
-            this.webBrowser1.Navigate(new Uri(PublicClass.WebUrl + "Web/loading.html?t=" + DateTime.Now));
+            this.webBrowser1.Navigate(new Uri(PublicClass.WebUrl + "${this.dialogForm.htmlPath}?t=" + DateTime.Now));
             this.webBrowser1.ObjectForScripting = this;
 
             //this.title_name.Text = "";
@@ -423,190 +662,6 @@ namespace EMRClient
             this.title_name.Parent = this.titlePn;
         }
     }
-}`;
-                        break;
-                    case 'appConfig':
-                        this.firstCode = 'string isLis = System.Configuration.ConfigurationManager.AppSettings["IsLis"].ToString();';
-                        this.secondCode = '';
-                        break;
-                    default:
-                        this.firstCode = '';
-                        this.secondCode = '';
-                        break;
-                }
-            }
-        },
-        methods: {
-            addDomain() {
-                this.eventForm.params.push({
-                    paramType: 'string',
-                    paramName: ''
-                });
-            },
-            removeParam(param) {
-                var index = this.eventForm.params.indexOf(param)
-                if (index !== -1) {
-                    this.eventForm.params.splice(index, 1)
-                }
-            },
-            createCs(){
-                this.secondCode = '';
-
-                    /****** cs代码生成 ******/
-                this.firstCode = `//${this.csForm.formName}.cs
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using SALE.ApiData;
-using ViewModel;
-using System.Reflection;
-using Newtonsoft.Json;
-using System.Threading;
-using System.Net;
-using EMRClient.DAL;
-using KNYY.HttpHelp;
-
-namespace ${this.csForm.namespace}
-{
-    [System.Runtime.InteropServices.ComVisible(true)]
-    public partial class ${this.csForm.formName} : DockContentEx
-    {
-        public ${this.csForm.formName}()
-        {
-            InitializeComponent();
-            this.webBrowser1.Navigate(new Uri(PublicClass.WebUrl + "${this.csForm.htmlPath}?t=" + DateTime.Now + "&hospitalName=" + PublicClass.HospitalName));
-            this.webBrowser1.ObjectForScripting = this;
-            this.webBrowser1.Dock = DockStyle.Fill;
-            webBrowser1.ScrollBarsEnabled = false;
-        }
-
-        /// <summary>
-        /// 弹出提示框
-        /// </summary>
-        /// window.external.MessageShow(0, 'message');
-        /// <param name="type"></param> tip -> 0 | IsSuccess -> 1 | IsFail -> -1
-        /// <param name="msg"></param>
-        public void MessageShow(int type, string msg)
-        {
-            MessageForm.messageType messageType = (MessageForm.messageType)type;
-            PublicClass.MessageAlert.ShowMessageBox(messageType, msg);
-        }
-
-        /// <summary>
-        /// 弹出选择提示框
-        /// </summary>
-        /// if(window.external.MessageSureShow('message')){};
-        /// <param name="msg"></param>
-        public bool MessageSureShow(string msg)
-        {
-            return PublicClass.MessageSureAlert.ShowMessageBox(msg) == DialogResult.Yes;
-        }
-
-        //#region 加载等待框
-        //public void WaitingShow()
-        //{
-        //    if (PublicClass.MessageLoad == null)
-        //    {
-        //        PublicClass.MessageLoad = new EMRClient.BodyTemperUI.BodyTemperEntry.WaitDialogForm();
-        //        //使用线程池显示等待框
-        //        ThreadPool.QueueUserWorkItem(state =>
-        //        {
-        //            PublicClass.MessageLoad.ShowDialog();
-        //        });
-        //    }
-        //}
-
-        //public void CloseWaiting()
-        //{
-        //    if (PublicClass.MessageLoad != null)
-        //        PublicClass.MessageLoad.Close();
-        //    PublicClass.MessageLoad = null;
-        //}
-        //#endregion
-    }
-}`;
-            },
-            createEvent(){
-                var params = this.eventForm.params;
-
-                /****** url注册代码生成 ******/
-                this.firstCode = `case HttpUrl.${this.eventForm.urlName}:
-    {
-        urladdress = conneckurl + string.Format("${this.eventForm.interfaceName}`
-
-                if(params.length){
-                    this.firstCode += '?'
-                    for(let i = 0; i < params.length; i++){
-                        this.firstCode += params[i].paramName + '={' + i + '}&';
-                    }
-                    this.firstCode = this.firstCode.slice(0,-1)
-                    this.firstCode += '"'
-                    for(let i = 0; i < params.length; i++){
-                        this.firstCode += ', paras[' + i + ']';
-                    }
-                }else{
-                    this.firstCode += '"'
-                }
-
-                this.firstCode +=`);${this.eventForm.urlMethod === 'get' ? '': '\n\tmethod = "post";'}
-        break;
-    }`;
-
-                /****** cs代码生成 ******/
-                this.secondCode = `/// <summary>
-/// ${this.eventForm.urlName}
-/// </summary>
-//js调用 ->
-//var result = JSON.parse(window.external.${this.eventForm.eventName}(${this.eventForm.urlMethod === 'post' ? 'JSON.stringify(postData)' : ''}`;
-
-                //页面调用注释
-                if(params.length) {
-                    this.secondCode += (this.eventForm.urlMethod === 'post' ? ',' : '');
-                    for(let i = 0; i < params.length; i++){
-                        this.secondCode += params[i].paramName + ',';
-                    }
-                    this.secondCode = this.secondCode.slice(0,-1);
-                }
-
-                this.secondCode +=`));
-${this.eventForm.urlMethod === 'post' ? `//window.external.MessageShow((result.resultStatus == '200' ? 1 : -1), result.msg);` : `//if(result.resultStatus == '200'){
-//  result.resultData
-//}else{
-//  window.external.MessageShow(-1, result.msg);
-//}`}
-public string ${this.eventForm.eventName}(${this.eventForm.urlMethod === 'post' ? 'string postData': ''}`;
-
-                //方法传参声明
-                if(params.length) {
-                    this.eventForm.urlMethod === 'post' ? (this.secondCode += ', '): '';
-                    for(let i = 0; i < params.length; i++){
-                        this.secondCode += params[i].paramType + ' ' + params[i].paramName + ',';
-                    }
-                    this.secondCode = this.secondCode.slice(0,-1);
-                }
-
-                this.secondCode +=`){
-    //${this.eventForm.remark}
-    `;
-
-                if(params.length) {
-                    this.secondCode += 'List<string> paras = new List<string>();\n\t    ';
-                }
-                //url传参组装
-                for(let i = 0; i < params.length; i++){
-                    this.secondCode += 'paras.Add(' + params[i].paramName + ');\n\t    ';
-                }
-
-                this.secondCode +=`Dictionary<string, string> httpurl = ApiURL.GetUrlAddress(EMRClient.DAL.ApiURL.HttpUrl.${this.eventForm.urlName}, ${ params.length ? 'paras': 'null'});
-    //获取Http  Api 数据 (url, method, param[POST], userId, hospitalId, departmentId)
-    string response = HttpHelp.HttpReq(httpurl["urladdress"], httpurl["method"], ${this.eventForm.urlMethod === 'get' ? '""': 'postData'}, PublicClass.CurUserId, PublicClass.HospitalId, PublicClass.CurDepartmentId);
-
-    return response;
 }`;
             }
         }

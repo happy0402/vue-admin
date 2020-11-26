@@ -9,6 +9,7 @@ export default {
             controllerCreate: '控件',
             tableCreate: '表格',
             csCreate: 'CS',
-            print: '打印'
+            print: '打印',
+            component: '组件'
     }
 }

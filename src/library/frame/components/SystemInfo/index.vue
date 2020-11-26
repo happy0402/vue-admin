@@ -4,10 +4,10 @@
             <breadcrumb></breadcrumb>
         </div>
         <div class="right-title">
+            <slot></slot>
+
             <lang-select></lang-select>
             <user-controller></user-controller>
-
-            <slot></slot>
         </div>
     </div>
 </template>

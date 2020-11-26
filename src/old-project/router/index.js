@@ -82,6 +82,14 @@ export default [
                         meta: {
                             title: 'print',
                         }
+                    },
+                    {
+                        path: 'component',
+                        name: 'Component',
+                        component: () => import('@/old-project/views/code-create/component'),
+                        meta: {
+                            title: 'component',
+                        }
                     }
                 ]
             }

@@ -57,6 +57,22 @@
             /*height: 95%;*/
         }
 
+        label{
+            display: inline-block;
+        }
+        .cssSelect {
+            white-space: nowrap;
+            float: none;
+            display: inline-block;
+            position: relative;
+            top: 10px;
+        }
+        .controlWarp{
+            margin-bottom: 5px;
+            margin-right: 5px;
+            display: inline-block;
+        }
+
         .checkbox{
             margin-right: 5px;
         }
@@ -177,13 +193,17 @@
         });
     <\/script>
     <script>
-        $(".tableContainer").css("width", $(".tableMainHead").css("width"));
-        $(".tableMain").css("width", $(".tableMainHead").css("width"));
+        $(".tableMainHead").each(function(){
+            $(this).parents('table').find(".tableContainer").css("width", $(this).css("width"));
+            $(this).parents('table').find(".tableMain").css("width", $(this).css("width"));
+        });
         $(".tableContainer").css("height", window.innerHeight-110+"px");
         $(".content1").css("height", window.innerHeight-110+"px");
         window.onresize = function () {
-            $(".tableContainer").css("width", $(".tableMainHead").css("width"));
-            $(".tableMain").css("width", $(".tableMainHead").css("width"));
+            $(".tableMainHead").each(function(){
+                $(this).parents('table').find(".tableContainer").css("width", $(this).css("width"));
+                $(this).parents('table').find(".tableMain").css("width", $(this).css("width"));
+            });
             $(".tableContainer").css("height", window.innerHeight-110+"px");
             $(".content1").css("height", window.innerHeight-110+"px");
         }
@@ -263,6 +283,11 @@
 
         //初始化表格
         function initTable($table, columns, options){
+            options.startPosition = 0;
+            options.stopPosition = 0;
+            options.pageSize = 30;
+            options.edge = 'bottom';
+
             $table.data('columns', columns);
             $table.data('options', options);
             var $head = $table.find('.topTable');
@@ -315,22 +340,27 @@
                 if(type == 'checkbox'){
                      if(cellData || cellData === ''){
                         $control = $('<span class="check-span checkbox" onselectstart="return false;" onclick="cellDataSet(this, \\'' + columns[j].field + '\\')">' +
-                            '<input type="checkbox" onchange="checkDataSet(this)">' +
+                            '<input type="checkbox" onchange="checkDataSet(this)" ' + (cellData == 'checked' ? 'checked' : '') + '>' +
                             '<span class="check-span check" ></span>' +
                             '</span>');
                     }else{
                         $control = $('<span></span>')
                     }
                 }else if(type == 'select'){
-                    var control = '<select onchange="cellDataSet(this, \\'' + columns[j].field + '\\')">';
+                    var control = '<select class="tab1 ' + columns[j].className + '" onchange="cellDataSet(this, \\'' + columns[j].field + '\\')">';
 
-                    for(var k = 0; k < columns[j].options.length; k++){
-                        control += '<option value="' + columns[j].options[k].code + '" ' + (columns[j].options[k].code == rowData[columns[j].field] ? 'selected = "selected"' : '') + '>' + columns[j].options[k].name + '</option>';
+                    var options = columns[j].options;
+                    if(typeof columns[j].options == 'function'){
+                        options = columns[j].options(rowData) || [];
+                    }
+                    for(var k = 0; k < options.length; k++){
+                        control += '<option value="' + options[k].code + '" ' + (options[k].code == rowData[columns[j].field] ? 'selected = "selected"' : '') + '>' + options[k].name + '</option>';
                     }
 
                     control += '</select>';
 
                     $control = $(control);
+                    rowData[columns[j].field] = $control.val();
                 }else if(type == 'input'){
                     $control = $('<input class="tab1" type="text" value="' + cellData + '" onchange="cellDataSet(this, \\'' + columns[j].field + '\\')">');
                 }else if(type == 'other'){
@@ -348,8 +378,57 @@
             return $row.data('row', rowData);
         }
 
+        function scrollLoadData(data, options, columns, $tbody){
+            if(options.edge === 'top'){
+                if(options.startPosition !== 0){
+                    for(var i = 0; i < options.pageSize && options.startPosition > 0; i++){
+                        var $row = createRow(columns, data[options.startPosition - 1]);
+                        $row.prependTo($tbody);
+
+                        options.startPosition --;
+                    }
+                }
+                //到顶
+            }
+
+            if(options.edge === 'bottom'){
+                if(options.stopPosition !== data.length){
+                    for(var i = 0; i < options.pageSize && options.stopPosition < data.length; i++){
+                        var $row = createRow(columns, data[options.stopPosition]);
+                        $row.appendTo($tbody);
+
+                        options.stopPosition ++;
+                    }
+                }
+                //到底
+            }
+        }
+
+        function scrollToRow($table, index){
+            var options = $table.data('options');
+            var $tbody = $table.find('.contentTable tbody');
+            var columns = $table.data('columns');
+            var data = options.data;
+
+            if(options.scrollLoad){
+                $tbody.html('');
+                options.startPosition = index;
+                options.stopPosition = index;
+                options.edge = 'top';
+                scrollLoadData(data, options, columns, $tbody);
+                options.edge = 'bottom';
+                scrollLoadData(data, options, columns, $tbody);
+
+                $table.find(".tableContainer").animate({scrollTop:($table.find(".contentTable tbody tr").eq(index - options.startPosition).click().offset().top)}, 100);
+            }else{
+
+            }
+        }
+
+
         function loadTableData($table, data, option){
             var options = $.extend($table.data('options'), option);
+            options.data = data;
             $table.data('options', options);
 
             var $tbody = $table.find('.contentTable tbody');
@@ -362,10 +441,30 @@
             }
 
             $tbody.html('');
-            for(var i = 0; i < data.length; i++){
-                var $row = createRow(columns, data[i]);
+            if(options.scrollLoad){
+                $table.find('.tableContainer').scroll(function(){
+                    var scrollTop = $(this).scrollTop();
+                    var contentH = $(this).innerHeight();
+                    var nScrollHight = $(this)[0].scrollHeight; //滚动距离总长(注意不是滚动条的长度)
+                    if(scrollTop == 0){
+                        options.edge = 'top';
 
-                $row.appendTo($tbody);
+                        scrollLoadData(data, options, columns, $tbody);
+                    }
+                    if(scrollTop + contentH > nScrollHight - 10){
+                        options.edge = 'bottom';
+
+                        scrollLoadData(data, options, columns, $tbody);
+                    }
+                });
+
+                scrollLoadData(data, options, columns, $tbody);
+            }else{
+                for(var i = 0; i < data.length; i++){
+                    var $row = createRow(columns, data[i]);
+
+                    $row.appendTo($tbody);
+                }
             }
 
             if(options && options.countData){
@@ -382,7 +481,7 @@
         }
 
         //获取表格数据
-        function getTabelData($table, dataType, rowCheck){
+        function getTableData($table, dataType, rowCheck){
             var data = [];
             $table.find('.contentTable tr').each(function(){
                 var rowData = $(this).data('row');

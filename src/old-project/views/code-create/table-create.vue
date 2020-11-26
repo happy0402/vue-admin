@@ -73,7 +73,7 @@
                 var cols = this.tableForm.cols;
 
                 var tableCode = `<div style="overflow-y: auto;height: 100%;width: 100%;">
-    <table border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
+    <table id="dataTable" border="0" cellspacing="0" cellpadding="0" style="width: 100%;">
         <thead>
             <tr>
                 <th>
@@ -132,7 +132,7 @@
 </div>
 
 <script>
-     initTable($(''), `
+     initTable($('#dataTable'), `
                 var columns = [];
                 for(let i = 0; i < cols.length; i++){
                     columns.push(`{
