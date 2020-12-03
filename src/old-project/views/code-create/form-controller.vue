@@ -2,7 +2,7 @@
     <div class="csCreate-container">
         <el-row :gutter="10">
             <el-col :span="9">
-                <el-form label-position="left" :model="form" label-width="70px">
+              <el-form label-position="left" :model="form" label-width="70px" @submit.native.prevent><!--阻止表单提交后自动刷新事件-->
                     <el-form-item label="控件类型">
                         <el-radio-group v-model="form.type">
                             <el-radio
@@ -11,7 +11,6 @@
                                     :label="type"></el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <input type="hidden"></input>
                     <el-form-item label="标题">
                         <el-input ref="title" id="title" v-model="form.title" @keyup.enter.native="controllerPlus"></el-input>
                     </el-form-item>

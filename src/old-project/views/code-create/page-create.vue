@@ -174,6 +174,14 @@
             background: #aad6ff!important;
             border: 1px solid #2F94ED!important;
         }
+
+        .cssSelect {
+            white-space: nowrap;
+            float: none;
+            display: inline-block;
+            position: relative;
+            top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -266,7 +274,11 @@
         function cellDataSet(dom, field){
             var rowData = $(dom).parent().parent().data('row');
             rowData._hadChanged = true;
-            rowData[field] = $(dom).val();
+            if($(dom).attr('type') == 'checkbox'){
+                rowData[field] = $(dom).is(':checked') ? '1':'0';
+            }else{
+                rowData[field] = $(dom).val();
+            }
             $(dom).parent().parent().data('row', rowData);
         }
 
@@ -340,7 +352,7 @@
                 if(type == 'checkbox'){
                      if(cellData || cellData === ''){
                         $control = $('<span class="check-span checkbox" onselectstart="return false;" onclick="cellDataSet(this, \\'' + columns[j].field + '\\')">' +
-                            '<input type="checkbox" onchange="checkDataSet(this)" ' + (cellData == 'checked' ? 'checked' : '') + '>' +
+                            '<input type="checkbox" onchange="checkDataSet(this, \\'' + columns[j].field + '\\')" ' + (cellData == 'checked' ? 'checked' : '') + '>' +
                             '<span class="check-span check" ></span>' +
                             '</span>');
                     }else{
@@ -419,9 +431,9 @@
                 options.edge = 'bottom';
                 scrollLoadData(data, options, columns, $tbody);
 
-                $table.find(".tableContainer").animate({scrollTop:($table.find(".contentTable tbody tr").eq(index - options.startPosition).click().offset().top)}, 100);
+                $table.find(".tableContainer").animate({scrollTop:($table.find(".contentTable tbody tr").eq(index - options.startPosition).click().offset().top + $table.find(".tableContainer").scrollTop() - 75)}, 0);
             }else{
-
+                $table.find(".tableContainer").animate({scrollTop:($table.find(".contentTable tbody tr").eq(index).click().offset().top + $table.find(".tableContainer").scrollTop() - 80)}, 100);
             }
         }
 
@@ -435,14 +447,14 @@
             var columns = $table.data('columns');
             $tbody.html('');
             if(!data || !data.length){
-                var row = '<tr><td colspan="' + columns.length + '">暂无数据！</td></tr>';
+                var row = '<tr class="noData"><td colspan="' + columns.length + '">暂无数据！</td></tr>';
                 $(row).appendTo($tbody);
                 return;
             }
 
             $tbody.html('');
             if(options.scrollLoad){
-                $table.find('.tableContainer').scroll(function(){
+               $table.find('.tableContainer').scroll(function(){
                     var scrollTop = $(this).scrollTop();
                     var contentH = $(this).innerHeight();
                     var nScrollHight = $(this)[0].scrollHeight; //滚动距离总长(注意不是滚动条的长度)
@@ -458,6 +470,9 @@
                     }
                 });
 
+                options.startPosition = 0;
+                options.stopPosition = 0;
+                options.edge = 'bottom';
                 scrollLoadData(data, options, columns, $tbody);
             }else{
                 for(var i = 0; i < data.length; i++){
@@ -513,6 +528,7 @@
             var $row = createRow(columns, rowData);
 
             var $lastRow = $table.find('.contentTable tbody tr:last-child');
+            if($lastRow.attr('class') == 'noData') $lastRow.remove();
             if(options && options.countData){
                 $row.insertBefore($lastRow);
             }else{
