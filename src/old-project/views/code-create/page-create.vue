@@ -2,7 +2,7 @@
     <div class="csCreate-container" style="height: 100%;">
         <el-row :gutter="10" style="height: 100%;">
             <el-col :span="8">
-                <el-form label-position="left" :model="tableForm" label-width="80px">
+                <el-form label-position="left" :model="tableForm" label-width="80px" @submit.native.prevent>
                     <el-form-item label="标题">
                         <el-input v-model="tableForm.title"></el-input>
                     </el-form-item>
@@ -94,6 +94,8 @@
             top: 0;
             opacity: 0;
             z-index: 1000;
+            width: 16px;
+            height: 16px;
         }
 
         .check-span input[type='radio'] + span{
@@ -254,6 +256,13 @@
 
         //全选
         function checkAll(dom, target){
+            var options = $(target).data('options');
+            if(options.scrollLoad){
+                for(var i = 0; i < options.data.length; i++){
+                    options.data[i]._checked = dom.checked;
+                }
+            }
+
             $(target + ' .checkbox').each(function(){
                 var $input = $(this).find('input');
                 if($input[0].checked != dom.checked){
@@ -265,7 +274,7 @@
             var $row = $(input).parent().parent().parent();
             var row = $row.data('row');
             if(row){
-                row.checked = $(input).is(':checked');
+                row._checked = $(input).is(':checked');
                 $row.data('row',row);
             }
         }
@@ -342,17 +351,17 @@
         function createRow(columns, rowData){
             var $row = $('<tr></tr>');
             for(var j = 0; j < columns.length; j++){
-                var type = columns[j].type || 'text';
-                var cellClass = columns[j].class || '';
-                var originalData = rowData[columns[j].field] == null ? '' : rowData[columns[j].field];
-                var cellData = typeof columns[j].formatter == 'function' ? columns[j].formatter(rowData, columns[j].field) : originalData;
+                var type = (columns[j].type ? columns[j].type : 'text');
+                var cellClass = (columns[j]["class"] ? columns[j]["class"] : '');
+                var originalData = (rowData[columns[j].field] == null ? '' : rowData[columns[j].field]);
+                var cellData = (typeof columns[j].formatter == 'function' ? columns[j].formatter(rowData, columns[j].field) : originalData);
 
                 var $cell = $('<td class="' + cellClass + '"></td>');
                 var $control;
                 if(type == 'checkbox'){
                      if(cellData || cellData === ''){
                         $control = $('<span class="check-span checkbox" onselectstart="return false;" onclick="cellDataSet(this, \\'' + columns[j].field + '\\')">' +
-                            '<input type="checkbox" onchange="checkDataSet(this, \\'' + columns[j].field + '\\')" ' + (cellData == 'checked' ? 'checked' : '') + '>' +
+                            '<input type="checkbox" onchange="checkDataSet(this, \\'' + columns[j].field + '\\')" ' + (cellData || rowData._checked ? 'checked' : '') + '>' +
                             '<span class="check-span check" ></span>' +
                             '</span>');
                     }else{
@@ -391,6 +400,8 @@
         }
 
         function scrollLoadData(data, options, columns, $tbody){
+            if(!data || !data.length) return ;
+
             if(options.edge === 'top'){
                 if(options.startPosition !== 0){
                     for(var i = 0; i < options.pageSize && options.startPosition > 0; i++){
@@ -398,6 +409,8 @@
                         $row.prependTo($tbody);
 
                         options.startPosition --;
+
+                        typeof options.afterScrollLoad == 'function' && options.afterScrollLoad($row);
                     }
                 }
                 //到顶
@@ -410,6 +423,8 @@
                         $row.appendTo($tbody);
 
                         options.stopPosition ++;
+
+                        typeof options.afterScrollLoad == 'function' && options.afterScrollLoad($row);
                     }
                 }
                 //到底
@@ -423,18 +438,28 @@
             var data = options.data;
 
             if(options.scrollLoad){
-                $tbody.html('');
-                options.startPosition = index;
-                options.stopPosition = index;
-                options.edge = 'top';
-                scrollLoadData(data, options, columns, $tbody);
-                options.edge = 'bottom';
-                scrollLoadData(data, options, columns, $tbody);
+            $tbody.html('');
+            options.startPosition = index;
+            options.stopPosition = index;
+            options.edge = 'top';
+            scrollLoadData(data, options, columns, $tbody);
+            options.edge = 'bottom';
+            scrollLoadData(data, options, columns, $tbody);
 
-                $table.find(".tableContainer").animate({scrollTop:($table.find(".contentTable tbody tr").eq(index - options.startPosition).click().offset().top + $table.find(".tableContainer").scrollTop() - 75)}, 0);
-            }else{
-                $table.find(".tableContainer").animate({scrollTop:($table.find(".contentTable tbody tr").eq(index).click().offset().top + $table.find(".tableContainer").scrollTop() - 80)}, 100);
+            if($selectedRow){
+                $selectedRow.removeClass('selectBg');
             }
+            $selectedRow = $table.find(".contentTable tbody tr").eq(index - options.startPosition);
+            $selectedRow.addClass('selectBg');
+            $table.find(".tableContainer").animate({scrollTop:($table.find(".contentTable tbody tr").eq(index - options.startPosition).offset().top + $table.find(".tableContainer").scrollTop() - 80)}, 0);
+        }else{
+            if($selectedRow){
+                $selectedRow.removeClass('selectBg');
+            }
+            $selectedRow = $table.find(".contentTable tbody tr").eq(index);
+            $selectedRow.addClass('selectBg');
+            $table.find(".tableContainer").animate({scrollTop:($table.find(".contentTable tbody tr").eq(index).click().offset().top + $table.find(".tableContainer").scrollTop() - 80)}, 100);
+        }
         }
 
 
@@ -455,6 +480,9 @@
             $tbody.html('');
             if(options.scrollLoad){
                $table.find('.tableContainer').scroll(function(){
+                    var options = $table.data('options');
+                    var data = options.data;
+
                     var scrollTop = $(this).scrollTop();
                     var contentH = $(this).innerHeight();
                     var nScrollHight = $(this)[0].scrollHeight; //滚动距离总长(注意不是滚动条的长度)
@@ -487,7 +515,7 @@
 
                 var row = '<tr>';
                 for(var i = 0; i < cols.length; i++){
-                    row += '<td colspan="' + (cols[i].colspan || 1) + '" style="' + (cols[i].style || '') + '" class="' + (cols[i].class || '') + '">' + options.countData[cols[i].field] + '</td>';
+                    row += '<td colspan="' + (cols[i]["colspan"] || 1) + '" style="' + (cols[i]["style"] || '') + '" class="' + (cols[i]["class"] || '') + '">' + options.countData[cols[i].field] + '</td>';
                 }
                 row += '</tr>';
 
@@ -501,7 +529,7 @@
             $table.find('.contentTable tr').each(function(){
                 var rowData = $(this).data('row');
                 if(rowData &&
-                    (!dataType || dataType == 'all' || (dataType == 'changed' && rowData._hadChanged) || (dataType == 'checked' && rowData.checked)) &&
+                    (!dataType || dataType == 'all' || (dataType == 'changed' && rowData._hadChanged) || (dataType == 'checked' && rowData._checked)) &&
                     (typeof rowCheck != 'function' || rowCheck(rowData))){
                     data.push(rowData);
                 }

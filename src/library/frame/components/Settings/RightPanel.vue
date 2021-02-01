@@ -40,30 +40,26 @@
         },
         watch:{
           show(value){
-              let body = document.querySelector('body')
+              let body = document.querySelector('body');
               if(value){
-                  body.classList.add('showRightPanel')
+                  body.classList.add('showRightPanel');
               }else{
-                  body.classList.remove('showRightPanel')
+                  body.classList.remove('showRightPanel');
               }
           }
         },
         methods:{
           drag(param){
               if (Math.abs(param.offsetY) > 1){
-                  this.dragging = true
-                  let positionY = this.buttonTop + param.offsetY
-                  this.buttonTop = positionY > 0 && positionY < (document.body.clientHeight - 35) ? positionY : this.buttonTop
+                  this.dragging = true;
+                  let positionY = this.buttonTop + param.offsetY;
+                  this.buttonTop = positionY > 0 && positionY < (document.body.clientHeight - 35) ? positionY : this.buttonTop;
               }
           },
           toggle(){
-              if(!this.dragging) this.show = !this.show
-              this.dragging = false
+              if(!this.dragging) this.show = !this.show;
+              this.dragging = false;
           }
-        },
-        mounted(){
-            let app = document.querySelector('#app');
-            app.insertBefore(this.$refs.rightPanel, app.firstChild);
         }
     }
 </script>
@@ -104,9 +100,9 @@
 
             .toggle-button{
                 position: absolute;
-                left: -35px;
+                left: -33px;
                 display: inline-block;
-                width: 35px;
+                width: 33px;
                 height: 35px;
                 background-color: $light-blue;
                 color: $white;

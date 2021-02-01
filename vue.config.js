@@ -38,6 +38,17 @@ module.exports = {
             warnings: false,
             errors: true
         }
+        // ,
+        // proxy: {//前端跨域请求
+        //     "/development": {
+        //         target: 'http://cloudhospital.knjs.com.cn', //要跨域的地址
+        //         ws: true,
+        //         pathRewrite: {'^/development' : ''}, //把遇到的/api 清除掉请求
+        //         changeOrigin: true,  // target是域名的话，需要这个参数,
+        //         secure: false,  // 设置 支持https协议的代理，支持能在https服务
+        //         //logLevel: "debug"//控制台打印
+        //     }
+        // }
     },
     configureWebpack: {
         // mode: 'production',//development | production

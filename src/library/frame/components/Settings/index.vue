@@ -24,17 +24,11 @@
 <script>
     import RightPanel from './RightPanel.vue'
     import { mapGetters } from 'vuex'
-    import variables from '#/styles/variables.scss'
 
     export default {
         name: 'Settings',
         components: {
             RightPanel
-        },
-        data(){
-            return {
-                variables: variables
-            }
         },
         computed:{
             ...mapGetters([

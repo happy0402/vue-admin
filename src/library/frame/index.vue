@@ -15,8 +15,6 @@
                         <router-view name="headInfo" key="headInfo"/>
                     </system-info>
                     <tags-view v-if="tagsView"></tags-view>
-                    <!-- 右边栏 -->
-                    <settings></settings>
                 </div>
             </el-header>
             <!-- 兼容ie -->
@@ -24,6 +22,9 @@
                 <app-main></app-main>
             </el-main>
         </el-container>
+
+        <!-- 右边栏 -->
+        <settings></settings>
     </el-container>
 </template>
 
